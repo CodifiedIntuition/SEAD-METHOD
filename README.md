@@ -135,34 +135,78 @@ sead stories                  # Generate constraint-aware user stories
 sead implement <story-id>     # Implement with catalog constraints
 ```
 
-### Rich Task Ecosystem (BMAD-METHOD Enhanced)
+### Rich Task Ecosystem (21+ SEAD Development Tasks)
+
+SEAD-METHOD provides a comprehensive task system that directly integrates with the 12-agent ecosystem. Each task provides guided execution with constitutional constraints and catalog awareness.
+
 ```bash
-sead task list                # List all 22+ available development tasks
-sead task <task-name>         # Execute specific development task
-
-# Quality Assurance Tasks
-sead task qa-gate             # Execute quality gates with catalog validation
-sead task apply-qa-fixes      # Apply QA fixes with constitutional compliance
-sead task review-story        # Comprehensive story review with patterns
-sead task verify-build        # Build verification against catalog standards
-
-# Requirements & Analysis Tasks  
-sead task advanced-elicitation        # Advanced stakeholder requirements gathering
-sead task create-deep-research-prompt # Generate comprehensive research prompts
-sead task risk-profile               # Constitutional constraint risk analysis
-sead task facilitate-brainstorming-session # Catalog-aware ideation sessions
-
-# Story & Documentation Tasks
-sead task create-next-story      # User stories with constraint awareness
-sead task document-project       # Comprehensive project documentation
-sead task generate-project-brief # Constitutional project brief generation
-sead task index-docs            # Documentation with catalog integration
-
-# Brownfield Integration Tasks
-sead task brownfield-create-epic     # Brownfield epic creation with pattern extraction
-sead task brownfield-create-story    # Brownfield stories with catalog awareness
-sead task brownfield-catalog-generation # AI-powered pattern extraction
+# List and explore tasks
+sead task list                          # Show all 21+ available development tasks
+sead task list --category quality       # Filter by category (quality|analysis|documentation|workflow)
+sead task list --detailed --agent-mapping  # Show agent assignments and detailed descriptions
 ```
+
+#### 🔍 Quality Assurance Tasks (SEAD QA Agent)
+```bash
+sead task qa-gate                       # Execute quality gates with catalog validation
+sead task apply-qa-fixes               # Apply QA fixes with constitutional compliance  
+sead task review-story                 # Comprehensive story review with pattern validation
+sead task verify-build                 # Build verification against catalog standards
+```
+
+#### 📋 Requirements & Analysis Tasks (SEAD Analyst/Project Manager)
+```bash
+sead task advanced-elicitation         # Advanced stakeholder requirements gathering
+sead task create-deep-research-prompt  # Generate comprehensive research prompts
+sead task risk-profile                 # Constitutional constraint risk analysis  
+sead task facilitate-brainstorming-session # Catalog-aware ideation sessions
+sead task facilitate-ideation-session  # Constitutional framework ideation
+```
+
+#### 📝 Story & Documentation Tasks (SEAD Product Owner/Analyst)
+```bash
+sead task create-next-story            # User stories with catalog integration
+sead task document-project             # Comprehensive project documentation
+sead task generate-project-brief       # Constitutional project brief generation
+sead task index-docs                   # Documentation with catalog references
+sead task document-issue               # Issue documentation with constraint analysis
+```
+
+#### ⚙️ Development Tasks (SEAD Architect/Scrum Master)
+```bash
+sead task create-simple-spec           # Simplified specifications with catalog patterns
+sead task correct-course               # Course correction with constraint validation
+sead task approve-solution             # Solution approval with compliance checking
+sead task generate-ai-frontend-prompt  # AI prompts with catalog pattern references
+```
+
+#### 🏗️ Brownfield Integration Tasks (SEAD Catalog Architect/Pattern Extraction)
+```bash
+sead task brownfield-create-epic       # Brownfield epic creation with pattern extraction
+sead task brownfield-create-story      # Brownfield stories with catalog awareness  
+sead task brownfield-catalog-generation # AI-powered pattern extraction from existing code
+```
+
+#### Task Execution Examples
+```bash
+# Interactive task execution with step-by-step guidance
+sead task qa-gate --interactive --mode development --strict
+
+# Automated execution with specific configuration
+sead task brownfield-catalog-generation --source ./legacy-app --use-ai
+
+# Task chaining for complete workflows
+sead task advanced-elicitation --interactive && \
+sead task create-next-story --mode development && \
+sead task qa-gate --validate-constraints
+```
+
+**Key Task Features:**
+- **🤖 Direct Agent Integration**: Each task maps to specific SEAD agents with constitutional constraints
+- **🎯 Mode-Aware Execution**: Tasks respect development mode constraints (prototype/development/build-to-deploy)
+- **📚 Catalog Integration**: All tasks leverage catalog patterns and validate compliance
+- **💬 Interactive Guidance**: `--interactive` flag provides step-by-step execution assistance
+- **🔄 Agent Coordination**: Tasks maintain context for seamless agent handoffs
 
 ### Catalog Management
 ```bash

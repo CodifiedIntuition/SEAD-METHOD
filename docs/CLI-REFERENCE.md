@@ -10,11 +10,12 @@
 2. [Installation & Setup](#installation--setup)
 3. [Core Workflow Commands](#core-workflow-commands)
 4. [Catalog Management Commands](#catalog-management-commands)
-5. [Project Management Commands](#project-management-commands)
-6. [Global Options](#global-options)
-7. [Configuration](#configuration)
-8. [Exit Codes](#exit-codes)
-9. [Examples](#examples)
+5. [Task System Commands](#task-system-commands)
+6. [Project Management Commands](#project-management-commands)
+7. [Global Options](#global-options)
+8. [Configuration](#configuration)
+9. [Exit Codes](#exit-codes)
+10. [Examples](#examples)
 
 ---
 
@@ -418,6 +419,429 @@ sead catalog validate --report html --output ./reports/
 
 # Auto-fix validation issues
 sead catalog validate --fix
+```
+
+---
+
+## Task System Commands
+
+SEAD-METHOD provides a comprehensive task system with 21+ specialized development tasks that work directly with SEAD agents. Each task provides guided execution with constitutional constraints and catalog awareness.
+
+### `sead task list`
+
+Display all available SEAD tasks organized by category.
+
+#### Syntax
+```bash
+sead task list [options]
+```
+
+#### Options
+- `--category <category>`: Filter by category (workflow|quality|analysis|documentation)
+- `--detailed`: Show detailed task descriptions
+- `--agent-mapping`: Show which SEAD agent handles each task
+
+#### Examples
+```bash
+# List all available tasks
+sead task list
+
+# Show only quality assurance tasks
+sead task list --category quality
+
+# Show detailed descriptions with agent mappings
+sead task list --detailed --agent-mapping
+```
+
+---
+
+### Quality Assurance Tasks
+
+#### `sead task qa-gate`
+Execute comprehensive quality assurance gate with catalog compliance validation.
+
+#### Syntax
+```bash
+sead task qa-gate [options]
+```
+
+#### Options
+- `--mode <mode>`: Development mode for QA criteria (prototype|development|build-to-deploy)
+- `--strict`: Enable strict catalog compliance checking
+- `--interactive`: Enable interactive QA process
+- `--report`: Generate QA gate report
+
+#### Agent Integration
+- **Primary Agent**: SEAD QA
+- **Constraints**: sead-qa-constraints.yaml
+- **Commands**: `*qa-gate`, `*validate-constraints`, `*check-compliance`
+
+---
+
+#### `sead task apply-qa-fixes`
+Apply quality assurance fixes with catalog compliance validation.
+
+#### Syntax
+```bash
+sead task apply-qa-fixes [options]
+```
+
+#### Options
+- `--validate-catalog`: Validate catalog compliance (default: true)
+- `--interactive`: Enable interactive QA mode
+- `--scope <scope>`: Fix scope (file|component|project)
+
+#### Agent Integration
+- **Primary Agent**: SEAD QA
+- **Commands**: `*review-qa`, `*apply-fixes`, `*validate-changes`
+
+---
+
+#### `sead task review-story`
+Comprehensive story review with catalog pattern validation.
+
+#### Syntax
+```bash
+sead task review-story [options]
+```
+
+#### Options
+- `--story <id>`: Story ID to review
+- `--interactive`: Enable interactive review mode
+- `--validation-depth <depth>`: Review depth (basic|comprehensive|deep)
+
+#### Agent Integration
+- **Primary Agent**: SEAD QA
+- **Commands**: `*review-story`, `*validate-patterns`, `*check-acceptance-criteria`
+
+---
+
+#### `sead task verify-build`
+Verify build compliance with catalog standards and constitutional requirements.
+
+#### Syntax
+```bash
+sead task verify-build [options]
+```
+
+#### Options
+- `--mode <mode>`: Development mode for verification (prototype|development|build-to-deploy)
+- `--strict`: Enable strict compliance checking
+- `--interactive`: Enable interactive verification
+
+#### Agent Integration
+- **Primary Agent**: SEAD QA
+- **Commands**: `*run-tests`, `*validate-build`, `*check-deployment-readiness`
+
+---
+
+### Requirements & Analysis Tasks
+
+#### `sead task advanced-elicitation`
+Advanced requirements elicitation with stakeholder interaction.
+
+#### Syntax
+```bash
+sead task advanced-elicitation [options]
+```
+
+#### Options
+- `--interactive`: Enable interactive elicitation mode (default: false)
+- `--mode <mode>`: Development mode context (prototype|development|build-to-deploy)
+- `--stakeholders <list>`: Stakeholder roles to focus on
+
+#### Agent Integration
+- **Primary Agent**: SEAD Analyst
+- **Commands**: `*elicit`, `*catalog-research`, `*validate-constraints`
+
+---
+
+#### `sead task create-deep-research-prompt`
+Generate comprehensive research prompts with constitutional awareness.
+
+#### Syntax
+```bash
+sead task create-deep-research-prompt [options]
+```
+
+#### Options
+- `--topic <topic>`: Research topic or domain
+- `--interactive`: Enable interactive prompt creation
+- `--depth <level>`: Research depth (surface|moderate|comprehensive)
+
+#### Agent Integration
+- **Primary Agent**: SEAD Analyst
+- **Commands**: `*research`, `*generate-prompt`, `*validate-scope`
+
+---
+
+#### `sead task risk-profile`
+Generate risk assessment profile with constitutional constraint analysis.
+
+#### Syntax
+```bash
+sead task risk-profile [options]
+```
+
+#### Options
+- `--interactive`: Enable interactive risk assessment
+- `--scope <scope>`: Risk assessment scope (feature|project|system)
+- `--framework <type>`: Risk framework to apply
+
+#### Agent Integration
+- **Primary Agent**: SEAD Project Manager
+- **Commands**: `*risk-assess`, `*analyze-constraints`, `*generate-mitigation`
+
+---
+
+#### `sead task facilitate-brainstorming-session`
+Lead structured brainstorming with catalog-aware ideation.
+
+#### Syntax
+```bash
+sead task facilitate-brainstorming-session [options]
+```
+
+#### Options
+- `--topic <topic>`: Brainstorming topic or challenge
+- `--interactive`: Enable interactive facilitation (default: true)
+- `--participants <count>`: Expected participant count
+
+#### Agent Integration
+- **Primary Agent**: SEAD Scrum Master
+- **Commands**: `*facilitate`, `*guide-ideation`, `*capture-outcomes`
+
+---
+
+### Story & Documentation Tasks
+
+#### `sead task create-next-story`
+Create next user story with catalog integration and constraint awareness.
+
+#### Syntax
+```bash
+sead task create-next-story [options]
+```
+
+#### Options
+- `--interactive`: Enable interactive story creation
+- `--mode <mode>`: Development mode for story constraints
+- `--template <template>`: Story template to use
+
+#### Agent Integration
+- **Primary Agent**: SEAD Product Owner
+- **Commands**: `*create-story`, `*validate-constraints`, `*check-catalog-patterns`
+
+---
+
+#### `sead task document-project`
+Generate comprehensive project documentation with catalog integration.
+
+#### Syntax
+```bash
+sead task document-project [options]
+```
+
+#### Options
+- `--interactive`: Enable interactive documentation
+- `--scope <scope>`: Documentation scope (minimal|standard|comprehensive)
+- `--format <format>`: Output format (markdown|html|pdf)
+
+#### Agent Integration
+- **Primary Agent**: SEAD Analyst
+- **Commands**: `*document`, `*organize-content`, `*validate-completeness`
+
+---
+
+#### `sead task generate-project-brief`
+Generate project brief with constitutional framework integration.
+
+#### Syntax
+```bash
+sead task generate-project-brief [options]
+```
+
+#### Options
+- `--interactive`: Enable interactive brief generation
+- `--scope <scope>`: Project scope and complexity (small|medium|large)
+- `--template <template>`: Brief template to use
+
+#### Agent Integration
+- **Primary Agent**: SEAD Project Manager
+- **Commands**: `*generate-brief`, `*validate-scope`, `*check-feasibility`
+
+---
+
+#### `sead task index-docs`
+Create documentation index with catalog references and constitutional links.
+
+#### Syntax
+```bash
+sead task index-docs [options]
+```
+
+#### Options
+- `--source <path>`: Documentation source path (default: ./docs)
+- `--interactive`: Enable interactive indexing
+- `--format <format>`: Index format (tree|flat|categorized)
+
+#### Agent Integration
+- **Primary Agent**: SEAD Analyst
+- **Commands**: `*index-docs`, `*organize-taxonomy`, `*validate-links`
+
+---
+
+### Development Tasks
+
+#### `sead task create-simple-spec`
+Create simplified specification with catalog pattern references.
+
+#### Syntax
+```bash
+sead task create-simple-spec [options]
+```
+
+#### Options
+- `--interactive`: Enable interactive spec creation
+- `--mode <mode>`: Development mode for spec constraints
+- `--template <template>`: Specification template
+
+#### Agent Integration
+- **Primary Agent**: SEAD Architect
+- **Commands**: `*create-spec`, `*validate-architecture`, `*check-patterns`
+
+---
+
+#### `sead task correct-course`
+Course correction with constraint validation and catalog alignment.
+
+#### Syntax
+```bash
+sead task correct-course [options]
+```
+
+#### Options
+- `--interactive`: Enable interactive course correction
+- `--mode <mode>`: Development mode for constraints
+- `--severity <level>`: Correction severity (minor|major|critical)
+
+#### Agent Integration
+- **Primary Agent**: SEAD Scrum Master
+- **Commands**: `*course-correct`, `*analyze-deviation`, `*plan-realignment`
+
+---
+
+#### `sead task approve-solution`
+Review and approve implementation solutions.
+
+#### Syntax
+```bash
+sead task approve-solution [options]
+```
+
+#### Options
+- `--interactive`: Enable interactive approval mode
+- `--mode <mode>`: Development mode for approval criteria
+- `--solution <id>`: Solution identifier to approve
+
+#### Agent Integration
+- **Primary Agent**: SEAD Architect
+- **Commands**: `*approve-solution`, `*validate-architecture`, `*check-compliance`
+
+---
+
+### Brownfield Integration Tasks
+
+#### `sead task brownfield-create-epic`
+Create epic for brownfield integration with catalog awareness.
+
+#### Syntax
+```bash
+sead task brownfield-create-epic [options]
+```
+
+#### Options
+- `--source <path>`: Existing codebase path (default: .)
+- `--interactive`: Enable interactive epic creation
+- `--analysis-depth <level>`: Codebase analysis depth
+
+#### Agent Integration
+- **Primary Agent**: SEAD Catalog Architect
+- **Commands**: `*create-epic`, `*analyze-patterns`, `*plan-integration`
+
+---
+
+#### `sead task brownfield-create-story`
+Create story for brownfield integration with pattern extraction.
+
+#### Syntax
+```bash
+sead task brownfield-create-story [options]
+```
+
+#### Options
+- `--source <path>`: Existing codebase path (default: .)
+- `--interactive`: Enable interactive story creation
+- `--pattern-focus <domain>`: Focus on specific pattern domain
+
+#### Agent Integration
+- **Primary Agent**: SEAD Catalog Architect
+- **Commands**: `*create-story`, `*extract-patterns`, `*validate-integration`
+
+---
+
+#### `sead task brownfield-catalog-generation`
+Generate catalog from brownfield codebase with AI-powered pattern extraction.
+
+#### Syntax
+```bash
+sead task brownfield-catalog-generation [options]
+```
+
+#### Options
+- `--source <path>`: Source codebase path (default: .)
+- `--interactive`: Enable interactive generation
+- `--use-ai`: Use AI agents for pattern analysis (default: true)
+
+#### Agent Integration
+- **Primary Agent**: SEAD Pattern Extraction
+- **Secondary Agent**: SEAD Catalog Architect
+- **Commands**: `*extract-patterns`, `*classify-patterns`, `*build-catalog`
+
+---
+
+### Task Execution Examples
+
+#### Interactive Task Execution
+```bash
+# Execute task with guided prompts
+sead task qa-gate --interactive --mode development
+
+# Create story with step-by-step guidance
+sead task create-next-story --interactive --template user-story
+
+# Generate project documentation interactively
+sead task document-project --interactive --scope comprehensive
+```
+
+#### Automated Task Execution
+```bash
+# Run QA gate with strict validation
+sead task qa-gate --strict --mode build-to-deploy
+
+# Generate catalog from existing codebase
+sead task brownfield-catalog-generation --source ./legacy-app --use-ai
+
+# Create project brief for large project
+sead task generate-project-brief --scope large --format markdown
+```
+
+#### Task Chaining
+```bash
+# Chain multiple related tasks
+sead task advanced-elicitation --interactive && \
+sead task create-deep-research-prompt --topic "user requirements" && \
+sead task create-next-story --mode development
 ```
 
 ---
