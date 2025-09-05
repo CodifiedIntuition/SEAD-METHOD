@@ -24,10 +24,10 @@ This fix application task operates with mode-sensitive constraints:
 ```yaml
 required:
   - story_id: '{epic}.{story}' # e.g., "2.2"
-  - qa_root: from `sead-config.yaml` key `qa.qaLocation` (e.g., `docs/project/qa`)
-  - story_root: from `sead-config.yaml` key `devStoryLocation` (e.g., `docs/project/stories`)
+  - qa_root: from `sead.config.yaml` key `qa.qaLocation` (e.g., `docs/project/qa`)
+  - story_root: from `sead.config.yaml` key `devStoryLocation` (e.g., `docs/project/stories`)
   - sead_mode: '{prototype|development|build-to-deploy}' # Current development mode
-  - catalog_path: from `sead-config.yaml` key `catalog.path`
+  - catalog_path: from `sead.config.yaml` key `catalog.path`
 
 optional:
   - story_title: '{title}' # derive from story H1 if missing
@@ -67,7 +67,7 @@ optional:
 
 ### 0) Load SEAD Config & Validate Catalog Access
 
-- Read `sead-config.yaml` and `sead-core/core-config.yaml`
+- Read `sead.config.yaml` and `sead-core/core-config.yaml`
 - Resolve `qa_root`, `story_root`, `catalog_path`, and `sead_mode`
 - **Constitutional Requirement**: Validate catalog pattern access and versions
 - Locate story file in `{story_root}/{epic}.{story}.*.md`
@@ -175,7 +175,7 @@ CRITICAL: SEAD Dev agent is ONLY authorized to update these sections of the stor
 
 ## SEAD Blocking Conditions
 
-- Missing `sead-config.yaml` or `sead-core/core-config.yaml`
+- Missing `sead.config.yaml` or `sead-core/core-config.yaml`
 - Story file not found for `story_id`
 - Catalog patterns inaccessible or version conflicts
 - No QA artifacts found (neither gate nor assessments)

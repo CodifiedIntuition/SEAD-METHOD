@@ -25,7 +25,7 @@ This task operates with mode-sensitive quality gate criteria:
 
 ## SEAD Configuration and Catalog Context
 
-**ALWAYS** check the `sead-config.yaml` and `sead-core/core-config.yaml` for:
+**ALWAYS** check the `sead.config.yaml` and `sead-core/core-config.yaml` for:
 - `qa.qaLocation/gates` - Gate file location
 - `catalog.path` - Catalog directory path
 - `mode.current` - Current SEAD development mode
@@ -217,7 +217,7 @@ waiver: { active: false } # Waivers not allowed for mode constraint violations
 
 ## SEAD Output Requirements
 
-1. **ALWAYS** create gate file at: `qa.qaLocation/gates` from `sead-config.yaml`
+1. **ALWAYS** create gate file at: `qa.qaLocation/gates` from `sead.config.yaml`
 2. **ALWAYS** append this exact format to story's QA Results section:
 
    ```text

@@ -25,6 +25,19 @@ ${chalk.cyan('║')}  ${chalk.green('🧪 PROTOTYPE')} → ${chalk.yellow('⚙�
 ${chalk.cyan('╚═══════════════════════════════════════════════════════════════╝')}
 `;
 
+// Security utility for path traversal protection
+function sanitizeFilename(input) {
+  if (!input) return 'default';
+  
+  return input
+    .toString()
+    .toLowerCase()
+    .replace(/[^a-z0-9-_]/g, '-')    // Only allow safe characters
+    .replace(/-+/g, '-')             // Collapse multiple dashes  
+    .replace(/^-+|-+$/g, '')         // Trim leading/trailing dashes
+    .substring(0, 50);               // Limit length
+}
+
 // Version and program info
 program
   .name('sead-method')
@@ -36,7 +49,7 @@ program
 
 // Show banner unless disabled
 program.hook('preAction', (thisCommand, actionCommand) => {
-  if (!thisCommand.opts().noBanner) {
+  if (thisCommand.opts().banner !== false) {
     console.log(SEAD_BANNER);
   }
 });
@@ -693,6 +706,19 @@ sead status
     path.join(projectPath, 'sead-catalog', 'README.md'),
     catalogReadme
   );
+  
+  // Copy SEAD-core resources to project for self-contained operation
+  console.log(chalk.blue('📦 Copying SEAD resources...'));
+  const seadCoreSrc = path.resolve(__dirname, 'sead-core');
+  const seadCoreDest = path.join(projectPath, 'sead-core');
+  
+  try {
+    await fs.copy(seadCoreSrc, seadCoreDest);
+    console.log(chalk.green('✅ SEAD resources copied successfully'));
+  } catch (error) {
+    console.error(chalk.yellow(`⚠️  Warning: Could not copy SEAD resources: ${error.message}`));
+    console.error(chalk.yellow('   Project will reference resources from CLI installation'));
+  }
 }
 
 async function runAgentBasedCatalogGeneration(options) {
@@ -807,7 +833,7 @@ async function createSeadSpecification(description, options) {
   
   const specType = options.type || 'frontend';
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-  const specFile = `./sead-workspace/specifications/${specType}-spec-${timestamp}.md`;
+  const specFile = `./sead-workspace/specifications/${sanitizeFilename(specType)}-spec-${timestamp}.md`;
   
   // Generate specification instructions
   const specInstructions = generateSpecificationInstructions(description, options, effectiveMode, catalogStatus);
@@ -820,23 +846,25 @@ async function createSeadSpecification(description, options) {
   console.log(chalk.blue('\n🚀 Next Steps - Agent Workflow:'));
   console.log(chalk.white('1. Activate SEAD Analyst for requirements gathering:'));
   console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-analyst.md`));
-  console.log(chalk.cyan(`   Command: *catalog-research ${specType}`));
+  console.log(chalk.cyan(`   Command: *catalog-research ${sanitizeFilename(specType)}`));
   console.log(chalk.cyan(`   Then: *elicit`));
   
   console.log(chalk.white('\n2. Activate SEAD Architect for technical specification:'));
   console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-architect.md`));
-  console.log(chalk.cyan(`   Template: sead-core/templates/sead-${specType}-spec-tmpl.yaml`));
+  // Normalize template name (frontend -> front-end for file system)
+  const templateSpecType = sanitizeFilename(specType) === 'frontend' ? 'front-end' : sanitizeFilename(specType);
+  console.log(chalk.cyan(`   Template: sead-core/templates/sead-${templateSpecType}-spec-tmpl.yaml`));
   console.log(chalk.cyan(`   Command: *create-spec`));
   
   console.log(chalk.white('\n3. Constitutional Validation:'));
-  console.log(chalk.cyan(`   Load constraints: sead-core/constitutional-constraints/sead-analyst-constraints.yaml`));
+  console.log(chalk.cyan(`   Load constraints: sead-core/constitutional-rules/sead-analyst-constraints.yaml`));
   console.log(chalk.cyan(`   Validate mode: ${effectiveMode}`));
   console.log(chalk.cyan(`   Enforce catalog: ${config.modes[effectiveMode].catalog_enforcement}`));
   
   if (options.interactive) {
     console.log(chalk.yellow('\n💡 Interactive Mode Enabled'));
     console.log('Run the agents above, then return here for guided specification creation.');
-    console.log(`Command: sead specify-continue ${specFile.split('/').pop()}`);
+    console.log('💡 Next: sead plan [tech-stack]');
   }
   
   return specFile;
@@ -917,7 +945,7 @@ ${catalogStatus.available ?
 
 **Activation**: Load \`sead-core/agents/sead-architect.md\`
 
-**Template**: \`sead-core/templates/sead-${options.type}-spec-tmpl.yaml\`
+**Template**: \`sead-core/templates/sead-${options.type === 'frontend' ? 'front-end' : options.type}-spec-tmpl.yaml\`
 
 **Pre-Action Requirements**:
 1. Load constitutional constraints from Phase 1
@@ -1046,7 +1074,7 @@ async function createSeadPlan(techStack, options) {
   await fs.ensureDir('./sead-workspace/planning');
   
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-  const planFile = `./sead-workspace/planning/${options.architecture}-plan-${timestamp}.md`;
+  const planFile = `./sead-workspace/planning/${sanitizeFilename(options.architecture)}-plan-${timestamp}.md`;
   
   // Generate architecture plan instructions
   const planInstructions = generatePlanInstructions(techStack, options, effectiveMode, catalogStatus, specificationStatus);
@@ -1059,7 +1087,9 @@ async function createSeadPlan(techStack, options) {
   console.log(chalk.blue('\n🚀 Next Steps - Planning Workflow:'));
   console.log(chalk.white('1. Activate SEAD Architect for system design:'));
   console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-architect.md`));
-  console.log(chalk.cyan(`   Template: sead-core/templates/sead-${options.architecture}-architecture-tmpl.yaml`));
+  // Normalize template name (frontend -> front-end for file system)
+  const templateArchType = options.architecture === 'frontend' ? 'front-end' : options.architecture;
+  console.log(chalk.cyan(`   Template: sead-core/templates/sead-${templateArchType}-architecture-tmpl.yaml`));
   console.log(chalk.cyan(`   Command: *create-architecture`));
   
   console.log(chalk.white('\n2. Activate SEAD Developer for implementation strategy:'));
@@ -1068,14 +1098,14 @@ async function createSeadPlan(techStack, options) {
   console.log(chalk.cyan(`   Validate: *check-feasibility`));
   
   console.log(chalk.white('\n3. Constitutional Validation:'));
-  console.log(chalk.cyan(`   Load constraints: sead-core/constitutional-constraints/sead-architect-constraints.yaml`));
+  console.log(chalk.cyan(`   Load constraints: sead-core/constitutional-rules/sead-architect-constraints.yaml`));
   console.log(chalk.cyan(`   Mode validation: ${effectiveMode}`));
   console.log(chalk.cyan(`   Tech stack compliance: ${techStack}`));
   
   if (options.interactive) {
     console.log(chalk.yellow('\n💡 Interactive Planning Enabled'));
     console.log('Follow the agent workflow above for guided architecture planning.');
-    console.log(`Command: sead plan-continue ${planFile.split('/').pop()}`);
+    console.log('💡 Next: sead stories --enforce-catalog');
   }
   
   return planFile;
@@ -1136,7 +1166,7 @@ ${catalogStatus.available ?
 
 **Activation**: Load \`sead-core/agents/sead-architect.md\`
 
-**Template**: \`sead-core/templates/sead-${options.architecture}-architecture-tmpl.yaml\`
+**Template**: \`sead-core/templates/sead-${options.architecture === 'frontend' ? 'front-end' : options.architecture}-architecture-tmpl.yaml\`
 
 **Pre-Action Requirements**:
 1. Read all available specifications from ./sead-workspace/specifications/
@@ -1380,7 +1410,7 @@ async function createSeadStories(options) {
   if (options.interactive) {
     console.log(chalk.yellow('\n💡 Interactive Story Creation Enabled'));
     console.log('Follow the agent workflow above for guided story creation.');
-    console.log(`Command: sead stories-continue ${storyFile.split('/').pop()}`);
+    console.log('💡 Next: sead implement [story-id]');
   }
   
   return storyFile;
@@ -1642,7 +1672,7 @@ async function implementSeadStory(storyId, options) {
   await fs.ensureDir('./sead-workspace/implementations');
   
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-  const implFile = `./sead-workspace/implementations/impl-${storyId}-${timestamp}.md`;
+  const implFile = `./sead-workspace/implementations/impl-${sanitizeFilename(storyId)}-${timestamp}.md`;
   
   // Generate implementation instructions
   const implInstructions = generateImplementationInstructions(storyId, options, effectiveMode, implementationReadiness);
@@ -1655,14 +1685,14 @@ async function implementSeadStory(storyId, options) {
   console.log(chalk.blue('\n🚀 Next Steps - Implementation Workflow:'));
   console.log(chalk.white('1. Activate SEAD Developer for implementation:'));
   console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-developer.md`));
-  console.log(chalk.cyan(`   Load constraints: sead-core/constitutional-constraints/sead-developer-constraints.yaml`));
+  console.log(chalk.cyan(`   Load constraints: sead-core/constitutional-rules/sead-developer-constraints.yaml`));
   console.log(chalk.cyan(`   Load story: ${implementationReadiness.story.path || 'stories/[story-file].md'}`));
   console.log(chalk.cyan(`   Command: *implement`));
   
   if (options.qaGate) {
     console.log(chalk.white('\n2. Activate SEAD QA for validation:'));
     console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-qa.md`));
-    console.log(chalk.cyan(`   Load constraints: sead-core/constitutional-constraints/sead-qa-constraints.yaml`));
+    console.log(chalk.cyan(`   Load constraints: sead-core/constitutional-rules/sead-qa-constraints.yaml`));
     console.log(chalk.cyan(`   Command: *validate-implementation`));
     console.log(chalk.cyan(`   Gate: *qa-gate-validation`));
   }
@@ -1675,7 +1705,7 @@ async function implementSeadStory(storyId, options) {
   if (options.interactive) {
     console.log(chalk.yellow('\n💡 Interactive Implementation Enabled'));
     console.log('Follow the agent workflow above for guided implementation.');
-    console.log(`Command: sead implement-continue ${implFile.split('/').pop()}`);
+    console.log('💡 Next: Review generated files and iterate');
   }
   
   return implFile;
@@ -1730,7 +1760,7 @@ async function checkStoryStatus(storyId) {
         
         // Look for exact story ID match or partial match
         const matchingFile = mdFiles.find(file => 
-          file.includes(storyId) || file.startsWith(storyId) || file === `${storyId}.md`
+          file.includes(sanitizeFilename(storyId)) || file.startsWith(sanitizeFilename(storyId)) || file === `${sanitizeFilename(storyId)}.md`
         );
         
         if (matchingFile) {
@@ -1804,7 +1834,7 @@ ${getModeConstraints(mode)}
 
 **Activation**: Load \`sead-core/agents/sead-developer.md\`
 
-**Constitutional Constraints**: Load \`sead-core/constitutional-constraints/sead-developer-constraints.yaml\`
+**Constitutional Constraints**: Load \`sead-core/constitutional-rules/sead-developer-constraints.yaml\`
 
 **Story Context**: Load story from \`${implementationReadiness.story.path || 'stories/[story-file].md'}\`
 
@@ -1843,7 +1873,7 @@ ${options.qaGate ? `
 
 **Activation**: Load \`sead-core/agents/sead-qa.md\`
 
-**Constitutional Constraints**: Load \`sead-core/constitutional-constraints/sead-qa-constraints.yaml\`
+**Constitutional Constraints**: Load \`sead-core/constitutional-rules/sead-qa-constraints.yaml\`
 
 **Pre-Action Requirements**:
 1. Review implementation from Phase 1
@@ -1941,7 +1971,7 @@ async function executeSeadTask(taskName, options = {}) {
     }
     
     // Load task definition
-    const taskPath = path.resolve(__dirname, `sead-core/tasks/${taskName}.md`);
+    const taskPath = path.resolve(__dirname, `sead-core/tasks/${sanitizeFilename(taskName)}.md`);
     if (!await fs.pathExists(taskPath)) {
       throw new Error(`Task not found: ${taskName}`);
     }
@@ -1954,7 +1984,7 @@ async function executeSeadTask(taskName, options = {}) {
     // Create task execution workspace
     await fs.ensureDir('./sead-workspace/tasks');
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-    const taskExecutionFile = `./sead-workspace/tasks/${taskName}-execution-${timestamp}.md`;
+    const taskExecutionFile = `./sead-workspace/tasks/${sanitizeFilename(taskName)}-execution-${timestamp}.md`;
     
     // Generate task execution instructions
     const taskInstructions = generateTaskExecutionInstructions(taskName, taskContent, options);

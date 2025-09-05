@@ -16,7 +16,7 @@ This review task operates with mode-sensitive validation:
 ```yaml
 required:
   - story_id: '{epic}.{story}' # e.g., "1.3"
-  - story_path: '{devStoryLocation}/{epic}.{story}.*.md' # Path from sead-config.yaml
+  - story_path: '{devStoryLocation}/{epic}.{story}.*.md' # Path from sead.config.yaml
   - story_title: '{title}' # If missing, derive from story file H1
   - story_slug: '{slug}' # If missing, derive from title (lowercase, hyphenated)
   - sead_mode: '{prototype|development|build-to-deploy}' # Current development mode
@@ -32,7 +32,7 @@ required:
 
 ## SEAD Configuration and Catalog Context
 
-**ALWAYS** check the `sead-config.yaml` and `sead-core/core-config.yaml` for:
+**ALWAYS** check the `sead.config.yaml` and `sead-core/core-config.yaml` for:
 - `qa.qaLocation/gates` - Gate file location
 - `catalog.path` - Catalog directory path  
 - `mode.current` - Current SEAD development mode
@@ -280,7 +280,7 @@ SEAD compliance: qa.qaLocation/assessments/{epic}.{story}-sead-{YYYYMMDD}.md
 **Template and Directory:**
 
 - Use SEAD-enhanced qa-gate template with catalog compliance sections
-- Create directory defined in `qa.qaLocation/gates` (see `sead-config.yaml`) if missing
+- Create directory defined in `qa.qaLocation/gates` (see `sead.config.yaml`) if missing
 - Save to: `qa.qaLocation/gates/{epic}.{story}-{slug}.yml`
 
 SEAD Gate file structure:

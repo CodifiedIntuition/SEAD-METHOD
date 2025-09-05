@@ -17,7 +17,7 @@ This validation task operates with mode-sensitive criteria:
 
 ### 0. Load SEAD Configuration and Catalog Context
 
-- Load `sead-config.yaml` and `sead-core/core-config.yaml`
+- Load `sead.config.yaml` and `sead-core/core-config.yaml`
 - If files do not exist, HALT and inform the user: "SEAD configuration files not found. Run 'sead init' to initialize SEAD project configuration."
 - Extract key configurations: `devStoryLocation`, `prd.*`, `architecture.*`, `catalog.*`, `mode.*`, `constraints.*`
 - **MANDATORY CATALOG READS** (Constitutional Requirement):
