@@ -61,6 +61,20 @@
 - **12 BMAD Templates**: Enhance with catalog compliance and constraint enforcement
 - **5 BMAD Workflows**: Convert to SEAD workflows with progressive validation
 
+#### **Phase 5.5**: Catalog Sharding System (Week 4.5)
+- **Catalog Document Sharding**: Create numbered subfile system for large catalog documents
+  - **Problem**: Large monolithic PRDs, API contracts, shared types docs create context window issues for agents
+  - **Solution**: Dual system - monolithic version + sharded numbered subfiles (01-overview.md, 02-core-features.md, etc.)
+  - **Benefits**: Agents can focus on specific sections, easier referencing, better context management
+  - **Implementation**: 
+    - PRD sharding: 01-overview, 02-user-stories, 03-technical-requirements, 04-constraints
+    - API contract sharding: 01-authentication, 02-user-endpoints, 03-data-endpoints, 04-schemas
+    - Shared types sharding: 01-core-types, 02-api-types, 03-ui-types, 04-validation-types
+    - Design system sharding: 01-tokens, 02-components, 03-patterns, 04-layouts
+- **Numbering Convention**: Two-digit prefix (01-99) for easy reference and agent focus
+- **Cross-Reference System**: Links between sharded files and main monolithic version
+- **Agent Integration**: Templates and tasks updated to reference specific numbered catalog shards
+
 #### **Phase 6**: CLI Command Implementation (Week 5)
 - **Core Workflow Commands**: `specify`, `plan`, `stories`, `implement` fully operational
 - **Catalog Integration**: All commands leverage catalog constraints and validation
