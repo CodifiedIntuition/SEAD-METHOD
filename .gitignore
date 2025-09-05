@@ -103,6 +103,10 @@ sead-workspace/
 *.sead-tmp
 .sead-cache/
 
+# Reference repositories (not part of SEAD-METHOD distribution)
+BMAD-METHOD/
+spec-kit/
+
 # Test outputs
 test-results/
 coverage-reports/

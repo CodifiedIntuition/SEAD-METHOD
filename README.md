@@ -115,21 +115,40 @@ SEAD-METHOD operates on three aligned tiers that progress from flexibility to co
 - **☁️ CLOUD-STAGING**: Lightweight cloud with branch environments
 - **🏭 PRODUCTION-DEPLOY**: Full CI/CD with blue/green deployment
 
-### Catalog Structure
+## 📁 Repository Structure
+
 ```
-sead-catalog/
-├── api-contracts/           # OpenAPI specs, contract definitions
-├── shared-types/           # TypeScript interfaces, data models
-├── design-system/          # Components, patterns, themes
-├── state-management/       # Store patterns, action schemas
-├── error-handling/         # Error types, handling patterns
-├── validation-schemas/     # Input validation, data constraints
-├── test-patterns/          # Test templates, fixtures
-├── auth-patterns/         # Authentication & authorization
-├── integration-patterns/   # External service patterns
-├── data-strategy/          # Three-tier data management
-└── deployment-strategy/    # Three-tier deployment system
+SEAD-METHOD/ (root)
+├── sead-core/                   # Core SEAD methodology
+│   ├── agents/                  # 12 SEAD agents with catalog awareness
+│   ├── constitutional-rules/    # Constitutional framework preventing drift
+│   ├── tasks/                   # SEAD development tasks
+│   ├── templates/               # SEAD templates and workflows
+│   └── core-config.yaml         # SEAD system configuration
+├── sead-catalog-template/       # Template for project catalogs
+│   ├── api-contracts/           # API specifications and contracts
+│   ├── shared-types/           # TypeScript interfaces, data models
+│   ├── design-system/          # UI components and design patterns
+│   ├── state-management/       # Store patterns, action schemas
+│   ├── error-handling/         # Error types and handling patterns
+│   ├── validation-schemas/     # Input validation, data constraints
+│   ├── test-patterns/          # Test templates and fixtures
+│   ├── auth-patterns/         # Authentication & authorization
+│   ├── integration-patterns/   # External service integration
+│   ├── data-strategy/          # Three-tier data management
+│   └── deployment-strategy/    # Three-tier deployment system
+├── examples/                    # Example SEAD projects
+│   └── basic-setup-example/     # Basic project initialization example
+├── cli.js                       # Unified SEAD CLI interface
+├── package.json                 # NPM package configuration
+└── docs/                        # Documentation and guides
 ```
+
+### Clean Architecture Benefits
+- **`sead-core/`**: The actual SEAD methodology (agents, rules, tasks, templates)
+- **`sead-catalog-template/`**: Template copied to new projects via `sead init`
+- **`examples/`**: Clear examples showing SEAD project setup
+- **Root level**: Clean CLI interface and configuration
 
 ## 🤖 SEAD Agents
 
