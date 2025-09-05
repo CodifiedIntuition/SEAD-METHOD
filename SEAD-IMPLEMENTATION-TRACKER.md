@@ -267,7 +267,7 @@ npx sead-method validate
    - Constitutional framework validation and governance compliance
    - Context preservation and agent handoff continuity mechanisms
    - Catalog pattern evolution and compliance validation requirements
-4. 🔄 **REMAINING WORK**: 5 workflows before Phase 6 CLI integration
+4. 🔄 **REMAINING WORK**: 2 workflows (greenfield-service, greenfield-ui) before Phase 6 CLI integration
 
 ### Phase 5 Part 2: Task & Template Library (COMPLETE!) 🎉
 - **21 BMAD Tasks**: Convert to SEAD-aware versions with catalog integration (21/21 complete) ✅
@@ -287,9 +287,10 @@ npx sead-method validate
   - ✅ Architecture templates: sead-fullstack-architecture-tmpl.yaml (constitutional fullstack design)
   - ✅ UI templates: sead-front-end-architecture-tmpl.yaml (constitutional UI architecture)
   - ✅ **COMPLETED TODAY**: sead-front-end-spec-tmpl.yaml, sead-brownfield-architecture-tmpl.yaml, sead-brownfield-prd-tmpl.yaml
-- **6 BMAD Workflows**: Convert to SEAD workflows with progressive validation (1/6 complete)
+- **6 BMAD Workflows**: Convert to SEAD workflows with progressive validation (4/6 complete) 🚀
   - ✅ Primary workflow: sead-greenfield-fullstack.yaml
-  - 🚧 Remaining: 5 workflows (brownfield-fullstack, brownfield-service, greenfield-service, etc.)
+  - ✅ **NEW COMPLETED**: sead-brownfield-fullstack.yaml, sead-brownfield-service.yaml, sead-brownfield-ui.yaml
+  - 🚧 Remaining: 2 workflows (greenfield-service, greenfield-ui)
 - **CLI Integration**: Connect constraints to workflow commands (pending - will be part of Phase 6)
 
 ## Component Extraction Roadmap
@@ -382,7 +383,7 @@ npx sead-method validate
 2. ✅ **TEMPLATE CONVERSION COMPLETE** - All 11/11 templates complete with constitutional integration! ✅
    - **Completed This Session**: sead-front-end-spec-tmpl.yaml, sead-brownfield-architecture-tmpl.yaml, sead-brownfield-prd-tmpl.yaml
    - **All Templates Complete**: Complete constitutional framework with catalog integration across all templates
-3. 🔄 **Convert remaining 5 workflows** (brownfield-fullstack, greenfield-service, etc.) - NEXT PRIORITY
+3. 🔄 **Convert remaining 2 workflows** (greenfield-service, greenfield-ui) - NEXT PRIORITY ⚡ MAJOR PROGRESS!
 4. Begin Phase 6: CLI Command Implementation preparation
 
 ---
