@@ -1,0 +1,58 @@
+{
+  "name": "@sead-method/core",
+  "version": "1.0.0",
+  "description": "Specification Enforced Agentic Agile Development - A hybrid methodology preventing AI agent drift through catalog-based constraints",
+  "main": "cli.js",
+  "bin": {
+    "sead-method": "./cli.js",
+    "sead": "./cli.js"
+  },
+  "scripts": {
+    "start": "node cli.js",
+    "test": "jest",
+    "lint": "eslint .",
+    "build": "npm run lint && npm test",
+    "install-global": "npm install -g .",
+    "dev": "nodemon cli.js"
+  },
+  "keywords": [
+    "sead-method",
+    "sead",
+    "agile",
+    "ai-agents",
+    "specification-driven",
+    "constraint-enforcement",
+    "development-methodology",
+    "catalog-system",
+    "context-preservation"
+  ],
+  "author": "SEAD-METHOD Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sead-method/core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sead-method/core/issues"
+  },
+  "homepage": "https://github.com/sead-method/core#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "commander": "^9.0.0",
+    "inquirer": "^8.0.0",
+    "chalk": "^4.1.0",
+    "fs-extra": "^10.0.0",
+    "yaml": "^2.0.0",
+    "glob": "^8.0.0",
+    "lodash": "^4.17.21",
+    "axios": "^1.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "eslint": "^8.0.0",
+    "nodemon": "^2.0.0"
+  },
+  "preferGlobal": true
+}

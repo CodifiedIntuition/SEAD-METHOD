@@ -1,0 +1,397 @@
+# <!-- Powered by SEAD-METHOD™ Core -->
+workflow:
+  id: sead-greenfield-fullstack
+  name: SEAD Greenfield Full-Stack Application Development
+  description: >-
+    Catalog-aware agent workflow for building full-stack applications from concept to development.
+    Enforces SEAD constraint methodology with progressive validation and catalog compliance.
+    Supports three development modes: prototype, development, and build-to-deploy.
+  type: greenfield
+  methodology: SEAD-METHOD
+  project_types:
+    - web-app
+    - saas
+    - enterprise-app
+    - prototype
+    - mvp
+
+  sead_configuration:
+    default_mode: development
+    catalog_enforcement: true
+    constraint_validation: progressive
+    context_preservation: true
+    
+    mode_progression:
+      - prototype: "Rapid experimentation with minimal catalog constraints"
+      - development: "Catalog-preferred with extension tracking" 
+      - build-to-deploy: "Strict catalog-only enforcement"
+
+  sequence:
+    - agent: sead-analyst
+      creates: project-brief.md
+      sead_enhancements:
+        - catalog_research: "Check existing catalog patterns for similar projects"
+        - mode_awareness: "Adapt analysis depth to current SEAD mode"
+        - constraint_documentation: "Document any catalog gaps for future extension"
+      optional_steps:
+        - catalog_pattern_analysis
+        - brainstorming_session
+        - market_research_prompt
+      notes: "Catalog-aware brainstorming and research. Include catalog pattern recommendations. SAVE OUTPUT: Copy final project-brief.md to your project's docs/ folder."
+
+    - agent: sead-pm
+      creates: prd.md
+      requires: 
+        - project-brief.md
+        - catalog-patterns-analysis.md
+      sead_enhancements:
+        - catalog_integration: "Reference catalog components in user stories"
+        - mode_constraints: "Include mode-appropriate acceptance criteria"
+        - validation_requirements: "Add SEAD constraint validation to stories"
+      notes: "Creates catalog-aware PRD from project brief using sead-prd-tmpl. Include catalog component references in stories. SAVE OUTPUT: Copy final prd.md to your project's docs/ folder."
+
+    - agent: sead-ux-expert  
+      creates: front-end-spec.md
+      requires: 
+        - prd.md
+        - catalog/design-system/
+      sead_enhancements:
+        - design_system_integration: "Use existing catalog design system patterns"
+        - component_reuse: "Prioritize catalog UI components over custom designs"
+        - constraint_compliance: "Validate designs against current mode constraints"
+      optional_steps:
+        - user_research_prompt
+        - design_system_audit
+      notes: "Creates UI/UX specification using catalog design system. Prioritize existing components. SAVE OUTPUT: Copy final front-end-spec.md to your project's docs/ folder."
+
+    - agent: sead-ux-expert
+      creates: v0_prompt (optional)
+      requires: 
+        - front-end-spec.md
+        - catalog/design-system/
+      condition: user_wants_ai_generation
+      sead_enhancements:
+        - catalog_component_inclusion: "Include catalog component definitions in AI prompt"
+        - constraint_specification: "Specify SEAD mode constraints in generation prompt"
+      notes: "OPTIONAL: Generate AI UI prompt for tools like v0, Lovable, etc., including catalog design system patterns. Use the sead-generate-ai-frontend-prompt task."
+
+    - agent: sead-architect
+      creates: fullstack-architecture.md
+      requires:
+        - prd.md
+        - front-end-spec.md
+        - catalog/api-contracts/
+        - catalog/shared-types/
+        - catalog/data-strategy/
+        - catalog/deployment-strategy/
+      sead_enhancements:
+        - catalog_pattern_selection: "Select appropriate architectural patterns from catalog"
+        - three_tier_design: "Design data and deployment strategies for all three tiers"
+        - constraint_architecture: "Ensure architecture supports all SEAD modes"
+        - pattern_gap_analysis: "Identify missing catalog patterns for future development"
+      optional_steps:
+        - technical_research_prompt
+        - catalog_architecture_audit
+        - review_generated_ui_structure
+      notes: "Creates comprehensive catalog-aware architecture using sead-fullstack-architecture-tmpl. Design three-tier data/deployment strategies. SAVE OUTPUT: Copy final fullstack-architecture.md to your project's docs/ folder."
+
+    - agent: sead-pm
+      updates: prd.md (if needed)
+      requires: fullstack-architecture.md
+      condition: architecture_suggests_prd_changes
+      sead_enhancements:
+        - catalog_story_updates: "Update stories with specific catalog component references"
+        - constraint_integration: "Add mode-specific validation criteria to updated stories"
+      notes: "If architect suggests story changes, update PRD with catalog references and constraint validations. Re-export complete prd.md to docs/ folder."
+
+    - agent: sead-po
+      validates: all_artifacts
+      uses: sead-po-master-checklist
+      sead_enhancements:
+        - catalog_compliance_check: "Validate all documents reference appropriate catalog patterns"
+        - constraint_consistency: "Ensure consistent SEAD mode constraints across all documents"
+        - three_tier_validation: "Validate data/deployment strategies are complete"
+      notes: "Validates all documents for catalog consistency and SEAD constraint completeness. May require updates to any document."
+
+    - agent: various
+      updates: any_flagged_documents
+      condition: po_checklist_issues
+      sead_enhancements:
+        - catalog_reference_fixes: "Fix missing or incorrect catalog references"
+        - constraint_corrections: "Correct constraint validation issues"
+      notes: "If PO finds issues, return to relevant agent to fix catalog/constraint issues and re-export updated documents to docs/ folder."
+
+    - step: sead_catalog_preparation
+      action: validate_catalog_completeness
+      sead_enhancements:
+        - pattern_availability_check: "Verify all required patterns exist in catalog"
+        - constraint_configuration: "Ensure project SEAD mode configuration is correct"
+        - validation_setup: "Configure progressive validation pipeline"
+      notes: "SEAD-specific: Validate catalog completeness and configure constraint validation before development begins."
+
+    - step: project_setup_guidance
+      action: guide_project_structure
+      condition: user_has_generated_ui
+      sead_enhancements:
+        - catalog_integration_guidance: "Guide integration of generated UI with catalog patterns"
+        - constraint_setup: "Configure SEAD constraint validation in generated project"
+      notes: "Enhanced with SEAD catalog integration guidance. For polyrepo setup, ensure catalog references work across repos. For monorepo, configure shared catalog access."
+
+    - step: development_order_guidance
+      action: guide_development_sequence
+      sead_enhancements:
+        - mode_progression_strategy: "Plan development mode progression (prototype → development → build-to-deploy)"
+        - catalog_evolution_planning: "Plan catalog extensions during development phase"
+      notes: "SEAD-enhanced development sequence. Consider mode progression strategy and catalog evolution during development."
+
+    - agent: sead-po
+      action: shard_documents
+      creates: sharded_docs
+      requires: all_artifacts_in_project
+      sead_enhancements:
+        - catalog_reference_preservation: "Maintain catalog references in sharded documents"
+        - constraint_context_preservation: "Preserve SEAD constraint context in shards"
+      notes: |
+        Shard documents for IDE development with SEAD enhancements:
+        - Option A: Use SEAD PO agent to shard: @sead-po then ask to shard docs/prd.md
+        - Option B: Manual: Drag sead-shard-doc task + docs/prd.md into chat
+        - Creates docs/prd/ and docs/architecture/ folders with catalog-aware sharded content
+
+    - agent: sead-scrum-master
+      action: create_story
+      creates: story.md
+      requires: 
+        - sharded_docs
+        - catalog/
+      repeats: for_each_epic
+      sead_enhancements:
+        - catalog_component_linking: "Link story tasks to specific catalog components"
+        - mode_constraint_integration: "Include appropriate mode constraints in acceptance criteria"
+        - context_preservation: "Include catalog references for developer context preservation"
+      notes: |
+        SEAD-enhanced story creation cycle:
+        - SEAD SM Agent (New Chat): @sead-scrum-master → *draft
+        - Creates catalog-aware story from sharded docs
+        - Story includes catalog component references and mode constraints
+        - Story starts in "Draft" status
+
+    - agent: sead-analyst/sead-pm
+      action: review_draft_story
+      updates: story.md
+      requires: story.md
+      optional: true
+      condition: user_wants_story_review
+      sead_enhancements:
+        - catalog_compliance_review: "Validate story references appropriate catalog patterns"
+        - constraint_validation_review: "Ensure mode constraints are correctly specified"
+      notes: |
+        OPTIONAL: Review and approve draft story with SEAD validation
+        - Review story catalog compliance and constraint completeness
+        - Validate catalog component references are correct
+        - Update story status: Draft → Approved
+
+    - agent: sead-developer
+      action: implement_story
+      creates: implementation_files
+      requires: 
+        - story.md
+        - catalog/
+      sead_enhancements:
+        - catalog_pattern_implementation: "Implement using catalog patterns where available"
+        - mode_constraint_enforcement: "Enforce current mode constraints during implementation"
+        - pattern_capture: "Capture new patterns for catalog promotion (development mode)"
+        - constraint_validation: "Validate implementation against mode constraints"
+      notes: |
+        SEAD Dev Agent (New Chat): @sead-developer
+        - Implements approved story using catalog patterns
+        - Validates against current SEAD mode constraints  
+        - Updates File List with all changes and catalog references
+        - Captures new patterns for catalog promotion (development mode)
+        - Marks story as "Review" when complete and constraint-compliant
+
+    - agent: sead-qa
+      action: review_implementation
+      updates: implementation_files
+      requires: implementation_files
+      optional: true
+      sead_enhancements:
+        - catalog_compliance_validation: "Validate implementation uses catalog patterns correctly"
+        - constraint_enforcement_check: "Verify mode constraints were properly enforced"
+        - pattern_quality_review: "Review any new patterns for catalog promotion quality"
+      notes: |
+        OPTIONAL: SEAD QA Agent (New Chat): @sead-qa → review-story
+        - Senior dev review with catalog compliance validation
+        - Validates constraint enforcement and pattern usage
+        - Reviews new patterns for catalog promotion
+        - Fixes small issues directly
+        - Updates story status (Review → Done or stays Review)
+
+    - agent: sead-developer
+      action: address_qa_feedback
+      updates: implementation_files
+      condition: qa_left_unchecked_items
+      sead_enhancements:
+        - catalog_compliance_fixes: "Fix catalog compliance issues"
+        - constraint_violation_fixes: "Address constraint validation failures"
+      notes: |
+        If SEAD QA left unchecked items:
+        - SEAD Dev Agent (New Chat): Address remaining catalog/constraint issues
+        - Return to SEAD QA for final approval
+
+    - step: repeat_development_cycle
+      action: continue_for_all_stories
+      sead_enhancements:
+        - mode_progression_monitoring: "Monitor readiness for mode progression"
+        - catalog_evolution_tracking: "Track catalog extensions during development"
+      notes: |
+        Repeat SEAD story cycle (SM → Dev → QA) for all epic stories
+        Continue until all stories complete with catalog compliance
+        Monitor catalog evolution and constraint effectiveness
+
+    - step: sead_mode_progression
+      action: evaluate_mode_progression
+      condition: epic_complete_and_ready_for_next_mode
+      sead_enhancements:
+        - constraint_effectiveness_review: "Review effectiveness of current mode constraints"
+        - catalog_completeness_assessment: "Assess catalog completeness for next mode"
+        - validation_pipeline_check: "Validate progressive validation pipeline readiness"
+      notes: |
+        SEAD-specific: Evaluate readiness for mode progression
+        - Review constraint effectiveness and compliance
+        - Assess catalog evolution and completeness
+        - Plan progression to next SEAD mode if ready
+
+    - agent: sead-po
+      action: epic_retrospective
+      creates: sead-epic-retrospective.md
+      condition: epic_complete
+      optional: true
+      sead_enhancements:
+        - catalog_evolution_review: "Review catalog extensions and improvements"
+        - constraint_effectiveness_analysis: "Analyze constraint enforcement effectiveness"
+        - mode_progression_planning: "Plan next mode progression if applicable"
+      notes: |
+        OPTIONAL: After epic completion with SEAD enhancements
+        - Document catalog evolution during epic
+        - Analyze constraint enforcement effectiveness
+        - Plan improvements for next development cycle
+
+    - step: workflow_end
+      action: project_complete
+      sead_enhancements:
+        - catalog_final_state: "Document final catalog state and evolution"
+        - constraint_compliance_summary: "Summarize constraint compliance across project"
+        - mode_progression_achievements: "Document SEAD mode progression achievements"
+      notes: |
+        All stories implemented and reviewed with SEAD methodology!
+        Project development phase complete with catalog compliance.
+        
+        SEAD Benefits Achieved:
+        - Context preserved across agent handoffs via catalog references
+        - Constraint drift prevented through progressive validation
+        - Catalog evolved with captured patterns from development
+        
+        Reference: {root}/data/sead-kb.md#SEAD Development Workflow
+
+  flow_diagram: |
+    ```mermaid
+    graph TD
+        A[Start: SEAD Greenfield Project] --> A1[Configure SEAD Mode & Catalog]
+        A1 --> B[sead-analyst: catalog-aware project-brief.md]
+        B --> C[sead-pm: catalog-integrated prd.md]
+        C --> D[sead-ux-expert: design-system-aware front-end-spec.md]
+        D --> D2{Generate v0 prompt?}
+        D2 -->|Yes| D3[sead-ux-expert: create catalog-enhanced v0 prompt]
+        D2 -->|No| E[sead-architect: catalog-pattern fullstack-architecture.md]
+        D3 --> D4[User: generate UI with catalog integration]
+        D4 --> E
+        E --> F{Architecture suggests PRD changes?}
+        F -->|Yes| G[sead-pm: update prd.md with catalog refs]
+        F -->|No| H[sead-po: validate all artifacts + catalog compliance]
+        G --> H
+        H --> I{PO finds issues?}
+        I -->|Yes| J[Return to relevant agent for catalog/constraint fixes]
+        I -->|No| K[Validate Catalog Completeness]
+        J --> H
+        
+        K --> L[sead-po: shard documents with catalog preservation]
+        L --> M[sead-scrum-master: create catalog-aware story]
+        M --> N{Review draft story?}
+        N -->|Yes| O[sead-analyst/pm: review story + catalog compliance]
+        N -->|No| P[sead-developer: implement with catalog patterns]
+        O --> P
+        P --> P1[Validate Mode Constraints]
+        P1 --> Q{QA review?}
+        Q -->|Yes| R[sead-qa: review implementation + catalog compliance]
+        Q -->|No| S{More stories?}
+        R --> T{QA found issues?}
+        T -->|Yes| U[sead-developer: address QA feedback + constraint fixes]
+        T -->|No| S
+        U --> R
+        S -->|Yes| M
+        S -->|No| V{Ready for Mode Progression?}
+        V -->|Yes| W[Evaluate SEAD Mode Progression]
+        V -->|No| X{Epic retrospective?}
+        W --> X
+        X -->|Yes| Y[sead-po: epic retrospective + catalog evolution review]
+        X -->|No| Z[Project Complete with SEAD Compliance]
+        Y --> Z
+
+        B -.-> B1[Optional: catalog pattern analysis]
+        B -.-> B2[Optional: brainstorming]
+        B -.-> B3[Optional: market research]
+        D -.-> D1[Optional: user research]
+        D -.-> D5[Optional: design system audit]
+        E -.-> E1[Optional: technical research]
+        E -.-> E2[Optional: catalog architecture audit]
+
+        style Z fill:#90EE90
+        style A1 fill:#FFB6C1
+        style K fill:#FFB6C1
+        style P1 fill:#FFB6C1
+        style W fill:#FFB6C1
+        style L fill:#ADD8E6
+        style M fill:#ADD8E6
+        style P fill:#ADD8E6
+        style D3 fill:#E6E6FA
+        style D4 fill:#E6E6FA
+        style B fill:#FFE4B5
+        style C fill:#FFE4B5
+        style D fill:#FFE4B5
+        style E fill:#FFE4B5
+        style O fill:#F0E68C
+        style R fill:#F0E68C
+        style Y fill:#F0E68C
+    ```
+
+  decision_guidance:
+    when_to_use:
+      - Building production-ready applications with catalog compliance requirements
+      - Multiple team members need consistent constraint enforcement
+      - Complex feature requirements requiring pattern reuse
+      - Need comprehensive documentation with catalog integration
+      - Long-term maintenance with pattern evolution expected
+      - Enterprise or customer-facing applications requiring quality gates
+      - Projects requiring mode progression (prototype → development → build-to-deploy)
+
+    sead_mode_selection:
+      prototype: "Use for rapid experimentation, proof of concepts, exploring new patterns"
+      development: "Use for production feature development with catalog extension capability"
+      build-to-deploy: "Use for deployment-ready features requiring strict catalog compliance"
+
+  handoff_prompts:
+    analyst_to_pm: "Catalog-aware project brief is complete with pattern recommendations. Save it as docs/project-brief.md in your project, then create the catalog-integrated PRD."
+    pm_to_ux: "Catalog-integrated PRD is ready. Save it as docs/prd.md in your project, then create the design-system-aware UI/UX specification."
+    ux_to_architect: "Design-system-compliant UI/UX spec complete. Save it as docs/front-end-spec.md in your project, then create the catalog-pattern fullstack architecture."
+    architect_review: "Catalog-aware architecture complete. Save it as docs/fullstack-architecture.md. Do you suggest any changes to the PRD stories or need new catalog patterns?"
+    architect_to_pm: "Please update the PRD with the suggested story changes and catalog references, then re-export the complete prd.md to docs/."
+    updated_to_po: "All documents ready in docs/ folder with catalog integration. Please validate all artifacts for catalog consistency and SEAD constraint completeness."
+    po_issues: "SEAD PO found issues with [document]. Please return to [agent] to fix catalog/constraint issues and re-save the updated document."
+    complete: "All planning artifacts validated and saved in docs/ folder with full catalog integration. SEAD mode configured. Move to IDE environment to begin constraint-aware development."
+    
+  sead_benefits:
+    context_preservation: "Catalog references maintain context across agent handoffs"
+    constraint_enforcement: "Progressive validation prevents deployment issues"
+    pattern_reuse: "Catalog patterns ensure consistency and reduce custom development"
+    quality_assurance: "Mode-based constraints ensure appropriate quality gates"
+    knowledge_capture: "Catalog evolution captures organizational learning"
