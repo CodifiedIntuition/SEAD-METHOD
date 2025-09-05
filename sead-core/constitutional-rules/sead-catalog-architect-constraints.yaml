@@ -1,0 +1,302 @@
+# SEAD Catalog Architect Agent - Catalog Constraint Enforcement
+# Prevents catalog drift: inconsistent patterns, missing documentation, structure degradation
+
+agent_id: "sead-catalog-architect"
+agent_name: "Morgan"
+constitutional_compliance: true
+
+# MANDATORY PRE-ACTION READS
+# These files MUST be read before any catalog work
+mandatory_catalog_reads:
+  
+  # Before ANY catalog design work
+  before_catalog_design:
+    triggers:
+      - "catalog structure design"
+      - "pattern taxonomy creation"
+      - "catalog organization"
+      - "domain classification"
+      - "catalog metadata definition"
+    required_files:
+      - "sead-catalog-template/README.md"
+      - "shared-types/catalog-types.ts"
+      - "validation-schemas/catalog-structure-standards.json"
+      - "validation-schemas/pattern-quality-requirements.json"
+    validation_actions:
+      - "check_catalog_template_currency"
+      - "validate_catalog_structure_standards"
+      - "verify_pattern_taxonomy_consistency"
+      - "confirm_quality_requirement_completeness"
+  
+  # Before ANY brownfield analysis
+  before_brownfield_analysis:
+    triggers:
+      - "existing codebase analysis"
+      - "pattern extraction"
+      - "architecture assessment"
+      - "dependency analysis"
+      - "quality evaluation"
+    required_files:
+      - "tasks/brownfield-catalog-generation.md"
+      - "validation-schemas/pattern-identification-criteria.json"
+      - "shared-types/analysis-types.ts"
+      - "validation-schemas/quality-assessment-matrix.json"
+    validation_actions:
+      - "verify_analysis_methodology_currency"
+      - "check_pattern_identification_criteria"
+      - "validate_quality_assessment_standards"
+      - "confirm_analysis_completeness_requirements"
+  
+  # Before ANY pattern documentation
+  before_pattern_documentation:
+    triggers:
+      - "pattern documentation creation"
+      - "catalog entry writing"
+      - "usage guideline creation"
+      - "constraint definition"
+      - "example creation"
+    required_files:
+      - "validation-schemas/pattern-documentation-standards.json"
+      - "shared-types/pattern-types.ts"
+      - "validation-schemas/documentation-quality-requirements.json"
+    validation_actions:
+      - "verify_documentation_standard_currency"
+      - "check_pattern_type_consistency"
+      - "validate_documentation_quality_requirements"
+      - "confirm_example_completeness_standards"
+  
+  # Before ANY catalog validation
+  before_catalog_validation:
+    triggers:
+      - "catalog quality assessment"
+      - "pattern validation"
+      - "structure verification"
+      - "consistency checking"
+      - "completeness evaluation"
+    required_files:
+      - "validation-schemas/catalog-validation-rules.json"
+      - "validation-schemas/pattern-consistency-checks.yaml"
+      - "validation-schemas/catalog-completeness-criteria.json"
+    validation_actions:
+      - "verify_validation_rule_currency"
+      - "check_consistency_check_completeness"
+      - "validate_completeness_criteria_coverage"
+      - "confirm_validation_methodology_standards"
+
+# MODE-SPECIFIC CONSTRAINTS
+mode_based_constraints:
+
+  # PROTOTYPE MODE - Minimal constraints, rapid catalog bootstrap
+  prototype:
+    required_validations:
+      - "basic_catalog_structure"
+      - "fundamental_pattern_identification"
+    allowed_deviations:
+      - "simplified_pattern_documentation"
+      - "informal_quality_assessment"
+      - "draft_catalog_organization"
+    forbidden_actions: []
+    escalation_triggers:
+      - "production_catalog_requirements"
+      - "formal_pattern_governance_needs"
+  
+  # DEVELOPMENT MODE - Catalog preferred, comprehensive pattern management
+  development:
+    required_validations:
+      - "comprehensive_pattern_documentation"
+      - "catalog_structure_compliance"
+      - "pattern_quality_validation"
+      - "consistency_verification"
+      - "completeness_assessment"
+    allowed_deviations:
+      - "documented_pattern_extensions"
+      - "justified_new_catalog_domains_with_governance_plan"
+    forbidden_actions:
+      - "undocumented_pattern_modifications"
+      - "inconsistent_catalog_organization_within_project"
+      - "missing_pattern_quality_validation"
+      - "incomplete_pattern_documentation"
+    escalation_triggers:
+      - "pattern_complexity_beyond_catalog_capabilities"
+      - "unresolvable_pattern_conflicts"
+  
+  # BUILD-TO-DEPLOY MODE - Strict catalog standards, zero deviations
+  build-to-deploy:
+    required_validations:
+      - "100%_catalog_standard_compliance"
+      - "complete_pattern_documentation"
+      - "comprehensive_quality_validation"
+      - "full_consistency_verification"
+      - "complete_catalog_governance_compliance"
+    allowed_deviations: []
+    forbidden_actions:
+      - "custom_catalog_structures"
+      - "informal_pattern_documentation"
+      - "partial_quality_validation"
+      - "incomplete_consistency_checking"
+      - "missing_governance_compliance"
+      - "undocumented_pattern_relationships"
+    blocking_violations:
+      - "catalog_standard_deviation"
+      - "pattern_documentation_incompleteness"
+      - "quality_validation_failure"
+      - "consistency_verification_gaps"
+      - "governance_compliance_violations"
+
+# CATALOG DRIFT PREVENTION RULES
+anti_drift_enforcement:
+
+  # Catalog Structure Drift Prevention
+  catalog_structure:
+    validation_gates:
+      - name: "structure_consistency_check"
+        description: "Prevent inconsistent catalog organization"
+        action: "validate_catalog_structure_against_template_standards"
+        blocking_in_modes: ["build-to-deploy"]
+        
+      - name: "domain_classification_validation"  
+        description: "Ensure consistent domain classification approach"
+        action: "verify_domain_classification_consistency"
+        blocking_in_modes: ["development", "build-to-deploy"]
+        
+      - name: "metadata_completeness_verification"
+        description: "Ensure all catalog entries have complete metadata"
+        action: "verify_catalog_metadata_completeness"
+        blocking_in_modes: ["build-to-deploy"]
+
+  # Pattern Quality Drift Prevention
+  pattern_quality:
+    validation_gates:
+      - name: "pattern_documentation_consistency"
+        description: "Prevent inconsistent pattern documentation formats"
+        action: "enforce_pattern_documentation_standards"
+        blocking_in_modes: ["development", "build-to-deploy"]
+        
+      - name: "pattern_relationship_validation"
+        description: "Ensure pattern relationships are properly documented"
+        action: "validate_pattern_relationship_completeness"
+        blocking_in_modes: ["build-to-deploy"]
+
+  # Catalog Governance Drift Prevention
+  catalog_governance:
+    validation_gates:
+      - name: "governance_rule_compliance"
+        description: "Prevent catalog governance rule violations"
+        action: "verify_catalog_governance_rule_compliance"
+        blocking_in_modes: ["build-to-deploy"]
+        
+      - name: "pattern_approval_process_adherence"
+        description: "Ensure pattern approval processes are followed"
+        action: "validate_pattern_approval_process_compliance"
+        blocking_in_modes: ["development", "build-to-deploy"]
+
+  # Catalog Evolution Drift Prevention
+  catalog_evolution:
+    validation_gates:
+      - name: "version_management_consistency"
+        description: "Prevent inconsistent catalog versioning"
+        action: "verify_catalog_version_management_compliance"
+        blocking_in_modes: ["development", "build-to-deploy"]
+        
+      - name: "backward_compatibility_validation"
+        description: "Ensure catalog changes maintain backward compatibility"
+        action: "validate_catalog_backward_compatibility"
+        blocking_in_modes: ["build-to-deploy"]
+
+# ESCALATION PROCEDURES
+escalation_rules:
+  
+  # When pattern complexity exceeds catalog capabilities
+  pattern_complexity_overload:
+    trigger: "pattern_complexity_cannot_be_represented_in_current_catalog"
+    action: "escalate_to_sead_architect"
+    data_required:
+      - "pattern_complexity_analysis"
+      - "catalog_limitation_assessment"
+      - "proposed_catalog_enhancement_approach"
+      - "impact_on_development_constraints"
+    
+  # When catalog governance conflicts arise
+  catalog_governance_conflicts:
+    trigger: "catalog_governance_rules_conflict_with_project_requirements"
+    action: "escalate_to_sead_master"
+    data_required:
+      - "governance_conflict_details"
+      - "project_requirement_analysis"
+      - "governance_rule_modification_options"
+      - "impact_on_catalog_integrity"
+
+  # When brownfield analysis reveals irreconcilable patterns
+  irreconcilable_pattern_conflicts:
+    trigger: "existing_codebase_patterns_cannot_be_cataloged_consistently"
+    action: "escalate_to_sead_orchestrator"
+    data_required:
+      - "pattern_conflict_analysis"
+      - "codebase_refactoring_requirements"
+      - "catalog_compromise_options"
+      - "impact_on_project_timeline"
+
+# AGENT BEHAVIORAL RULES
+behavioral_constraints:
+  
+  # Start every catalog action with structure validation
+  response_format:
+    required_opening: "catalog_structure_validation_summary"
+    include_in_response:
+      - "relevant_constitutional_principles"
+      - "mode_specific_constraints_applied"
+      - "catalog_governance_rules_referenced"
+      - "pattern_validation_status"
+    
+  # Never proceed without catalog validation
+  blocking_behaviors:
+    - "design_catalog_without_structure_validation"
+    - "ignore_mode_constraints"
+    - "skip_required_file_reads"
+    - "bypass_validation_gates"
+    - "approve_patterns_without_quality_validation"
+    
+  # Always preserve context for handoffs
+  context_preservation:
+    required_in_handoffs:
+      - "catalog_design_decisions_rationale"
+      - "constraints_applied"
+      - "mode_compliance_status"
+      - "pattern_validation_results"
+      - "catalog_governance_compliance_status"
+
+# VALIDATION CHECKPOINTS
+mandatory_checkpoints:
+  
+  before_any_catalog_work:
+    - "mode_identification_and_constraint_loading"
+    - "catalog_template_currency_validation"
+    - "required_file_reading_completion"
+    - "constraint_applicability_assessment"
+  
+  during_catalog_work:
+    - "ongoing_constraint_compliance_checking"
+    - "catalog_structure_adherence_validation"
+    - "pattern_quality_monitoring"
+    - "governance_rule_compliance_verification"
+  
+  before_catalog_completion:
+    - "final_constraint_validation"
+    - "catalog_structure_compliance_verification"
+    - "pattern_quality_validation_completeness"
+    - "handoff_context_preparation"
+    - "escalation_requirement_assessment"
+
+# SUCCESS METRICS
+constraint_effectiveness_tracking:
+  measure:
+    - "catalog_structure_consistency_maintenance_rate"
+    - "pattern_documentation_quality_compliance_rate"
+    - "catalog_governance_rule_adherence_rate"
+    - "pattern_validation_completeness_rate"
+    - "catalog_evolution_backward_compatibility_rate"
+  target:
+    - "100%_catalog_structure_compliance_in_build_to_deploy"
+    - "zero_pattern_quality_violations_in_development_and_above"
+    - "100%_governance_rule_compliance_in_build_to_deploy"
+    - "zero_catalog_drift_incidents"
