@@ -276,6 +276,277 @@ program
   });
 
 /**
+ * TASK COMMAND SYSTEM
+ * Exposes the rich SEAD task ecosystem from BMAD-METHOD
+ */
+
+// Task command with subcommands
+const taskCmd = program
+  .command('task')
+  .alias('t')
+  .description('Execute SEAD development tasks');
+
+// List all available tasks
+taskCmd
+  .command('list')
+  .alias('ls')
+  .description('List all available SEAD tasks')
+  .option('-c, --category <category>', 'filter by category (workflow|quality|analysis|documentation)')
+  .action(async (options) => {
+    console.log(chalk.blue('📋 Available SEAD Tasks'));
+    console.log(chalk.white('Execute any task with: sead task <task-name>\n'));
+    
+    const tasks = await getAvailableTasks();
+    const categories = {
+      'workflow': [],
+      'quality': [], 
+      'analysis': [],
+      'documentation': [],
+      'other': []
+    };
+    
+    // Categorize tasks
+    tasks.forEach(task => {
+      if (task.includes('qa') || task.includes('review') || task.includes('validate') || task.includes('verify')) {
+        categories.quality.push(task);
+      } else if (task.includes('elicitation') || task.includes('research') || task.includes('risk') || task.includes('facilitate')) {
+        categories.analysis.push(task);
+      } else if (task.includes('document') || task.includes('index')) {
+        categories.documentation.push(task);  
+      } else if (task.includes('create') || task.includes('generate') || task.includes('correct') || task.includes('approve')) {
+        categories.workflow.push(task);
+      } else {
+        categories.other.push(task);
+      }
+    });
+    
+    // Display tasks by category
+    const categoryColors = {
+      'workflow': chalk.green,
+      'quality': chalk.red,
+      'analysis': chalk.yellow,
+      'documentation': chalk.blue,
+      'other': chalk.magenta
+    };
+    
+    Object.entries(categories).forEach(([category, taskList]) => {
+      if (taskList.length > 0 && (!options.category || options.category === category)) {
+        console.log(categoryColors[category](`\n📁 ${category.toUpperCase()}`));
+        taskList.forEach(task => {
+          console.log(`   ${chalk.cyan(task)}`);
+        });
+      }
+    });
+    
+    console.log(chalk.white('\n💡 Use "sead task <task-name> --help" for task-specific options'));
+    console.log(chalk.white('💡 Use "sead task <task-name> --interactive" for guided execution'));
+  });
+
+// Dynamic task execution - generate subcommands for all tasks
+taskCmd
+  .command('advanced-elicitation')
+  .description('Advanced requirements elicitation with stakeholder interaction')
+  .option('-i, --interactive', 'enable interactive elicitation mode', false)
+  .option('-m, --mode <mode>', 'development mode context', 'development')
+  .action(async (options) => {
+    await executeSeadTask('sead-advanced-elicitation', options);
+  });
+
+taskCmd
+  .command('apply-qa-fixes')
+  .description('Apply quality assurance fixes with catalog compliance')
+  .option('-i, --interactive', 'enable interactive QA mode', false)
+  .option('--validate-catalog', 'validate catalog compliance', true)
+  .action(async (options) => {
+    await executeSeadTask('sead-apply-qa-fixes', options);
+  });
+
+taskCmd
+  .command('approve-solution')
+  .description('Review and approve implementation solutions')
+  .option('-i, --interactive', 'enable interactive approval mode', false)
+  .option('--mode <mode>', 'development mode for approval criteria', 'development')
+  .action(async (options) => {
+    await executeSeadTask('sead-approve-solution', options);
+  });
+
+taskCmd
+  .command('brownfield-create-epic')
+  .description('Create epic for brownfield integration with catalog awareness')
+  .option('-s, --source <path>', 'existing codebase path', '.')
+  .option('-i, --interactive', 'enable interactive epic creation', false)
+  .action(async (options) => {
+    await executeSeadTask('sead-brownfield-create-epic', options);
+  });
+
+taskCmd
+  .command('brownfield-create-story')
+  .description('Create story for brownfield integration with pattern extraction')
+  .option('-s, --source <path>', 'existing codebase path', '.')
+  .option('-i, --interactive', 'enable interactive story creation', false)
+  .action(async (options) => {
+    await executeSeadTask('sead-brownfield-create-story', options);
+  });
+
+taskCmd
+  .command('correct-course')
+  .description('Course correction with constraint validation and catalog alignment')
+  .option('-i, --interactive', 'enable interactive course correction', false)
+  .option('--mode <mode>', 'development mode for constraints', 'development')
+  .action(async (options) => {
+    await executeSeadTask('sead-correct-course', options);
+  });
+
+taskCmd
+  .command('create-deep-research-prompt')
+  .description('Generate comprehensive research prompts with constitutional awareness')
+  .option('-t, --topic <topic>', 'research topic or domain')
+  .option('-i, --interactive', 'enable interactive prompt creation', false)
+  .action(async (options) => {
+    await executeSeadTask('sead-create-deep-research-prompt', options);
+  });
+
+taskCmd
+  .command('create-next-story')
+  .description('Create next user story with catalog integration and constraint awareness')
+  .option('-i, --interactive', 'enable interactive story creation', false)
+  .option('--mode <mode>', 'development mode for story constraints', 'development')
+  .action(async (options) => {
+    await executeSeadTask('sead-create-next-story', options);
+  });
+
+taskCmd
+  .command('create-simple-spec')
+  .description('Create simplified specification with catalog pattern references')
+  .option('-i, --interactive', 'enable interactive spec creation', false)
+  .option('--mode <mode>', 'development mode for spec constraints', 'development')
+  .action(async (options) => {
+    await executeSeadTask('sead-create-simple-spec', options);
+  });
+
+taskCmd
+  .command('document-issue')
+  .description('Document issues with catalog context and constraint analysis')
+  .option('-i, --interactive', 'enable interactive issue documentation', false)
+  .option('--severity <level>', 'issue severity level', 'medium')
+  .action(async (options) => {
+    await executeSeadTask('sead-document-issue', options);
+  });
+
+taskCmd
+  .command('document-project')
+  .description('Generate comprehensive project documentation with catalog integration')
+  .option('-i, --interactive', 'enable interactive documentation', false)
+  .option('--scope <scope>', 'documentation scope', 'full')
+  .action(async (options) => {
+    await executeSeadTask('sead-document-project', options);
+  });
+
+taskCmd
+  .command('facilitate-brainstorming-session')
+  .description('Lead structured brainstorming with catalog-aware ideation')
+  .option('-t, --topic <topic>', 'brainstorming topic or challenge')
+  .option('-i, --interactive', 'enable interactive facilitation', true)
+  .action(async (options) => {
+    await executeSeadTask('sead-facilitate-brainstorming-session', options);
+  });
+
+taskCmd
+  .command('facilitate-ideation-session')
+  .description('Facilitate ideation sessions with constitutional constraints')
+  .option('-t, --topic <topic>', 'ideation topic or problem space')
+  .option('-i, --interactive', 'enable interactive facilitation', true)
+  .action(async (options) => {
+    await executeSeadTask('sead-facilitate-ideation-session', options);
+  });
+
+taskCmd
+  .command('generate-ai-frontend-prompt')
+  .description('Generate AI prompts for frontend development with catalog patterns')
+  .option('-c, --component <type>', 'component type to generate prompt for')
+  .option('-i, --interactive', 'enable interactive prompt generation', false)
+  .action(async (options) => {
+    await executeSeadTask('sead-generate-ai-frontend-prompt', options);
+  });
+
+taskCmd
+  .command('generate-project-brief')
+  .description('Generate project brief with constitutional framework integration')
+  .option('-i, --interactive', 'enable interactive brief generation', false)
+  .option('--scope <scope>', 'project scope and complexity', 'medium')
+  .action(async (options) => {
+    await executeSeadTask('sead-generate-project-brief', options);
+  });
+
+taskCmd
+  .command('index-docs')
+  .description('Create documentation index with catalog references and constitutional links')
+  .option('-s, --source <path>', 'documentation source path', './docs')
+  .option('-i, --interactive', 'enable interactive indexing', false)
+  .action(async (options) => {
+    await executeSeadTask('sead-index-docs', options);
+  });
+
+taskCmd
+  .command('qa-gate')
+  .description('Execute quality assurance gate with catalog compliance validation')
+  .option('-i, --interactive', 'enable interactive QA process', false)
+  .option('--mode <mode>', 'development mode for QA criteria', 'development')
+  .option('--strict', 'enable strict catalog compliance checking', false)
+  .action(async (options) => {
+    await executeSeadTask('sead-qa-gate', options);
+  });
+
+taskCmd
+  .command('review-story')
+  .description('Comprehensive story review with catalog pattern validation')
+  .option('-s, --story <id>', 'story ID to review')
+  .option('-i, --interactive', 'enable interactive review mode', false)
+  .action(async (options) => {
+    await executeSeadTask('sead-review-story', options);
+  });
+
+taskCmd
+  .command('risk-profile')
+  .description('Generate risk assessment profile with constitutional constraint analysis')
+  .option('-i, --interactive', 'enable interactive risk assessment', false)
+  .option('--scope <scope>', 'risk assessment scope', 'project')
+  .action(async (options) => {
+    await executeSeadTask('sead-risk-profile', options);
+  });
+
+taskCmd
+  .command('validate-next-story')
+  .description('Validate next story against catalog constraints and mode requirements')
+  .option('-s, --story <id>', 'story ID to validate')
+  .option('-i, --interactive', 'enable interactive validation', false)
+  .option('--mode <mode>', 'development mode for validation', 'development')
+  .action(async (options) => {
+    await executeSeadTask('sead-validate-next-story', options);
+  });
+
+taskCmd
+  .command('verify-build')
+  .description('Verify build compliance with catalog standards and constitutional requirements')
+  .option('-i, --interactive', 'enable interactive verification', false)
+  .option('--mode <mode>', 'development mode for verification', 'development')
+  .option('--strict', 'enable strict compliance checking', false)
+  .action(async (options) => {
+    await executeSeadTask('sead-verify-build', options);
+  });
+
+// Catalog generation task (special case)
+taskCmd
+  .command('brownfield-catalog-generation')
+  .description('Generate catalog from brownfield codebase with AI-powered pattern extraction')
+  .option('-s, --source <path>', 'source codebase path', '.')
+  .option('-i, --interactive', 'enable interactive generation', false)
+  .option('--use-ai', 'use AI agents for pattern analysis', true)
+  .action(async (options) => {
+    await executeSeadTask('brownfield-catalog-generation', options);
+  });
+
+/**
  * UTILITY FUNCTIONS
  */
 
@@ -1638,6 +1909,264 @@ ${!implementationReadiness.story.available && implementationReadiness.details.st
 ---
 *Generated by SEAD-METHOD™ CLI - Specification Enforced Agentic Agile Development*
 `;
+}
+
+/**
+ * TASK SYSTEM SUPPORT FUNCTIONS
+ */
+
+async function getAvailableTasks() {
+  try {
+    const tasksDir = path.resolve(__dirname, 'sead-core/tasks');
+    const taskFiles = await fs.readdir(tasksDir);
+    
+    return taskFiles
+      .filter(file => file.endsWith('.md'))
+      .map(file => file.replace(/^sead-/, '').replace(/\.md$/, ''))
+      .sort();
+  } catch (error) {
+    console.error(chalk.red('❌ Error reading tasks directory:'), error.message);
+    return [];
+  }
+}
+
+async function executeSeadTask(taskName, options = {}) {
+  console.log(chalk.blue(`🎯 Executing SEAD Task: ${taskName}`));
+  
+  try {
+    // Check for SEAD project
+    const hasSeadConfig = await fs.pathExists('./sead.config.yaml');
+    if (!hasSeadConfig) {
+      throw new Error('No SEAD project found. Run "sead init" first.');
+    }
+    
+    // Load task definition
+    const taskPath = path.resolve(__dirname, `sead-core/tasks/${taskName}.md`);
+    if (!await fs.pathExists(taskPath)) {
+      throw new Error(`Task not found: ${taskName}`);
+    }
+    
+    const taskContent = await fs.readFile(taskPath, 'utf8');
+    
+    console.log(`📋 Task Definition: ${chalk.bold(taskName)}`);
+    console.log(`🎛️  Options: ${JSON.stringify(options, null, 2)}`);
+    
+    // Create task execution workspace
+    await fs.ensureDir('./sead-workspace/tasks');
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    const taskExecutionFile = `./sead-workspace/tasks/${taskName}-execution-${timestamp}.md`;
+    
+    // Generate task execution instructions
+    const taskInstructions = generateTaskExecutionInstructions(taskName, taskContent, options);
+    
+    await fs.writeFile(taskExecutionFile, taskInstructions);
+    
+    console.log(chalk.green(`✅ Task Execution Framework Created!`));
+    console.log(`📁 Execution File: ${chalk.bold(taskExecutionFile)}`);
+    
+    // Determine appropriate agent for task
+    const suggestedAgent = determineSuggestedAgent(taskName);
+    
+    console.log(chalk.blue(`\n🚀 Task Execution Workflow:`));
+    console.log(chalk.white(`1. Load Agent: ${chalk.cyan(suggestedAgent.path)}`));
+    console.log(chalk.white(`2. Agent Command: ${chalk.cyan(suggestedAgent.command)}`));
+    console.log(chalk.white(`3. Follow task instructions in: ${taskExecutionFile}`));
+    
+    if (options.interactive) {
+      console.log(chalk.yellow('\n💡 Interactive Mode Enabled'));
+      console.log('The task will guide you through each step with prompts and validation.');
+    }
+    
+    // Show task-specific guidance
+    console.log(chalk.blue('\n📚 Task-Specific Guidance:'));
+    console.log(suggestedAgent.guidance);
+    
+    return taskExecutionFile;
+    
+  } catch (error) {
+    console.error(chalk.red('❌ Task execution failed:'), error.message);
+    throw error;
+  }
+}
+
+function generateTaskExecutionInstructions(taskName, taskContent, options) {
+  const timestamp = new Date().toISOString();
+  
+  return `# SEAD Task Execution: ${taskName}
+
+**Generated**: ${timestamp}
+**Task**: ${taskName}
+**Options**: ${JSON.stringify(options, null, 2)}
+**Interactive Mode**: ${options.interactive ? 'Enabled' : 'Disabled'}
+
+## Task Definition
+
+${taskContent}
+
+## Execution Context
+
+### SEAD Mode Integration
+- Current mode constraints apply to this task execution
+- Catalog patterns should be consulted for relevant domains
+- Constitutional validation required for all outputs
+
+### Agent Coordination
+- Load appropriate SEAD agent (see workflow above)
+- Follow agent's \`*help\` command to see available actions
+- Use agent's task-specific commands for execution
+
+### Task Options
+${Object.entries(options).map(([key, value]) => `- **${key}**: ${value}`).join('\n')}
+
+## Expected Outputs
+- Task completion following SEAD methodology
+- Catalog compliance where applicable
+- Constitutional constraint adherence
+- Documentation of decisions and patterns used
+
+## Next Actions
+1. Load suggested SEAD agent
+2. Execute task following SEAD workflow
+3. Validate outputs against mode constraints
+4. Update project documentation as needed
+
+---
+*Generated by SEAD-METHOD™ CLI - Task Execution System*
+`;
+}
+
+function determineSuggestedAgent(taskName) {
+  const agentMappings = {
+    // Quality and QA tasks
+    'apply-qa-fixes': {
+      path: 'sead-core/agents/sead-qa.md',
+      command: '*review-qa',
+      guidance: 'Focus on catalog compliance and mode-specific quality gates'
+    },
+    'qa-gate': {
+      path: 'sead-core/agents/sead-qa.md', 
+      command: '*qa-gate',
+      guidance: 'Execute comprehensive quality validation with constitutional compliance'
+    },
+    'verify-build': {
+      path: 'sead-core/agents/sead-qa.md',
+      command: '*run-tests',
+      guidance: 'Validate build against catalog standards and mode constraints'
+    },
+    'review-story': {
+      path: 'sead-core/agents/sead-qa.md',
+      command: '*review-story',
+      guidance: 'Review story for catalog pattern compliance and constraint adherence'
+    },
+    'validate-next-story': {
+      path: 'sead-core/agents/sead-qa.md',
+      command: '*validate-story',
+      guidance: 'Validate story against SEAD mode constraints and catalog patterns'
+    },
+    
+    // Development and implementation tasks
+    'create-next-story': {
+      path: 'sead-core/agents/sead-product-owner.md',
+      command: '*create-story',
+      guidance: 'Create user stories with catalog awareness and constraint validation'
+    },
+    'create-simple-spec': {
+      path: 'sead-core/agents/sead-architect.md',
+      command: '*create-spec',
+      guidance: 'Generate specifications following catalog patterns and constitutional requirements'
+    },
+    'correct-course': {
+      path: 'sead-core/agents/sead-scrum-master.md',
+      command: '*course-correct',
+      guidance: 'Analyze and correct development direction with constraint alignment'
+    },
+    'approve-solution': {
+      path: 'sead-core/agents/sead-architect.md',
+      command: '*approve-solution',
+      guidance: 'Review solutions for architectural consistency and catalog compliance'
+    },
+    
+    // Analysis and elicitation tasks
+    'advanced-elicitation': {
+      path: 'sead-core/agents/sead-analyst.md',
+      command: '*elicit',
+      guidance: 'Conduct requirements elicitation with constitutional framework awareness'
+    },
+    'risk-profile': {
+      path: 'sead-core/agents/sead-project-manager.md',
+      command: '*risk-assess',
+      guidance: 'Generate risk profiles with mode-specific constraint analysis'
+    },
+    'create-deep-research-prompt': {
+      path: 'sead-core/agents/sead-analyst.md',
+      command: '*research',
+      guidance: 'Create research prompts with catalog context and constitutional requirements'
+    },
+    
+    // Facilitation and ideation tasks
+    'facilitate-brainstorming-session': {
+      path: 'sead-core/agents/sead-scrum-master.md',
+      command: '*facilitate',
+      guidance: 'Lead brainstorming with catalog-aware ideation and constitutional constraints'
+    },
+    'facilitate-ideation-session': {
+      path: 'sead-core/agents/sead-scrum-master.md',
+      command: '*facilitate',
+      guidance: 'Facilitate ideation with constitutional framework and catalog integration'
+    },
+    
+    // Documentation tasks
+    'document-project': {
+      path: 'sead-core/agents/sead-analyst.md',
+      command: '*document',
+      guidance: 'Generate comprehensive documentation with catalog references and constitutional links'
+    },
+    'document-issue': {
+      path: 'sead-core/agents/sead-qa.md',
+      command: '*document',
+      guidance: 'Document issues with catalog context and constraint analysis'
+    },
+    'index-docs': {
+      path: 'sead-core/agents/sead-analyst.md',
+      command: '*index-docs',
+      guidance: 'Create documentation index with catalog and constitutional framework integration'
+    },
+    
+    // Generation tasks
+    'generate-project-brief': {
+      path: 'sead-core/agents/sead-project-manager.md',
+      command: '*generate-brief',
+      guidance: 'Generate project briefs with constitutional framework and catalog integration'
+    },
+    'generate-ai-frontend-prompt': {
+      path: 'sead-core/agents/sead-developer.md',
+      command: '*generate-prompt',
+      guidance: 'Create AI prompts with catalog pattern references and constraint awareness'
+    },
+    
+    // Brownfield tasks
+    'brownfield-create-epic': {
+      path: 'sead-core/agents/sead-catalog-architect.md',
+      command: '*create-epic',
+      guidance: 'Create epics for brownfield integration with catalog pattern extraction'
+    },
+    'brownfield-create-story': {
+      path: 'sead-core/agents/sead-catalog-architect.md',
+      command: '*create-story',
+      guidance: 'Create stories for brownfield integration with existing pattern analysis'
+    },
+    'brownfield-catalog-generation': {
+      path: 'sead-core/agents/sead-pattern-extraction.md',
+      command: '*extract-patterns',
+      guidance: 'Extract patterns from existing codebase for catalog integration'
+    }
+  };
+  
+  return agentMappings[taskName] || {
+    path: 'sead-core/agents/sead-master.md',
+    command: '*help',
+    guidance: 'Use SEAD Master agent for general task coordination and execution'
+  };
 }
 
 // Global error handler

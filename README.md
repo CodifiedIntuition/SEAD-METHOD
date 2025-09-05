@@ -84,7 +84,7 @@ SEAD-METHOD operates on three aligned tiers that scale from creativity to consis
 
 ## 🤖 Agent Ecosystem
 
-SEAD-METHOD employs 12 specialized AI agents with constitutional constraints:
+SEAD-METHOD employs 12 specialized AI agents with constitutional constraints and a rich task ecosystem:
 
 ### Core Development Agents (Tier 1)
 - **SEAD Developer** - Constitutional implementation with catalog compliance
@@ -106,6 +106,18 @@ SEAD-METHOD employs 12 specialized AI agents with constitutional constraints:
 - **SEAD Master** - Universal task execution with full constraint inheritance
 - **SEAD Orchestrator** - Multi-agent workflow coordination and context preservation
 
+### Two-Tier Command Architecture
+
+SEAD-METHOD provides both **high-level workflow commands** (from Spec-Kit) and **detailed task commands** (from BMAD-METHOD):
+
+**🔄 Workflow Layer**: Constitutional development lifecycle
+- `sead specify` → `sead plan` → `sead stories` → `sead implement`
+
+**🎯 Task Layer**: 22+ specialized development tasks
+- Quality gates, elicitation, documentation, brownfield integration
+- Each task maps to specific SEAD agents with slash commands (`*help`, `*qa-gate`, etc.)
+- Agent coordination with catalog awareness and constitutional compliance
+
 ## 📋 Core Commands
 
 ### Project Management
@@ -115,12 +127,41 @@ sead status                   # Show project status and catalog health
 sead validate                 # Validate project against current mode constraints
 ```
 
-### Development Workflow
+### Development Workflow (Spec-Kit Enhanced)
 ```bash
 sead specify <description>    # Create constitutional specification  
 sead plan <tech-stack>        # Create agentic implementation plan
 sead stories                  # Generate constraint-aware user stories
 sead implement <story-id>     # Implement with catalog constraints
+```
+
+### Rich Task Ecosystem (BMAD-METHOD Enhanced)
+```bash
+sead task list                # List all 22+ available development tasks
+sead task <task-name>         # Execute specific development task
+
+# Quality Assurance Tasks
+sead task qa-gate             # Execute quality gates with catalog validation
+sead task apply-qa-fixes      # Apply QA fixes with constitutional compliance
+sead task review-story        # Comprehensive story review with patterns
+sead task verify-build        # Build verification against catalog standards
+
+# Requirements & Analysis Tasks  
+sead task advanced-elicitation        # Advanced stakeholder requirements gathering
+sead task create-deep-research-prompt # Generate comprehensive research prompts
+sead task risk-profile               # Constitutional constraint risk analysis
+sead task facilitate-brainstorming-session # Catalog-aware ideation sessions
+
+# Story & Documentation Tasks
+sead task create-next-story      # User stories with constraint awareness
+sead task document-project       # Comprehensive project documentation
+sead task generate-project-brief # Constitutional project brief generation
+sead task index-docs            # Documentation with catalog integration
+
+# Brownfield Integration Tasks
+sead task brownfield-create-epic     # Brownfield epic creation with pattern extraction
+sead task brownfield-create-story    # Brownfield stories with catalog awareness
+sead task brownfield-catalog-generation # AI-powered pattern extraction
 ```
 
 ### Catalog Management
