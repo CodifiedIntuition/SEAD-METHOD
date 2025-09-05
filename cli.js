@@ -90,13 +90,22 @@ program
   .option('-m, --mode <mode>', 'development mode', 'development')
   .option('-d, --data-tier <tier>', 'data tier to use', 'mock')
   .option('-p, --deploy-tier <tier>', 'deployment tier', 'cloud-staging')
+  .option('-t, --type <type>', 'specification type', 'frontend')
+  .option('-i, --interactive', 'enable interactive mode', false)
   .action(async (description, options) => {
     console.log(chalk.blue('📋 Creating SEAD specification...'));
     console.log(`Feature: ${chalk.bold(description)}`);
     console.log(`Mode: ${getModeEmoji(options.mode)} ${options.mode}`);
+    console.log(`Type: ${options.type}`);
+    console.log(`Data Tier: ${options.dataTier}`);
+    console.log(`Deploy Tier: ${options.deployTier}`);
     
-    // TODO: Implement specification creation
-    console.log(chalk.yellow('⏳ Specification creation - Coming soon...'));
+    try {
+      await createSeadSpecification(description, options);
+    } catch (error) {
+      console.error(chalk.red('❌ Specification creation failed:'), error.message);
+      process.exit(1);
+    }
   });
 
 // Plan command (from BMAD enhanced)
@@ -108,13 +117,22 @@ program
   .option('-m, --catalog-mode <mode>', 'catalog enforcement mode', 'development')
   .option('-d, --data-tier <tier>', 'data tier', 'mock')
   .option('-p, --deploy-tier <tier>', 'deployment tier', 'cloud-staging')
+  .option('-a, --architecture <type>', 'architecture type', 'fullstack')
+  .option('-i, --interactive', 'enable interactive planning', false)
   .action(async (techStack, options) => {
     console.log(chalk.blue('🏗️  Creating SEAD implementation plan...'));
     console.log(`Tech Stack: ${chalk.bold(techStack)}`);
     console.log(`Catalog Mode: ${getModeEmoji(options.catalogMode)} ${options.catalogMode}`);
+    console.log(`Architecture: ${options.architecture}`);
+    console.log(`Data Tier: ${options.dataTier}`);
+    console.log(`Deploy Tier: ${options.deployTier}`);
     
-    // TODO: Implement plan creation
-    console.log(chalk.yellow('⏳ Plan creation - Coming soon...'));
+    try {
+      await createSeadPlan(techStack, options);
+    } catch (error) {
+      console.error(chalk.red('❌ Plan creation failed:'), error.message);
+      process.exit(1);
+    }
   });
 
 // Stories command
@@ -125,13 +143,21 @@ program
   .option('--enforce-catalog', 'enforce catalog constraints', false)
   .option('--context-preserve', 'enable context preservation', false)
   .option('-d, --data-tier <tier>', 'data tier', 'mock')
+  .option('-m, --mode <mode>', 'story development mode', 'development')
+  .option('-i, --interactive', 'enable interactive story creation', false)
   .action(async (options) => {
     console.log(chalk.blue('📝 Creating SEAD stories...'));
     console.log(`Catalog Enforcement: ${options.enforceCatalog ? '✅' : '❌'}`);
     console.log(`Context Preservation: ${options.contextPreserve ? '✅' : '❌'}`);
+    console.log(`Mode: ${getModeEmoji(options.mode)} ${options.mode}`);
+    console.log(`Data Tier: ${options.dataTier}`);
     
-    // TODO: Implement story creation
-    console.log(chalk.yellow('⏳ Story creation - Coming soon...'));
+    try {
+      await createSeadStories(options);
+    } catch (error) {
+      console.error(chalk.red('❌ Story creation failed:'), error.message);
+      process.exit(1);
+    }
   });
 
 // Implement command
@@ -142,13 +168,21 @@ program
   .argument('<story-id>', 'story ID to implement')
   .option('-m, --mode <mode>', 'development mode', 'development')
   .option('--validate-compliance', 'validate catalog compliance', false)
+  .option('-i, --interactive', 'enable interactive implementation', false)
+  .option('--qa-gate', 'enable QA validation gate', false)
   .action(async (storyId, options) => {
     console.log(chalk.blue('⚡ Implementing with SEAD constraints...'));
     console.log(`Story: ${chalk.bold(storyId)}`);
     console.log(`Mode: ${getModeEmoji(options.mode)} ${options.mode}`);
+    console.log(`Compliance Validation: ${options.validateCompliance ? '✅' : '❌'}`);
+    console.log(`QA Gate: ${options.qaGate ? '✅' : '❌'}`);
     
-    // TODO: Implement story implementation
-    console.log(chalk.yellow('⏳ Implementation - Coming soon...'));
+    try {
+      await implementSeadStory(storyId, options);
+    } catch (error) {
+      console.error(chalk.red('❌ Implementation failed:'), error.message);
+      process.exit(1);
+    }
   });
 
 /**
@@ -446,6 +480,1164 @@ async function guidedCatalogGeneration(options) {
   console.log(chalk.white(`   • Workflow: ./sead-core/tasks/brownfield-catalog-generation.md`));
   
   console.log(chalk.blue('\n💡 Pro Tip: Use --use-ai flag for automated agent orchestration'));
+}
+
+async function createSeadSpecification(description, options) {
+  console.log(chalk.green('\n🔍 Initializing SEAD Specification Process...'));
+  
+  // Check for SEAD project
+  const hasSeadConfig = await fs.pathExists('./sead.config.yaml');
+  if (!hasSeadConfig) {
+    throw new Error('No SEAD project found. Run "sead init" first.');
+  }
+  
+  // Load project configuration
+  const yaml = require('yaml');
+  const configContent = await fs.readFile('./sead.config.yaml', 'utf8');
+  const config = yaml.parse(configContent);
+  
+  console.log(chalk.blue('📊 Constitutional Framework Analysis:'));
+  console.log(`  Project Mode: ${getModeEmoji(config.project.mode)} ${config.project.mode}`);
+  console.log(`  Request Mode: ${getModeEmoji(options.mode)} ${options.mode}`);
+  console.log(`  Catalog Enforcement: ${config.modes[options.mode].catalog_enforcement}`);
+  console.log(`  Validation Level: ${config.modes[options.mode].validation_level}`);
+  
+  // Validate mode compatibility
+  const effectiveMode = validateModeCompatibility(config.project.mode, options.mode);
+  console.log(`  Effective Mode: ${getModeEmoji(effectiveMode)} ${effectiveMode}`);
+  
+  // Check catalog availability
+  const catalogStatus = await checkCatalogStatus();
+  console.log(`\n📚 Catalog Status: ${catalogStatus.available ? '✅ Available' : '❌ Not Available'}`);
+  
+  if (catalogStatus.available) {
+    console.log('  Domains Found:');
+    for (const domain of catalogStatus.domains) {
+      console.log(`    • ${domain}`);
+    }
+  }
+  
+  // Agent activation process
+  console.log(chalk.green('\n🤖 Activating SEAD Agents...'));
+  
+  const agentSequence = [
+    { name: 'SEAD Analyst', role: 'Requirements Analysis & Catalog Research', agent: 'sead-analyst' },
+    { name: 'SEAD Architect', role: 'Technical Specification & Constraint Enforcement', agent: 'sead-architect' }
+  ];
+  
+  console.log(chalk.white('\nAgent Activation Sequence:'));
+  for (let i = 0; i < agentSequence.length; i++) {
+    const agent = agentSequence[i];
+    console.log(`${i + 1}. ${chalk.cyan(agent.name)}: ${agent.role}`);
+  }
+  
+  // Create specification workspace
+  await fs.ensureDir('./sead-workspace/specifications');
+  
+  const specType = options.type || 'frontend';
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+  const specFile = `./sead-workspace/specifications/${specType}-spec-${timestamp}.md`;
+  
+  // Generate specification instructions
+  const specInstructions = generateSpecificationInstructions(description, options, effectiveMode, catalogStatus);
+  
+  await fs.writeFile(specFile, specInstructions);
+  
+  console.log(chalk.green(`\n✅ SEAD Specification Framework Created!`));
+  console.log(`📁 Specification File: ${chalk.bold(specFile)}`);
+  
+  console.log(chalk.blue('\n🚀 Next Steps - Agent Workflow:'));
+  console.log(chalk.white('1. Activate SEAD Analyst for requirements gathering:'));
+  console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-analyst.md`));
+  console.log(chalk.cyan(`   Command: *catalog-research ${specType}`));
+  console.log(chalk.cyan(`   Then: *elicit`));
+  
+  console.log(chalk.white('\n2. Activate SEAD Architect for technical specification:'));
+  console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-architect.md`));
+  console.log(chalk.cyan(`   Template: sead-core/templates/sead-${specType}-spec-tmpl.yaml`));
+  console.log(chalk.cyan(`   Command: *create-spec`));
+  
+  console.log(chalk.white('\n3. Constitutional Validation:'));
+  console.log(chalk.cyan(`   Load constraints: sead-core/constitutional-constraints/sead-analyst-constraints.yaml`));
+  console.log(chalk.cyan(`   Validate mode: ${effectiveMode}`));
+  console.log(chalk.cyan(`   Enforce catalog: ${config.modes[effectiveMode].catalog_enforcement}`));
+  
+  if (options.interactive) {
+    console.log(chalk.yellow('\n💡 Interactive Mode Enabled'));
+    console.log('Run the agents above, then return here for guided specification creation.');
+    console.log(`Command: sead specify-continue ${specFile.split('/').pop()}`);
+  }
+  
+  return specFile;
+}
+
+function validateModeCompatibility(projectMode, requestMode) {
+  const modeHierarchy = ['prototype', 'development', 'build-to-deploy'];
+  const projectIndex = modeHierarchy.indexOf(projectMode);
+  const requestIndex = modeHierarchy.indexOf(requestMode);
+  
+  // Use the more restrictive mode
+  return requestIndex > projectIndex ? requestMode : projectMode;
+}
+
+async function checkCatalogStatus() {
+  const catalogPath = './sead-catalog';
+  const status = { available: false, domains: [] };
+  
+  try {
+    if (await fs.pathExists(catalogPath)) {
+      const catalogDirs = await fs.readdir(catalogPath);
+      status.domains = catalogDirs.filter(dir => !dir.includes('.'));
+      status.available = status.domains.length > 0;
+    }
+  } catch (error) {
+    // Catalog not available
+  }
+  
+  return status;
+}
+
+function generateSpecificationInstructions(description, options, mode, catalogStatus) {
+  const timestamp = new Date().toISOString();
+  
+  return `# SEAD Specification Framework
+
+**Generated**: ${timestamp}
+**Feature**: ${description}
+**Mode**: ${mode}
+**Type**: ${options.type}
+**Data Tier**: ${options.dataTier}
+**Deploy Tier**: ${options.deployTier}
+
+## Constitutional Requirements
+
+### Mode Constraints (${mode})
+${getModeConstraints(mode)}
+
+### Catalog Integration
+${catalogStatus.available ? 
+  `✅ Catalog Available - Domains: ${catalogStatus.domains.join(', ')}` : 
+  '❌ No Catalog Found - Create catalog first with: sead catalog generate'}
+
+## Agent Workflow Instructions
+
+### Phase 1: SEAD Analyst (Requirements & Research)
+
+**Activation**: Load \`sead-core/agents/sead-analyst.md\`
+
+**Pre-Action Requirements**:
+1. Read catalog domains relevant to: ${description}
+2. Check mode constraints for ${mode}
+3. Validate constitutional compliance requirements
+
+**Commands Sequence**:
+\`\`\`
+*catalog-research ${options.type}
+*elicit
+*validate-constraints
+\`\`\`
+
+**Expected Outputs**:
+- Requirements analysis with catalog awareness
+- Constraint compliance validation
+- Stakeholder needs assessment with constitutional framework
+
+### Phase 2: SEAD Architect (Technical Specification)
+
+**Activation**: Load \`sead-core/agents/sead-architect.md\`
+
+**Template**: \`sead-core/templates/sead-${options.type}-spec-tmpl.yaml\`
+
+**Pre-Action Requirements**:
+1. Load constitutional constraints from Phase 1
+2. Review catalog patterns for ${options.type} specifications
+3. Validate mode-specific technical constraints
+
+**Commands Sequence**:
+\`\`\`
+*create-spec
+*validate-architecture
+*check-constraints
+\`\`\`
+
+**Expected Outputs**:
+- Technical specification with catalog integration
+- Architecture decisions with constitutional compliance
+- Implementation guidance with constraint enforcement
+
+### Phase 3: Constitutional Validation
+
+**Requirements**:
+- All specifications must comply with ${mode} mode constraints
+- Catalog integration must be validated for available domains
+- Context preservation for agent handoffs must be maintained
+
+**Validation Commands**:
+\`\`\`
+*validate-constraints
+*mode-status
+*doc-out
+\`\`\`
+
+## Feature Description
+${description}
+
+## Next Actions
+1. Follow agent workflow above
+2. Generate specification using activated agents
+3. Validate constitutional compliance
+4. Save specification to this workspace
+5. Run: \`sead plan [tech-stack]\` to continue SEAD workflow
+
+---
+*Generated by SEAD-METHOD™ CLI - Specification Enforced Agentic Agile Development*
+`;
+}
+
+function getModeConstraints(mode) {
+  switch (mode) {
+    case 'prototype':
+      return `- Flexible exploration allowed
+- Experimental approaches permitted
+- Basic validation required
+- Document deviations for future catalog promotion`;
+    
+    case 'development':
+      return `- Catalog patterns preferred
+- Justify any deviations from catalog
+- Plan migration path to catalog compliance
+- Comprehensive validation required`;
+    
+    case 'build-to-deploy':
+      return `- Catalog-only enforcement
+- No deviations permitted
+- Strict constitutional compliance
+- Full validation required`;
+    
+    default:
+      return '- Unknown mode constraints';
+  }
+}
+
+async function createSeadPlan(techStack, options) {
+  console.log(chalk.green('\n🔍 Initializing SEAD Planning Process...'));
+  
+  // Check for SEAD project
+  const hasSeadConfig = await fs.pathExists('./sead.config.yaml');
+  if (!hasSeadConfig) {
+    throw new Error('No SEAD project found. Run "sead init" first.');
+  }
+  
+  // Load project configuration
+  const yaml = require('yaml');
+  const configContent = await fs.readFile('./sead.config.yaml', 'utf8');
+  const config = yaml.parse(configContent);
+  
+  // Validate mode compatibility
+  const effectiveMode = validateModeCompatibility(config.project.mode, options.catalogMode);
+  
+  console.log(chalk.blue('🏗️  Architecture Planning Analysis:'));
+  console.log(`  Tech Stack: ${chalk.bold(techStack)}`);
+  console.log(`  Architecture Type: ${options.architecture}`);
+  console.log(`  Effective Mode: ${getModeEmoji(effectiveMode)} ${effectiveMode}`);
+  console.log(`  Data Strategy: ${options.dataTier}`);
+  console.log(`  Deployment Strategy: ${options.deployTier}`);
+  
+  // Check catalog and specifications availability
+  const catalogStatus = await checkCatalogStatus();
+  const specificationStatus = await checkSpecificationStatus();
+  
+  console.log(`\n📚 Catalog Status: ${catalogStatus.available ? '✅ Available' : '❌ Not Available'}`);
+  console.log(`📋 Specifications: ${specificationStatus.available ? '✅ Available' : '❌ Not Available'}`);
+  
+  if (specificationStatus.available) {
+    console.log('  Specifications Found:');
+    for (const spec of specificationStatus.specs) {
+      console.log(`    • ${spec}`);
+    }
+  }
+  
+  // Architecture planning process
+  console.log(chalk.green('\n🤖 Activating SEAD Architecture Planning...'));
+  
+  const planningAgents = [
+    { name: 'SEAD Architect', role: 'System Architecture & Technical Planning', agent: 'sead-architect' },
+    { name: 'SEAD Developer', role: 'Implementation Strategy & Feasibility', agent: 'sead-developer' }
+  ];
+  
+  console.log(chalk.white('\nPlanning Agent Sequence:'));
+  for (let i = 0; i < planningAgents.length; i++) {
+    const agent = planningAgents[i];
+    console.log(`${i + 1}. ${chalk.cyan(agent.name)}: ${agent.role}`);
+  }
+  
+  // Create planning workspace
+  await fs.ensureDir('./sead-workspace/planning');
+  
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+  const planFile = `./sead-workspace/planning/${options.architecture}-plan-${timestamp}.md`;
+  
+  // Generate architecture plan instructions
+  const planInstructions = generatePlanInstructions(techStack, options, effectiveMode, catalogStatus, specificationStatus);
+  
+  await fs.writeFile(planFile, planInstructions);
+  
+  console.log(chalk.green(`\n✅ SEAD Architecture Plan Framework Created!`));
+  console.log(`📁 Plan File: ${chalk.bold(planFile)}`);
+  
+  console.log(chalk.blue('\n🚀 Next Steps - Planning Workflow:'));
+  console.log(chalk.white('1. Activate SEAD Architect for system design:'));
+  console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-architect.md`));
+  console.log(chalk.cyan(`   Template: sead-core/templates/sead-${options.architecture}-architecture-tmpl.yaml`));
+  console.log(chalk.cyan(`   Command: *create-architecture`));
+  
+  console.log(chalk.white('\n2. Activate SEAD Developer for implementation strategy:'));
+  console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-developer.md`));
+  console.log(chalk.cyan(`   Command: *plan-implementation`));
+  console.log(chalk.cyan(`   Validate: *check-feasibility`));
+  
+  console.log(chalk.white('\n3. Constitutional Validation:'));
+  console.log(chalk.cyan(`   Load constraints: sead-core/constitutional-constraints/sead-architect-constraints.yaml`));
+  console.log(chalk.cyan(`   Mode validation: ${effectiveMode}`));
+  console.log(chalk.cyan(`   Tech stack compliance: ${techStack}`));
+  
+  if (options.interactive) {
+    console.log(chalk.yellow('\n💡 Interactive Planning Enabled'));
+    console.log('Follow the agent workflow above for guided architecture planning.');
+    console.log(`Command: sead plan-continue ${planFile.split('/').pop()}`);
+  }
+  
+  return planFile;
+}
+
+async function checkSpecificationStatus() {
+  const specPath = './sead-workspace/specifications';
+  const status = { available: false, specs: [] };
+  
+  try {
+    if (await fs.pathExists(specPath)) {
+      const specFiles = await fs.readdir(specPath);
+      status.specs = specFiles.filter(file => file.endsWith('.md'));
+      status.available = status.specs.length > 0;
+    }
+  } catch (error) {
+    // Specifications not available
+  }
+  
+  return status;
+}
+
+function generatePlanInstructions(techStack, options, mode, catalogStatus, specificationStatus) {
+  const timestamp = new Date().toISOString();
+  
+  return `# SEAD Architecture Planning Framework
+
+**Generated**: ${timestamp}
+**Tech Stack**: ${techStack}
+**Architecture**: ${options.architecture}
+**Mode**: ${mode}
+**Data Tier**: ${options.dataTier}
+**Deploy Tier**: ${options.deployTier}
+
+## Constitutional Requirements
+
+### Mode Constraints (${mode})
+${getModeConstraints(mode)}
+
+### Architecture Compliance
+- **Tech Stack Validation**: ${techStack} must align with catalog patterns
+- **Three-Tier Strategy**: Support data and deployment tier progression
+- **Catalog Integration**: Leverage existing architectural patterns
+- **Constitutional Framework**: Ensure governance compliance
+
+### Planning Context
+${specificationStatus.available ? 
+  `✅ Specifications Available: ${specificationStatus.specs.join(', ')}` : 
+  '⚠️ No Specifications Found - Consider running: sead specify [feature]'}
+
+${catalogStatus.available ? 
+  `✅ Catalog Available - Domains: ${catalogStatus.domains.join(', ')}` : 
+  '❌ No Catalog Found - Create catalog first with: sead catalog generate'}
+
+## Agent Workflow Instructions
+
+### Phase 1: SEAD Architect (System Design)
+
+**Activation**: Load \`sead-core/agents/sead-architect.md\`
+
+**Template**: \`sead-core/templates/sead-${options.architecture}-architecture-tmpl.yaml\`
+
+**Pre-Action Requirements**:
+1. Read all available specifications from ./sead-workspace/specifications/
+2. Review catalog domains for existing architectural patterns
+3. Check constitutional constraints for ${mode} mode
+4. Validate tech stack compatibility: ${techStack}
+
+**Commands Sequence**:
+\`\`\`
+*catalog-research architecture
+*create-architecture
+*validate-constraints
+*check-feasibility
+\`\`\`
+
+**Expected Outputs**:
+- System architecture with catalog integration
+- Technology stack validation and rationale
+- Component design with constitutional compliance
+- Infrastructure planning with deployment strategy
+
+### Phase 2: SEAD Developer (Implementation Strategy)
+
+**Activation**: Load \`sead-core/agents/sead-developer.md\`
+
+**Pre-Action Requirements**:
+1. Review architecture design from Phase 1
+2. Load catalog patterns for implementation guidance
+3. Check development constraints for ${mode} mode
+4. Validate technical feasibility of planned approach
+
+**Commands Sequence**:
+\`\`\`
+*plan-implementation
+*validate-tech-stack
+*check-feasibility
+*estimate-effort
+\`\`\`
+
+**Expected Outputs**:
+- Implementation roadmap with catalog compliance
+- Technical risk assessment with mitigation strategies
+- Development timeline with constitutional milestones
+- Resource requirements with skill assessments
+
+### Phase 3: Constitutional Validation
+
+**Architecture Review**:
+- All architectural decisions must comply with ${mode} mode constraints
+- Tech stack choices must align with catalog patterns (when available)
+- Three-tier strategy must be supported (${options.dataTier}/${options.deployTier})
+- Context preservation for implementation handoffs
+
+**Validation Commands**:
+\`\`\`
+*validate-architecture
+*check-constraints
+*mode-status
+*doc-out
+\`\`\`
+
+## Technology Stack Analysis
+
+### Requested Stack: ${techStack}
+
+**Constitutional Considerations**:
+- Mode compliance for ${mode}
+- Catalog pattern alignment
+- Three-tier strategy support
+- Agent handoff compatibility
+
+### Architecture Type: ${options.architecture}
+
+**Planning Focus**:
+- ${options.architecture === 'fullstack' ? 'Full-stack integration with frontend/backend coordination' : 
+    options.architecture === 'frontend' ? 'Frontend architecture with design system integration' :
+    options.architecture === 'backend' ? 'Backend services with API design focus' :
+    'Custom architecture with specialized requirements'}
+
+## Data & Deployment Strategy
+
+### Data Tier: ${options.dataTier}
+${getDataTierDescription(options.dataTier)}
+
+### Deployment Tier: ${options.deployTier}
+${getDeploymentTierDescription(options.deployTier)}
+
+## Next Actions
+1. Follow agent workflow above
+2. Generate architecture using activated agents
+3. Validate constitutional compliance
+4. Create implementation plan
+5. Run: \`sead stories --enforce-catalog\` to continue SEAD workflow
+
+---
+*Generated by SEAD-METHOD™ CLI - Specification Enforced Agentic Agile Development*
+`;
+}
+
+function getDataTierDescription(tier) {
+  switch (tier) {
+    case 'demo':
+      return `- SQLite/JSON with full schema
+- Curated fixtures for demonstration
+- Experimental schema extensions allowed
+- Fast setup for prototyping`;
+    
+    case 'mock':
+      return `- Production-like database with fake data
+- Realistic data generation at scale
+- Schema evolution tracking
+- Performance testing capable`;
+    
+    case 'production':
+      return `- Full production database setup
+- Strict schema validation
+- Catalog-only compliance required
+- Migration-ready configuration`;
+    
+    default:
+      return `- Custom data tier configuration
+- Define requirements based on project needs`;
+  }
+}
+
+function getDeploymentTierDescription(tier) {
+  switch (tier) {
+    case 'local-dev':
+      return `- Docker Compose orchestration
+- Minimal infrastructure complexity
+- Team sharing via tunnels
+- Fast iteration cycles`;
+    
+    case 'cloud-staging':
+      return `- Lightweight cloud deployment
+- Branch-based environments
+- Integration testing pipeline
+- Moderate infrastructure setup`;
+    
+    case 'production-deploy':
+      return `- Full CI/CD pipeline
+- Blue/green deployment strategy
+- Comprehensive monitoring
+- Production-grade infrastructure`;
+    
+    default:
+      return `- Custom deployment configuration
+- Define requirements based on project scale`;
+  }
+}
+
+async function createSeadStories(options) {
+  console.log(chalk.green('\n🔍 Initializing SEAD Story Creation Process...'));
+  
+  // Check for SEAD project
+  const hasSeadConfig = await fs.pathExists('./sead.config.yaml');
+  if (!hasSeadConfig) {
+    throw new Error('No SEAD project found. Run "sead init" first.');
+  }
+  
+  // Load project configuration
+  const yaml = require('yaml');
+  const configContent = await fs.readFile('./sead.config.yaml', 'utf8');
+  const config = yaml.parse(configContent);
+  
+  // Validate mode compatibility
+  const effectiveMode = validateModeCompatibility(config.project.mode, options.mode);
+  
+  console.log(chalk.blue('📖 Story Creation Analysis:'));
+  console.log(`  Project Mode: ${getModeEmoji(config.project.mode)} ${config.project.mode}`);
+  console.log(`  Story Mode: ${getModeEmoji(options.mode)} ${options.mode}`);
+  console.log(`  Effective Mode: ${getModeEmoji(effectiveMode)} ${effectiveMode}`);
+  console.log(`  Catalog Enforcement: ${options.enforceCatalog ? 'Enabled' : 'Disabled'}`);
+  console.log(`  Context Preservation: ${options.contextPreserve ? 'Enabled' : 'Disabled'}`);
+  
+  // Check project artifacts status
+  const catalogStatus = await checkCatalogStatus();
+  const specificationStatus = await checkSpecificationStatus();
+  const planStatus = await checkPlanningStatus();
+  
+  console.log(`\n📚 Project Artifacts:`)
+  console.log(`  Catalog: ${catalogStatus.available ? '✅ Available' : '❌ Not Available'}`);
+  console.log(`  Specifications: ${specificationStatus.available ? '✅ Available' : '❌ Not Available'}`);
+  console.log(`  Planning: ${planStatus.available ? '✅ Available' : '❌ Not Available'}`);
+  
+  // Story creation readiness assessment
+  const readinessScore = calculateReadinessScore(catalogStatus, specificationStatus, planStatus);
+  console.log(`\n📊 Story Creation Readiness: ${getReadinessDisplay(readinessScore)}`);
+  
+  if (readinessScore.score < 50) {
+    console.log(chalk.yellow('\n⚠️  Low Readiness Score - Consider completing missing artifacts:'));
+    for (const suggestion of readinessScore.suggestions) {
+      console.log(`  • ${suggestion}`);
+    }
+  }
+  
+  // Story creation process
+  console.log(chalk.green('\n🤖 Activating SEAD Story Creation...'));
+  
+  const storyAgents = [
+    { name: 'SEAD Scrum Master', role: 'Story Creation & Backlog Management', agent: 'sead-scrum-master' },
+    { name: 'SEAD Product Owner', role: 'Acceptance Criteria & Business Value', agent: 'sead-product-owner' }
+  ];
+  
+  console.log(chalk.white('\nStory Agent Sequence:'));
+  for (let i = 0; i < storyAgents.length; i++) {
+    const agent = storyAgents[i];
+    console.log(`${i + 1}. ${chalk.cyan(agent.name)}: ${agent.role}`);
+  }
+  
+  // Create stories workspace
+  await fs.ensureDir('./sead-workspace/stories');
+  
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+  const storyFile = `./sead-workspace/stories/story-creation-${timestamp}.md`;
+  
+  // Generate story creation instructions
+  const storyInstructions = generateStoryInstructions(options, effectiveMode, catalogStatus, specificationStatus, planStatus, readinessScore);
+  
+  await fs.writeFile(storyFile, storyInstructions);
+  
+  console.log(chalk.green(`\n✅ SEAD Story Creation Framework Ready!`));
+  console.log(`📁 Story File: ${chalk.bold(storyFile)}`);
+  
+  console.log(chalk.blue('\n🚀 Next Steps - Story Creation Workflow:'));
+  console.log(chalk.white('1. Activate SEAD Scrum Master for story creation:'));
+  console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-scrum-master.md`));
+  console.log(chalk.cyan(`   Template: sead-core/templates/sead-story-tmpl.yaml`));
+  console.log(chalk.cyan(`   Command: *create`));
+  
+  console.log(chalk.white('\n2. Activate SEAD Product Owner for acceptance criteria:'));
+  console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-product-owner.md`));
+  console.log(chalk.cyan(`   Command: *define-acceptance-criteria`));
+  console.log(chalk.cyan(`   Validate: *business-value-check`));
+  
+  console.log(chalk.white('\n3. Constitutional Validation:'));
+  console.log(chalk.cyan(`   Mode constraints: ${effectiveMode}`));
+  console.log(chalk.cyan(`   Catalog enforcement: ${options.enforceCatalog ? 'Required' : 'Optional'}`));
+  console.log(chalk.cyan(`   Context preservation: ${options.contextPreserve ? 'Enabled' : 'Disabled'}`));
+  
+  if (options.interactive) {
+    console.log(chalk.yellow('\n💡 Interactive Story Creation Enabled'));
+    console.log('Follow the agent workflow above for guided story creation.');
+    console.log(`Command: sead stories-continue ${storyFile.split('/').pop()}`);
+  }
+  
+  return storyFile;
+}
+
+async function checkPlanningStatus() {
+  const planPath = './sead-workspace/planning';
+  const status = { available: false, plans: [] };
+  
+  try {
+    if (await fs.pathExists(planPath)) {
+      const planFiles = await fs.readdir(planPath);
+      status.plans = planFiles.filter(file => file.endsWith('.md'));
+      status.available = status.plans.length > 0;
+    }
+  } catch (error) {
+    // Planning not available
+  }
+  
+  return status;
+}
+
+function calculateReadinessScore(catalogStatus, specificationStatus, planStatus) {
+  let score = 0;
+  const suggestions = [];
+  
+  // Catalog readiness (30 points)
+  if (catalogStatus.available) {
+    score += 30;
+  } else {
+    suggestions.push('Generate catalog: sead catalog generate --source .');
+  }
+  
+  // Specification readiness (40 points)
+  if (specificationStatus.available) {
+    score += 40;
+  } else {
+    suggestions.push('Create specifications: sead specify [feature-description]');
+  }
+  
+  // Planning readiness (30 points)
+  if (planStatus.available) {
+    score += 30;
+  } else {
+    suggestions.push('Create architecture plan: sead plan [tech-stack]');
+  }
+  
+  return { score, suggestions };
+}
+
+function getReadinessDisplay(readinessScore) {
+  if (readinessScore.score >= 80) return chalk.green(`${readinessScore.score}% - Excellent`);
+  if (readinessScore.score >= 60) return chalk.yellow(`${readinessScore.score}% - Good`);
+  if (readinessScore.score >= 40) return chalk.yellow(`${readinessScore.score}% - Fair`);
+  return chalk.red(`${readinessScore.score}% - Poor`);
+}
+
+function generateStoryInstructions(options, mode, catalogStatus, specificationStatus, planStatus, readinessScore) {
+  const timestamp = new Date().toISOString();
+  
+  return `# SEAD Story Creation Framework
+
+**Generated**: ${timestamp}
+**Mode**: ${mode}
+**Catalog Enforcement**: ${options.enforceCatalog ? 'Required' : 'Optional'}
+**Context Preservation**: ${options.contextPreserve ? 'Enabled' : 'Disabled'}
+**Data Tier**: ${options.dataTier}
+
+## Story Creation Readiness
+
+### Readiness Score: ${readinessScore.score}%
+
+**Available Artifacts**:
+${catalogStatus.available ? `✅ Catalog (${catalogStatus.domains.length} domains)` : '❌ No Catalog'}
+${specificationStatus.available ? `✅ Specifications (${specificationStatus.specs.length} files)` : '❌ No Specifications'}  
+${planStatus.available ? `✅ Plans (${planStatus.plans.length} files)` : '❌ No Plans'}
+
+${readinessScore.suggestions.length > 0 ? 
+  `**Improvement Suggestions**:\n${readinessScore.suggestions.map(s => `- ${s}`).join('\n')}\n` : 
+  '**Status**: Ready for story creation!\n'}
+
+## Constitutional Requirements
+
+### Mode Constraints (${mode})
+${getModeConstraints(mode)}
+
+### Story Creation Rules
+- **Catalog Integration**: ${options.enforceCatalog ? 'All stories must reference catalog components' : 'Catalog references optional but encouraged'}
+- **Context Preservation**: ${options.contextPreserve ? 'Stories must include context for seamless agent handoffs' : 'Basic story format acceptable'}
+- **Constraint Validation**: Stories must include mode-appropriate acceptance criteria
+- **Template Compliance**: Use SEAD story template with constitutional framework
+
+## Agent Workflow Instructions
+
+### Phase 1: SEAD Scrum Master (Story Creation)
+
+**Activation**: Load \`sead-core/agents/sead-scrum-master.md\`
+
+**Template**: \`sead-core/templates/sead-story-tmpl.yaml\`
+
+**Pre-Action Requirements**:
+1. Read available specifications from ./sead-workspace/specifications/
+2. Review architecture plans from ./sead-workspace/planning/
+3. Check catalog domains for relevant patterns (if available)
+4. Validate story creation constraints for ${mode} mode
+
+**Commands Sequence**:
+\`\`\`
+*help
+*create
+*validate-story-constraints
+*check-catalog-compliance
+\`\`\`
+
+**Expected Outputs**:
+- Well-defined user story with business value
+- Clear acceptance criteria with catalog references
+- Task breakdown with implementation guidance
+- Context preservation for developer handoffs
+
+### Phase 2: SEAD Product Owner (Business Validation)
+
+**Activation**: Load \`sead-core/agents/sead-product-owner.md\`
+
+**Pre-Action Requirements**:
+1. Review story created in Phase 1
+2. Validate business value alignment
+3. Check acceptance criteria completeness
+4. Ensure stakeholder needs are addressed
+
+**Commands Sequence**:
+\`\`\`
+*define-acceptance-criteria
+*business-value-check
+*validate-user-needs
+*prioritize-story
+\`\`\`
+
+**Expected Outputs**:
+- Business value justification
+- Complete acceptance criteria with edge cases
+- Story prioritization with rationale
+- Stakeholder validation confirmation
+
+### Phase 3: Constitutional Validation
+
+**Story Review Requirements**:
+- Story format complies with SEAD template structure
+- Mode constraints are properly reflected in acceptance criteria
+- Catalog components are referenced (if enforcement enabled)
+- Context preservation elements are included (if enabled)
+
+**Validation Commands**:
+\`\`\`
+*validate-constraints
+*check-template-compliance
+*verify-context-preservation
+*doc-out
+\`\`\`
+
+## Story Creation Guidelines
+
+### Catalog Integration ${options.enforceCatalog ? '(Required)' : '(Optional)'}
+${options.enforceCatalog ? 
+  `- All stories MUST reference relevant catalog components
+- Include component IDs and version numbers
+- Validate component compatibility with story requirements
+- Document new patterns discovered during story creation` :
+  `- Catalog references encouraged but not mandatory
+- Include references where applicable
+- Consider catalog alignment for better consistency`}
+
+### Context Preservation ${options.contextPreserve ? '(Enabled)' : '(Disabled)'}
+${options.contextPreserve ?
+  `- Include catalog component references for developer context
+- Add constraint validation criteria for implementation
+- Specify handoff requirements between agents
+- Document architectural decisions relevant to story` :
+  `- Basic story context acceptable
+- Include essential implementation notes
+- Consider adding context for complex stories`}
+
+## Next Actions
+1. Follow agent workflow above
+2. Create user stories using activated agents
+3. Validate constitutional compliance
+4. Prepare stories for implementation
+5. Run: \`sead implement [story-id]\` to continue SEAD workflow
+
+---
+*Generated by SEAD-METHOD™ CLI - Specification Enforced Agentic Agile Development*
+`;
+}
+
+async function implementSeadStory(storyId, options) {
+  console.log(chalk.green('\n🔍 Initializing SEAD Implementation Process...'));
+  
+  // Check for SEAD project
+  const hasSeadConfig = await fs.pathExists('./sead.config.yaml');
+  if (!hasSeadConfig) {
+    throw new Error('No SEAD project found. Run "sead init" first.');
+  }
+  
+  // Load project configuration
+  const yaml = require('yaml');
+  const configContent = await fs.readFile('./sead.config.yaml', 'utf8');
+  const config = yaml.parse(configContent);
+  
+  // Validate mode compatibility
+  const effectiveMode = validateModeCompatibility(config.project.mode, options.mode);
+  
+  console.log(chalk.blue('⚡ Implementation Analysis:'));
+  console.log(`  Story ID: ${chalk.bold(storyId)}`);
+  console.log(`  Project Mode: ${getModeEmoji(config.project.mode)} ${config.project.mode}`);
+  console.log(`  Implementation Mode: ${getModeEmoji(options.mode)} ${options.mode}`);
+  console.log(`  Effective Mode: ${getModeEmoji(effectiveMode)} ${effectiveMode}`);
+  console.log(`  Catalog Validation: ${options.validateCompliance ? 'Required' : 'Optional'}`);
+  console.log(`  QA Gate: ${options.qaGate ? 'Enabled' : 'Disabled'}`);
+  
+  // Check project readiness
+  const implementationReadiness = await checkImplementationReadiness(storyId);
+  
+  console.log(`\n📊 Implementation Readiness Assessment:`);
+  console.log(`  Overall Score: ${getReadinessDisplay(implementationReadiness)}`);
+  
+  displayReadinessDetails(implementationReadiness);
+  
+  if (implementationReadiness.score < 60) {
+    console.log(chalk.yellow('\n⚠️  Implementation readiness below recommended threshold'));
+    console.log(chalk.white('Consider addressing missing elements before implementation:'));
+    for (const suggestion of implementationReadiness.suggestions) {
+      console.log(`  • ${suggestion}`);
+    }
+    
+    if (!options.interactive) {
+      console.log(chalk.red('\n❌ Use --interactive flag to proceed with incomplete setup'));
+      return;
+    }
+  }
+  
+  // Implementation process
+  console.log(chalk.green('\n🤖 Activating SEAD Implementation Workflow...'));
+  
+  const implementationAgents = [
+    { name: 'SEAD Developer', role: 'Catalog-Compliant Implementation', agent: 'sead-developer', phase: 'implementation' },
+    { name: 'SEAD QA', role: 'Constraint Validation & Testing', agent: 'sead-qa', phase: 'validation', enabled: options.qaGate }
+  ];
+  
+  console.log(chalk.white('\nImplementation Agent Sequence:'));
+  implementationAgents.forEach((agent, i) => {
+    if (agent.enabled === false) {
+      console.log(`${i + 1}. ${chalk.gray(agent.name)}: ${chalk.gray(agent.role)} (Disabled)`);
+    } else {
+      console.log(`${i + 1}. ${chalk.cyan(agent.name)}: ${agent.role}`);
+    }
+  });
+  
+  // Create implementation workspace
+  await fs.ensureDir('./sead-workspace/implementations');
+  
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+  const implFile = `./sead-workspace/implementations/impl-${storyId}-${timestamp}.md`;
+  
+  // Generate implementation instructions
+  const implInstructions = generateImplementationInstructions(storyId, options, effectiveMode, implementationReadiness);
+  
+  await fs.writeFile(implFile, implInstructions);
+  
+  console.log(chalk.green(`\n✅ SEAD Implementation Framework Ready!`));
+  console.log(`📁 Implementation File: ${chalk.bold(implFile)}`);
+  
+  console.log(chalk.blue('\n🚀 Next Steps - Implementation Workflow:'));
+  console.log(chalk.white('1. Activate SEAD Developer for implementation:'));
+  console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-developer.md`));
+  console.log(chalk.cyan(`   Load constraints: sead-core/constitutional-constraints/sead-developer-constraints.yaml`));
+  console.log(chalk.cyan(`   Load story: ${implementationReadiness.story.path || 'stories/[story-file].md'}`));
+  console.log(chalk.cyan(`   Command: *implement`));
+  
+  if (options.qaGate) {
+    console.log(chalk.white('\n2. Activate SEAD QA for validation:'));
+    console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-qa.md`));
+    console.log(chalk.cyan(`   Load constraints: sead-core/constitutional-constraints/sead-qa-constraints.yaml`));
+    console.log(chalk.cyan(`   Command: *validate-implementation`));
+    console.log(chalk.cyan(`   Gate: *qa-gate-validation`));
+  }
+  
+  console.log(chalk.white('\n3. Constitutional Compliance:'));
+  console.log(chalk.cyan(`   Mode enforcement: ${effectiveMode}`));
+  console.log(chalk.cyan(`   Catalog validation: ${options.validateCompliance ? 'Required' : 'Optional'}`));
+  console.log(chalk.cyan(`   Constraint compliance: Mandatory`));
+  
+  if (options.interactive) {
+    console.log(chalk.yellow('\n💡 Interactive Implementation Enabled'));
+    console.log('Follow the agent workflow above for guided implementation.');
+    console.log(`Command: sead implement-continue ${implFile.split('/').pop()}`);
+  }
+  
+  return implFile;
+}
+
+async function checkImplementationReadiness(storyId) {
+  const readiness = {
+    score: 0,
+    suggestions: [],
+    details: {},
+    story: { available: false, path: null }
+  };
+  
+  // Check for project artifacts
+  const catalogStatus = await checkCatalogStatus();
+  const specificationStatus = await checkSpecificationStatus();
+  const planStatus = await checkPlanningStatus();
+  const storyStatus = await checkStoryStatus(storyId);
+  
+  readiness.details = { catalogStatus, specificationStatus, planStatus, storyStatus };
+  readiness.story = storyStatus;
+  
+  // Score calculation
+  if (catalogStatus.available) readiness.score += 25;
+  else readiness.suggestions.push('Generate catalog: sead catalog generate');
+  
+  if (specificationStatus.available) readiness.score += 25;
+  else readiness.suggestions.push('Create specifications: sead specify [feature]');
+  
+  if (planStatus.available) readiness.score += 25;
+  else readiness.suggestions.push('Create architecture plan: sead plan [tech-stack]');
+  
+  if (storyStatus.available) readiness.score += 25;
+  else readiness.suggestions.push(`Create story: sead stories (looking for story ID: ${storyId})`);
+  
+  return readiness;
+}
+
+async function checkStoryStatus(storyId) {
+  const storyPath = './sead-workspace/stories';
+  const docsStoriesPath = './docs/stories';
+  const status = { available: false, path: null, stories: [] };
+  
+  // Check both workspace and docs locations
+  const pathsToCheck = [storyPath, docsStoriesPath];
+  
+  for (const basePath of pathsToCheck) {
+    try {
+      if (await fs.pathExists(basePath)) {
+        const storyFiles = await fs.readdir(basePath);
+        const mdFiles = storyFiles.filter(file => file.endsWith('.md'));
+        
+        // Look for exact story ID match or partial match
+        const matchingFile = mdFiles.find(file => 
+          file.includes(storyId) || file.startsWith(storyId) || file === `${storyId}.md`
+        );
+        
+        if (matchingFile) {
+          status.available = true;
+          status.path = path.join(basePath, matchingFile);
+          break;
+        }
+        
+        status.stories.push(...mdFiles);
+      }
+    } catch (error) {
+      // Path not available
+    }
+  }
+  
+  return status;
+}
+
+function displayReadinessDetails(readiness) {
+  console.log(`  📚 Catalog: ${readiness.details.catalogStatus.available ? '✅ Available' : '❌ Missing'}`);
+  console.log(`  📋 Specifications: ${readiness.details.specificationStatus.available ? '✅ Available' : '❌ Missing'}`);
+  console.log(`  🏗️  Planning: ${readiness.details.planStatus.available ? '✅ Available' : '❌ Missing'}`);
+  console.log(`  📖 Story: ${readiness.details.storyStatus.available ? '✅ Found' : '❌ Not Found'}`);
+  
+  if (readiness.details.storyStatus.available) {
+    console.log(`    Story Path: ${readiness.details.storyStatus.path}`);
+  } else if (readiness.details.storyStatus.stories.length > 0) {
+    console.log(`    Available Stories: ${readiness.details.storyStatus.stories.slice(0, 3).join(', ')}${readiness.details.storyStatus.stories.length > 3 ? '...' : ''}`);
+  }
+}
+
+function generateImplementationInstructions(storyId, options, mode, implementationReadiness) {
+  const timestamp = new Date().toISOString();
+  
+  return `# SEAD Implementation Framework
+
+**Generated**: ${timestamp}
+**Story ID**: ${storyId}
+**Mode**: ${mode}
+**Catalog Validation**: ${options.validateCompliance ? 'Required' : 'Optional'}
+**QA Gate**: ${options.qaGate ? 'Enabled' : 'Disabled'}
+
+## Implementation Readiness
+
+### Overall Score: ${implementationReadiness.score}%
+
+**Artifact Status**:
+${implementationReadiness.details.catalogStatus.available ? '✅' : '❌'} **Catalog**: ${implementationReadiness.details.catalogStatus.available ? `${implementationReadiness.details.catalogStatus.domains.length} domains available` : 'Not available'}
+${implementationReadiness.details.specificationStatus.available ? '✅' : '❌'} **Specifications**: ${implementationReadiness.details.specificationStatus.available ? `${implementationReadiness.details.specificationStatus.specs.length} files available` : 'Not available'}
+${implementationReadiness.details.planStatus.available ? '✅' : '❌'} **Planning**: ${implementationReadiness.details.planStatus.available ? `${implementationReadiness.details.planStatus.plans.length} plans available` : 'Not available'}
+${implementationReadiness.story.available ? '✅' : '❌'} **Story**: ${implementationReadiness.story.available ? `Found at ${implementationReadiness.story.path}` : 'Not found'}
+
+${implementationReadiness.suggestions.length > 0 ? 
+  `**Missing Prerequisites**:\n${implementationReadiness.suggestions.map(s => `- ${s}`).join('\n')}\n` : 
+  '**Status**: All prerequisites available - ready for implementation!\n'}
+
+## Constitutional Requirements
+
+### Mode Constraints (${mode})
+${getModeConstraints(mode)}
+
+### Implementation Rules
+- **Story Compliance**: Implementation must fulfill all story acceptance criteria
+- **Catalog Integration**: ${options.validateCompliance ? 'All code must use catalog patterns and components' : 'Catalog compliance encouraged but not mandatory'}
+- **Constitutional Framework**: All development must respect SEAD governance principles
+- **QA Validation**: ${options.qaGate ? 'Implementation must pass QA gate before completion' : 'Basic validation acceptable'}
+
+## Agent Workflow Instructions
+
+### Phase 1: SEAD Developer (Implementation)
+
+**Activation**: Load \`sead-core/agents/sead-developer.md\`
+
+**Constitutional Constraints**: Load \`sead-core/constitutional-constraints/sead-developer-constraints.yaml\`
+
+**Story Context**: Load story from \`${implementationReadiness.story.path || 'stories/[story-file].md'}\`
+
+**Pre-Action Requirements**:
+1. **Mandatory Catalog Reads**: Review required catalog files per constraints
+   ${implementationReadiness.details.catalogStatus.available ? 
+     `   - Available domains: ${implementationReadiness.details.catalogStatus.domains.join(', ')}` : 
+     '   - ⚠️  No catalog available - proceed with caution'}
+2. **Mode Detection**: Validate current development mode (${mode})
+3. **Story Analysis**: Parse story requirements and acceptance criteria
+4. **Constraint Validation**: Check applicable constraints from sead-developer-constraints.yaml
+
+**Commands Sequence**:
+\`\`\`
+*help
+*analyze-story
+*check-constraints
+*implement
+*validate-code
+\`\`\`
+
+**Implementation Guidelines**:
+- **Technical Drift Prevention**: Validate against type conflicts, style inconsistencies, API mismatches
+- **Catalog Compliance**: ${options.validateCompliance ? 'Use only catalog-approved patterns and components' : 'Consider catalog patterns where applicable'}
+- **Constraint Enforcement**: Never proceed with forbidden actions in ${mode} mode
+- **Context Preservation**: Maintain story context throughout implementation
+
+**Expected Outputs**:
+- Working code that fulfills story requirements
+- Catalog-compliant implementation (if validation enabled)
+- Constitutional constraint compliance
+- Implementation documentation and context
+
+${options.qaGate ? `
+### Phase 2: SEAD QA (Validation Gate)
+
+**Activation**: Load \`sead-core/agents/sead-qa.md\`
+
+**Constitutional Constraints**: Load \`sead-core/constitutional-constraints/sead-qa-constraints.yaml\`
+
+**Pre-Action Requirements**:
+1. Review implementation from Phase 1
+2. Load story requirements for validation
+3. Check catalog compliance requirements
+4. Validate constitutional framework adherence
+
+**Commands Sequence**:
+\`\`\`
+*help
+*validate-implementation
+*check-story-fulfillment
+*catalog-compliance-check
+*qa-gate-validation
+\`\`\`
+
+**QA Gate Criteria**:
+- All story acceptance criteria met
+- Code quality meets ${mode} mode standards
+- Catalog compliance validated (if required)
+- Constitutional constraints respected
+- No blocking issues identified
+
+**Expected Outputs**:
+- QA validation report
+- Pass/fail determination for implementation
+- Identified issues with resolution guidance
+- Approval for story completion or required fixes
+` : ''}
+
+### Phase 3: Constitutional Compliance Review
+
+**Final Validation Requirements**:
+- Story implementation fulfills all acceptance criteria
+- Code respects ${mode} mode constraints
+- Catalog integration meets requirements (if validation enabled)
+- Context preservation maintained for future development
+- All constitutional principles upheld throughout implementation
+
+**Completion Criteria**:
+\`\`\`
+*final-validation
+*story-completion-check
+*constitutional-compliance-review
+*handoff-preparation
+\`\`\`
+
+## Story Information
+
+**Story ID**: ${storyId}
+**Story Location**: ${implementationReadiness.story.available ? implementationReadiness.story.path : 'Story not found - ensure story exists before implementation'}
+
+${!implementationReadiness.story.available && implementationReadiness.details.storyStatus.stories.length > 0 ? 
+  `**Available Stories**: ${implementationReadiness.details.storyStatus.stories.join(', ')}\n` : ''}
+
+## Next Actions
+1. Follow agent workflow above
+2. Implement story using activated agents
+3. Validate constitutional compliance
+4. ${options.qaGate ? 'Pass QA gate validation' : 'Complete basic validation'}
+5. Mark story as implemented and ready for review
+
+---
+*Generated by SEAD-METHOD™ CLI - Specification Enforced Agentic Agile Development*
+`;
 }
 
 // Global error handler
