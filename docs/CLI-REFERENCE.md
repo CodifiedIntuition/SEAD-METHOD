@@ -50,7 +50,7 @@ sead --version
 
 ```bash
 # Install globally via npm
-npm install -g sead-method
+npm install -g sead-method-core
 
 # Verify installation
 sead --version

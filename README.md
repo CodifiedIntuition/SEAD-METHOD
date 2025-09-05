@@ -31,10 +31,10 @@ Traditional AI-assisted development suffers from:
 ### Install SEAD-METHOD
 ```bash
 # Install globally
-npm install -g @sead-method/core
+npm install -g sead-method-core
 
 # Or use directly with npx
-npx @sead-method/core init my-project
+npx sead-method-core init my-project
 ```
 
 ### Initialize Your First Project

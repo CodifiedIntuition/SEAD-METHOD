@@ -53,7 +53,7 @@ SEAD-METHOD™ (Specification Enforced Agentic Agile Development) is a revolutio
 
 ```bash
 # Install SEAD-METHOD globally
-npm install -g sead-method
+npm install -g sead-method-core
 
 # Verify installation
 sead --version

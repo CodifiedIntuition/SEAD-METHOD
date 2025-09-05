@@ -1,5 +1,5 @@
 {
-  "name": "@sead-method/core",
+  "name": "sead-method-core",
   "version": "1.0.0",
   "description": "Specification Enforced Agentic Agile Development - A hybrid methodology preventing AI agent drift through catalog-based constraints",
   "main": "cli.js",

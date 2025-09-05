@@ -24,7 +24,7 @@ SEAD-METHOD™ (Specification Enforced Agentic Agile Development) is a revolutio
 
 ```bash
 # Install SEAD globally
-npm install -g sead-method
+npm install -g sead-method-core
 
 # Verify installation
 sead --version
@@ -425,4 +425,4 @@ SEAD-METHOD™ is revolutionizing AI-assisted development. Join us to:
 **SEAD-METHOD™ Version**: 1.0  
 **Status**: Production Ready
 
-**Get started now**: `npm install -g sead-method && sead init my-project`
+**Get started now**: `npm install -g sead-method-core && sead init my-project`
