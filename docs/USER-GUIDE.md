@@ -551,6 +551,52 @@ The SEAD catalog system provides 11 domains of reusable patterns:
 - Environment management
 - Monitoring and alerting setups
 
+### External Asset Integration
+
+SEAD supports seamless integration of external assets (design systems, component libraries, API specifications) into your catalog while maintaining constitutional compliance.
+
+#### Supported External Asset Types
+- **Design Systems**: Figma exports, design tokens, web chat design systems
+- **Component Libraries**: React/Vue/Angular components, Storybook exports  
+- **API Specifications**: OpenAPI/Swagger specs, GraphQL schemas, Postman collections
+- **Pattern Collections**: Authentication flows, integration patterns, testing strategies
+
+#### External Asset Integration Workflow
+```bash
+# 1. Stage external assets
+mkdir external-assets-staging/
+# Organize by type: design-system/, api-specifications/, component-library/
+
+# 2. Analyze assets for compatibility
+sead activate sead-catalog-architect
+*analyze-external-assets
+
+# 3. Create integration architecture  
+sead activate sead-architect
+*create-integration-architecture
+
+# 4. Transform assets to SEAD format
+sead activate sead-catalog-architect
+*design-system-transform        # For design systems
+*api-contract-transform         # For API specifications
+*component-library-transform    # For component libraries
+
+# 5. Integrate with existing catalog
+*catalog-merge-external
+
+# 6. Validate integration
+*validate-external-integration
+
+# 7. Create team adoption strategy
+*adoption-strategy-external
+```
+
+#### Quality and Compliance
+- **Constitutional Validation**: All external assets validated against SEAD constraints
+- **Mode-Aware Processing**: Quality requirements scale based on development mode
+- **Conflict Resolution**: Systematic handling of pattern conflicts and duplicates
+- **Documentation Generation**: Automatic creation of usage guides and adoption strategies
+
 ### Working with Catalog Patterns
 
 #### Referencing Patterns in Code

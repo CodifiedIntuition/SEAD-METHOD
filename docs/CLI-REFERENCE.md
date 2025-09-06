@@ -1279,6 +1279,28 @@ sead validate --constitutional --catalog --agents
 | `sead catalog generate` | Extract patterns from existing project | `--source`, `--guided`, `--domains` |
 | `sead catalog init` | Initialize greenfield catalog | `--mode`, `--domains`, `--template` |
 | `sead catalog validate` | Validate catalog integrity | `--constitutional-compliance`, `--fix` |
+| `sead catalog integrate-external` | Integrate external assets into catalog | `--source`, `--type`, `--guided`, `--mode` |
+
+#### External Asset Integration Details
+
+The `sead catalog integrate-external` command provides comprehensive integration of external assets while maintaining SEAD constitutional compliance. This includes:
+
+**Supported Asset Types**:
+- **Design Systems**: Figma exports, design tokens, web chat design systems
+- **API Specifications**: OpenAPI/Swagger files, GraphQL schemas, Postman collections  
+- **Component Libraries**: React/Vue/Angular components, Storybook exports
+- **Pattern Collections**: Authentication flows, integration patterns, testing strategies
+
+**Integration Modes**:
+- **Prototype**: Basic validation and integration for rapid experimentation
+- **Development**: Comprehensive quality checks and documentation requirements
+- **Production**: Strict validation with security and performance requirements
+
+**Quality Gates by Mode**:
+- Constitutional compliance validation at all levels
+- Mode-aware quality requirements scaling
+- Automatic conflict resolution and pattern deduplication
+- Generated adoption strategies and team training materials
 
 ### Project Management Commands
 | Command | Purpose | Key Options |

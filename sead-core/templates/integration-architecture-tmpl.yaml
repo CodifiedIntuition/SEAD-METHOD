@@ -1,0 +1,317 @@
+# Integration Architecture Template
+# Used by sead-architect to define strategic approach for external asset integration
+
+metadata:
+  template_name: "integration-architecture-tmpl.yaml"
+  version: "1.0.0"
+  purpose: "Structure comprehensive integration architecture for external assets"
+  generated_by: "sead-architect"
+  target_file: "docs/integration-architecture.md"
+
+template_structure:
+  document_header:
+    title: "External Asset Integration Architecture"
+    date: "{{ architecture_date }}"
+    architect: "{{ architect_name }}"
+    project: "{{ project_name }}"
+    mode: "{{ project_mode }}"
+    version: "{{ architecture_version }}"
+
+  executive_summary:
+    description: "Strategic overview of external asset integration approach"
+    content:
+      integration_scope: "{{ integration_scope }}"
+      strategic_objectives: "{{ strategic_objectives }}"
+      architectural_principles: "{{ architectural_principles }}"
+      success_criteria: "{{ success_criteria }}"
+      risk_mitigation_approach: "{{ risk_mitigation_summary }}"
+
+  integration_strategy:
+    description: "High-level strategy for incorporating external assets"
+    strategic_approach:
+      integration_methodology:
+        - approach_type: "{{ methodology_type }}" # phased, big-bang, hybrid
+        - integration_philosophy: "{{ integration_philosophy }}"
+        - compatibility_strategy: "{{ compatibility_strategy }}"
+        - migration_approach: "{{ migration_approach }}"
+      
+      catalog_integration_strategy:
+        - catalog_expansion_approach: "{{ catalog_expansion }}"
+        - domain_organization_strategy: "{{ domain_organization }}"
+        - pattern_classification_approach: "{{ pattern_classification }}"
+        - version_management_strategy: "{{ version_management }}"
+      
+      team_adoption_strategy:
+        - rollout_methodology: "{{ rollout_methodology }}"
+        - training_approach: "{{ training_approach }}"
+        - support_model: "{{ support_model }}"
+        - change_management_strategy: "{{ change_management }}"
+
+  architectural_overview:
+    description: "Technical architecture for external asset integration"
+    system_architecture:
+      integration_layers:
+        asset_staging_layer:
+          - purpose: "{{ staging_layer_purpose }}"
+          - components: "{{ staging_components }}"
+          - responsibilities: "{{ staging_responsibilities }}"
+          - interfaces: "{{ staging_interfaces }}"
+        
+        transformation_layer:
+          - purpose: "{{ transformation_layer_purpose }}"
+          - components: "{{ transformation_components }}"
+          - responsibilities: "{{ transformation_responsibilities }}"
+          - interfaces: "{{ transformation_interfaces }}"
+        
+        catalog_integration_layer:
+          - purpose: "{{ catalog_layer_purpose }}"
+          - components: "{{ catalog_components }}"
+          - responsibilities: "{{ catalog_responsibilities }}"
+          - interfaces: "{{ catalog_interfaces }}"
+        
+        validation_layer:
+          - purpose: "{{ validation_layer_purpose }}"
+          - components: "{{ validation_components }}"
+          - responsibilities: "{{ validation_responsibilities }}"
+          - interfaces: "{{ validation_interfaces }}"
+
+      data_flow_architecture:
+        - external_asset_ingestion: "{{ asset_ingestion_flow }}"
+        - transformation_pipeline: "{{ transformation_pipeline }}"
+        - catalog_integration_flow: "{{ catalog_integration_flow }}"
+        - validation_and_quality_gates: "{{ validation_flow }}"
+
+  asset_transformation_strategy:
+    description: "Detailed strategy for transforming different asset types"
+    transformation_approaches:
+      design_system_transformation:
+        token_transformation:
+          - source_formats_supported: "{{ token_source_formats }}"
+          - target_format_specifications: "{{ token_target_formats }}"
+          - transformation_rules: "{{ token_transformation_rules }}"
+          - validation_criteria: "{{ token_validation_criteria }}"
+        
+        component_transformation:
+          - component_analysis_approach: "{{ component_analysis }}"
+          - pattern_extraction_methodology: "{{ pattern_extraction }}"
+          - sead_compliance_transformation: "{{ sead_compliance_transformation }}"
+          - documentation_generation_strategy: "{{ documentation_generation }}"
+
+      api_contract_transformation:
+        schema_transformation:
+          - specification_format_support: "{{ api_formats_supported }}"
+          - type_system_integration: "{{ type_system_integration }}"
+          - contract_standardization_approach: "{{ contract_standardization }}"
+          - validation_schema_generation: "{{ validation_schema_generation }}"
+        
+        integration_pattern_creation:
+          - client_generation_strategy: "{{ client_generation }}"
+          - error_handling_standardization: "{{ error_handling_standards }}"
+          - authentication_integration: "{{ auth_integration }}"
+          - caching_and_optimization: "{{ caching_strategy }}"
+
+      component_library_transformation:
+        library_analysis:
+          - dependency_analysis_approach: "{{ dependency_analysis }}"
+          - compatibility_assessment_methodology: "{{ compatibility_assessment }}"
+          - pattern_extraction_strategy: "{{ library_pattern_extraction }}"
+          - quality_validation_approach: "{{ library_quality_validation }}"
+        
+        integration_approach:
+          - catalog_integration_methodology: "{{ library_catalog_integration }}"
+          - usage_pattern_documentation: "{{ library_usage_documentation }}"
+          - constraint_definition_approach: "{{ library_constraint_definition }}"
+          - adoption_pathway_creation: "{{ library_adoption_pathway }}"
+
+  catalog_integration_architecture:
+    description: "Architecture for integrating external patterns into SEAD catalog"
+    catalog_organization:
+      domain_structure:
+        existing_domains:
+          - api_contracts: "{{ api_contracts_integration }}"
+          - shared_types: "{{ shared_types_integration }}"
+          - design_system: "{{ design_system_integration }}"
+          - auth_patterns: "{{ auth_patterns_integration }}"
+          - validation_schemas: "{{ validation_schemas_integration }}"
+        
+        new_domains:
+          - external_integrations: "{{ external_integrations_domain }}"
+          - migration_patterns: "{{ migration_patterns_domain }}"
+          - compatibility_layers: "{{ compatibility_layers_domain }}"
+        
+        cross_domain_relationships:
+          - dependency_mapping: "{{ cross_domain_dependencies }}"
+          - reference_management: "{{ cross_reference_management }}"
+          - version_compatibility: "{{ cross_domain_versioning }}"
+
+      pattern_organization:
+        pattern_classification:
+          - external_pattern_identification: "{{ external_pattern_identification }}"
+          - sead_native_pattern_preservation: "{{ native_pattern_preservation }}"
+          - hybrid_pattern_creation: "{{ hybrid_pattern_creation }}"
+          - deprecation_and_migration_paths: "{{ deprecation_paths }}"
+        
+        documentation_organization:
+          - usage_documentation_structure: "{{ usage_docs_structure }}"
+          - integration_guides_organization: "{{ integration_guides_structure }}"
+          - migration_documentation_approach: "{{ migration_docs_approach }}"
+          - troubleshooting_resources_organization: "{{ troubleshooting_structure }}"
+
+  quality_and_validation_architecture:
+    description: "Architecture for ensuring quality and compliance throughout integration"
+    quality_gates:
+      constitutional_compliance:
+        - constraint_validation_approach: "{{ constraint_validation }}"
+        - mode_specific_validation: "{{ mode_validation }}"
+        - compliance_reporting_strategy: "{{ compliance_reporting }}"
+        - remediation_workflow: "{{ remediation_workflow }}"
+      
+      technical_validation:
+        - code_quality_standards: "{{ code_quality_standards }}"
+        - type_safety_validation: "{{ type_safety_validation }}"
+        - performance_impact_assessment: "{{ performance_assessment }}"
+        - security_validation_approach: "{{ security_validation }}"
+      
+      integration_validation:
+        - catalog_integrity_validation: "{{ catalog_integrity }}"
+        - pattern_usability_testing: "{{ usability_testing }}"
+        - documentation_completeness_validation: "{{ documentation_validation }}"
+        - adoption_readiness_assessment: "{{ adoption_readiness }}"
+
+    validation_workflow:
+      - pre_transformation_validation: "{{ pre_transformation_validation }}"
+      - transformation_quality_gates: "{{ transformation_quality_gates }}"
+      - integration_validation_checkpoints: "{{ integration_checkpoints }}"
+      - post_integration_validation: "{{ post_integration_validation }}"
+
+  implementation_roadmap:
+    description: "Phased implementation approach with timelines and milestones"
+    implementation_phases:
+      phase_1_foundation:
+        objectives: "{{ phase_1_objectives }}"
+        deliverables: "{{ phase_1_deliverables }}"
+        timeline: "{{ phase_1_timeline }}"
+        success_criteria: "{{ phase_1_success_criteria }}"
+        dependencies: "{{ phase_1_dependencies }}"
+        risks: "{{ phase_1_risks }}"
+      
+      phase_2_transformation:
+        objectives: "{{ phase_2_objectives }}"
+        deliverables: "{{ phase_2_deliverables }}"
+        timeline: "{{ phase_2_timeline }}"
+        success_criteria: "{{ phase_2_success_criteria }}"
+        dependencies: "{{ phase_2_dependencies }}"
+        risks: "{{ phase_2_risks }}"
+      
+      phase_3_integration:
+        objectives: "{{ phase_3_objectives }}"
+        deliverables: "{{ phase_3_deliverables }}"
+        timeline: "{{ phase_3_timeline }}"
+        success_criteria: "{{ phase_3_success_criteria }}"
+        dependencies: "{{ phase_3_dependencies }}"
+        risks: "{{ phase_3_risks }}"
+      
+      phase_4_validation_and_adoption:
+        objectives: "{{ phase_4_objectives }}"
+        deliverables: "{{ phase_4_deliverables }}"
+        timeline: "{{ phase_4_timeline }}"
+        success_criteria: "{{ phase_4_success_criteria }}"
+        dependencies: "{{ phase_4_dependencies }}"
+        risks: "{{ phase_4_risks }}"
+
+    milestone_checkpoints:
+      - milestone_1: "{{ milestone_1_description }}"
+      - milestone_2: "{{ milestone_2_description }}"
+      - milestone_3: "{{ milestone_3_description }}"
+      - milestone_4: "{{ milestone_4_description }}"
+
+  risk_management_architecture:
+    description: "Comprehensive risk identification and mitigation strategies"
+    risk_categories:
+      technical_risks:
+        integration_complexity:
+          - risk_description: "{{ integration_complexity_risk }}"
+          - probability: "{{ integration_complexity_probability }}"
+          - impact: "{{ integration_complexity_impact }}"
+          - mitigation_strategy: "{{ integration_complexity_mitigation }}"
+        
+        compatibility_issues:
+          - risk_description: "{{ compatibility_risk }}"
+          - probability: "{{ compatibility_probability }}"
+          - impact: "{{ compatibility_impact }}"
+          - mitigation_strategy: "{{ compatibility_mitigation }}"
+        
+        performance_degradation:
+          - risk_description: "{{ performance_risk }}"
+          - probability: "{{ performance_probability }}"
+          - impact: "{{ performance_impact }}"
+          - mitigation_strategy: "{{ performance_mitigation }}"
+
+      organizational_risks:
+        team_adoption_challenges:
+          - risk_description: "{{ adoption_risk }}"
+          - probability: "{{ adoption_probability }}"
+          - impact: "{{ adoption_impact }}"
+          - mitigation_strategy: "{{ adoption_mitigation }}"
+        
+        skill_gaps:
+          - risk_description: "{{ skill_gap_risk }}"
+          - probability: "{{ skill_gap_probability }}"
+          - impact: "{{ skill_gap_impact }}"
+          - mitigation_strategy: "{{ skill_gap_mitigation }}"
+
+      project_risks:
+        timeline_delays:
+          - risk_description: "{{ timeline_risk }}"
+          - probability: "{{ timeline_probability }}"
+          - impact: "{{ timeline_impact }}"
+          - mitigation_strategy: "{{ timeline_mitigation }}"
+        
+        scope_creep:
+          - risk_description: "{{ scope_creep_risk }}"
+          - probability: "{{ scope_creep_probability }}"
+          - impact: "{{ scope_creep_impact }}"
+          - mitigation_strategy: "{{ scope_creep_mitigation }}"
+
+  success_metrics_and_monitoring:
+    description: "Metrics and monitoring approach for integration success"
+    success_metrics:
+      technical_metrics:
+        - integration_completeness: "{{ integration_completeness_metric }}"
+        - catalog_compliance_rate: "{{ compliance_rate_metric }}"
+        - pattern_adoption_rate: "{{ adoption_rate_metric }}"
+        - quality_gate_pass_rate: "{{ quality_gate_metric }}"
+      
+      business_metrics:
+        - development_velocity_improvement: "{{ velocity_improvement_metric }}"
+        - developer_satisfaction: "{{ satisfaction_metric }}"
+        - pattern_reusability: "{{ reusability_metric }}"
+        - maintenance_overhead: "{{ maintenance_overhead_metric }}"
+
+    monitoring_approach:
+      - continuous_monitoring_strategy: "{{ monitoring_strategy }}"
+      - reporting_and_dashboards: "{{ reporting_approach }}"
+      - feedback_collection_mechanisms: "{{ feedback_collection }}"
+      - continuous_improvement_process: "{{ improvement_process }}"
+
+  governance_and_maintenance:
+    description: "Ongoing governance and maintenance strategy"
+    governance_model:
+      - decision_making_process: "{{ decision_making_process }}"
+      - change_management_process: "{{ change_management_process }}"
+      - quality_assurance_process: "{{ qa_process }}"
+      - stakeholder_communication: "{{ stakeholder_communication }}"
+
+    maintenance_strategy:
+      - ongoing_validation_process: "{{ ongoing_validation }}"
+      - update_management_process: "{{ update_management }}"
+      - documentation_maintenance: "{{ documentation_maintenance }}"
+      - community_engagement: "{{ community_engagement }}"
+
+# Template Usage Instructions
+usage_instructions:
+  - "Replace all {{ variable }} placeholders with actual architectural decisions"
+  - "Customize sections based on specific external assets being integrated"
+  - "Ensure alignment with project mode and constitutional requirements"
+  - "Include specific technical details relevant to the integration scope"
+  - "Provide actionable guidance for implementation teams"
