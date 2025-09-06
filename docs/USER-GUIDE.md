@@ -8,14 +8,15 @@
 
 1. [Introduction](#introduction)
 2. [Getting Started](#getting-started)
-3. [Core Concepts](#core-concepts)
-4. [Development Workflow](#development-workflow)
-5. [Constitutional Framework](#constitutional-framework)
-6. [Catalog System](#catalog-system)
-7. [CLI Commands](#cli-commands)
-8. [Best Practices](#best-practices)
-9. [Troubleshooting](#troubleshooting)
-10. [Advanced Usage](#advanced-usage)
+3. [IDE Integration](#ide-integration)
+4. [Core Concepts](#core-concepts)
+5. [Development Workflow](#development-workflow)
+6. [Constitutional Framework](#constitutional-framework)
+7. [Catalog System](#catalog-system)
+8. [CLI Commands](#cli-commands)
+9. [Best Practices](#best-practices)
+10. [Troubleshooting](#troubleshooting)
+11. [Advanced Usage](#advanced-usage)
 
 ---
 
@@ -46,21 +47,55 @@ SEAD-METHOD™ (Specification Enforced Agentic Agile Development) is a revolutio
 ### Prerequisites
 
 - Node.js 16+ installed
-- Git repository access
+- Git repository access  
+- IDE of choice (Claude Code, Cursor, VS Code, etc.)
 - Basic understanding of software development concepts
 
 ### Installation
 
+#### Step 1: Package Installation
 ```bash
 # Install SEAD-METHOD globally
 npm install -g sead-method-core
 
 # Verify installation
 sead --version
+```
 
-# Initialize a new SEAD project
+#### Step 2: Professional IDE Integration
+SEAD features a **BMAD-style professional installer** that automatically integrates with your IDE:
+
+```bash
+# Interactive installation (recommended)
+sead install
+
+# The installer will:
+# 1. Detect/ask for your IDE preference
+# 2. Install SEAD agents as IDE commands
+# 3. Set up constitutional framework
+# 4. Create .sead-core/ directory with all resources
+```
+
+#### Step 3: Verify IDE Integration
+```bash
+# Check installation status
+sead status
+
+# List available agents
+sead list-agents
+
+# Test in your IDE:
+# Claude Code: /sead-architect "help me get started"  
+# Cursor: @sead-architect "help me get started"
+```
+
+#### Step 4: Initialize Your Project
+```bash
+# Create new SEAD project
 sead init my-project
 cd my-project
+
+# Your IDE now has access to all SEAD agents and workflows!
 ```
 
 ### Your First SEAD Project
@@ -89,6 +124,140 @@ cd my-project
    ```bash
    sead implement story-001 --mode prototype
    ```
+
+---
+
+## IDE Integration
+
+SEAD provides **professional-grade IDE integration** using the same system as BMAD-METHOD, supporting **15+ popular development environments**.
+
+### Supported IDEs
+
+| IDE | Command Format | Integration Method | Status |
+|-----|---------------|-------------------|---------|
+| **Claude Code** | `/sead-architect` | Slash commands | ✅ Primary |
+| **Cursor** | `@sead-architect` | Agent chat | ✅ Full |
+| **VS Code + GitHub Copilot** | Agent modes | Chat modes | ✅ Full |
+| **Windsurf** | `/sead-architect` | Workflow commands | ✅ Full |
+| **Crush** | Agent personas | CTRL+P+TAB | ✅ Full |
+| **Cline** | `@sead-architect` | Rules system | ✅ Full |
+| **Roo Code** | Mode selector | Custom modes | ✅ Full |
+| **Trae** | `@sead-architect` | Agent personas | ✅ Full |
+| **Gemini CLI** | Mention agents | Single file | ✅ Full |
+| **Qwen Code** | Mention agents | Single file | ✅ Full |
+| **Auggie CLI** | `/sead:architect` | Commands | ✅ Full |
+| **Codex CLI/Web** | Mention agents | Project memory | ✅ Full |
+| **Kilo Code** | Mode selector | Custom modes | ✅ Full |
+
+### What Gets Installed
+
+When you run `sead install`, the system creates:
+
+```
+.sead-core/                    # Hidden directory with all resources
+├── agents/                   # 12 constitutional AI agents
+│   ├── sead-architect.md    # Software architecture with constraints
+│   ├── sead-developer.md    # Implementation with catalog patterns
+│   ├── sead-qa.md          # Quality assurance and validation
+│   ├── sead-orchestrator.md # Multi-agent coordination  
+│   └── [8 more agents]
+├── tasks/                   # 23 development tasks
+├── templates/               # Reusable code templates
+├── workflows/               # Multi-step processes
+├── checklists/              # Quality assurance lists
+└── constitutional-rules/     # Constraint definitions
+
+[Your IDE's directory]/      # IDE-specific integration
+├── agents/                  # Agent commands for your IDE
+└── tasks/                   # Task commands for your IDE
+```
+
+### Agent Usage Examples
+
+#### Claude Code Integration
+```bash
+# Architecture and design
+/sead-architect "Design a user authentication system with PostgreSQL"
+
+# Implementation
+/sead-developer "Implement the login component using our catalog patterns"
+
+# Quality assurance
+/sead-qa "Review this authentication code for security vulnerabilities"
+
+# Project orchestration
+/sead-orchestrator "Create a development plan for this user story"
+```
+
+#### Cursor Integration  
+```bash
+# Same commands, different syntax
+@sead-architect "Design a user authentication system with PostgreSQL"
+@sead-developer "Implement the login component using our catalog patterns"  
+@sead-qa "Review this authentication code for security vulnerabilities"
+```
+
+#### Multi-IDE Workflow
+```bash
+# Plan in Claude Code
+/sead-architect "Design the system architecture"
+
+# Implement in Cursor
+@sead-developer "Build the components based on the architecture"
+
+# Review in VS Code
+# Use GitHub Copilot chat with SEAD agents available as chat modes
+```
+
+### Constitutional Compliance in IDEs
+
+All SEAD agents, regardless of IDE, automatically follow:
+
+- **Constitutional constraints** preventing harmful or insecure code
+- **Catalog pattern enforcement** ensuring consistent architecture
+- **Quality gates** with automatic validation
+- **Context preservation** across agent interactions
+- **Audit trails** for compliance tracking
+
+### IDE-Specific Features
+
+#### Claude Code (Primary IDE)
+- Native slash command integration
+- Real-time constitutional validation
+- Automatic catalog pattern suggestions
+- Multi-agent workflow orchestration
+
+#### Cursor (Recommended Alternative)
+- Agent chat integration with `@` mentions
+- Context-aware constitutional guidance
+- Catalog pattern recommendations
+- Seamless workflow transitions
+
+#### VS Code + GitHub Copilot
+- Chat mode integration
+- Agent personas in chat interface
+- Constitutional constraint overlays
+- Catalog pattern IntelliSense
+
+### Installation Commands by IDE
+
+```bash
+# Claude Code (recommended)
+sead install --ide claude-code
+
+# Cursor  
+sead install --ide cursor
+
+# VS Code + GitHub Copilot
+sead install --ide github-copilot
+
+# Multiple IDEs
+sead install --ide claude-code --ide cursor --ide vs-code
+
+# Interactive selection (recommended)
+sead install
+# Will prompt you to select your preferred IDE(s)
+```
 
 ---
 

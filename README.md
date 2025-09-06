@@ -34,7 +34,37 @@ Traditional AI-assisted development suffers from:
 npm install -g sead-method-core
 
 # Or use directly with npx
-npx sead-method-core init my-project
+npx sead-method-core install
+```
+
+### Professional Installation Experience
+SEAD features a **BMAD-style professional installer** with interactive setup:
+
+```bash
+# Interactive installation with IDE selection
+sead install
+
+# Install for specific IDE (15+ supported)
+sead install --ide claude-code
+sead install --ide cursor
+sead install --ide vs-code
+
+# Installation options
+sead install --full                    # Complete SEAD system
+sead install --constitutional          # Constitutional framework focus
+sead install --agent sead-architect   # Single agent installation
+```
+
+### Verify Installation
+```bash
+# Check installation status
+sead status
+
+# List available agents
+sead list-agents
+
+# See all 12 agents with descriptions
+sead agents
 ```
 
 ### Initialize Your First Project
@@ -43,8 +73,50 @@ npx sead-method-core init my-project
 sead init my-project
 cd my-project
 
-# Check project status
-sead status
+# SEAD is now installed to .sead-core/ with IDE integration ready!
+```
+
+## 🔧 IDE Integration
+
+SEAD automatically integrates with **15+ popular IDEs** using the same professional installation system as BMAD-METHOD:
+
+### Supported IDEs
+- **Claude Code** (recommended) - Slash commands: `/sead-architect`, `/sead-developer`
+- **Cursor** - Agent chat: `@sead-architect`, `@sead-developer`  
+- **VS Code + GitHub Copilot** - Chat modes in `.github/chatmodes/`
+- **Windsurf** - Workflow commands: `/sead-architect`, `/sead-developer`
+- **Crush** - Agent personas via CTRL+P+TAB
+- **Cline** - Rules stored in `.clinerules/`
+- **And many more** - Roo Code, Trae, Gemini CLI, Qwen Code, Auggie CLI, Codex, Kilo Code
+
+### What Gets Installed
+```bash
+✓ .sead-core/ - Hidden directory with all SEAD resources
+  ├── agents/           # 12 constitutional AI agents
+  ├── tasks/            # 23 development tasks
+  ├── templates/        # Reusable code templates
+  ├── workflows/        # Multi-step processes  
+  ├── checklists/       # Quality assurance lists
+  └── constitutional-rules/ # Constraint definitions
+
+✓ IDE-specific commands automatically generated:
+  /sead-architect      # Software architecture with constraints
+  /sead-developer      # Implementation with catalog awareness
+  /sead-qa            # Quality assurance and validation
+  /sead-orchestrator  # Multi-agent coordination
+  [and 8 more specialized agents]
+```
+
+### Agent Usage Examples
+```bash
+# In Claude Code
+/sead-architect "Design a user authentication system with PostgreSQL"
+
+# In Cursor  
+@sead-developer "Implement the login component using our catalog patterns"
+
+# In any IDE with SEAD installed
+# Agents automatically follow constitutional constraints and catalog patterns
 ```
 
 ### Complete Development Workflow

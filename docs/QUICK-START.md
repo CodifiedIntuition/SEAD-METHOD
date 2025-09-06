@@ -20,18 +20,48 @@ SEAD-METHOD™ (Specification Enforced Agentic Agile Development) is a revolutio
 
 ---
 
-## Installation (2 minutes)
+## Installation (3 minutes)
 
+### Step 1: Install SEAD Package
 ```bash
 # Install SEAD globally
 npm install -g sead-method-core
 
 # Verify installation
 sead --version
-
-# Check system health
-sead doctor
 ```
+
+### Step 2: Run Professional Installer
+SEAD features a **BMAD-style professional installer** with interactive IDE setup:
+
+```bash
+# Interactive installation (recommended)
+sead install
+
+# The installer will ask you:
+# 1. Which IDE you use (Claude Code, Cursor, VS Code, etc.)
+# 2. Installation type (full, constitutional, or specific agents)
+# 3. Where to install (.sead-core directory)
+```
+
+### Step 3: Verify Setup
+```bash
+# Check installation status  
+sead status
+
+# List available AI agents
+sead list-agents
+
+# Test agent availability
+sead agents
+
+# Expected output: 12 agents listed with descriptions
+```
+
+**🎉 Installation Complete!** SEAD agents are now available in your IDE:
+- **Claude Code**: `/sead-architect`, `/sead-developer`
+- **Cursor**: `@sead-architect`, `@sead-developer`
+- **Other IDEs**: Commands generated based on your selection
 
 ---
 

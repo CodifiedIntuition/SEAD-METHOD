@@ -46,7 +46,7 @@ sead --version
 
 ## Installation & Setup
 
-### Installation
+### Package Installation
 
 ```bash
 # Install globally via npm
@@ -54,23 +54,97 @@ npm install -g sead-method-core
 
 # Verify installation
 sead --version
-
-# Check system requirements
-sead doctor
 ```
 
-### Initial Setup
+### Professional Installer System
+
+SEAD features a **BMAD-style professional installer** for IDE integration:
+
+#### `sead install`
+Interactive installation with IDE setup and agent configuration.
 
 ```bash
-# Configure SEAD for first use
-sead configure
+# Interactive installation (recommended)
+sead install
 
-# Set default development mode
-sead config set defaultMode development
+# Installation options
+sead install --full                     # Complete SEAD system
+sead install --constitutional           # Constitutional framework focus  
+sead install --agent <agent-name>       # Single agent installation
 
-# Set preferred catalog location
-sead config set catalogPath ./sead-catalog
+# IDE-specific installation
+sead install --ide claude-code          # For Claude Code
+sead install --ide cursor               # For Cursor
+sead install --ide vs-code              # For VS Code + GitHub Copilot
+sead install --ide windsurf             # For Windsurf
+# [and 11+ more supported IDEs]
+
+# Directory specification
+sead install /path/to/project            # Install in specific directory
+sead install .                          # Install in current directory (default)
 ```
+
+**What gets installed:**
+- `.sead-core/` directory with all SEAD resources
+- IDE-specific command files (slash commands, chat modes, etc.)
+- 12 AI agents as IDE commands
+- 23 development tasks as IDE commands
+- Constitutional rules and catalog templates
+
+#### `sead status`
+Show current installation status and information.
+
+```bash
+sead status                              # Show installation details
+
+# Example output:
+# SEAD Installation Status:
+#   Directory:      /path/to/project
+#   Version:        1.0.0  
+#   Installed:      1/5/2025
+#   Type:           full
+#   IDE Setup:      claude-code
+#   Total Files:    72
+```
+
+#### `sead list-agents` / `sead agents`
+List all available SEAD agents with descriptions.
+
+```bash
+sead list-agents                         # List all agents
+sead agents                             # Alias for list-agents
+
+# Shows all 12 agents:
+# sead-architect, sead-developer, sead-qa, sead-orchestrator, etc.
+```
+
+#### `sead update`
+Update existing SEAD installation.
+
+```bash
+sead update                             # Update to latest version
+sead update --force                     # Force update even if same version
+```
+
+### IDE Integration Commands
+
+Once installed, SEAD agents are available directly in your IDE:
+
+**Claude Code:**
+```bash
+/sead-architect "Design user authentication system"
+/sead-developer "Implement login component"
+/sead-qa "Review this code for security issues"
+```
+
+**Cursor:**  
+```bash
+@sead-architect "Design user authentication system"  
+@sead-developer "Implement login component"
+@sead-qa "Review this code for security issues"
+```
+
+**Other IDEs:** Commands generated based on IDE capabilities
 
 ---
 
