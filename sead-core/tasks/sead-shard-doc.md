@@ -156,23 +156,102 @@ Then ask the user if they want to:
 - Adjust heading levels (## becomes #, ### becomes ##, etc.)
 - Preserve all subsections and content
 
-**Workstream Strategy:**
-- Detect workstream boundaries by searching for keywords:
-  - Authentication, Auth, Login, User Management
-  - Competition, Contest, Event, Tournament
-  - Talent, Portfolio, Achievement, Badge
-  - Analytics, Reporting, Dashboard
-- Group related sections under workstream folders
-- Maintain cross-workstream reference files
+**PRD Story-Focused Sharding (For Development Work):**
 
-**Constitutional Strategy:**
-- Detect principle boundaries by searching for:
-  - Constitutional principles
-  - Constraint definitions
-  - Governance rules
-  - Compliance requirements
-- Create principle-specific folders
-- Extract associated constraints into separate YAML files
+**Purpose**: Split PRDs so developers can focus on specific stories without loading entire document.
+
+**Step 1: Story Workstream Detection:**
+1. **Scan for story/feature groupings** by workstream keywords:
+   - **Authentication Stories**: "login", "signup", "auth", "user management", "permissions", "security"
+   - **Competition Stories**: "tournament", "contest", "competition", "event", "leaderboard", "matching"
+   - **Talent Stories**: "portfolio", "achievement", "badge", "progress", "skill development"
+   - **Analytics Stories**: "dashboard", "reporting", "metrics", "analytics", "insights"
+   - **Administration Stories**: "admin", "settings", "configuration", "user management"
+
+2. **Story Content Identification**: For each section, look for:
+   - User story formats ("As a [user], I want...")
+   - Acceptance criteria lists
+   - Feature requirements
+   - API endpoint descriptions
+   - UI/UX specifications
+
+**Step 2: Development-Ready Structure:**
+Create workstream folders optimized for story development:
+```
+docs/prd-shards/
+├── index.md (story navigation by workstream)
+├── authentication/
+│   ├── user-stories.md (all auth user stories)
+│   ├── api-requirements.md (auth API specs)
+│   ├── acceptance-criteria.md (auth testing criteria)
+│   └── dependencies.md (what auth needs from other workstreams)
+├── competition/
+│   ├── user-stories.md (competition stories)
+│   ├── api-requirements.md (competition APIs)
+│   ├── acceptance-criteria.md (competition testing)
+│   └── dependencies.md
+├── shared/
+│   ├── data-models.md (shared data structures)
+│   ├── common-components.md (reusable UI components)
+│   └── integration-points.md (how workstreams connect)
+```
+
+**Step 3: Developer Workflow Integration:**
+- **sead-developer**: Gets focused story file + dependencies only
+- **sead-product-owner**: Reviews story-specific requirements 
+- **sead-qa**: Gets acceptance criteria without unrelated features
+- **sead-scrum-master**: Manages backlog by workstream
+
+**Story Sharding Rules:**
+1. **One story per section** - Easy to find and work on
+2. **Include dependencies** - Developer knows what they need from other teams
+3. **Preserve acceptance criteria** - QA can test without full context
+4. **Maintain traceability** - Link back to original PRD sections
+
+**Constitutional Strategy (Phase 2 Enhanced):**
+
+**Step 1: Constitutional Principle Detection:**
+1. Scan document for constitutional principle indicators:
+   - **User Autonomy**: "user control", "consent", "choice", "autonomy", "self-determination"
+   - **Privacy Protection**: "privacy", "data protection", "personal information", "confidentiality"
+   - **Educational Focus**: "education", "learning", "development", "skill", "growth", "academic"
+   - **Accessibility First**: "accessibility", "inclusive", "universal design", "assistive", "barrier-free"
+   - **Data Sovereignty**: "data ownership", "user data", "data rights", "information control"
+
+2. **Constitutional Content Analysis**: For each section:
+   - Identify constraint statements (must/shall/required)
+   - Extract governance rules and policies
+   - Map compliance requirements to principles
+   - Detect constitutional violation risks
+
+**Step 2: Principle-Specific Organization:**
+- Create principle directories with governance structure:
+  ```
+  docs/constitutional-shards/
+  ├── index.md (principle navigation)
+  ├── user-autonomy/
+  │   ├── principle.md (core principle definition)
+  │   ├── constraints.yaml (technical constraints)
+  │   ├── validation-rules.md (compliance checking)
+  │   ├── examples.md (implementation examples)
+  │   └── violations.md (common violations and fixes)
+  ├── privacy-protection/
+  │   ├── principle.md
+  │   ├── constraints.yaml (GDPR/COPPA compliance)
+  │   ├── validation-rules.md
+  │   ├── examples.md
+  │   └── violations.md
+  └── compliance/
+      ├── cross-principle-matrix.md (principle interactions)
+      ├── mode-requirements.md (prototype/dev/deploy modes)
+      └── audit-checklist.md (constitutional audit items)
+  ```
+
+**Step 3: Constraint Extraction and Validation:**
+- Extract constraint definitions into structured YAML
+- Create validation rules for automated compliance checking
+- Generate principle interaction matrices
+- Build constitutional audit checklists
 
 **Catalog Pattern Strategy:**
 - Detect pattern categories:
