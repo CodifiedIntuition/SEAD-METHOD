@@ -1,7 +1,7 @@
 {
   "name": "sead-method-core",
-  "version": "1.2.0",
-  "description": "Specification Enforced Agentic Agile Development - A hybrid methodology preventing AI agent drift through catalog-based constraints",
+  "version": "1.3.0",
+  "description": "Specification Enforced Agentic Agile Development - A hybrid methodology preventing AI agent drift through catalog-based constraints with comprehensive external asset integration",
   "main": "cli.js",
   "bin": {
     "sead-method": "cli.js",
@@ -24,7 +24,12 @@
     "constraint-enforcement",
     "development-methodology",
     "catalog-system",
-    "context-preservation"
+    "context-preservation",
+    "external-asset-integration",
+    "design-system-integration",
+    "api-transformation",
+    "component-library-integration",
+    "brownfield-development"
   ],
   "author": "SEAD-METHOD Contributors",
   "license": "MIT",
