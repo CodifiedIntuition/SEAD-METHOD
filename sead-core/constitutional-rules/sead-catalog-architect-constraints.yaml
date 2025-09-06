@@ -83,6 +83,76 @@ mandatory_catalog_reads:
       - "validate_completeness_criteria_coverage"
       - "confirm_validation_methodology_standards"
 
+  # Before ANY greenfield bootstrap work
+  before_greenfield_bootstrap:
+    triggers:
+      - "greenfield catalog creation"
+      - "initial pattern seeding"  
+      - "catalog structure bootstrap"
+      - "pattern capture preparation"
+      - "document-based catalog generation"
+    required_files:
+      - "docs/sead-project-brief.md"    # Project context and mode
+      - "docs/sead-prd.md"             # Requirements and functional patterns
+      - "docs/sead-architecture.md"    # Technical patterns and system design
+      - "sead-catalog-template/README.md"
+    optional_files:
+      - "docs/sead-front-end-spec.md"  # UI patterns if available
+      - "docs/brainstorming/*.md"      # Additional context
+    validation_actions:
+      - "validate_project_documents_exist"
+      - "extract_planned_patterns_from_architecture" 
+      - "identify_requirements_patterns_from_prd"
+      - "assess_catalog_seeding_opportunities"
+      - "validate_development_mode_constraints"
+      - "verify_document_pattern_extraction_completeness"
+    failure_behaviors:
+      - trigger: "missing_project_brief"
+        action: "error_with_guidance"
+        message: "Greenfield catalog bootstrap requires project brief. Create with sead-product-owner first using *create-project-brief command."
+      - trigger: "missing_prd"
+        action: "error_with_guidance" 
+        message: "Greenfield catalog bootstrap requires PRD. Create with sead-product-owner first using *create-prd command."
+      - trigger: "missing_architecture"
+        action: "error_with_guidance"
+        message: "Greenfield catalog bootstrap requires architecture. Create with sead-architect first using *create-backend-architecture command."
+      - trigger: "insufficient_pattern_extraction"
+        action: "warning_with_guidance"
+        message: "Limited patterns available for extraction. Consider creating frontend specifications for comprehensive catalog seeding."
+
+  # Before ANY external asset integration
+  before_external_integration:
+    triggers:
+      - "external asset integration"
+      - "asset transformation"
+      - "design system import"
+      - "api specification import"
+      - "component library integration"
+      - "pattern collection import"
+    required_files:
+      - "external-assets-staging/"
+      - "docs/integration-architecture.md"
+      - "docs/external-asset-analysis.md"
+    optional_files:
+      - "docs/sead-project-brief.md"
+      - "docs/sead-prd.md"
+    validation_actions:
+      - "validate_external_asset_staging_structure"
+      - "assess_external_asset_quality"
+      - "check_sead_compatibility"
+      - "validate_integration_architecture_exists"
+      - "verify_catalog_merge_safety"
+    failure_behaviors:
+      - trigger: "missing_staging_area"
+        action: "error_with_guidance"
+        message: "External asset integration requires staging area. Create external-assets-staging/ directory first."
+      - trigger: "missing_integration_architecture"
+        action: "error_with_guidance"
+        message: "External asset integration requires integration architecture. Create with sead-architect first."
+      - trigger: "asset_quality_insufficient"
+        action: "warning_with_guidance"
+        message: "External assets may need quality improvement before integration. Consider documentation and standardization."
+
 # MODE-SPECIFIC CONSTRAINTS
 mode_based_constraints:
 
@@ -99,6 +169,22 @@ mode_based_constraints:
     escalation_triggers:
       - "production_catalog_requirements"
       - "formal_pattern_governance_needs"
+    # Greenfield-specific requirements
+    greenfield_requirements:
+      - "basic_pattern_seeding_from_documents"
+      - "template_structure_initialization"
+    required_document_reads:
+      - "docs/sead-project-brief.md"
+    optional_document_reads: 
+      - "docs/sead-prd.md"
+      - "docs/sead-architecture.md"
+    catalog_seeding_level: "minimal"
+    # External integration requirements
+    external_integration_requirements:
+      - "basic_asset_validation"
+      - "simple_transformation_patterns"
+    allowed_external_sources: "any"
+    quality_requirements: "minimal"
   
   # DEVELOPMENT MODE - Catalog preferred, comprehensive pattern management
   development:
@@ -119,6 +205,26 @@ mode_based_constraints:
     escalation_triggers:
       - "pattern_complexity_beyond_catalog_capabilities"
       - "unresolvable_pattern_conflicts"
+    # Greenfield-specific requirements
+    greenfield_requirements:
+      - "comprehensive_pattern_extraction_from_documents"
+      - "structured_catalog_domain_seeding"
+      - "pattern_validation_preparation"
+    required_document_reads:
+      - "docs/sead-project-brief.md"
+      - "docs/sead-prd.md"
+      - "docs/sead-architecture.md"
+    optional_document_reads:
+      - "docs/sead-front-end-spec.md"
+      - "docs/brainstorming/*.md"
+    catalog_seeding_level: "comprehensive"
+    # External integration requirements
+    external_integration_requirements:
+      - "comprehensive_asset_analysis"
+      - "quality_validation_required"
+      - "documentation_compliance"
+    allowed_external_sources: "validated"
+    quality_requirements: "comprehensive"
   
   # BUILD-TO-DEPLOY MODE - Strict catalog standards, zero deviations
   build-to-deploy:
@@ -142,6 +248,30 @@ mode_based_constraints:
       - "quality_validation_failure"
       - "consistency_verification_gaps"
       - "governance_compliance_violations"
+    # Greenfield-specific requirements
+    greenfield_requirements:
+      - "complete_pattern_extraction_validation"
+      - "full_catalog_compliance_preparation"
+      - "production_ready_pattern_seeding"
+    required_document_reads:
+      - "docs/sead-project-brief.md"
+      - "docs/sead-prd.md" 
+      - "docs/sead-architecture.md"
+      - "docs/sead-front-end-spec.md"
+    optional_document_reads:
+      - "docs/brainstorming/*.md"
+    catalog_seeding_level: "production_ready"
+    blocking_requirements:
+      - "all_required_documents_must_exist"
+      - "pattern_extraction_must_be_comprehensive"
+      - "catalog_architecture_alignment_required"
+    # External integration requirements
+    external_integration_requirements:
+      - "strict_asset_validation"
+      - "complete_sead_compliance"
+      - "production_quality_assurance"
+    allowed_external_sources: "enterprise_grade_only"
+    quality_requirements: "production_ready"
 
 # CATALOG DRIFT PREVENTION RULES
 anti_drift_enforcement:
@@ -202,6 +332,47 @@ anti_drift_enforcement:
         description: "Ensure catalog changes maintain backward compatibility"
         action: "validate_catalog_backward_compatibility"
         blocking_in_modes: ["build-to-deploy"]
+
+  # Greenfield Catalog Seeding Drift Prevention
+  greenfield_catalog_seeding:
+    validation_gates:
+      - name: "document_availability_check"
+        description: "Ensure required project documents exist for pattern extraction"
+        action: "validate_required_documents_readable"
+        blocking_in_modes: ["development", "build-to-deploy"]
+        
+      - name: "pattern_extraction_completeness"  
+        description: "Ensure all discoverable patterns extracted from documents"
+        action: "verify_pattern_extraction_from_project_documents"
+        blocking_in_modes: ["build-to-deploy"]
+        
+      - name: "catalog_architecture_alignment"
+        description: "Ensure seeded catalog supports planned architecture"
+        action: "validate_catalog_architecture_compatibility"
+        blocking_in_modes: ["development", "build-to-deploy"]
+        
+      - name: "document_consistency_validation"
+        description: "Ensure project documents are internally consistent"
+        action: "validate_document_cross_references"
+        blocking_in_modes: ["build-to-deploy"]
+
+  # External Asset Integration Drift Prevention
+  external_asset_integration:
+    validation_gates:
+      - name: "external_asset_quality_check"
+        description: "Ensure external assets meet minimum quality standards"
+        action: "validate_external_asset_quality"
+        blocking_in_modes: ["development", "build-to-deploy"]
+        
+      - name: "catalog_compatibility_validation"
+        description: "Ensure external assets are compatible with existing catalog"
+        action: "verify_catalog_compatibility"
+        blocking_in_modes: ["build-to-deploy"]
+        
+      - name: "integration_documentation_completeness"
+        description: "Ensure integration process is fully documented"
+        action: "validate_integration_documentation"
+        blocking_in_modes: ["development", "build-to-deploy"]
 
 # ESCALATION PROCEDURES
 escalation_rules:
@@ -264,6 +435,36 @@ behavioral_constraints:
       - "mode_compliance_status"
       - "pattern_validation_results"
       - "catalog_governance_compliance_status"
+      
+  # Greenfield workflow behavior
+  greenfield_workflow:
+    required_pre_actions:
+      - "scan_for_project_documents"
+      - "validate_document_completeness_for_mode"
+      - "extract_patterns_from_available_documents"
+    
+    document_reading_order:
+      - "docs/sead-project-brief.md"      # First: context and mode
+      - "docs/sead-prd.md"               # Second: functional patterns
+      - "docs/sead-architecture.md"      # Third: technical patterns
+      - "docs/sead-front-end-spec.md"    # Fourth: UI patterns (if exists)
+    
+    pattern_extraction_priorities:
+      prototype_mode:
+        - "basic_api_endpoint_patterns"
+        - "core_data_type_patterns"
+        - "essential_component_patterns"
+      development_mode:
+        - "comprehensive_api_contract_patterns"
+        - "complete_shared_type_patterns"
+        - "design_system_component_patterns"
+        - "state_management_patterns"
+        - "error_handling_patterns"
+      build_to_deploy_mode:
+        - "production_ready_all_patterns"
+        - "validation_schema_patterns"
+        - "test_pattern_templates"
+        - "deployment_configuration_patterns"
 
 # VALIDATION CHECKPOINTS
 mandatory_checkpoints:

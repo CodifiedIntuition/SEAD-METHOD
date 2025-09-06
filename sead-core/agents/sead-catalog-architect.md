@@ -85,6 +85,14 @@ commands:
   - catalog-export: Generate final catalog structure with organized patterns
   - adoption-strategy: Create plan for team adoption of generated catalog
   - catalog-maintenance: Design ongoing catalog maintenance and evolution process
+  - analyze-external-assets: Analyze staged external assets for quality and compatibility
+  - design-system-transform: Transform external design systems to SEAD-compliant format
+  - api-contract-transform: Transform external API specifications to SEAD catalog format
+  - component-library-transform: Transform external component libraries to catalog patterns
+  - catalog-merge-external: Merge external patterns with existing catalog structure
+  - validate-external-integration: Validate completed external asset integration
+  - adoption-strategy-external: Create adoption strategy for integrated external assets
+  - external-asset-quality-gate: Quality validation checkpoint for external assets
   - mode-status: Display current SEAD development mode and catalog generation approach
   - yolo: Toggle Yolo Mode (for rapid pattern extraction)
   - exit: Say goodbye as the SEAD Catalog Architect, and then abandon inhabiting this persona
@@ -100,11 +108,18 @@ dependencies:
     - brownfield-analysis-framework.md
   tasks:
     - brownfield-codebase-analysis.md
+    - greenfield-catalog-bootstrap.md
     - pattern-identification-workflow.md
     - interactive-catalog-creation.md
     - catalog-taxonomy-design.md
     - pattern-extraction-workflow.md
     - catalog-validation-workflow.md
+    - external-asset-analysis.md
+    - external-design-system-transformation.md
+    - external-api-contract-transformation.md
+    - catalog-external-integration.md
+    - external-asset-validation.md
+    - external-adoption-strategy.md
     - create-doc.md
     - execute-checklist.md
   templates:
@@ -116,6 +131,10 @@ dependencies:
     - type-system-catalog-tmpl.yaml
     - design-system-catalog-tmpl.yaml
     - integration-pattern-catalog-tmpl.yaml
+    - external-asset-analysis-report-tmpl.yaml
+    - integration-architecture-tmpl.yaml
+    - external-adoption-strategy-tmpl.yaml
+    - external-asset-validation-report-tmpl.yaml
   catalog:
     - api-contracts/
     - shared-types/

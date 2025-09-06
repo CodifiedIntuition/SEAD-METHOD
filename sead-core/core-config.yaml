@@ -99,6 +99,89 @@ catalog:
     require_tests: true
     require_version: true
 
+  # Greenfield catalog bootstrap configuration
+  greenfield_bootstrap:
+    enabled: true
+    document_sources:
+      project_context: "docs/sead-project-brief.md"
+      functional_requirements: "docs/sead-prd.md"
+      technical_architecture: "docs/sead-architecture.md" 
+      ui_specifications: "docs/sead-front-end-spec.md"
+      additional_context: "docs/brainstorming/*.md"
+    
+    # Pattern extraction mapping - which documents feed which catalog domains
+    pattern_extraction:
+      api_contracts_from: ["technical_architecture", "functional_requirements"]
+      shared_types_from: ["technical_architecture", "functional_requirements", "ui_specifications"]
+      design_system_from: ["functional_requirements", "ui_specifications"]
+      state_management_from: ["technical_architecture", "ui_specifications"]
+      error_handling_from: ["functional_requirements", "technical_architecture"]
+      validation_schemas_from: ["functional_requirements"]
+      test_patterns_from: ["technical_architecture"]
+      auth_patterns_from: ["technical_architecture", "functional_requirements"]
+      integration_patterns_from: ["technical_architecture"]
+      data_strategy_from: ["technical_architecture", "functional_requirements"]
+      deployment_strategy_from: ["technical_architecture"]
+    
+    # Mode-specific bootstrap behavior
+    mode_behavior:
+      prototype:
+        extraction_depth: "basic"
+        required_documents: ["project_context"]
+        optional_documents: ["functional_requirements", "technical_architecture"]
+        catalog_seeding_level: "minimal"
+        required_domains: ["api-contracts", "shared-types", "design-system"]
+      development:
+        extraction_depth: "comprehensive"
+        required_documents: ["project_context", "functional_requirements", "technical_architecture"]
+        optional_documents: ["ui_specifications", "additional_context"] 
+        catalog_seeding_level: "comprehensive"
+        required_domains: "all"
+      build_to_deploy:
+        extraction_depth: "production_ready"
+        required_documents: ["project_context", "functional_requirements", "technical_architecture", "ui_specifications"]
+        optional_documents: ["additional_context"]
+        catalog_seeding_level: "production_ready"
+        required_domains: "all"
+        validation_required: true
+
+  # External asset integration configuration
+  external_integration:
+    enabled: true
+    staging_directory: "external-assets-staging"
+    supported_formats:
+      design_systems: [".tsx", ".vue", ".json", ".css", ".scss"]
+      api_specifications: [".yaml", ".json", ".openapi"]
+      component_libraries: [".tsx", ".vue", ".js", ".ts"]
+      documentation: [".md", ".mdx", ".html"]
+    
+    # Asset transformation mappings
+    transformation_mappings:
+      design_tokens: "sead-catalog/design-system/tokens/"
+      ui_components: "sead-catalog/design-system/components/"
+      api_contracts: "sead-catalog/api-contracts/"
+      shared_types: "sead-catalog/shared-types/"
+      auth_patterns: "sead-catalog/auth-patterns/"
+      validation_schemas: "sead-catalog/validation-schemas/"
+      test_patterns: "sead-catalog/test-patterns/"
+      integration_patterns: "sead-catalog/integration-patterns/"
+    
+    # Quality requirements by mode
+    quality_requirements:
+      prototype:
+        documentation_required: false
+        examples_required: false
+        tests_required: false
+      development:
+        documentation_required: true
+        examples_required: true
+        tests_required: false
+      build_to_deploy:
+        documentation_required: true
+        examples_required: true
+        tests_required: true
+        security_validation: true
+
   # Technical Constraint Enforcement (Prevents AI Agent Drift)
   constraints:
     
