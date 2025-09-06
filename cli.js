@@ -94,6 +94,135 @@ program
     }
   });
 
+// Install command - BMAD-style interactive installer
+program
+  .command('install')
+  .description('Install SEAD Method with interactive setup')
+  .argument('[directory]', 'installation directory (default: current directory)')
+  .option('--full', 'install complete SEAD system')
+  .option('--ide <ide>', 'target IDE (claude-code, cursor, vs-code, etc.)')
+  .option('--agent <agent>', 'install specific agent only')
+  .option('--team <team>', 'install specific team configuration') 
+  .option('--constitutional', 'install with constitutional framework focus')
+  .action(async (directory, options) => {
+    try {
+      const installer = require('./tools/installer/lib/installer');
+      
+      // Build config from options
+      const config = {
+        directory: directory || process.cwd(),
+        installType: options.agent ? 'single-agent' : 
+                    options.team ? 'team' : 
+                    options.constitutional ? 'constitutional' : 'full',
+        agent: options.agent,
+        team: options.team,
+        ide: options.ide,
+        ides: options.ide ? [options.ide] : ['claude-code'], // Default to Claude Code
+        constitutional: options.constitutional
+      };
+      
+      await installer.install(config);
+      
+    } catch (error) {
+      console.error(chalk.red('❌ Installation failed:'), error.message);
+      if (options.verbose) {
+        console.error(error.stack);
+      }
+      process.exit(1);
+    }
+  });
+
+// Status command - show installation status
+program
+  .command('status')
+  .description('Show SEAD installation status')
+  .action(async () => {
+    try {
+      const installer = require('./tools/installer/lib/installer');
+      await installer.showStatus();
+    } catch (error) {
+      console.error(chalk.red('❌ Failed to show status:'), error.message);
+      process.exit(1);
+    }
+  });
+
+// List agents command
+program
+  .command('list-agents')
+  .alias('agents')
+  .description('List all available SEAD agents')
+  .action(async () => {
+    try {
+      const installer = require('./tools/installer/lib/installer');
+      await installer.listAgents();
+    } catch (error) {
+      console.error(chalk.red('❌ Failed to list agents:'), error.message);
+      process.exit(1);
+    }
+  });
+
+// Update command - update existing installation
+program
+  .command('update')
+  .description('Update existing SEAD installation')
+  .option('--force', 'force update even if no changes detected')
+  .action(async (options) => {
+    try {
+      const installer = require('./tools/installer/lib/installer');
+      const config = {
+        installType: 'update',
+        force: options.force
+      };
+      await installer.install(config);
+    } catch (error) {
+      console.error(chalk.red('❌ Update failed:'), error.message);
+      process.exit(1);
+    }
+  });
+
+// Uninstall command - removes global .sead-method workspace
+program
+  .command('uninstall')
+  .description('Uninstall SEAD-METHOD global workspace')
+  .option('--confirm', 'confirm removal without prompt')
+  .action(async (options) => {
+    console.log(chalk.yellow('🗑️  Uninstalling SEAD-METHOD global workspace...'));
+    
+    try {
+      const os = require('os');
+      const homeDir = os.homedir();
+      const globalSeadDir = path.join(homeDir, '.sead-method');
+      
+      if (!(await fs.pathExists(globalSeadDir))) {
+        console.log(chalk.yellow('⚠️  ~/.sead-method does not exist'));
+        return;
+      }
+      
+      if (!options.confirm) {
+        const inquirer = require('inquirer');
+        const { confirmed } = await inquirer.prompt([{
+          type: 'confirm',
+          name: 'confirmed',
+          message: 'Remove ~/.sead-method workspace? This will not affect your projects.',
+          default: false
+        }]);
+        
+        if (!confirmed) {
+          console.log(chalk.blue('Uninstall cancelled'));
+          return;
+        }
+      }
+      
+      await fs.remove(globalSeadDir);
+      console.log(chalk.green('✅ SEAD-METHOD global workspace removed'));
+      console.log(chalk.white('Your projects are unaffected. Run "sead install" to reinstall.'));
+      
+    } catch (error) {
+      console.error(chalk.red('❌ Uninstall failed:'), error.message);
+      process.exit(1);
+    }
+  });
+
 // Specify command (from Spec-Kit enhanced)
 program
   .command('specify')
@@ -707,6 +836,22 @@ sead status
     catalogReadme
   );
   
+  // Create .sead-method directory structure for AI tools
+  console.log(chalk.blue('🤖 Setting up .sead-method workspace...'));
+  const seadMethodDir = path.join(projectPath, '.sead-method');
+  const seadMethodDirs = [
+    'agents',
+    'constitutional-rules', 
+    'tasks',
+    'templates',
+    'workflows',
+    'checklists'
+  ];
+  
+  for (const dir of seadMethodDirs) {
+    await fs.ensureDir(path.join(seadMethodDir, dir));
+  }
+  
   // Copy SEAD-core resources to project for self-contained operation
   console.log(chalk.blue('📦 Copying SEAD resources...'));
   const seadCoreSrc = path.resolve(__dirname, 'sead-core');
@@ -715,6 +860,18 @@ sead status
   try {
     await fs.copy(seadCoreSrc, seadCoreDest);
     console.log(chalk.green('✅ SEAD resources copied successfully'));
+    
+    // Also copy key resources to .sead-method for AI tool access
+    console.log(chalk.blue('🔄 Setting up .sead-method workspace...'));
+    await fs.copy(path.join(seadCoreSrc, 'agents'), path.join(seadMethodDir, 'agents'));
+    await fs.copy(path.join(seadCoreSrc, 'constitutional-rules'), path.join(seadMethodDir, 'constitutional-rules'));
+    await fs.copy(path.join(seadCoreSrc, 'tasks'), path.join(seadMethodDir, 'tasks'));
+    await fs.copy(path.join(seadCoreSrc, 'templates'), path.join(seadMethodDir, 'templates'));
+    await fs.copy(path.join(seadCoreSrc, 'workflows'), path.join(seadMethodDir, 'workflows'));
+    await fs.copy(path.join(seadCoreSrc, 'checklists'), path.join(seadMethodDir, 'checklists'));
+    
+    console.log(chalk.green('✅ .sead-method workspace configured'));
+    
   } catch (error) {
     console.error(chalk.yellow(`⚠️  Warning: Could not copy SEAD resources: ${error.message}`));
     console.error(chalk.yellow('   Project will reference resources from CLI installation'));
