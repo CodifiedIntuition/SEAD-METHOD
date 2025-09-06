@@ -253,13 +253,68 @@ docs/prd-shards/
 - Generate principle interaction matrices
 - Build constitutional audit checklists
 
-**Catalog Pattern Strategy:**
-- Detect pattern categories:
-  - API patterns, Auth patterns, UI patterns
-  - Data patterns, Integration patterns
-  - Test patterns, Deployment patterns
-- Group related patterns together
-- Maintain pattern dependency references
+**Catalog Pattern Sharding (For Agent Pattern Discovery):**
+
+**Purpose**: Split large catalog files so agents can quickly find specific patterns/templates.
+
+**Step 1: Pattern Category Detection:**
+1. **Scan for pattern groupings** by category keywords:
+   - **API Patterns**: "endpoint", "REST", "GraphQL", "API", "service", "microservice"
+   - **Auth Patterns**: "authentication", "authorization", "OAuth", "JWT", "session", "security"
+   - **Data Patterns**: "database", "schema", "migration", "model", "entity", "repository"
+   - **UI Patterns**: "component", "layout", "form", "navigation", "responsive", "design system"
+   - **Integration Patterns**: "webhook", "event", "messaging", "queue", "pub/sub", "integration"
+   - **Test Patterns**: "testing", "unit test", "integration test", "mock", "fixture", "coverage"
+
+2. **Pattern Content Identification**: For each section, look for:
+   - Code examples and snippets
+   - Implementation templates
+   - Configuration patterns
+   - Best practice guidelines
+   - Usage documentation
+
+**Step 2: Agent-Optimized Structure:**
+Create category folders optimized for pattern discovery:
+```
+sead-catalog/shards/
+├── index.md (pattern discovery navigation)
+├── api-patterns/
+│   ├── rest-endpoints.md (RESTful API patterns)
+│   ├── graphql-schemas.md (GraphQL patterns)
+│   ├── error-handling.md (API error patterns)
+│   └── authentication.md (API auth patterns)
+├── auth-patterns/
+│   ├── oauth-implementation.md (OAuth flows)
+│   ├── session-management.md (session patterns)
+│   ├── jwt-handling.md (JWT patterns)
+│   └── rbac-patterns.md (role-based access)
+├── data-patterns/
+│   ├── schema-design.md (database schemas)
+│   ├── migration-patterns.md (data migrations)
+│   ├── repository-patterns.md (data access)
+│   └── validation-schemas.md (data validation)
+├── ui-patterns/
+│   ├── component-library.md (reusable components)
+│   ├── form-patterns.md (form implementations)
+│   ├── navigation-patterns.md (nav components)
+│   └── responsive-layouts.md (layout patterns)
+└── shared/
+    ├── pattern-dependencies.md (how patterns connect)
+    ├── integration-examples.md (pattern combinations)
+    └── migration-guide.md (pattern evolution)
+```
+
+**Step 3: Agent Workflow Integration:**
+- **sead-architect**: Gets architecture-specific patterns quickly
+- **sead-catalog-architect**: Maintains and organizes pattern libraries
+- **sead-developer**: Finds implementation examples without searching entire catalog
+- **All agents**: Quick pattern discovery for planning and development
+
+**Catalog Sharding Rules:**
+1. **One pattern per section** - Easy to find specific implementations
+2. **Include usage examples** - Agents get complete context
+3. **Maintain relationships** - Show how patterns work together
+4. **Version compatibility** - Track pattern evolution and compatibility
 
 #### Step 4: Index File Generation
 
