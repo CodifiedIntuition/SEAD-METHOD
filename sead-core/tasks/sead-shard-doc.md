@@ -156,31 +156,165 @@ Then ask the user if they want to:
 - Adjust heading levels (## becomes #, ### becomes ##, etc.)
 - Preserve all subsections and content
 
-**Workstream Strategy:**
-- Detect workstream boundaries by searching for keywords:
-  - Authentication, Auth, Login, User Management
-  - Competition, Contest, Event, Tournament
-  - Talent, Portfolio, Achievement, Badge
-  - Analytics, Reporting, Dashboard
-- Group related sections under workstream folders
-- Maintain cross-workstream reference files
+**PRD Story-Focused Sharding (For Development Work):**
 
-**Constitutional Strategy:**
-- Detect principle boundaries by searching for:
-  - Constitutional principles
-  - Constraint definitions
-  - Governance rules
-  - Compliance requirements
-- Create principle-specific folders
-- Extract associated constraints into separate YAML files
+**Purpose**: Split PRDs so developers can focus on specific stories without loading entire document.
 
-**Catalog Pattern Strategy:**
-- Detect pattern categories:
-  - API patterns, Auth patterns, UI patterns
-  - Data patterns, Integration patterns
-  - Test patterns, Deployment patterns
-- Group related patterns together
-- Maintain pattern dependency references
+**Step 1: Story Workstream Detection:**
+1. **Scan for story/feature groupings** by workstream keywords:
+   - **Authentication Stories**: "login", "signup", "auth", "user management", "permissions", "security"
+   - **Competition Stories**: "tournament", "contest", "competition", "event", "leaderboard", "matching"
+   - **Talent Stories**: "portfolio", "achievement", "badge", "progress", "skill development"
+   - **Analytics Stories**: "dashboard", "reporting", "metrics", "analytics", "insights"
+   - **Administration Stories**: "admin", "settings", "configuration", "user management"
+
+2. **Story Content Identification**: For each section, look for:
+   - User story formats ("As a [user], I want...")
+   - Acceptance criteria lists
+   - Feature requirements
+   - API endpoint descriptions
+   - UI/UX specifications
+
+**Step 2: Development-Ready Structure:**
+Create workstream folders optimized for story development:
+```
+docs/prd-shards/
+├── index.md (story navigation by workstream)
+├── authentication/
+│   ├── user-stories.md (all auth user stories)
+│   ├── api-requirements.md (auth API specs)
+│   ├── acceptance-criteria.md (auth testing criteria)
+│   └── dependencies.md (what auth needs from other workstreams)
+├── competition/
+│   ├── user-stories.md (competition stories)
+│   ├── api-requirements.md (competition APIs)
+│   ├── acceptance-criteria.md (competition testing)
+│   └── dependencies.md
+├── shared/
+│   ├── data-models.md (shared data structures)
+│   ├── common-components.md (reusable UI components)
+│   └── integration-points.md (how workstreams connect)
+```
+
+**Step 3: Developer Workflow Integration:**
+- **sead-developer**: Gets focused story file + dependencies only
+- **sead-product-owner**: Reviews story-specific requirements 
+- **sead-qa**: Gets acceptance criteria without unrelated features
+- **sead-scrum-master**: Manages backlog by workstream
+
+**Story Sharding Rules:**
+1. **One story per section** - Easy to find and work on
+2. **Include dependencies** - Developer knows what they need from other teams
+3. **Preserve acceptance criteria** - QA can test without full context
+4. **Maintain traceability** - Link back to original PRD sections
+
+**Constitutional Strategy (Phase 2 Enhanced):**
+
+**Step 1: Constitutional Principle Detection:**
+1. Scan document for constitutional principle indicators:
+   - **User Autonomy**: "user control", "consent", "choice", "autonomy", "self-determination"
+   - **Privacy Protection**: "privacy", "data protection", "personal information", "confidentiality"
+   - **Educational Focus**: "education", "learning", "development", "skill", "growth", "academic"
+   - **Accessibility First**: "accessibility", "inclusive", "universal design", "assistive", "barrier-free"
+   - **Data Sovereignty**: "data ownership", "user data", "data rights", "information control"
+
+2. **Constitutional Content Analysis**: For each section:
+   - Identify constraint statements (must/shall/required)
+   - Extract governance rules and policies
+   - Map compliance requirements to principles
+   - Detect constitutional violation risks
+
+**Step 2: Principle-Specific Organization:**
+- Create principle directories with governance structure:
+  ```
+  docs/constitutional-shards/
+  ├── index.md (principle navigation)
+  ├── user-autonomy/
+  │   ├── principle.md (core principle definition)
+  │   ├── constraints.yaml (technical constraints)
+  │   ├── validation-rules.md (compliance checking)
+  │   ├── examples.md (implementation examples)
+  │   └── violations.md (common violations and fixes)
+  ├── privacy-protection/
+  │   ├── principle.md
+  │   ├── constraints.yaml (GDPR/COPPA compliance)
+  │   ├── validation-rules.md
+  │   ├── examples.md
+  │   └── violations.md
+  └── compliance/
+      ├── cross-principle-matrix.md (principle interactions)
+      ├── mode-requirements.md (prototype/dev/deploy modes)
+      └── audit-checklist.md (constitutional audit items)
+  ```
+
+**Step 3: Constraint Extraction and Validation:**
+- Extract constraint definitions into structured YAML
+- Create validation rules for automated compliance checking
+- Generate principle interaction matrices
+- Build constitutional audit checklists
+
+**Catalog Pattern Sharding (For Agent Pattern Discovery):**
+
+**Purpose**: Split large catalog files so agents can quickly find specific patterns/templates.
+
+**Step 1: Pattern Category Detection:**
+1. **Scan for pattern groupings** by category keywords:
+   - **API Patterns**: "endpoint", "REST", "GraphQL", "API", "service", "microservice"
+   - **Auth Patterns**: "authentication", "authorization", "OAuth", "JWT", "session", "security"
+   - **Data Patterns**: "database", "schema", "migration", "model", "entity", "repository"
+   - **UI Patterns**: "component", "layout", "form", "navigation", "responsive", "design system"
+   - **Integration Patterns**: "webhook", "event", "messaging", "queue", "pub/sub", "integration"
+   - **Test Patterns**: "testing", "unit test", "integration test", "mock", "fixture", "coverage"
+
+2. **Pattern Content Identification**: For each section, look for:
+   - Code examples and snippets
+   - Implementation templates
+   - Configuration patterns
+   - Best practice guidelines
+   - Usage documentation
+
+**Step 2: Agent-Optimized Structure:**
+Create category folders optimized for pattern discovery:
+```
+sead-catalog/shards/
+├── index.md (pattern discovery navigation)
+├── api-patterns/
+│   ├── rest-endpoints.md (RESTful API patterns)
+│   ├── graphql-schemas.md (GraphQL patterns)
+│   ├── error-handling.md (API error patterns)
+│   └── authentication.md (API auth patterns)
+├── auth-patterns/
+│   ├── oauth-implementation.md (OAuth flows)
+│   ├── session-management.md (session patterns)
+│   ├── jwt-handling.md (JWT patterns)
+│   └── rbac-patterns.md (role-based access)
+├── data-patterns/
+│   ├── schema-design.md (database schemas)
+│   ├── migration-patterns.md (data migrations)
+│   ├── repository-patterns.md (data access)
+│   └── validation-schemas.md (data validation)
+├── ui-patterns/
+│   ├── component-library.md (reusable components)
+│   ├── form-patterns.md (form implementations)
+│   ├── navigation-patterns.md (nav components)
+│   └── responsive-layouts.md (layout patterns)
+└── shared/
+    ├── pattern-dependencies.md (how patterns connect)
+    ├── integration-examples.md (pattern combinations)
+    └── migration-guide.md (pattern evolution)
+```
+
+**Step 3: Agent Workflow Integration:**
+- **sead-architect**: Gets architecture-specific patterns quickly
+- **sead-catalog-architect**: Maintains and organizes pattern libraries
+- **sead-developer**: Finds implementation examples without searching entire catalog
+- **All agents**: Quick pattern discovery for planning and development
+
+**Catalog Sharding Rules:**
+1. **One pattern per section** - Easy to find specific implementations
+2. **Include usage examples** - Agents get complete context
+3. **Maintain relationships** - Show how patterns work together
+4. **Version compatibility** - Track pattern evolution and compatibility
 
 #### Step 4: Index File Generation
 
