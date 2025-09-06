@@ -360,3 +360,76 @@ monitoring:
   agent_performance: true
   constraint_effectiveness: true
   catalog_coverage: true
+
+# Document Sharding Configuration
+sharding:
+  enabled: true
+  markdownExploder: true  # Use @kayvan/markdown-tree-parser for automatic sharding
+  fallback_to_manual: true
+  
+  # Default sharding strategies by document type
+  strategies:
+    prd:
+      method: "workstream"
+      output_path: "docs/prd-shards/"
+      index_template: "workstream-index"
+      workstreams:
+        - "authentication"
+        - "competition" 
+        - "talent"
+        - "analytics"
+        - "administration"
+      
+    architecture:
+      method: "level2"
+      output_path: "docs/arch-shards/"
+      index_template: "technical-index"
+      
+    constitutional:
+      method: "constitutional" 
+      output_path: "docs/const-shards/"
+      index_template: "principle-index"
+      principles:
+        - "user-autonomy"
+        - "privacy-protection"
+        - "educational-focus"
+        - "accessibility-first"
+        - "data-sovereignty"
+        
+    catalog:
+      method: "catalog-pattern"
+      output_path: "sead-catalog/shards/"
+      index_template: "pattern-index"
+      categories:
+        - "api-contracts"
+        - "auth-patterns"
+        - "data-patterns"
+        - "ui-patterns"
+        - "integration-patterns"
+        - "test-patterns"
+        
+    default:
+      method: "level2"
+      output_path: "docs/shards/"
+      index_template: "basic-index"
+  
+  # Content preservation settings
+  preservation:
+    constitutional_markers: true
+    catalog_references: true
+    cross_references: true
+    sead_templates: true
+    
+  # Validation settings
+  validation:
+    content_integrity: true
+    constitutional_compliance: true
+    catalog_integration: true
+    reconstructible: true
+    
+  # Output formatting
+  output:
+    include_context_headers: true
+    generate_navigation_index: true
+    create_dependency_maps: true
+    include_compliance_matrix: true
