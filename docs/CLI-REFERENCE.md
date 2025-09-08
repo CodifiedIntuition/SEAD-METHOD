@@ -384,6 +384,151 @@ sead implement ui-component-001 \
 
 ---
 
+## Development Tool Commands
+
+### `sead flatten`
+
+Flatten codebase into a single XML file with comprehensive statistics and analysis. This tool is essential for understanding project structure, generating documentation, and preparing codebase for AI analysis.
+
+#### Syntax
+```bash
+sead flatten [options]
+```
+
+#### Options
+- `-i, --input <path>`: Input directory to flatten (default: current directory)
+- `-o, --output <path>`: Output file path (default: 'flattened-codebase.xml')
+
+#### Features
+- **Intelligent File Discovery**: Automatically discovers all files while respecting .gitignore patterns
+- **Binary Detection**: Identifies and excludes binary files using advanced heuristics
+- **Comprehensive Statistics**: Generates detailed statistics including:
+  - File count and size distribution
+  - Lines of code analysis
+  - Extension breakdown
+  - Directory structure analysis
+  - Duplicate file detection
+  - Git integration status
+  - Temporal analysis (oldest/newest files)
+  - Compression analysis
+- **Streaming XML Generation**: Efficiently handles large codebases with streaming output
+- **Markdown Reports**: Generates detailed markdown reports alongside XML output
+
+#### Examples
+```bash
+# Basic codebase flattening (auto-detects project root)
+sead flatten
+
+# Flatten specific directory with custom output
+sead flatten --input ./src --output ./docs/codebase-analysis.xml
+
+# Flatten current directory with custom filename
+sead flatten --output ./project-snapshot.xml
+```
+
+#### Interactive Mode
+When run without arguments, `sead flatten` will:
+1. Auto-detect the project root by looking for common markers (.git, package.json, etc.)
+2. Suggest optimal input and output paths
+3. Provide confirmation prompts for user review
+4. Generate both XML and detailed markdown statistics report
+
+#### Output Structure
+- **XML File**: Contains all text file contents with clear start/end markers
+- **Markdown Report**: Detailed statistics including file breakdown, size analysis, quality metrics
+- **Statistics Include**: File counts, size percentiles, extension analysis, directory breakdown, temporal data, Git integration status
+
+---
+
+### `sead build`
+
+Build web-compatible bundles for SEAD agents and teams. Creates distributable packages that contain all necessary resources for agent operation in web environments.
+
+#### Syntax
+```bash
+sead build [options]
+```
+
+#### Options
+- `-a, --agents-only`: Build only agent bundles
+- `-t, --teams-only`: Build only team bundles
+- `-e, --expansions-only`: Build only expansion pack bundles
+- `--no-expansions`: Skip building expansion packs
+- `--no-clean`: Skip cleaning output directories
+
+#### Features
+- **Agent Bundle Creation**: Packages individual SEAD agents with all dependencies
+- **Team Bundle Generation**: Creates coordinated team packages with shared resources
+- **Expansion Pack Support**: Builds extension packages for specialized functionality
+- **Web Compatibility**: Ensures all resources are web-accessible with proper path resolution
+- **Dependency Resolution**: Automatically resolves and includes all required dependencies
+- **Template Integration**: Incorporates SEAD-specific templates and instructions
+
+#### Examples
+```bash
+# Build all bundles (agents, teams, and expansion packs)
+sead build
+
+# Build only agent bundles
+sead build --agents-only
+
+# Build only team bundles without cleaning output first
+sead build --teams-only --no-clean
+
+# Build expansion packs only
+sead build --expansions-only
+
+# Build agents and teams but skip expansion packs
+sead build --no-expansions
+```
+
+#### Additional Build Commands
+
+##### `sead build list-agents`
+List all available agents that can be built.
+
+```bash
+sead build list-agents
+```
+
+##### `sead build list-expansions`
+List all available expansion packs.
+
+```bash
+sead build list-expansions
+```
+
+##### `sead build validate`
+Validate agent and team configurations before building.
+
+```bash
+sead build validate
+```
+
+#### Output Structure
+Built bundles are created in the `dist/` directory with the following structure:
+```
+dist/
+├── agents/
+│   ├── sead-architect-bundle.md
+│   ├── sead-developer-bundle.md
+│   └── ... (other agent bundles)
+├── teams/
+│   ├── dev-team-bundle.md
+│   └── ... (other team bundles)
+└── expansions/
+    ├── specialization-pack-bundle.md
+    └── ... (other expansion bundles)
+```
+
+Each bundle includes:
+- Complete agent/team configuration
+- All referenced resources and dependencies
+- Web-compatible resource paths
+- Startup instructions and operational guidelines
+
+---
+
 ## Catalog Management Commands
 
 ### `sead catalog generate`
@@ -1280,6 +1425,12 @@ sead validate --constitutional --catalog --agents
 | `sead catalog init` | Initialize greenfield catalog | `--mode`, `--domains`, `--template` |
 | `sead catalog validate` | Validate catalog integrity | `--constitutional-compliance`, `--fix` |
 | `sead catalog integrate-external` | Integrate external assets into catalog | `--source`, `--type`, `--guided`, `--mode` |
+
+### Development Tool Commands
+| Command | Purpose | Key Options |
+|---------|---------|-------------|
+| `sead flatten` | Flatten codebase into single XML file with comprehensive statistics | `--input`, `--output` |
+| `sead build` | Build web bundles for agents and teams | `--agents-only`, `--teams-only`, `--expansions-only` |
 
 #### External Asset Integration Details
 
