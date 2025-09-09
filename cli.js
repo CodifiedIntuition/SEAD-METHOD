@@ -395,7 +395,7 @@ catalogCmd
 
 // Project status
 program
-  .command('status')
+  .command('project-status')
   .alias('st')
   .description('Show SEAD project status')
   .action(async () => {
@@ -971,60 +971,35 @@ async function createSeadSpecification(description, options) {
     }
   }
   
-  // Agent activation process
-  console.log(chalk.green('\n🤖 Activating SEAD Agents...'));
+  console.log(chalk.green('\n🚀 Executing Spec-Kit Integration Task...'));
   
-  const agentSequence = [
-    { name: 'SEAD Analyst', role: 'Requirements Analysis & Catalog Research', agent: 'sead-analyst' },
-    { name: 'SEAD Architect', role: 'Technical Specification & Constraint Enforcement', agent: 'sead-architect' }
-  ];
+  // Execute the new Spec-Kit specification creation task
+  const taskOptions = {
+    ...options,
+    feature_description: description,
+    effective_mode: effectiveMode,
+    catalog_status: catalogStatus,
+    interactive: options.interactive || false
+  };
   
-  console.log(chalk.white('\nAgent Activation Sequence:'));
-  for (let i = 0; i < agentSequence.length; i++) {
-    const agent = agentSequence[i];
-    console.log(`${i + 1}. ${chalk.cyan(agent.name)}: ${agent.role}`);
-  }
+  await executeSeadTask('sead-create-specification', taskOptions);
   
-  // Create specification workspace
-  await fs.ensureDir('./sead-workspace/specifications');
-  
-  const specType = options.type || 'frontend';
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-  const specFile = `./sead-workspace/specifications/${sanitizeFilename(specType)}-spec-${timestamp}.md`;
-  
-  // Generate specification instructions
-  const specInstructions = generateSpecificationInstructions(description, options, effectiveMode, catalogStatus);
-  
-  await fs.writeFile(specFile, specInstructions);
-  
-  console.log(chalk.green(`\n✅ SEAD Specification Framework Created!`));
-  console.log(`📁 Specification File: ${chalk.bold(specFile)}`);
-  
-  console.log(chalk.blue('\n🚀 Next Steps - Agent Workflow:'));
-  console.log(chalk.white('1. Activate SEAD Analyst for requirements gathering:'));
-  console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-analyst.md`));
-  console.log(chalk.cyan(`   Command: *catalog-research ${sanitizeFilename(specType)}`));
-  console.log(chalk.cyan(`   Then: *elicit`));
-  
-  console.log(chalk.white('\n2. Activate SEAD Architect for technical specification:'));
-  console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-architect.md`));
-  // Normalize template name (frontend -> front-end for file system)
-  const templateSpecType = sanitizeFilename(specType) === 'frontend' ? 'front-end' : sanitizeFilename(specType);
-  console.log(chalk.cyan(`   Template: sead-core/templates/sead-${templateSpecType}-spec-tmpl.yaml`));
-  console.log(chalk.cyan(`   Command: *create-spec`));
-  
-  console.log(chalk.white('\n3. Constitutional Validation:'));
-  console.log(chalk.cyan(`   Load constraints: sead-core/constitutional-rules/sead-analyst-constraints.yaml`));
-  console.log(chalk.cyan(`   Validate mode: ${effectiveMode}`));
-  console.log(chalk.cyan(`   Enforce catalog: ${config.modes[effectiveMode].catalog_enforcement}`));
+  console.log(chalk.green(`\n✅ SEAD Specification Created with Spec-Kit Integration!`));
+  console.log(chalk.blue('📋 Specification created using Spec-Kit proven methodology with SEAD enhancements'));
+  console.log(chalk.white(`   • Catalog pattern integration: ${catalogStatus.available ? 'Applied' : 'N/A'}`));
+  console.log(chalk.white(`   • Constitutional compliance: ${effectiveMode} mode constraints`));
+  console.log(chalk.white(`   • Agent coordination: Context preserved for planning phase`));
   
   if (options.interactive) {
-    console.log(chalk.yellow('\n💡 Interactive Mode Enabled'));
-    console.log('Run the agents above, then return here for guided specification creation.');
-    console.log('💡 Next: sead plan [tech-stack]');
+    console.log(chalk.yellow('\n💡 Interactive Mode Completed'));
+    console.log('Specification ready for implementation planning.');
   }
   
-  return specFile;
+  console.log(chalk.blue('\n🚀 Next Steps:'));
+  console.log(chalk.white('  1. Review the generated specification file'));
+  console.log(chalk.white('  2. Run: sead plan [tech-stack] to create implementation plan'));
+  
+  return 'specification-created-via-spec-kit-integration';
 }
 
 function validateModeCompatibility(projectMode, requestMode) {
@@ -1213,59 +1188,40 @@ async function createSeadPlan(techStack, options) {
     }
   }
   
-  // Architecture planning process
-  console.log(chalk.green('\n🤖 Activating SEAD Architecture Planning...'));
+  console.log(chalk.green('\n🚀 Executing Spec-Kit Planning Integration Task...'));
   
-  const planningAgents = [
-    { name: 'SEAD Architect', role: 'System Architecture & Technical Planning', agent: 'sead-architect' },
-    { name: 'SEAD Developer', role: 'Implementation Strategy & Feasibility', agent: 'sead-developer' }
-  ];
+  // Execute the new Spec-Kit implementation planning task
+  const taskOptions = {
+    ...options,
+    tech_stack: techStack,
+    effective_mode: effectiveMode,
+    catalog_status: catalogStatus,
+    specification_status: specificationStatus,
+    interactive: options.interactive || false
+  };
   
-  console.log(chalk.white('\nPlanning Agent Sequence:'));
-  for (let i = 0; i < planningAgents.length; i++) {
-    const agent = planningAgents[i];
-    console.log(`${i + 1}. ${chalk.cyan(agent.name)}: ${agent.role}`);
-  }
+  await executeSeadTask('sead-create-implementation-plan', taskOptions);
   
-  // Create planning workspace
-  await fs.ensureDir('./sead-workspace/planning');
+  console.log(chalk.green(`\n✅ SEAD Implementation Plan Created with Spec-Kit Integration!`));
+  console.log(chalk.blue('📁 Plan integrated with SEAD catalog patterns and constitutional framework'));
   
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-  const planFile = `./sead-workspace/planning/${sanitizeFilename(options.architecture)}-plan-${timestamp}.md`;
+  console.log(chalk.blue('\n🚀 Implementation Plan Integration Complete:'));
+  console.log(chalk.white('✅ Spec-Kit planning logic integrated with SEAD agents'));
+  console.log(chalk.white('✅ Catalog pattern integration configured'));
+  console.log(chalk.white('✅ Constitutional compliance framework applied'));
+  console.log(chalk.white('✅ Agent coordination context prepared'));
   
-  // Generate architecture plan instructions
-  const planInstructions = generatePlanInstructions(techStack, options, effectiveMode, catalogStatus, specificationStatus);
+  console.log(chalk.blue('\n🔄 Next Command Options:'));
+  console.log(chalk.cyan('   sead stories    # Generate task breakdown using integrated workflow'));
+  console.log(chalk.cyan('   sead implement  # Execute implementation with constitutional compliance'));
   
-  await fs.writeFile(planFile, planInstructions);
-  
-  console.log(chalk.green(`\n✅ SEAD Architecture Plan Framework Created!`));
-  console.log(`📁 Plan File: ${chalk.bold(planFile)}`);
-  
-  console.log(chalk.blue('\n🚀 Next Steps - Planning Workflow:'));
-  console.log(chalk.white('1. Activate SEAD Architect for system design:'));
-  console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-architect.md`));
-  // Normalize template name (frontend -> front-end for file system)
-  const templateArchType = options.architecture === 'frontend' ? 'front-end' : options.architecture;
-  console.log(chalk.cyan(`   Template: sead-core/templates/sead-${templateArchType}-architecture-tmpl.yaml`));
-  console.log(chalk.cyan(`   Command: *create-architecture`));
-  
-  console.log(chalk.white('\n2. Activate SEAD Developer for implementation strategy:'));
-  console.log(chalk.cyan(`   Load agent: sead-core/agents/sead-developer.md`));
-  console.log(chalk.cyan(`   Command: *plan-implementation`));
-  console.log(chalk.cyan(`   Validate: *check-feasibility`));
-  
-  console.log(chalk.white('\n3. Constitutional Validation:'));
-  console.log(chalk.cyan(`   Load constraints: sead-core/constitutional-rules/sead-architect-constraints.yaml`));
-  console.log(chalk.cyan(`   Mode validation: ${effectiveMode}`));
-  console.log(chalk.cyan(`   Tech stack compliance: ${techStack}`));
   
   if (options.interactive) {
-    console.log(chalk.yellow('\n💡 Interactive Planning Enabled'));
-    console.log('Follow the agent workflow above for guided architecture planning.');
-    console.log('💡 Next: sead stories --enforce-catalog');
+    console.log(chalk.yellow('\n💡 Interactive Planning with Spec-Kit Integration Enabled'));
+    console.log('Integrated workflow combines proven Spec-Kit logic with SEAD agent coordination.');
   }
   
-  return planFile;
+  return `Implementation plan created with Spec-Kit integration in ${effectiveMode} mode`;
 }
 
 async function checkSpecificationStatus() {
@@ -1285,195 +1241,7 @@ async function checkSpecificationStatus() {
   return status;
 }
 
-function generatePlanInstructions(techStack, options, mode, catalogStatus, specificationStatus) {
-  const timestamp = new Date().toISOString();
-  
-  return `# SEAD Architecture Planning Framework
 
-**Generated**: ${timestamp}
-**Tech Stack**: ${techStack}
-**Architecture**: ${options.architecture}
-**Mode**: ${mode}
-**Data Tier**: ${options.dataTier}
-**Deploy Tier**: ${options.deployTier}
-
-## Constitutional Requirements
-
-### Mode Constraints (${mode})
-${getModeConstraints(mode)}
-
-### Architecture Compliance
-- **Tech Stack Validation**: ${techStack} must align with catalog patterns
-- **Three-Tier Strategy**: Support data and deployment tier progression
-- **Catalog Integration**: Leverage existing architectural patterns
-- **Constitutional Framework**: Ensure governance compliance
-
-### Planning Context
-${specificationStatus.available ? 
-  `✅ Specifications Available: ${specificationStatus.specs.join(', ')}` : 
-  '⚠️ No Specifications Found - Consider running: sead specify [feature]'}
-
-${catalogStatus.available ? 
-  `✅ Catalog Available - Domains: ${catalogStatus.domains.join(', ')}` : 
-  '❌ No Catalog Found - Create catalog first with: sead catalog generate'}
-
-## Agent Workflow Instructions
-
-### Phase 1: SEAD Architect (System Design)
-
-**Activation**: Load \`sead-core/agents/sead-architect.md\`
-
-**Template**: \`sead-core/templates/sead-${options.architecture === 'frontend' ? 'front-end' : options.architecture}-architecture-tmpl.yaml\`
-
-**Pre-Action Requirements**:
-1. Read all available specifications from ./sead-workspace/specifications/
-2. Review catalog domains for existing architectural patterns
-3. Check constitutional constraints for ${mode} mode
-4. Validate tech stack compatibility: ${techStack}
-
-**Commands Sequence**:
-\`\`\`
-*catalog-research architecture
-*create-architecture
-*validate-constraints
-*check-feasibility
-\`\`\`
-
-**Expected Outputs**:
-- System architecture with catalog integration
-- Technology stack validation and rationale
-- Component design with constitutional compliance
-- Infrastructure planning with deployment strategy
-
-### Phase 2: SEAD Developer (Implementation Strategy)
-
-**Activation**: Load \`sead-core/agents/sead-developer.md\`
-
-**Pre-Action Requirements**:
-1. Review architecture design from Phase 1
-2. Load catalog patterns for implementation guidance
-3. Check development constraints for ${mode} mode
-4. Validate technical feasibility of planned approach
-
-**Commands Sequence**:
-\`\`\`
-*plan-implementation
-*validate-tech-stack
-*check-feasibility
-*estimate-effort
-\`\`\`
-
-**Expected Outputs**:
-- Implementation roadmap with catalog compliance
-- Technical risk assessment with mitigation strategies
-- Development timeline with constitutional milestones
-- Resource requirements with skill assessments
-
-### Phase 3: Constitutional Validation
-
-**Architecture Review**:
-- All architectural decisions must comply with ${mode} mode constraints
-- Tech stack choices must align with catalog patterns (when available)
-- Three-tier strategy must be supported (${options.dataTier}/${options.deployTier})
-- Context preservation for implementation handoffs
-
-**Validation Commands**:
-\`\`\`
-*validate-architecture
-*check-constraints
-*mode-status
-*doc-out
-\`\`\`
-
-## Technology Stack Analysis
-
-### Requested Stack: ${techStack}
-
-**Constitutional Considerations**:
-- Mode compliance for ${mode}
-- Catalog pattern alignment
-- Three-tier strategy support
-- Agent handoff compatibility
-
-### Architecture Type: ${options.architecture}
-
-**Planning Focus**:
-- ${options.architecture === 'fullstack' ? 'Full-stack integration with frontend/backend coordination' : 
-    options.architecture === 'frontend' ? 'Frontend architecture with design system integration' :
-    options.architecture === 'backend' ? 'Backend services with API design focus' :
-    'Custom architecture with specialized requirements'}
-
-## Data & Deployment Strategy
-
-### Data Tier: ${options.dataTier}
-${getDataTierDescription(options.dataTier)}
-
-### Deployment Tier: ${options.deployTier}
-${getDeploymentTierDescription(options.deployTier)}
-
-## Next Actions
-1. Follow agent workflow above
-2. Generate architecture using activated agents
-3. Validate constitutional compliance
-4. Create implementation plan
-5. Run: \`sead stories --enforce-catalog\` to continue SEAD workflow
-
----
-*Generated by SEAD-METHOD™ CLI - Specification Enforced Agentic Agile Development*
-`;
-}
-
-function getDataTierDescription(tier) {
-  switch (tier) {
-    case 'demo':
-      return `- SQLite/JSON with full schema
-- Curated fixtures for demonstration
-- Experimental schema extensions allowed
-- Fast setup for prototyping`;
-    
-    case 'mock':
-      return `- Production-like database with fake data
-- Realistic data generation at scale
-- Schema evolution tracking
-- Performance testing capable`;
-    
-    case 'production':
-      return `- Full production database setup
-- Strict schema validation
-- Catalog-only compliance required
-- Migration-ready configuration`;
-    
-    default:
-      return `- Custom data tier configuration
-- Define requirements based on project needs`;
-  }
-}
-
-function getDeploymentTierDescription(tier) {
-  switch (tier) {
-    case 'local-dev':
-      return `- Docker Compose orchestration
-- Minimal infrastructure complexity
-- Team sharing via tunnels
-- Fast iteration cycles`;
-    
-    case 'cloud-staging':
-      return `- Lightweight cloud deployment
-- Branch-based environments
-- Integration testing pipeline
-- Moderate infrastructure setup`;
-    
-    case 'production-deploy':
-      return `- Full CI/CD pipeline
-- Blue/green deployment strategy
-- Comprehensive monitoring
-- Production-grade infrastructure`;
-    
-    default:
-      return `- Custom deployment configuration
-- Define requirements based on project scale`;
-  }
-}
 
 async function createSeadStories(options) {
   console.log(chalk.green('\n🔍 Initializing SEAD Story Creation Process...'));
