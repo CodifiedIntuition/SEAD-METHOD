@@ -5,6 +5,34 @@ All notable changes to the SEAD-METHOD core package will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.2] - 2025-01-08
+
+### Added
+- **Flattener Tool Suite**: Complete codebase analysis and XML generation tool
+  - Comprehensive XML generation with detailed statistics
+  - Binary file detection and gitignore integration
+  - Detailed markdown reports and file analysis
+  - Command: `sead flatten [options]`
+- **Web Builder Tool**: SEAD agent bundle creation for web deployment
+  - Agent and team bundle generation
+  - Web-compatible resource packaging
+  - Dependency resolution and template integration
+  - Command: `sead build-web [options]`
+
+### Enhanced
+- **CLI Reference Documentation**: Updated with detailed usage for new development tools
+- **Tool Branding**: Branded tools for SEAD Method with sead-core path integration
+- **Development Workflow**: Added comprehensive codebase analysis capabilities
+
+### Fixed
+- Remove project-docs files from git tracking to comply with .gitignore
+- Merge latest main branch changes into develop branch
+- Synchronize remote branches with local development
+
+### Maintenance
+- Clean up repository structure and tracking inconsistencies
+- Ensure proper git ignore compliance for development documentation
+
 ## [1.3.0] - 2025-01-06
 
 ### Added

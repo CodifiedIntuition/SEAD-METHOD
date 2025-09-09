@@ -1,0 +1,341 @@
+# SEAD-Enhanced Task Breakdown Template
+# Combines Spec-Kit proven task generation with SEAD catalog integration and constitutional framework
+
+template_info:
+  name: "SEAD Spec-Kit Task Breakdown Template"
+  version: "1.0"
+  source: "Adapted from spec-kit/templates/tasks-template.md"
+  purpose: "Constitutional task breakdown with catalog integration and agent coordination"
+  
+sead_config:
+  template_type: "task_breakdown"
+  mode_support: ["prototype", "development", "build-to-deploy"]
+  catalog_integration: true
+  constitutional_compliance: true
+  agent_coordination: true
+
+content: |
+  # Task Breakdown: {{FEATURE_NAME}}
+  
+  **Branch**: `{{BRANCH_NAME}}` | **Date**: {{CREATION_DATE}} | **Plan**: [link]({{PLAN_LINK}})
+  **SEAD Mode**: {{SEAD_MODE}} | **Tasks Generated**: {{TASK_COUNT}} | **Parallel Tasks**: {{PARALLEL_TASK_COUNT}}
+  **Catalog Patterns**: {{CATALOG_PATTERN_COUNT}} | **Quality Gates**: {{QUALITY_GATE_COUNT}}
+  
+  Generated from: {{AVAILABLE_DOCS}}
+  
+  ## Overview
+  
+  This task breakdown implements **{{FEATURE_NAME}}** using:
+  - **Tech Stack**: {{TECH_STACK}}
+  - **Architecture**: {{ARCHITECTURE_TYPE}}
+  - **SEAD Mode**: {{SEAD_MODE}} with {{MODE_CONSTRAINTS}}
+  - **Catalog Integration**: {{CATALOG_INTEGRATION_STRATEGY}}
+  - **Constitutional Compliance**: {{CONSTITUTIONAL_COMPLIANCE_LEVEL}}
+  
+  ### Execution Strategy
+  - **Sequential Dependencies**: Setup → Tests → Implementation → Integration → Validation
+  - **Parallel Execution**: Tasks marked [P] can run simultaneously
+  - **Catalog Pattern Implementation**: {{CATALOG_IMPLEMENTATION_APPROACH}}
+  - **Quality Gates**: Positioned at {{QUALITY_GATE_POSITIONS}}
+  - **Agent Coordination**: {{AGENT_COORDINATION_STRATEGY}}
+  
+  ---
+  
+  ## Task Categories
+  
+  ### Setup Tasks (Foundation)
+  {{#each SETUP_TASKS}}
+  **{{id}}**: {{title}}
+  - **Agent**: {{assigned_agent}}
+  - **Files**: {{target_files}}
+  - **Dependencies**: {{dependencies}}
+  - **SEAD Context**: {{sead_context}}
+  {{#if catalog_patterns}}
+  - **Catalog Patterns**: {{catalog_patterns}}
+  {{/if}}
+  {{#if constitutional_requirements}}
+  - **Constitutional Requirements**: {{constitutional_requirements}}
+  {{/if}}
+  
+  {{/each}}
+  
+  ### Catalog Pattern Setup Tasks [P]
+  {{#each CATALOG_SETUP_TASKS}}
+  **{{id}}**: {{title}} [P]
+  - **Agent**: SEAD Developer (with catalog pattern expertise)
+  - **Pattern Domain**: {{pattern_domain}}
+  - **Pattern Action**: {{pattern_action}} (setup|extend|create)
+  - **Files**: {{target_files}}
+  - **Catalog Integration**: {{catalog_integration_details}}
+  - **Validation**: {{validation_requirements}}
+  {{#if depends_on_setup}}
+  - **Dependencies**: {{setup_dependencies}}
+  {{/if}}
+  
+  {{/each}}
+  
+  ### Test Tasks [P] (TDD - Must Fail First)
+  {{#each TEST_TASKS}}
+  **{{id}}**: {{title}} [P]
+  - **Agent**: SEAD QA
+  - **Test Type**: {{test_type}} (contract|integration|unit)
+  - **Files**: {{test_files}}
+  - **Target**: {{test_target}}
+  - **Must Fail**: ✅ (TDD requirement - implement test first, verify failure)
+  {{#if catalog_test_patterns}}
+  - **Catalog Test Patterns**: {{catalog_test_patterns}}
+  {{/if}}
+  - **Constitutional Requirement**: RED-GREEN-Refactor cycle enforced
+  
+  {{/each}}
+  
+  ### Core Implementation Tasks
+  {{#each CORE_TASKS}}
+  **{{id}}**: {{title}}{{#if parallel}} [P]{{/if}}
+  - **Agent**: {{assigned_agent}}
+  - **Files**: {{target_files}}
+  - **Dependencies**: {{dependencies}}
+  - **Implementation Guide**: {{implementation_guide}}
+  {{#if catalog_patterns}}
+  - **Catalog Patterns**: {{catalog_patterns}}
+  - **Pattern Usage**: {{pattern_usage_guidance}}
+  {{/if}}
+  {{#if constitutional_constraints}}
+  - **Constitutional Constraints**: {{constitutional_constraints}}
+  {{/if}}
+  - **Makes Tests Pass**: {{associated_tests}}
+  
+  {{/each}}
+  
+  ### Integration Tasks
+  {{#each INTEGRATION_TASKS}}
+  **{{id}}**: {{title}}
+  - **Agent**: {{assigned_agent}}
+  - **Integration Type**: {{integration_type}}
+  - **Files**: {{target_files}}
+  - **Dependencies**: {{dependencies}}
+  {{#if catalog_integration_patterns}}
+  - **Catalog Integration Patterns**: {{catalog_integration_patterns}}
+  {{/if}}
+  - **Validation Requirements**: {{validation_requirements}}
+  
+  {{/each}}
+  
+  ### SEAD Quality Gate Tasks
+  {{#each QUALITY_GATE_TASKS}}
+  **{{id}}**: {{title}}
+  - **Agent**: SEAD QA
+  - **Gate Type**: {{gate_type}} (catalog|constitutional|agent_handoff)
+  - **Validation Scope**: {{validation_scope}}
+  - **Success Criteria**: {{success_criteria}}
+  - **Dependencies**: {{dependencies}}
+  {{#if (eq gate_type "catalog")}}
+  - **Catalog Compliance Check**: {{catalog_compliance_requirements}}
+  {{/if}}
+  {{#if (eq gate_type "constitutional")}}
+  - **Constitutional Compliance Check**: {{constitutional_compliance_requirements}}
+  {{/if}}
+  {{#if (eq gate_type "agent_handoff")}}
+  - **Context Preservation Validation**: {{context_preservation_requirements}}
+  {{/if}}
+  
+  {{/each}}
+  
+  ### Polish Tasks [P] (Final Quality)
+  {{#each POLISH_TASKS}}
+  **{{id}}**: {{title}} [P]
+  - **Agent**: {{assigned_agent}}
+  - **Polish Type**: {{polish_type}} (unit_tests|performance|docs|cleanup)
+  - **Files**: {{target_files}}
+  - **Dependencies**: {{dependencies}}
+  {{#if catalog_patterns}}
+  - **Catalog Patterns**: {{catalog_patterns}}
+  {{/if}}
+  - **Quality Standard**: {{quality_standard}}
+  
+  {{/each}}
+  
+  ---
+  
+  ## Parallel Execution Guide
+  
+  ### Phase 1: Setup & Foundation
+  ```bash
+  # Sequential - must complete in order
+  {{#each SEQUENTIAL_SETUP}}
+  sead task execute {{task_id}}  # {{title}}
+  {{/each}}
+  ```
+  
+  ### Phase 2: Catalog Pattern Setup [PARALLEL]
+  ```bash
+  # Can run simultaneously - independent pattern domains
+  {{#each PARALLEL_CATALOG}}
+  sead task execute {{task_id}} &  # {{title}}
+  {{/each}}
+  wait  # Wait for all catalog setup to complete
+  ```
+  
+  ### Phase 3: Test Creation [PARALLEL] 
+  ```bash
+  # TDD: Create failing tests first
+  {{#each PARALLEL_TESTS}}
+  sead task execute {{task_id}} &  # {{title}}
+  {{/each}}
+  wait
+  
+  # Verify all tests fail (TDD requirement)
+  sead task verify-tests-fail
+  ```
+  
+  ### Phase 4: Core Implementation
+  ```bash
+  # Mixed sequential and parallel based on file dependencies
+  {{#each CORE_IMPLEMENTATION}}
+  {{#if parallel}}
+  sead task execute {{task_id}} &  # {{title}} [PARALLEL]
+  {{else}}
+  sead task execute {{task_id}}    # {{title}} [SEQUENTIAL]
+  {{/if}}
+  {{/each}}
+  ```
+  
+  ### Phase 5: Integration & Validation
+  ```bash
+  # Sequential - integration has dependencies
+  {{#each INTEGRATION_SEQUENCE}}
+  sead task execute {{task_id}}  # {{title}}
+  {{/each}}
+  
+  # Quality gates
+  {{#each QUALITY_GATES}}
+  sead task execute {{task_id}}  # {{title}}
+  {{/each}}
+  ```
+  
+  ### Phase 6: Polish [PARALLEL]
+  ```bash
+  # Final quality improvements - can run in parallel
+  {{#each PARALLEL_POLISH}}
+  sead task execute {{task_id}} &  # {{title}}
+  {{/each}}
+  wait
+  ```
+  
+  ---
+  
+  ## SEAD Integration Details
+  
+  ### Catalog Pattern Implementation
+  {{#each CATALOG_PATTERNS}}
+  **{{domain}}**: {{pattern_name}}
+  - **Status**: {{status}} (available|extend|create)
+  - **Tasks**: {{related_tasks}}
+  - **Validation**: {{validation_tasks}}
+  - **Dependencies**: {{pattern_dependencies}}
+  {{/each}}
+  
+  ### Constitutional Compliance Tracking
+  **Mode**: {{SEAD_MODE}} Requirements
+  {{#if (eq SEAD_MODE "prototype")}}
+  - **Pattern Flexibility**: Experimentation encouraged, document learnings
+  - **Validation Level**: Basic validation, learning-focused
+  - **Documentation**: Capture pattern insights for promotion
+  {{/if}}
+  {{#if (eq SEAD_MODE "development")}}
+  - **Pattern Compliance**: Preferred usage, document extensions
+  - **Validation Level**: Standard checkpoints required  
+  - **Documentation**: Pattern usage and modifications documented
+  {{/if}}
+  {{#if (eq SEAD_MODE "build-to-deploy")}}
+  - **Pattern Compliance**: Strict adherence required
+  - **Validation Level**: Comprehensive validation gates
+  - **Documentation**: Complete compliance documentation
+  {{/if}}
+  
+  ### Agent Coordination Points
+  {{#each AGENT_COORDINATION}}
+  **{{checkpoint_name}}**: {{description}}
+  - **Trigger**: After task {{trigger_task}}
+  - **Agents Involved**: {{involved_agents}}
+  - **Context Exchange**: {{context_exchange_requirements}}
+  - **Validation**: {{validation_requirements}}
+  {{/each}}
+  
+  ---
+  
+  ## Task Dependencies Graph
+  
+  ```
+  {{DEPENDENCY_GRAPH}}
+  ```
+  
+  ## Execution Validation
+  
+  ### Task Completion Criteria
+  {{#each ALL_TASKS}}
+  - **{{id}}**: {{completion_criteria}}
+  {{/each}}
+  
+  ### Quality Gate Success Criteria  
+  {{#each QUALITY_GATES}}
+  - **{{id}}**: {{success_criteria}}
+  {{/each}}
+  
+  ### Constitutional Compliance Validation
+  - **TDD Compliance**: All tests created before implementation, all tests fail initially
+  - **Catalog Pattern Compliance**: Required patterns implemented correctly
+  - **Mode Constraint Compliance**: {{SEAD_MODE}} requirements satisfied
+  - **Agent Handoff Compliance**: Context preserved across agent transitions
+  
+  ---
+  
+  ## Implementation Notes
+  
+  ### For SEAD Developers
+  - **Catalog Pattern Priority**: Use catalog patterns over custom implementations
+  - **Constitutional Constraints**: Respect {{SEAD_MODE}} mode limitations
+  - **Context Preservation**: Maintain agent handoff context throughout implementation
+  - **TDD Discipline**: Never implement before tests exist and fail
+  
+  ### For SEAD QA
+  - **Catalog Validation**: Verify pattern compliance at each quality gate
+  - **Constitutional Validation**: Ensure mode constraints respected
+  - **Test Strategy**: Validate TDD cycle adherence
+  - **Integration Testing**: Use catalog test patterns where available
+  
+  ### For SEAD Architects
+  - **Pattern Oversight**: Guide catalog pattern selection and extension
+  - **Constitutional Compliance**: Validate architectural decisions against constraints
+  - **Agent Coordination**: Facilitate context preservation across handoffs
+  - **Quality Gate Design**: Configure appropriate validation checkpoints
+  
+  ---
+  
+  ## Artifact Relationships *(SEAD Enhancement)*
+  - **Task Breakdown ID**: tasks-{{SANITIZED_FEATURE_NAME}}-{{TIMESTAMP}}
+  - **Plan ID**: {{PLAN_ID}}
+  - **Specification ID**: {{SPEC_ID}}
+  - **Branch**: {{BRANCH_NAME}}
+  - **SEAD Mode**: {{SEAD_MODE}}
+  - **Catalog Patterns**: {{CATALOG_PATTERN_IDS}}
+  - **Agent Coordination**: {{AGENT_COORDINATION_ID}}
+  - **Next Phase**: Implementation Execution
+  - **Implementation Readiness**: {{IMPLEMENTATION_READINESS_STATUS}}
+  
+  ---
+  
+  **Total Tasks**: {{TASK_COUNT}} | **Estimated Duration**: {{ESTIMATED_DURATION}} | **Agent Coordination Points**: {{COORDINATION_POINTS}}
+  
+  *Ready for implementation execution with SEAD agent coordination*
+
+# Template processing instructions for SEAD agents
+processing_instructions:
+  - Generate tasks based on available design documents
+  - Apply Spec-Kit task generation rules with SEAD enhancements
+  - Integrate catalog pattern implementation tasks
+  - Position quality gates appropriately for SEAD mode
+  - Configure agent coordination points
+  - Maintain TDD discipline throughout task sequence
+  - Ensure constitutional compliance validation
+  - Preserve parallel execution opportunities
