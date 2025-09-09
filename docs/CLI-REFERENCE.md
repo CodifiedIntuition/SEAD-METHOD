@@ -207,7 +207,7 @@ my-app/
 
 ### `sead specify`
 
-Create constitutional specification with catalog integration and constraint validation.
+Create constitutional specification using integrated Spec-Kit proven methodology with SEAD catalog integration and constraint validation.
 
 #### Syntax
 ```bash
@@ -218,41 +218,40 @@ sead specify <description> [options]
 - `<description>`: Feature or system description to specify
 
 #### Options
-- `--mode <mode>`: Development mode for appropriate constraints
-- `--catalog-integration`: Enable catalog pattern integration (default: true)
-- `--constitutional-compliance`: Enforce constitutional validation (default: true)
-- `--output <file>`: Custom output file path
-- `--template <type>`: Specification template (feature|system|enhancement)
-- `--interactive`: Interactive specification creation
-- `--ai-assist`: Enable AI-assisted specification enhancement
+- `-m, --mode <mode>`: Development mode (prototype|development|build-to-deploy) (default: development)
+- `-d, --data-tier <tier>`: Data tier to use (demo|mock|production) (default: mock)
+- `-p, --deploy-tier <tier>`: Deployment tier (local-dev|cloud-staging|production-deploy) (default: cloud-staging)
+- `-t, --type <type>`: Specification type (frontend|backend|fullstack) (default: frontend)
+- `-i, --interactive`: Enable interactive specification creation
 
 #### Examples
 ```bash
 # Basic feature specification
 sead specify "User authentication system"
 
-# Interactive specification with catalog integration
+# Interactive specification with development mode
 sead specify "E-commerce checkout" --interactive --mode development
 
-# System-level specification for production
+# Backend specification for production deployment
 sead specify "Payment processing microservice" \
-  --template system --mode build-to-deploy
+  --type backend --mode build-to-deploy --deploy-tier production-deploy
 
-# Custom output location
+# Fullstack specification with production data tier
 sead specify "Dashboard analytics" \
-  --output ./docs/specs/dashboard-spec.md
+  --type fullstack --data-tier production --mode development
 ```
 
 #### Generated Output
-- **Location**: `sead-workspace/specifications/`
-- **Filename**: `frontend-spec-YYYY-MM-DDTHH-MM-SS.md`
-- **Content**: Constitutional specification with catalog references
+- **Location**: `sead-workspace/tasks/`
+- **Task File**: `sead-create-specification-execution-YYYY-MM-DDTHH-MM-SS.md`
+- **Content**: Spec-Kit integrated task with SEAD constitutional compliance and catalog pattern integration
+- **Execution**: Ready for SEAD agents with complete context preservation
 
 ---
 
 ### `sead plan`
 
-Generate agentic planning with constitutional constraint awareness and catalog compliance.
+Generate agentic implementation plan using integrated Spec-Kit proven methodology with constitutional constraint awareness and catalog compliance.
 
 #### Syntax
 ```bash
@@ -260,39 +259,38 @@ sead plan <tech-stack> [options]
 ```
 
 #### Arguments
-- `<tech-stack>`: Technology stack (fullstack|frontend|backend|api|mobile|data)
+- `<tech-stack>`: Technology stack description (e.g., "Next.js with TypeScript and Auth0")
 
 #### Options
-- `--catalog-mode <mode>`: Catalog compliance level (prototype|development|build-to-deploy)
-- `--data-tier <tier>`: Data strategy tier (demo|mock|production)
-- `--constitutional-validation`: Enable constitutional constraint validation
-- `--architecture <style>`: Architecture style (monolith|microservices|serverless)
-- `--deployment <target>`: Deployment target (local|cloud|hybrid)
-- `--output <file>`: Custom output file path
-- `--interactive`: Interactive planning session
+- `-m, --catalog-mode <mode>`: Catalog enforcement mode (prototype|development|build-to-deploy) (default: development)
+- `-d, --data-tier <tier>`: Data strategy tier (demo|mock|production) (default: mock)
+- `-p, --deploy-tier <tier>`: Deployment tier (local-dev|cloud-staging|production-deploy) (default: cloud-staging)
+- `-a, --architecture <type>`: Architecture type (frontend|backend|fullstack) (default: fullstack)
+- `-i, --interactive`: Enable interactive planning session
 
 #### Examples
 ```bash
 # Basic fullstack planning
-sead plan fullstack
+sead plan "Next.js with TypeScript and Prisma"
 
 # Development-ready plan with production data
-sead plan fullstack --catalog-mode development --data-tier production
+sead plan "React with Node.js API" --catalog-mode development --data-tier production
 
-# Microservices architecture for cloud deployment
-sead plan backend \
-  --architecture microservices \
-  --deployment cloud \
-  --mode build-to-deploy
+# Backend architecture for production deployment
+sead plan "FastAPI with PostgreSQL and Redis" \
+  --architecture backend \
+  --deploy-tier production-deploy \
+  --catalog-mode build-to-deploy
 
-# Interactive planning session
-sead plan frontend --interactive --catalog-mode development
+# Interactive frontend planning session
+sead plan "Vue.js with TailwindCSS" --interactive --architecture frontend
 ```
 
 #### Generated Output
-- **Location**: `sead-workspace/planning/`
-- **Filename**: `fullstack-plan-YYYY-MM-DDTHH-MM-SS.md`
-- **Content**: Comprehensive architectural plan with catalog integration
+- **Location**: `sead-workspace/tasks/`
+- **Task File**: `sead-create-implementation-plan-execution-YYYY-MM-DDTHH-MM-SS.md`
+- **Content**: Spec-Kit integrated planning task with constitutional compliance and catalog integration
+- **Execution**: Ready for SEAD agents with architecture context and constraint validation
 
 ---
 
