@@ -1,0 +1,42 @@
+project:
+  name: SEAD-METHOD
+  version: 1.0.0
+  mode: prototype
+  template: default
+catalog:
+  version: 1.0.0
+  enforce_constraints: true
+  auto_validate: true
+modes:
+  prototype:
+    validation_level: basic
+    catalog_enforcement: optional
+    experimental_extensions: true
+  development:
+    validation_level: comprehensive
+    catalog_enforcement: preferred
+    experimental_extensions: tracked
+  build-to-deploy:
+    validation_level: strict
+    catalog_enforcement: mandatory
+    experimental_extensions: false
+data_strategy:
+  demo:
+    storage: sqlite
+    schema: full_production_plus_experimental
+  mock:
+    storage: production_like
+    schema: production_plus_extensions
+  production:
+    storage: production
+    schema: catalog_only
+deployment_strategy:
+  local-dev:
+    infrastructure: docker_compose
+    complexity: minimal
+  cloud-staging:
+    infrastructure: lightweight_cloud
+    complexity: moderate
+  production-deploy:
+    infrastructure: full_production
+    complexity: comprehensive
