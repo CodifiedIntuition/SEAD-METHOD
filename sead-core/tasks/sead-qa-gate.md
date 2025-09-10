@@ -23,7 +23,9 @@ This task operates with mode-sensitive quality gate criteria:
 - **SEAD Enhancement**: Catalog pattern usage has been validated
 - **SEAD Enhancement**: Mode constraint adherence has been assessed
 
-## SEAD Configuration and Catalog Context
+## SEQUENTIAL Task Execution (Do not proceed until current Task is complete)
+
+### 1. Load SEAD Configuration and Catalog Context
 
 **ALWAYS** check the `sead.config.yaml` and `sead-core/core-config.yaml` for:
 - `qa.qaLocation/gates` - Gate file location
@@ -36,6 +38,38 @@ This task operates with mode-sensitive quality gate criteria:
 - Read `{catalogPath}/test-patterns/README.md` for testing compliance
 - Read `{catalogPath}/error-handling/README.md` for error handling patterns
 - Document catalog versions referenced in quality assessment
+
+### 2. Spec-Kit Business Quality Validation (NEW - Insert before existing validation)
+
+#### 2.1 Testability Validation (Spec-Kit Integration)
+- Scan all functional requirements for measurable criteria:
+  → Each requirement must have testable, unambiguous acceptance criteria
+  → Flag vague language: "user-friendly", "fast", "reliable", "secure" without metrics
+  → Validate Given-When-Then scenarios are measurable
+  → Check edge cases have defined expected behaviors
+  → Document testability score and issues found
+
+Example validation:
+- PASS: "System must authenticate user within 2 seconds of valid credential submission"
+- FAIL: "System should have good performance" (not measurable)
+
+#### 2.2 Ambiguity Detection Scanning (Spec-Kit Integration)
+- Scan implementation and story content for [NEEDS CLARIFICATION] markers:
+  → Any remaining markers indicate incomplete requirements
+  → Check for assumption-based language: "should", "might", "probably"
+  → Flag undefined terms and concepts
+  → Validate all technical decisions have clear rationale
+  → Document ambiguity detection results
+
+#### 2.3 Business Stakeholder Readiness (Spec-Kit Integration)  
+- Validate content is appropriate for non-technical stakeholders:
+  → Check for inappropriate implementation details (database schemas, APIs)
+  → Verify user value proposition is clearly articulated
+  → Ensure business outcomes are measurable
+  → Validate separation of WHAT (user needs) vs HOW (implementation)
+  → Document stakeholder readiness score
+
+### 3. SEAD Constitutional Framework Validation (Existing)
 
 ## Enhanced SEAD Quality Gate Schema
 
@@ -142,29 +176,43 @@ top_issues:
 waiver: { active: false } # Waivers not allowed for mode constraint violations
 ```
 
-## SEAD Gate Decision Criteria
+## SEAD Gate Decision Criteria (Enhanced with Dual-Phase Scoring)
+
+### Combined Quality Gate Assessment (Enhanced)
+Each story must pass both Spec-Kit business quality validation and SEAD constitutional compliance:
+
+**Spec-Kit Business Score:**
+- Testability: PASS/FAIL
+- Ambiguity Detection: PASS/FAIL  
+- Stakeholder Readiness: PASS/FAIL
+
+**SEAD Constitutional Score:**
+- Constitutional Compliance: PASS/FAIL
+- Catalog Integration: PASS/FAIL
+- Mode Appropriateness: PASS/FAIL
+
+**Overall Gate Result:** PASS/FAIL (must pass both Spec-Kit and SEAD phases)
 
 ### PASS
 - All acceptance criteria met
 - No high-severity issues
 - Test coverage meets project standards
-- **SEAD Enhancement**: Catalog compliance achieved
-- **SEAD Enhancement**: Mode constraints respected
-- **SEAD Enhancement**: Context preservation data complete
+- **Spec-Kit Business Quality**: All business quality validations pass
+- **SEAD Constitutional**: Catalog compliance achieved, mode constraints respected, context preservation data complete
 
 ### CONCERNS  
 - Non-blocking issues present
 - Should be tracked and scheduled
 - Can proceed with awareness
-- **SEAD Enhancement**: Minor catalog pattern violations (development mode)
-- **SEAD Enhancement**: Extensions created and properly tracked
+- **Spec-Kit Business Quality**: Minor business language or testability issues
+- **SEAD Constitutional**: Minor catalog pattern violations (development mode), extensions created and properly tracked
 
 ### FAIL
 - Acceptance criteria not met
 - High-severity issues present
 - Recommend return to InProgress
-- **SEAD Enhancement**: Major catalog compliance failures
-- **SEAD Enhancement**: Mode constraint violations (prototype/development)
+- **Spec-Kit Business Quality**: Major testability failures, ambiguity markers remain, inappropriate for stakeholders
+- **SEAD Constitutional**: Major catalog compliance failures, mode constraint violations (prototype/development)
 
 ### CATALOG_VIOLATION (SEAD-specific)
 - **BUILD-TO-DEPLOY Mode**: Any catalog pattern deviation

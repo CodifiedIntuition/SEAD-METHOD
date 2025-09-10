@@ -65,35 +65,51 @@ content: |
   - **SEAD sections**: Required for catalog integration and constitutional compliance
   - When a section doesn't apply, remove it entirely (don't leave as "N/A")
   
-  ### For AI Generation
+  ### For AI Generation (Enhanced Ambiguity Detection)
   When creating this spec from a user prompt:
   1. **Mark all ambiguities**: Use [NEEDS CLARIFICATION: specific question] for any assumption you'd need to make
   2. **Don't guess**: If the prompt doesn't specify something (e.g., "login system" without auth method), mark it
   3. **Think like a tester**: Every vague requirement should fail the "testable and unambiguous" checklist item
   4. **SEAD Enhancement**: Check catalog patterns before marking as unclear
   5. **SEAD Enhancement**: Consider constitutional constraints for current mode
-  6. **Common underspecified areas**:
-     - User types and permissions → Check catalog auth patterns
-     - Data retention/deletion policies → Check catalog data strategy
-     - Performance targets and scale → Check catalog integration patterns
-     - Error handling behaviors → Check catalog error handling patterns
-     - Integration requirements → Check catalog integration patterns
-     - Security/compliance needs → Check constitutional requirements
+  6. **Enhanced Ambiguity Detection Patterns**:
+     - **Vague qualitative terms**: "user-friendly", "fast", "secure", "reliable" without metrics
+       - Example: "System should be fast" → [NEEDS CLARIFICATION: fast means what response time? <2s, <5s?]
+     - **Undefined technical terms**: "login system", "notification system", "payment processing" without specifics
+       - Example: "login system" → [NEEDS CLARIFICATION: auth method - email/password, SSO, OAuth, API keys?]
+     - **Missing constraints and limits**: "retain user data", "send notifications", "process payments" without parameters
+       - Example: "retain user data" → [NEEDS CLARIFICATION: retention period - 30 days, 1 year, indefinitely?]
+     - **Integration unknowns**: "integrate with external APIs", "connect to database" without specifics
+       - Example: "payment system" → [NEEDS CLARIFICATION: payment method - Stripe, PayPal, direct bank?]
+  7. **Common underspecified areas requiring clarification**:
+     - User types and permissions → Check catalog auth patterns, then mark if still unclear
+     - Data retention/deletion policies → Check catalog data strategy, then mark if still unclear
+     - Performance targets and scale → Check catalog integration patterns, then mark if still unclear
+     - Error handling behaviors → Check catalog error handling patterns, then mark if still unclear
+     - Integration requirements → Check catalog integration patterns, then mark if still unclear
+     - Security/compliance needs → Check constitutional requirements, then mark if still unclear
   
   ---
   
   ## User Scenarios & Testing *(mandatory)*
   
   ### Primary User Story
-  [Describe the main user journey in plain language]
+  [Describe the main user journey in plain language - main user journey]
   
-  ### Acceptance Scenarios
-  1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-  2. **Given** [initial state], **When** [action], **Then** [expected outcome]
+  ### Acceptance Scenarios (Given-When-Then Format)
+  1. **Given** [initial state/precondition], **When** [user action], **Then** [expected measurable outcome]
+  2. **Given** [boundary condition/context], **When** [user action], **Then** [expected specific behavior]
+  3. **Given** [error condition], **When** [user action/system condition], **Then** [expected error handling behavior]
   
-  ### Edge Cases
-  - What happens when [boundary condition]?
-  - How does system handle [error scenario]?
+  *Each scenario must be testable and measurable - no vague outcomes like "works well" or "is user-friendly"*
+  
+  ### Edge Cases and Error Scenarios
+  - **Boundary Condition**: What happens when [specific boundary condition]?
+    - **Expected Behavior**: [Specific expected system response]
+  - **Error Scenario**: How does system handle [specific error scenario]?
+    - **Expected Behavior**: [Specific error handling and user feedback]
+  - **Integration Edge Case**: What happens when [external dependency fails/unavailable]?
+    - **Expected Behavior**: [Specific fallback behavior]
   
   **SEAD Enhancement**: Test scenarios should reference catalog test patterns where applicable:
   {{#if CATALOG_TEST_PATTERNS}}

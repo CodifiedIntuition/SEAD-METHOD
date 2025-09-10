@@ -120,6 +120,13 @@ To create comprehensive implementation plans with SEAD catalog integration by co
 - **Constitutional Validation**: Ensure design meets mode-specific constraints
 - **Agent Context Preparation**: Prepare implementation context package for Developer agents
 
+#### 4.2.1 Enhanced Design Validation (Minor Spec-Kit Integration)
+After Phase 1 design generation, add:
+- Validate all design decisions have clear rationale documented
+- Check that technical context has no remaining NEEDS CLARIFICATION markers
+- Ensure architectural decisions trace back to specification requirements
+- Verify catalog pattern usage is justified and appropriate
+
 ### 5. Phase 2 Planning Approach (Describe Only - Not Execute)
 
 #### 5.1 Task Generation Strategy (Spec-Kit + SEAD)

@@ -19,17 +19,64 @@ reviewer: "SEAD QA Agent (Catalog-Aware Test Architect)"
 updated: "{{iso_timestamp}}"
 sead_mode: "{{sead_mode}}" # prototype|development|build-to-deploy
 
-# SEAD-specific compliance tracking
-catalog_compliance:
-  status: "{{catalog_compliance_status}}" # compliant|partial|non-compliant|extended
-  patterns_used: []
-  patterns_violated: []
-  extensions_created: []
+# Dual-Phase Quality Assessment (Spec-Kit + SEAD)
+spec_kit_business_quality:
+  testability_validation:
+    status: "{{testability_status}}" # PASS|FAIL
+    measurable_criteria_count: "{{measurable_criteria_count}}"
+    vague_language_detected: []
+    given_when_then_scenarios_validated: "{{scenarios_validated}}" # true|false
+    edge_cases_defined: "{{edge_cases_count}}"
+    testability_score: "{{testability_score}}" # 0-100
+  
+  ambiguity_detection:
+    status: "{{ambiguity_status}}" # PASS|FAIL
+    needs_clarification_markers_remaining: "{{clarification_markers_count}}"
+    assumption_based_language_detected: []
+    undefined_terms_flagged: []
+    technical_decisions_rationale_complete: "{{rationale_complete}}" # true|false
+    ambiguity_score: "{{ambiguity_score}}" # 0-100
+    
+  stakeholder_readiness:
+    status: "{{stakeholder_readiness_status}}" # PASS|FAIL
+    technical_details_inappropriate: []
+    user_value_proposition_clear: "{{user_value_clear}}" # true|false
+    business_outcomes_measurable: "{{business_outcomes_measurable}}" # true|false
+    what_vs_how_separation_proper: "{{what_how_separated}}" # true|false
+    stakeholder_readiness_score: "{{stakeholder_score}}" # 0-100
 
-constraint_adherence:
-  status: "{{constraint_status}}" # compliant|violated|waived
-  mode_appropriate: "{{mode_appropriate}}" # true|false
-  violations: []
+# SEAD-specific compliance tracking
+sead_constitutional_quality:
+  catalog_compliance:
+    status: "{{catalog_compliance_status}}" # compliant|partial|non-compliant|extended
+    patterns_used: []
+    patterns_violated: []
+    extensions_created: []
+
+  constraint_adherence:
+    status: "{{constraint_status}}" # compliant|violated|waived
+    mode_appropriate: "{{mode_appropriate}}" # true|false
+    violations: []
+
+  mode_appropriateness:
+    status: "{{mode_appropriate_status}}" # PASS|FAIL
+    current_mode: "{{sead_mode}}"
+    mode_constraints_respected: "{{mode_constraints_respected}}" # true|false
+    quality_gates_appropriate: "{{quality_gates_appropriate}}" # true|false
+
+# Combined Quality Gate Assessment
+combined_assessment:
+  spec_kit_score:
+    testability: "{{testability_status}}" # PASS|FAIL
+    ambiguity_detection: "{{ambiguity_status}}" # PASS|FAIL  
+    stakeholder_readiness: "{{stakeholder_readiness_status}}" # PASS|FAIL
+  
+  sead_constitutional_score:
+    constitutional_compliance: "{{constitutional_compliance_status}}" # PASS|FAIL
+    catalog_integration: "{{catalog_integration_status}}" # PASS|FAIL
+    mode_appropriateness: "{{mode_appropriate_status}}" # PASS|FAIL
+  
+  overall_gate_result: "{{overall_result}}" # PASS|FAIL - must pass both phases
 
 constitutional_compliance:
   required_reads_completed: "{{required_reads_completed}}" # true|false

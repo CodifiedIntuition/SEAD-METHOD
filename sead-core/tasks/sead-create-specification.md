@@ -52,11 +52,30 @@ To create constitutional specifications with SEAD catalog integration by combini
 2. Extract key concepts from description
    → Identify: actors, actions, data, constraints
    → SEAD Enhancement: Map concepts to catalog domains
-3. For each unclear aspect:
-   → Mark with [NEEDS CLARIFICATION: specific question]
+3. Enhanced Ambiguity Detection (Spec-Kit Integration):
+   → For each unclear aspect in extracted concepts:
+     • Mark with [NEEDS CLARIFICATION: specific question]
+     • Check if catalog patterns provide clarity before marking unclear
+     • Document assumptions requiring validation
+     • Update Progress: Ambiguity Detection Complete
+   → Example patterns to detect:
+     • Vague requirements: "user-friendly", "fast", "secure" 
+     • Undefined terms: "login system" without auth method specified
+     • Missing constraints: "retain user data" without retention period
+     • Integration unknowns: "payment system" without payment method details
    → SEAD Enhancement: Check if catalog patterns can resolve ambiguities
-4. Fill User Scenarios & Testing section
-   → If no clear user flow: ERROR "Cannot determine user scenarios"
+4. Enhanced User Scenario Generation (Spec-Kit Integration):
+   → Create Primary User Story: [main user journey in plain language]
+   → Generate Acceptance Scenarios using Given-When-Then format:
+     1. **Given** [initial state], **When** [user action], **Then** [expected outcome]
+     2. **Given** [boundary condition], **When** [action], **Then** [expected behavior]
+   → Include Edge Cases:
+     • What happens when [boundary condition]?
+     • How does system handle [error scenario]?
+   → Validate scenario completeness:
+     • If no clear user flow: ERROR "Cannot determine user scenarios"
+     • Each scenario must be testable and measurable
+   → Update Progress: User Scenarios Complete
    → SEAD Enhancement: Reference catalog test patterns where applicable
 5. Generate Functional Requirements
    → Each requirement must be testable
