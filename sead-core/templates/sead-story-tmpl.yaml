@@ -104,6 +104,46 @@ sections:
     editors: [sead-scrum-master, sead-pm]
     sead_enhancement: includes mode-specific validation criteria
 
+  - id: spec-kit-acceptance-scenarios
+    title: Given-When-Then Acceptance Scenarios (Spec-Kit Enhancement)
+    type: structured-list
+    structure: |
+      **Scenario {{scenario_number}}**: {{scenario_title}}
+      - **Given** {{precondition_or_initial_state}}
+      - **When** {{user_action_or_trigger}}
+      - **Then** {{expected_measurable_outcome}}
+      
+      **Edge Case {{edge_case_number}}**: {{edge_case_title}}
+      - **Given** {{boundary_condition}}
+      - **When** {{action_or_condition}}
+      - **Then** {{specific_expected_behavior}}
+    instruction: Transform acceptance criteria into testable Given-When-Then scenarios. Each scenario must be measurable - no vague outcomes like "works well" or "is user-friendly"
+    required: true
+    owner: sead-scrum-master
+    editors: [sead-scrum-master, sead-pm]
+    validation: business-language-appropriate
+
+  - id: business-language-validation
+    title: Business Language Validation (Spec-Kit Enhancement)
+    type: structured-text
+    template: |
+      **Stakeholder Readiness**: {{non_technical_stakeholder_friendly}}
+      
+      **Technical Details Removed**: 
+      {{#each removed_technical_details}}
+      - {{this}} → Moved to implementation plan
+      {{/each}}
+      
+      **Business Value Clarity**:
+      - **User Value**: {{clear_user_value}}
+      - **Business Outcomes**: {{measurable_business_outcomes}}
+      - **WHAT vs HOW Separation**: {{what_vs_how_properly_separated}}
+      
+      **Language Validation Status**: {{validation_status}}
+    instruction: Ensure story content is appropriate for non-technical stakeholders, with user needs (WHAT) clearly separated from implementation details (HOW)
+    required: true
+    owner: sead-scrum-master
+
   - id: sead-acceptance-criteria
     title: SEAD Catalog Compliance Criteria
     type: numbered-list

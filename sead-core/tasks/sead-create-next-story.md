@@ -174,9 +174,33 @@ To identify the next logical story based on project progress and epic definition
   - Catalog pattern integration tests
   - Cross-agent context preservation tests
 
-### 7. Context Preservation Setup
+### 7. Apply Spec-Kit Story Quality Enhancement (NEW)
 
-#### 7.1 Agent Handoff Preparation
+#### 7.1 Generate Given-When-Then Acceptance Scenarios
+- Transform acceptance criteria into testable Given-When-Then format:
+  → **Given** [precondition/context], **When** [user action], **Then** [expected outcome]
+  → Each scenario must be measurably testable
+  → No vague outcomes like "works well" or "is user-friendly"
+  → Include edge cases and error scenarios
+
+Example enhancement:
+- Before: "User can log in successfully"  
+- After: "**Given** user has valid credentials, **When** user enters email and password, **Then** system authenticates user and redirects to dashboard within 2 seconds"
+
+#### 7.2 Business Language Validation (Spec-Kit Integration)
+- Review story content for technical implementation details that don't belong:
+  → Remove: Database schemas, API endpoints, code architecture
+  → Keep: User value, business outcomes, measurable criteria
+  → Flag: Any HOW details that should be in implementation plan instead
+- Ensure stakeholder-appropriate language:
+  → Non-technical stakeholders can understand story value
+  → Business outcomes clearly articulated
+  → User needs (WHAT) separated from implementation approach (HOW)
+- Update Progress: Business Language Validation Complete
+
+### 8. Context Preservation Setup
+
+#### 8.1 Agent Handoff Preparation
 - **SEAD Enhancement**: Context Preservation Data:
   - Catalog component IDs and versions
   - Mode configuration and constraints
@@ -188,7 +212,7 @@ To identify the next logical story based on project progress and epic definition
   - Architecture pattern references
   - Implementation decision history
 
-#### 7.2 Validation and Quality Assurance Setup
+#### 8.2 Validation and Quality Assurance Setup
 - **QA Context**: Define catalog compliance validation requirements
 - **Review Criteria**: Include constraint adherence checkpoints
 - **SEAD Enhancement**: Progressive Validation Setup:
@@ -196,15 +220,15 @@ To identify the next logical story based on project progress and epic definition
   - Catalog pattern validation points
   - Context preservation verification
 
-### 8. Finalize Story with SEAD Compliance
+### 9. Finalize Story with SEAD Compliance
 
-#### 8.1 Final Story Validation
+#### 9.1 Final Story Validation
 - Verify all SEAD sections are complete
 - Validate catalog component references are accurate
 - Confirm mode constraints are properly specified
 - Check context preservation data is complete
 
-#### 8.2 Story Status and Handoff
+#### 9.2 Story Status and Handoff
 - Set initial status to "Draft" 
 - **SEAD Enhancement**: Include SEAD compliance readiness indicators
 - Prepare handoff notes for Developer Agent with:
