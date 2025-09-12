@@ -1,0 +1,599 @@
+# SEAD Pattern Extraction Report Template
+template:
+  id: pattern-extraction-report-template-v1
+  name: SEAD Pattern Extraction Report
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/pattern-extraction-report.md
+    title: "{{project_name}} Pattern Extraction Report"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  governance_validation: continuous
+
+workflow:
+  mode: constitutional_interactive
+  elicitation: pattern-extraction-workflow
+  catalog_validation: enabled
+  constraint_enforcement: progressive
+
+sections:
+  - id: constitutional-initialization
+    title: Constitutional Framework Initialization
+    instruction: |
+      Establish constitutional context for pattern extraction reporting:
+      1. Identify development mode and extraction quality requirements
+      2. Load constitutional framework for extraction governance
+      3. Configure catalog integration validation requirements
+      4. Establish context preservation for extraction handoffs
+      5. Set quality gates appropriate for extracted patterns
+    sections:
+      - id: extraction-context
+        title: Extraction Context and Constitutional Framework
+        template: |
+          **Extraction Date:** {{extraction_date}}
+          **Development Mode:** {{development_mode}}
+          **Constitutional Framework:** {{constitutional_version}}
+          **Extraction Agent:** {{extraction_agent}}
+          **Quality Requirements:** {{quality_standards}}
+          **Catalog Integration Level:** {{catalog_integration_level}}
+          **Pattern Source:** {{pattern_source_description}}
+
+  - id: executive-summary
+    title: Executive Summary
+    instruction: |
+      Provide comprehensive summary of pattern extraction results:
+      1. Summarize extraction scope and methodology applied
+      2. Highlight key patterns extracted and quality achievements
+      3. Present catalog integration readiness and value proposition
+      4. Assess constitutional compliance and governance alignment
+      5. Recommend next steps for catalog integration
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: extraction-overview
+        title: Extraction Overview
+        template: |
+          **Extraction Scope:**
+          - **Source Material:** {{source_description}}
+          - **Extraction Method:** {{extraction_methodology}}
+          - **Timeline:** {{extraction_timeline}}
+          - **Quality Focus:** {{quality_focus_areas}}
+          
+          **Key Results:**
+          - **Patterns Extracted:** {{total_patterns_extracted}}
+          - **Quality Distribution:** {{quality_tier_distribution}}
+          - **Catalog Domains Covered:** {{domains_covered}}
+          - **Constitutional Compliance:** {{compliance_achievement}}
+
+      - id: value-proposition
+        title: Value Proposition and Impact
+        template: |
+          **Business Value:**
+          - **Reusability Potential:** {{reusability_assessment}}
+          - **Development Acceleration:** {{development_impact}}
+          - **Quality Improvement:** {{quality_improvements}}
+          - **Knowledge Preservation:** {{knowledge_capture}}
+          
+          **Catalog Enhancement:**
+          - **New Domains Added:** {{new_domains_count}}
+          - **Existing Domains Enhanced:** {{enhanced_domains_count}}
+          - **Pattern Coverage Increase:** {{coverage_increase}}%
+          - **Constitutional Strengthening:** {{constitutional_improvements}}
+
+  - id: extraction-methodology
+    title: Extraction Methodology and Approach
+    instruction: |
+      Document the methodology and approach used for pattern extraction:
+      1. Describe extraction strategy and techniques applied
+      2. Document quality assessment criteria and validation approach
+      3. Explain constitutional compliance integration throughout process
+      4. Detail catalog integration planning and validation
+      5. Outline stakeholder involvement and feedback incorporation
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: extraction-strategy
+        title: Extraction Strategy
+        template: |
+          **Primary Strategy:** {{extraction_strategy_name}}
+          **Constitutional Alignment:** {{constitutional_strategy_rationale}}
+          
+          **Strategy Components:**
+          - **Pattern Identification:** {{identification_approach}}
+          - **Quality Assessment:** {{quality_assessment_method}}
+          - **Documentation Generation:** {{documentation_approach}}
+          - **Validation Process:** {{validation_methodology}}
+          - **Constitutional Integration:** {{constitutional_integration_method}}
+
+      - id: quality-criteria
+        title: Quality Assessment Criteria
+        template: |
+          **Quality Framework:** {{quality_framework_name}}
+          **Mode-Specific Standards:** {{mode_quality_adaptations}}
+          
+          **Tier Classification Criteria:**
+          - **Tier 1 (Foundational):** {{tier1_criteria}}
+          - **Tier 2 (Specialized):** {{tier2_criteria}}
+          - **Tier 3 (Contextual):** {{tier3_criteria}}
+          - **Tier 4 (Experimental):** {{tier4_criteria}}
+          
+          **Constitutional Requirements:**
+          - **Governance Compliance:** {{governance_requirements}}
+          - **Context Preservation:** {{context_requirements}}
+          - **Validation Standards:** {{validation_requirements}}
+
+      - id: stakeholder-involvement
+        title: Stakeholder Involvement
+        template: |
+          **Review Process:**
+          - **Domain Experts:** {{expert_involvement}}
+          - **Architecture Review:** {{architecture_review_process}}
+          - **Quality Assurance:** {{qa_involvement}}
+          - **Constitutional Validation:** {{constitutional_review_process}}
+          
+          **Feedback Integration:**
+          - **Feedback Cycles:** {{feedback_cycle_count}}
+          - **Major Adjustments:** {{major_adjustments_made}}
+          - **Quality Improvements:** {{quality_improvements_from_feedback}}
+
+  - id: extracted-patterns-summary
+    title: Extracted Patterns Summary
+    instruction: |
+      Provide comprehensive overview of all extracted patterns:
+      1. Organize patterns by catalog domain and quality tier
+      2. Highlight most valuable and reusable patterns
+      3. Document constitutional compliance status for each pattern
+      4. Assess catalog integration readiness and requirements
+      5. Identify patterns requiring additional development or validation
+    elicit: true
+    catalog_validation: required
+    sections:
+      - id: patterns-by-domain
+        title: Patterns by Catalog Domain
+        repeatable: true
+        template: |
+          **Domain:** {{domain_name}}
+          **Total Patterns:** {{domain_pattern_count}}
+          **Quality Distribution:** Tier 1: {{tier1_count}}, Tier 2: {{tier2_count}}, Tier 3: {{tier3_count}}, Tier 4: {{tier4_count}}
+          
+          **Top Patterns:**
+          {{#each top_patterns}}
+          - **{{pattern_name}}**
+            - **Quality Tier:** {{quality_tier}}
+            - **Reusability Score:** {{reusability_score}}/10
+            - **Constitutional Compliance:** {{compliance_status}}
+            - **Integration Readiness:** {{integration_readiness}}
+            - **Value Proposition:** {{value_description}}
+          {{/each}}
+          
+          **Domain Integration Status:**
+          - **Existing Patterns Enhanced:** {{enhanced_count}}
+          - **New Patterns Added:** {{new_count}}
+          - **Integration Complexity:** {{integration_complexity}}
+          - **Constitutional Alignment:** {{constitutional_alignment}}
+
+      - id: quality-distribution
+        title: Quality Distribution Analysis
+        type: table
+        columns: [Quality Tier, Pattern Count, Percentage, Integration Priority, Constitutional Compliance Rate]
+        instruction: |
+          Analyze the distribution of extracted patterns across quality tiers:
+          - Show concentration of high-quality vs experimental patterns
+          - Highlight constitutional compliance achievements by tier
+          - Indicate integration priorities based on quality and value
+          - Identify patterns needing additional development
+
+      - id: high-value-patterns
+        title: High-Value Pattern Highlights
+        repeatable: true
+        template: |
+          **Pattern Name:** {{pattern_name}}
+          **Catalog Domain:** {{catalog_domain}}
+          **Quality Tier:** {{quality_tier}}
+          **Reusability Score:** {{reusability_score}}/10
+          
+          **Value Proposition:**
+          {{pattern_value_description}}
+          
+          **Technical Summary:**
+          - **Technology Stack:** {{pattern_technologies}}
+          - **Use Cases:** {{primary_use_cases}}
+          - **Dependencies:** {{pattern_dependencies}}
+          - **Performance Characteristics:** {{performance_notes}}
+          
+          **Constitutional Compliance:**
+          - **Governance Alignment:** {{governance_compliance}}
+          - **Context Preservation:** {{context_support}}
+          - **Validation Requirements:** {{validation_needs}}
+          
+          **Integration Readiness:**
+          - **Documentation Status:** {{documentation_completeness}}
+          - **Test Coverage:** {{test_coverage}}%
+          - **Example Availability:** {{example_count}} examples
+          - **Integration Effort:** {{integration_effort_estimate}}
+
+  - id: detailed-pattern-analysis
+    title: Detailed Pattern Analysis
+    instruction: |
+      Provide in-depth analysis of extracted patterns with technical details:
+      1. Document pattern implementation details and variations
+      2. Analyze pattern relationships and dependencies
+      3. Assess integration requirements and compatibility
+      4. Evaluate constitutional compliance and governance alignment
+      5. Identify optimization opportunities and evolution potential
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: pattern-relationships
+        title: Pattern Relationships and Dependencies
+        template: |
+          **Relationship Analysis:**
+          - **Foundational Patterns:** {{foundational_pattern_count}} patterns supporting {{dependent_pattern_count}} others
+          - **Independent Patterns:** {{independent_pattern_count}} patterns with no dependencies
+          - **Complex Dependencies:** {{complex_dependency_count}} patterns with multiple dependencies
+          
+          **Dependency Graph Highlights:**
+          {{#each key_dependencies}}
+          - **{{source_pattern}}** → **{{target_pattern}}** ({{relationship_type}})
+          {{/each}}
+          
+          **Integration Sequence:**
+          1. **Foundation Phase:** {{foundation_patterns}}
+          2. **Core Patterns:** {{core_patterns}}
+          3. **Specialized Patterns:** {{specialized_patterns}}
+          4. **Context-Specific Patterns:** {{contextual_patterns}}
+
+      - id: implementation-variations
+        title: Implementation Variations and Adaptability
+        repeatable: true
+        template: |
+          **Pattern:** {{pattern_name}}
+          
+          **Variations Identified:**
+          {{#each variations}}
+          - **{{variation_name}}:** {{variation_description}}
+            - **Use Case:** {{variation_use_case}}
+            - **Complexity:** {{variation_complexity}}
+            - **Constitutional Impact:** {{constitutional_considerations}}
+          {{/each}}
+          
+          **Adaptability Assessment:**
+          - **Flexibility Score:** {{flexibility_score}}/10
+          - **Customization Points:** {{customization_points}}
+          - **Extension Mechanisms:** {{extension_capabilities}}
+          - **Constitutional Constraints:** {{constitutional_limitations}}
+
+      - id: technical-debt-analysis
+        title: Technical Debt and Improvement Opportunities
+        template: |
+          **Current Technical Debt:**
+          - **Documentation Gaps:** {{documentation_debt}}
+          - **Test Coverage Gaps:** {{testing_debt}}
+          - **Performance Optimizations:** {{performance_debt}}
+          - **Constitutional Compliance Gaps:** {{compliance_debt}}
+          
+          **Improvement Roadmap:**
+          - **Immediate (0-1 month):** {{immediate_improvements}}
+          - **Short-term (1-3 months):** {{shortterm_improvements}}
+          - **Medium-term (3-6 months):** {{mediumterm_improvements}}
+          - **Long-term (6+ months):** {{longterm_improvements}}
+
+  - id: catalog-integration-plan
+    title: Catalog Integration Plan
+    instruction: |
+      Detail the plan for integrating extracted patterns into the catalog:
+      1. Plan integration sequence and phasing approach
+      2. Identify catalog structure modifications required
+      3. Design validation and quality assurance checkpoints
+      4. Plan team adoption and change management approach
+      5. Establish monitoring and continuous improvement processes
+    elicit: true
+    catalog_integration: mandatory
+    sections:
+      - id: integration-sequence
+        title: Integration Sequence and Phasing
+        template: |
+          **Integration Strategy:** {{integration_strategy_name}}
+          **Constitutional Compliance:** {{constitutional_integration_approach}}
+          
+          **Phase Plan:**
+          {{#each integration_phases}}
+          **Phase {{phase_number}}: {{phase_name}}**
+          - **Duration:** {{phase_duration}}
+          - **Patterns Included:** {{phase_pattern_count}} patterns
+          - **Focus Areas:** {{phase_focus}}
+          - **Success Criteria:** {{phase_success_criteria}}
+          - **Constitutional Gates:** {{constitutional_checkpoints}}
+          {{/each}}
+
+      - id: catalog-structure-modifications
+        title: Required Catalog Structure Modifications
+        template: |
+          **New Domains Required:**
+          {{#each new_domains}}
+          - **{{domain_name}}:** {{domain_description}} ({{pattern_count}} patterns)
+          {{/each}}
+          
+          **Existing Domain Enhancements:**
+          {{#each enhanced_domains}}
+          - **{{domain_name}}:** {{enhancement_description}} (+{{new_pattern_count}} patterns)
+          {{/each}}
+          
+          **Structural Changes:**
+          - **Directory Additions:** {{new_directories}}
+          - **Metadata Updates:** {{metadata_changes}}
+          - **Cross-Reference Updates:** {{cross_reference_updates}}
+          - **Constitutional Integration:** {{constitutional_structural_changes}}
+
+      - id: quality-assurance-plan
+        title: Quality Assurance and Validation Plan
+        template: |
+          **QA Strategy:** {{qa_strategy_name}}
+          **Constitutional Validation:** {{constitutional_qa_approach}}
+          
+          **Validation Checkpoints:**
+          {{#each qa_checkpoints}}
+          - **{{checkpoint_name}}:** {{checkpoint_criteria}} ({{checkpoint_timing}})
+          {{/each}}
+          
+          **Testing Requirements:**
+          - **Pattern Testing:** {{pattern_testing_requirements}}
+          - **Integration Testing:** {{integration_testing_approach}}
+          - **Constitutional Compliance Testing:** {{compliance_testing_plan}}
+          - **Performance Testing:** {{performance_testing_scope}}
+
+  - id: team-adoption-strategy
+    title: Team Adoption Strategy
+    instruction: |
+      Define comprehensive strategy for team adoption of extracted patterns:
+      1. Plan training and knowledge transfer approach
+      2. Design support resources and documentation
+      3. Establish feedback mechanisms and continuous improvement
+      4. Plan change management and adoption monitoring
+      5. Design incentives and recognition for pattern adoption
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: training-plan
+        title: Training and Knowledge Transfer
+        template: |
+          **Training Strategy:** {{training_strategy_name}}
+          **Constitutional Education:** {{constitutional_training_approach}}
+          
+          **Training Components:**
+          - **Pattern Overview:** {{overview_training}} ({{overview_duration}})
+          - **Hands-on Workshops:** {{workshop_count}} sessions ({{workshop_duration}} each)
+          - **Constitutional Framework:** {{constitutional_training}} ({{constitutional_duration}})
+          - **Best Practices:** {{best_practices_training}} ({{practices_duration}})
+          
+          **Training Timeline:**
+          - **Early Adopters:** {{early_adopter_training_timeline}}
+          - **Team Rollout:** {{team_training_timeline}}
+          - **Ongoing Education:** {{ongoing_training_schedule}}
+
+      - id: support-resources
+        title: Support Resources and Documentation
+        template: |
+          **Documentation Suite:**
+          - **Pattern Catalog:** {{catalog_documentation_status}}
+          - **Usage Guidelines:** {{guidelines_documentation_status}}
+          - **Integration Examples:** {{examples_documentation_status}}
+          - **Troubleshooting Guides:** {{troubleshooting_documentation_status}}
+          - **Constitutional Compliance Guides:** {{constitutional_documentation_status}}
+          
+          **Support Mechanisms:**
+          - **Office Hours:** {{office_hours_schedule}}
+          - **Slack/Teams Channel:** {{support_channel_details}}
+          - **Expert Network:** {{expert_network_structure}}
+          - **Constitutional Guidance:** {{constitutional_support_approach}}
+
+      - id: adoption-monitoring
+        title: Adoption Monitoring and Metrics
+        template: |
+          **Key Metrics:**
+          - **Pattern Usage Rate:** {{usage_tracking_method}}
+          - **Adoption Velocity:** {{adoption_velocity_measurement}}
+          - **Quality Impact:** {{quality_impact_metrics}}
+          - **Constitutional Compliance:** {{compliance_monitoring_approach}}
+          
+          **Monitoring Tools:**
+          - **Usage Analytics:** {{analytics_tooling}}
+          - **Feedback Collection:** {{feedback_mechanisms}}
+          - **Quality Monitoring:** {{quality_monitoring_tools}}
+          - **Constitutional Tracking:** {{constitutional_monitoring_tools}}
+
+  - id: constitutional-compliance-report
+    title: Constitutional Compliance Assessment
+    instruction: |
+      Provide comprehensive constitutional compliance assessment:
+      1. Evaluate compliance with SEAD governance framework
+      2. Assess context preservation capabilities across patterns
+      3. Validate constraint enforcement and quality gate implementation
+      4. Review audit trail and governance integration completeness
+      5. Identify compliance gaps and remediation requirements
+    constitutional_validation: mandatory
+    sections:
+      - id: compliance-summary
+        title: Constitutional Compliance Summary
+        template: |
+          **Overall Compliance Score:** {{overall_compliance_score}}/100
+          **Framework Version:** {{constitutional_framework_version}}
+          **Assessment Date:** {{compliance_assessment_date}}
+          **Assessor:** {{compliance_assessor}}
+          
+          **Compliance by Area:**
+          - **Governance Integration:** {{governance_compliance}}%
+          - **Context Preservation:** {{context_preservation_compliance}}%
+          - **Quality Gates:** {{quality_gates_compliance}}%
+          - **Audit Trail:** {{audit_trail_compliance}}%
+          - **Constraint Enforcement:** {{constraint_enforcement_compliance}}%
+
+      - id: compliance-details
+        title: Detailed Compliance Assessment
+        repeatable: true
+        template: |
+          **Compliance Area:** {{compliance_area}}
+          **Score:** {{area_score}}/100
+          **Status:** {{compliance_status}}
+          
+          **Requirements Met:**
+          {{#each met_requirements}}
+          - {{requirement_description}}
+          {{/each}}
+          
+          **Gaps Identified:**
+          {{#each compliance_gaps}}
+          - **Gap:** {{gap_description}}
+          - **Impact:** {{gap_impact}}
+          - **Remediation:** {{remediation_approach}}
+          - **Timeline:** {{remediation_timeline}}
+          {{/each}}
+
+      - id: audit-trail
+        title: Audit Trail and Documentation
+        template: |
+          **Audit Trail Completeness:** {{audit_completeness}}%
+          **Documentation Coverage:** {{documentation_coverage}}%
+          
+          **Audit Components:**
+          - **Extraction Process:** {{extraction_audit_status}}
+          - **Quality Validation:** {{quality_audit_status}}
+          - **Pattern Verification:** {{pattern_audit_status}}
+          - **Integration Planning:** {{integration_audit_status}}
+          
+          **Governance Documentation:**
+          - **Decision Log:** {{decision_log_status}}
+          - **Approval Records:** {{approval_records_status}}
+          - **Change Management:** {{change_management_status}}
+          - **Constitutional Validation:** {{constitutional_validation_records}}
+
+  - id: recommendations-and-next-steps
+    title: Recommendations and Next Steps
+    instruction: |
+      Provide comprehensive recommendations and next steps:
+      1. Synthesize extraction results into strategic recommendations
+      2. Prioritize integration activities based on value and effort
+      3. Define immediate actions with clear ownership and timelines
+      4. Plan long-term pattern evolution and catalog enhancement
+      5. Establish success metrics and monitoring approach
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: strategic-recommendations
+        title: Strategic Recommendations
+        repeatable: true
+        template: |
+          **Recommendation:** {{recommendation_title}}
+          **Priority:** {{recommendation_priority}} (Critical/High/Medium/Low)
+          **Category:** {{recommendation_category}}
+          
+          **Rationale:**
+          {{recommendation_rationale}}
+          
+          **Implementation:**
+          - **Approach:** {{implementation_approach}}
+          - **Timeline:** {{implementation_timeline}}
+          - **Resources:** {{resource_requirements}}
+          - **Constitutional Considerations:** {{constitutional_implications}}
+          - **Success Metrics:** {{success_measurements}}
+
+      - id: immediate-next-steps
+        title: Immediate Next Steps (0-30 days)
+        type: table
+        columns: [Action, Responsible Party, Deliverable, Timeline, Dependencies, Constitutional Requirements]
+        instruction: |
+          Define specific actions for immediate execution:
+          - Focus on high-impact activities that enable broader adoption
+          - Establish foundation for long-term catalog integration
+          - Address critical constitutional compliance requirements
+          - Set up monitoring and feedback mechanisms
+
+      - id: long-term-evolution
+        title: Long-term Pattern Evolution Plan
+        template: |
+          **Evolution Strategy:** {{evolution_strategy_name}}
+          **Constitutional Framework:** {{constitutional_evolution_approach}}
+          
+          **Evolution Roadmap:**
+          - **Quarter 1:** {{q1_evolution_focus}}
+          - **Quarter 2:** {{q2_evolution_focus}}
+          - **Quarter 3:** {{q3_evolution_focus}}
+          - **Quarter 4:** {{q4_evolution_focus}}
+          
+          **Continuous Improvement:**
+          - **Feedback Integration:** {{feedback_integration_plan}}
+          - **Quality Enhancement:** {{quality_enhancement_plan}}
+          - **Pattern Retirement:** {{pattern_retirement_criteria}}
+          - **Constitutional Updates:** {{constitutional_update_plan}}
+
+  - id: appendices
+    title: Appendices and Supporting Data
+    instruction: |
+      Include comprehensive supporting data and detailed technical information:
+      1. Pattern implementation examples and code samples
+      2. Detailed metrics and analysis data
+      3. Tool outputs and extraction artifacts
+      4. Constitutional compliance documentation
+      5. Stakeholder feedback and review comments
+    sections:
+      - id: pattern-examples
+        title: Pattern Implementation Examples
+        type: code
+        language: typescript
+        repeatable: true
+        template: |
+          // Pattern: {{pattern_name}}
+          // Domain: {{catalog_domain}}
+          // Quality Tier: {{quality_tier}}
+          // Constitutional Compliance: {{compliance_status}}
+          
+          {{pattern_code_example}}
+          
+          // Usage Example:
+          {{pattern_usage_example}}
+          
+          // Constitutional Notes:
+          // {{constitutional_notes}}
+
+      - id: extraction-metrics
+        title: Detailed Extraction Metrics
+        template: |
+          **Source Analysis Metrics:**
+          - **Files Analyzed:** {{files_analyzed_count}}
+          - **Lines of Code Reviewed:** {{loc_reviewed}}
+          - **Patterns Identified:** {{patterns_identified}}
+          - **Patterns Extracted:** {{patterns_extracted}}
+          - **Patterns Validated:** {{patterns_validated}}
+          
+          **Quality Metrics:**
+          - **Documentation Coverage:** {{documentation_coverage}}%
+          - **Test Coverage:** {{test_coverage}}%
+          - **Example Coverage:** {{example_coverage}}%
+          - **Constitutional Compliance:** {{constitutional_compliance}}%
+          
+          **Effort Metrics:**
+          - **Extraction Time:** {{extraction_hours}} hours
+          - **Validation Time:** {{validation_hours}} hours
+          - **Documentation Time:** {{documentation_hours}} hours
+          - **Total Effort:** {{total_effort_hours}} hours
+
+      - id: constitutional-framework-details
+        title: Constitutional Framework Integration Details
+        template: |
+          **Framework Integration:**
+          - **Version:** {{constitutional_framework_version}}
+          - **Integration Date:** {{integration_date}}
+          - **Integration Method:** {{integration_methodology}}
+          - **Validation Approach:** {{validation_methodology}}
+          
+          **Compliance Artifacts:**
+          - **Compliance Checklist:** {{compliance_checklist_status}}
+          - **Audit Trail:** {{audit_trail_location}}
+          - **Validation Reports:** {{validation_reports_location}}
+          - **Governance Documentation:** {{governance_docs_location}}

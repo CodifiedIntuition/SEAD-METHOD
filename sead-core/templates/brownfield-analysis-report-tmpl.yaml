@@ -1,0 +1,493 @@
+# SEAD Brownfield Analysis Report Template
+template:
+  id: brownfield-analysis-report-template-v1
+  name: SEAD Brownfield Analysis Report
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/brownfield-analysis-report.md
+    title: "{{project_name}} Brownfield Analysis Report"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  governance_validation: continuous
+
+workflow:
+  mode: constitutional_interactive
+  elicitation: brownfield-analysis-framework
+  catalog_validation: enabled
+  constraint_enforcement: progressive
+
+sections:
+  - id: constitutional-initialization
+    title: Constitutional Framework Initialization
+    instruction: |
+      Establish constitutional context for brownfield analysis:
+      1. Identify current development mode and applicable constraints
+      2. Load constitutional framework for analysis governance
+      3. Configure catalog integration and validation requirements
+      4. Establish quality gates appropriate for brownfield context
+      5. Prepare context preservation for analysis handoffs
+    sections:
+      - id: analysis-context
+        title: Analysis Context and Constitutional Framework
+        template: |
+          **Analysis Date:** {{analysis_date}}
+          **Development Mode:** {{development_mode}}
+          **Constitutional Framework:** {{constitutional_version}}
+          **Analyzer Agent:** {{analyzer_agent}}
+          **Quality Requirements:** {{quality_standards}}
+          **Catalog Integration Level:** {{catalog_integration_level}}
+          **Context Preservation:** {{context_strategy}}
+
+  - id: executive-summary
+    title: Executive Summary
+    instruction: |
+      Provide comprehensive executive summary of brownfield analysis:
+      1. Summarize key findings and recommendations
+      2. Highlight critical pattern extraction opportunities
+      3. Assess constitutional compliance readiness
+      4. Identify major risks and mitigation strategies
+      5. Present overall catalog generation feasibility
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: key-findings
+        title: Key Findings
+        template: |
+          **Codebase Overview:**
+          - **Size and Complexity:** {{codebase_metrics}}
+          - **Architecture Quality:** {{architecture_assessment}}
+          - **Pattern Potential:** {{pattern_potential}}
+          - **Technical Debt:** {{technical_debt_assessment}}
+          
+          **Catalog Generation Potential:**
+          - **Pattern Count:** {{estimated_pattern_count}}
+          - **Quality Distribution:** {{quality_distribution}}
+          - **Extraction Complexity:** {{extraction_complexity}}
+          - **Constitutional Alignment:** {{constitutional_readiness}}
+
+      - id: recommendations
+        title: Executive Recommendations
+        template: |
+          **Primary Recommendations:**
+          1. **{{recommendation_1}}** - Priority: {{priority_1}} - Timeline: {{timeline_1}}
+          2. **{{recommendation_2}}** - Priority: {{priority_2}} - Timeline: {{timeline_2}}
+          3. **{{recommendation_3}}** - Priority: {{priority_3}} - Timeline: {{timeline_3}}
+          
+          **Constitutional Compliance Actions:**
+          - **Immediate:** {{immediate_constitutional_actions}}
+          - **Short-term:** {{shortterm_constitutional_actions}}
+          - **Long-term:** {{longterm_constitutional_actions}}
+
+  - id: codebase-assessment
+    title: Comprehensive Codebase Assessment
+    instruction: |
+      Conduct detailed analysis of existing codebase with catalog awareness:
+      1. Analyze architecture patterns and structural quality
+      2. Assess code organization and modularity
+      3. Evaluate existing patterns for catalog extraction potential
+      4. Review documentation and maintainability
+      5. Identify constitutional compliance gaps and opportunities
+    elicit: true
+    catalog_validation: required
+    sections:
+      - id: architecture-analysis
+        title: Architecture Analysis
+        template: |
+          **Architectural Style:** {{architecture_style}}
+          **Constitutional Alignment:** {{constitutional_architecture_assessment}}
+          
+          **Component Structure:**
+          - **Modularity Score:** {{modularity_score}}/10
+          - **Coupling Assessment:** {{coupling_level}}
+          - **Cohesion Quality:** {{cohesion_assessment}}
+          - **Separation of Concerns:** {{separation_quality}}
+          
+          **Catalog Domain Mapping:**
+          {{#each catalog_domains}}
+          - **{{domain_name}}:** {{current_patterns}} patterns (Quality: {{quality_level}})
+          {{/each}}
+
+      - id: code-quality-metrics
+        title: Code Quality Metrics
+        type: table
+        columns: [Metric, Current Value, Catalog Standard, Gap Analysis, Remediation Effort]
+        instruction: |
+          Assess code quality against catalog standards:
+          - Compare current metrics to catalog quality requirements
+          - Identify gaps requiring remediation for catalog integration
+          - Estimate effort needed to meet constitutional standards
+          - Prioritize improvements based on catalog domain importance
+
+      - id: technology-stack-assessment
+        title: Technology Stack Assessment
+        template: |
+          **Current Technology Stack:**
+          {{#each technologies}}
+          - **{{category}}:** {{technology}} {{version}} (Catalog Support: {{catalog_compatibility}})
+          {{/each}}
+          
+          **Catalog Integration Assessment:**
+          - **Compatibility Score:** {{compatibility_score}}/10
+          - **Migration Requirements:** {{migration_needs}}
+          - **Constitutional Compliance:** {{compliance_level}}
+          - **Modernization Opportunities:** {{modernization_potential}}
+
+  - id: pattern-identification
+    title: Pattern Identification and Classification
+    instruction: |
+      Identify and classify patterns with catalog integration potential:
+      1. Systematically identify recurring patterns across codebase
+      2. Classify patterns by quality tier and reusability potential
+      3. Assess constitutional compliance of identified patterns
+      4. Map patterns to target catalog domains
+      5. Prioritize patterns for extraction based on value and effort
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: identified-patterns
+        title: Identified Patterns by Domain
+        repeatable: true
+        template: |
+          **Catalog Domain:** {{domain_name}}
+          
+          **Patterns Identified:**
+          {{#each patterns}}
+          - **{{pattern_name}}**
+            - **Quality Tier:** {{quality_tier}} (1-4)
+            - **Reusability:** {{reusability_score}}/10
+            - **Complexity:** {{complexity_level}}
+            - **Constitutional Compliance:** {{compliance_status}}
+            - **Extraction Effort:** {{extraction_effort}}
+            - **Usage Frequency:** {{usage_count}} occurrences
+            - **Documentation Status:** {{documentation_level}}
+          {{/each}}
+
+      - id: pattern-quality-distribution
+        title: Pattern Quality Distribution
+        type: table
+        columns: [Quality Tier, Pattern Count, Percentage, Extraction Priority, Constitutional Requirements]
+        instruction: |
+          Break down identified patterns by quality tier:
+          - Tier 1 (Foundational): Battle-tested, well-documented patterns
+          - Tier 2 (Specialized): Domain-specific, proven patterns
+          - Tier 3 (Contextual): Situational patterns with specific use cases
+          - Tier 4 (Experimental): Emerging patterns needing validation
+
+      - id: anti-patterns
+        title: Anti-Patterns and Issues
+        repeatable: true
+        template: |
+          **Anti-Pattern:** {{antipattern_name}}
+          **Category:** {{antipattern_category}}
+          **Frequency:** {{occurrence_count}} instances
+          **Impact:** {{impact_assessment}}
+          **Constitutional Violations:** {{constitutional_issues}}
+          **Remediation Strategy:** {{remediation_approach}}
+          **Priority:** {{remediation_priority}}
+
+  - id: extraction-feasibility
+    title: Pattern Extraction Feasibility Analysis
+    instruction: |
+      Assess feasibility of pattern extraction with constitutional considerations:
+      1. Analyze technical complexity and extraction effort required
+      2. Evaluate resource requirements and timeline estimates
+      3. Assess constitutional compliance challenges and solutions
+      4. Identify dependencies and sequencing constraints
+      5. Evaluate risk factors and mitigation strategies
+    elicit: true
+    constitutional_validation: critical
+    sections:
+      - id: extraction-complexity
+        title: Extraction Complexity Assessment
+        template: |
+          **Overall Complexity:** {{overall_complexity}} (Low/Medium/High/Critical)
+          **Constitutional Compliance:** {{constitutional_complexity}}
+          
+          **Complexity Factors:**
+          - **Code Entanglement:** {{entanglement_level}}
+          - **Documentation Gaps:** {{documentation_gaps}}
+          - **Testing Coverage:** {{test_coverage}}%
+          - **Dependencies:** {{dependency_complexity}}
+          - **Legacy Code:** {{legacy_code_percentage}}%
+
+      - id: resource-requirements
+        title: Resource Requirements
+        template: |
+          **Estimated Effort:**
+          - **Pattern Extraction:** {{extraction_effort}} person-weeks
+          - **Documentation:** {{documentation_effort}} person-weeks
+          - **Testing:** {{testing_effort}} person-weeks
+          - **Constitutional Validation:** {{validation_effort}} person-weeks
+          - **Total:** {{total_effort}} person-weeks
+          
+          **Skill Requirements:**
+          - **Domain Expertise:** {{domain_expertise_needs}}
+          - **Technical Skills:** {{technical_skills_needs}}
+          - **SEAD Methodology:** {{sead_expertise_level}}
+          - **Constitutional Framework:** {{constitutional_expertise_needs}}
+
+      - id: risk-assessment
+        title: Risk Assessment
+        repeatable: true
+        template: |
+          **Risk:** {{risk_description}}
+          **Category:** {{risk_category}}
+          **Probability:** {{risk_probability}} (Low/Medium/High)
+          **Impact:** {{risk_impact}} (Low/Medium/High/Critical)
+          **Constitutional Implications:** {{constitutional_risk}}
+          **Mitigation Strategy:** {{mitigation_approach}}
+          **Contingency Plan:** {{contingency_strategy}}
+
+  - id: catalog-integration-analysis
+    title: Catalog Integration Analysis
+    instruction: |
+      Analyze integration requirements and opportunities:
+      1. Assess compatibility with existing catalog structure
+      2. Identify integration points and dependencies
+      3. Plan catalog domain enhancements and additions
+      4. Evaluate constitutional compliance integration requirements
+      5. Design integration strategy minimizing disruption
+    elicit: true
+    catalog_integration: mandatory
+    sections:
+      - id: existing-catalog-compatibility
+        title: Existing Catalog Compatibility
+        template: |
+          **Compatibility Assessment:**
+          {{#each catalog_domains}}
+          - **{{domain_name}}:**
+            - **Existing Patterns:** {{existing_count}}
+            - **New Patterns:** {{new_patterns_count}}
+            - **Compatibility:** {{compatibility_level}}
+            - **Integration Effort:** {{integration_effort}}
+            - **Constitutional Alignment:** {{constitutional_compatibility}}
+          {{/each}}
+
+      - id: integration-strategy
+        title: Integration Strategy
+        template: |
+          **Integration Approach:** {{integration_methodology}}
+          **Constitutional Requirements:** {{constitutional_integration_needs}}
+          
+          **Integration Phases:**
+          1. **Preparation:** {{prep_activities}} ({{prep_timeline}})
+          2. **Pilot Integration:** {{pilot_scope}} ({{pilot_timeline}})
+          3. **Incremental Rollout:** {{rollout_strategy}} ({{rollout_timeline}})
+          4. **Full Integration:** {{full_integration_scope}} ({{full_timeline}})
+          
+          **Quality Gates:**
+          {{#each quality_gates}}
+          - **{{gate_name}}:** {{gate_criteria}} ({{gate_timing}})
+          {{/each}}
+
+      - id: catalog-enhancement-opportunities
+        title: Catalog Enhancement Opportunities
+        repeatable: true
+        template: |
+          **Enhancement:** {{enhancement_description}}
+          **Target Domain:** {{target_domain}}
+          **Value Proposition:** {{value_description}}
+          **Implementation Effort:** {{implementation_effort}}
+          **Constitutional Benefits:** {{constitutional_advantages}}
+          **Timeline:** {{enhancement_timeline}}
+          **Dependencies:** {{enhancement_dependencies}}
+
+  - id: modernization-roadmap
+    title: Modernization and Improvement Roadmap
+    instruction: |
+      Develop comprehensive roadmap for codebase modernization:
+      1. Prioritize improvements based on catalog integration value
+      2. Plan constitutional compliance enhancements
+      3. Design phased approach minimizing business disruption
+      4. Identify quick wins and long-term strategic improvements
+      5. Establish success metrics and monitoring approach
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: improvement-priorities
+        title: Improvement Priorities
+        type: table
+        columns: [Priority, Improvement, Catalog Impact, Constitutional Benefits, Effort, Timeline]
+        instruction: |
+          Prioritize improvements based on:
+          - Catalog integration value and pattern quality impact
+          - Constitutional compliance enhancement potential
+          - Resource requirements and implementation complexity
+          - Business value and risk reduction benefits
+
+      - id: phased-roadmap
+        title: Phased Modernization Roadmap
+        repeatable: true
+        template: |
+          **Phase {{phase_number}}: {{phase_name}}**
+          **Duration:** {{phase_duration}}
+          **Objectives:** {{phase_objectives}}
+          
+          **Key Activities:**
+          {{#each activities}}
+          - {{activity_name}} ({{activity_timeline}})
+          {{/each}}
+          
+          **Deliverables:**
+          - {{deliverable_1}}
+          - {{deliverable_2}}
+          - {{deliverable_3}}
+          
+          **Success Criteria:**
+          - {{success_criterion_1}}
+          - {{success_criterion_2}}
+          - {{constitutional_compliance_criteria}}
+          
+          **Dependencies:** {{phase_dependencies}}
+          **Risks:** {{phase_risks}}
+
+  - id: constitutional-compliance-assessment
+    title: Constitutional Compliance Assessment
+    instruction: |
+      Assess constitutional compliance readiness and requirements:
+      1. Evaluate current codebase against constitutional principles
+      2. Identify compliance gaps and remediation requirements
+      3. Plan constitutional framework integration strategy
+      4. Design governance validation and monitoring approach
+      5. Establish compliance improvement roadmap
+    constitutional_validation: mandatory
+    sections:
+      - id: compliance-gaps
+        title: Constitutional Compliance Gaps
+        repeatable: true
+        template: |
+          **Compliance Area:** {{compliance_area}}
+          **Current State:** {{current_compliance_level}}
+          **Required State:** {{required_compliance_level}}
+          **Gap Severity:** {{gap_severity}} (Low/Medium/High/Critical)
+          **Impact Assessment:** {{gap_impact}}
+          **Remediation Approach:** {{remediation_strategy}}
+          **Timeline:** {{remediation_timeline}}
+          **Resource Requirements:** {{remediation_resources}}
+
+      - id: governance-integration
+        title: Governance Integration Plan
+        template: |
+          **Current Governance:** {{current_governance_state}}
+          **Target Governance:** {{target_governance_state}}
+          **Integration Strategy:** {{governance_integration_approach}}
+          
+          **Implementation Phases:**
+          1. **Foundation:** {{governance_foundation}} ({{foundation_timeline}})
+          2. **Integration:** {{governance_integration}} ({{integration_timeline}})
+          3. **Validation:** {{governance_validation}} ({{validation_timeline}})
+          4. **Optimization:** {{governance_optimization}} ({{optimization_timeline}})
+
+  - id: recommendations-and-next-steps
+    title: Detailed Recommendations and Next Steps
+    instruction: |
+      Provide comprehensive recommendations and action plan:
+      1. Synthesize all analysis findings into actionable recommendations
+      2. Prioritize actions based on value, effort, and constitutional compliance
+      3. Define immediate next steps with clear ownership and timelines
+      4. Establish success metrics and monitoring approach
+      5. Plan stakeholder communication and change management
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: strategic-recommendations
+        title: Strategic Recommendations
+        repeatable: true
+        template: |
+          **Recommendation:** {{recommendation_title}}
+          **Category:** {{recommendation_category}}
+          **Priority:** {{recommendation_priority}} (Critical/High/Medium/Low)
+          **Business Value:** {{business_value}}
+          **Constitutional Impact:** {{constitutional_benefits}}
+          
+          **Implementation Approach:**
+          - **Approach:** {{implementation_strategy}}
+          - **Timeline:** {{implementation_timeline}}
+          - **Resources:** {{resource_requirements}}
+          - **Dependencies:** {{implementation_dependencies}}
+          - **Success Metrics:** {{success_measurements}}
+
+      - id: immediate-actions
+        title: Immediate Next Steps
+        type: table
+        columns: [Action, Responsible Party, Timeline, Dependencies, Success Criteria]
+        instruction: |
+          Define specific actions for the next 30-90 days:
+          - Focus on high-impact, low-effort quick wins
+          - Establish foundation for long-term improvements
+          - Begin constitutional compliance preparation
+          - Set up monitoring and feedback mechanisms
+
+      - id: success-metrics
+        title: Success Metrics and Monitoring
+        template: |
+          **Key Performance Indicators:**
+          - **Pattern Quality:** {{quality_metrics}}
+          - **Extraction Efficiency:** {{efficiency_metrics}}
+          - **Constitutional Compliance:** {{compliance_metrics}}
+          - **Catalog Integration:** {{integration_metrics}}
+          - **Team Adoption:** {{adoption_metrics}}
+          
+          **Monitoring Approach:**
+          - **Frequency:** {{monitoring_frequency}}
+          - **Reporting:** {{reporting_schedule}}
+          - **Review Cycles:** {{review_schedule}}
+          - **Adjustment Triggers:** {{adjustment_criteria}}
+
+  - id: appendices
+    title: Appendices and Supporting Data
+    instruction: |
+      Include comprehensive supporting data and detailed analysis:
+      1. Detailed technical findings and raw data
+      2. Tool outputs and analysis results
+      3. Code samples and pattern examples
+      4. Risk register and mitigation details
+      5. Constitutional framework alignment documentation
+    sections:
+      - id: technical-details
+        title: Technical Analysis Details
+        template: |
+          **Analysis Tools Used:**
+          {{#each analysis_tools}}
+          - **{{tool_name}}:** {{tool_version}} - {{tool_purpose}}
+          {{/each}}
+          
+          **Raw Metrics:**
+          - **Lines of Code:** {{total_loc}}
+          - **Files Analyzed:** {{files_analyzed}}
+          - **Functions/Methods:** {{functions_count}}
+          - **Classes/Modules:** {{classes_count}}
+          - **Test Coverage:** {{test_coverage}}%
+
+      - id: pattern-examples
+        title: Pattern Examples
+        type: code
+        language: typescript
+        template: |
+          // Example of identified pattern: {{pattern_name}}
+          // Quality Tier: {{quality_tier}}
+          // Constitutional Compliance: {{compliance_status}}
+          
+          {{pattern_code_example}}
+
+      - id: constitutional-framework-alignment
+        title: Constitutional Framework Alignment
+        template: |
+          **Framework Version:** {{constitutional_version}}
+          **Compliance Assessment Date:** {{assessment_date}}
+          **Assessor:** {{assessor_name}}
+          
+          **Alignment Summary:**
+          - **Governance Principles:** {{governance_alignment}}
+          - **Quality Standards:** {{quality_alignment}}
+          - **Context Preservation:** {{context_alignment}}
+          - **Validation Requirements:** {{validation_alignment}}
+          
+          **Detailed Findings:**
+          {{constitutional_detailed_findings}}
