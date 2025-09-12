@@ -1,0 +1,703 @@
+# SEAD Pattern Documentation Template
+template:
+  id: pattern-documentation-template-v1
+  name: SEAD Pattern Documentation Template
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  pattern_domain: universal
+  output:
+    format: markdown
+    filename: "{{pattern_name}}-pattern.md"
+    title: "{{pattern_name}} Pattern Documentation"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  quality_validation: continuous
+  anti_pattern_detection: enabled
+
+workflow:
+  mode: constitutional_interactive
+  elicitation: guided_extraction
+  catalog_validation: enabled
+  constraint_enforcement: progressive
+
+sections:
+  - id: constitutional-initialization
+    title: Constitutional Framework Initialization
+    instruction: |
+      Establish constitutional context for pattern documentation:
+      1. Identify development mode and documentation quality requirements
+      2. Load constitutional framework for documentation governance
+      3. Configure catalog integration validation requirements
+      4. Establish context preservation for documentation handoffs
+      5. Set quality gates appropriate for pattern tier
+    sections:
+      - id: pattern-context
+        title: Pattern Context and Constitutional Framework
+        template: |
+          **Documentation Date:** {{documentation_date}}
+          **Development Mode:** {{development_mode}}
+          **Constitutional Framework:** {{constitutional_version}}
+          **Pattern Agent:** {{pattern_agent}}
+          **Quality Tier:** {{pattern_quality_tier}}
+          **Catalog Domain:** {{catalog_domain}} > {{catalog_subdomain}}
+          **Constitutional Compliance:** {{constitutional_compliance_level}}
+
+  - id: pattern-overview
+    title: Pattern Overview
+    instruction: |
+      Provide comprehensive pattern overview with clear purpose and scope:
+      1. Define pattern purpose and problem it solves
+      2. Establish pattern scope and boundaries
+      3. Document when to use and when NOT to use this pattern
+      4. Identify target audience and prerequisites
+      5. Provide value proposition and benefits
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: pattern-summary
+        title: Pattern Summary
+        template: |
+          **Pattern Name:** {{pattern_name}}
+          **Domain:** {{pattern_domain}}
+          **Quality Tier:** {{quality_tier}}
+          **Complexity Level:** {{complexity_level}}
+          **Reusability Scope:** {{reusability_scope}}
+          
+          **Purpose:**
+          {{pattern_purpose}}
+          
+          **Problem Solved:**
+          {{problem_description}}
+          
+          **Key Benefits:**
+          {{#each benefits}}
+          - {{benefit_description}}
+          {{/each}}
+
+      - id: usage-guidance
+        title: Usage Guidance
+        template: |
+          **When to Use:**
+          {{#each use_cases}}
+          - {{use_case_description}}
+          {{/each}}
+          
+          **When NOT to Use:**
+          {{#each anti_use_cases}}
+          - {{anti_use_case_description}}
+          {{/each}}
+          
+          **Prerequisites:**
+          {{#each prerequisites}}
+          - {{prerequisite_description}}
+          {{/each}}
+          
+          **Target Audience:**
+          - **Skill Level:** {{target_skill_level}}
+          - **Experience:** {{target_experience}}
+          - **Domain Knowledge:** {{domain_knowledge_required}}
+
+  - id: implementation-guide
+    title: Implementation Guide
+    instruction: |
+      Provide comprehensive implementation guidance with clear steps and examples:
+      1. Document step-by-step implementation process
+      2. Provide working code examples for different scenarios
+      3. Include configuration options and customization points
+      4. Address integration requirements and dependencies
+      5. Include validation and testing approaches
+    elicit: true
+    constitutional_validation: critical
+    sections:
+      - id: basic-implementation
+        title: Basic Implementation
+        template: |
+          **Implementation Steps:**
+          {{#each implementation_steps}}
+          {{step_number}}. {{step_description}}
+             {{#if step_code}}
+             ```{{language}}
+             {{step_code}}
+             ```
+             {{/if}}
+          {{/each}}
+          
+          **Basic Example:**
+          ```{{primary_language}}
+          {{basic_example_code}}
+          ```
+          
+          **Expected Output:**
+          ```
+          {{expected_output}}
+          ```
+
+      - id: advanced-implementation
+        title: Advanced Implementation
+        template: |
+          **Advanced Features:**
+          {{#each advanced_features}}
+          - **{{feature_name}}:** {{feature_description}}
+          {{/each}}
+          
+          **Advanced Example:**
+          ```{{primary_language}}
+          {{advanced_example_code}}
+          ```
+          
+          **Configuration Options:**
+          {{#each config_options}}
+          - **{{option_name}}:** {{option_description}}
+            - **Type:** {{option_type}}
+            - **Default:** {{option_default}}
+            - **Required:** {{option_required}}
+          {{/each}}
+
+      - id: customization-guide
+        title: Customization and Extension
+        template: |
+          **Customization Points:**
+          {{#each customization_points}}
+          - **{{customization_name}}:** {{customization_description}}
+            - **Flexibility:** {{customization_flexibility}}
+            - **Impact:** {{customization_impact}}
+          {{/each}}
+          
+          **Extension Mechanisms:**
+          {{#each extension_mechanisms}}
+          - **{{extension_name}}:** {{extension_description}}
+          ```{{primary_language}}
+          {{extension_example}}
+          ```
+          {{/each}}
+
+  - id: integration-requirements
+    title: Integration Requirements
+    instruction: |
+      Document comprehensive integration requirements and dependencies:
+      1. List all dependencies and their versions
+      2. Provide integration instructions with other patterns
+      3. Document environment setup and configuration
+      4. Address compatibility and version requirements
+      5. Include migration guidance from alternatives
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: dependencies
+        title: Dependencies and Requirements
+        template: |
+          **System Requirements:**
+          {{#each system_requirements}}
+          - {{requirement_description}}
+          {{/each}}
+          
+          **Dependencies:**
+          {{#each dependencies}}
+          - **{{dependency_name}}:** {{dependency_version}}
+            - **Type:** {{dependency_type}}
+            - **Purpose:** {{dependency_purpose}}
+            - **Installation:** {{dependency_installation}}
+          {{/each}}
+          
+          **Environment Setup:**
+          ```bash
+          {{environment_setup_commands}}
+          ```
+
+      - id: integration-patterns
+        title: Integration with Other Patterns
+        template: |
+          **Compatible Patterns:**
+          {{#each compatible_patterns}}
+          - **{{pattern_name}}:** {{integration_description}}
+            - **Relationship:** {{relationship_type}}
+            - **Integration Effort:** {{integration_effort}}
+          {{/each}}
+          
+          **Integration Examples:**
+          {{#each integration_examples}}
+          **{{example_title}}:**
+          ```{{language}}
+          {{integration_code}}
+          ```
+          {{/each}}
+
+      - id: migration-guide
+        title: Migration and Upgrade Guide
+        template: |
+          **Migration from Alternatives:**
+          {{#each migration_paths}}
+          **From {{source_approach}}:**
+          1. {{migration_steps}}
+          
+          **Before:**
+          ```{{language}}
+          {{before_code}}
+          ```
+          
+          **After:**
+          ```{{language}}
+          {{after_code}}
+          ```
+          {{/each}}
+          
+          **Upgrade Considerations:**
+          {{#each upgrade_considerations}}
+          - {{consideration_description}}
+          {{/each}}
+
+  - id: troubleshooting
+    title: Troubleshooting and Common Issues
+    instruction: |
+      Provide comprehensive troubleshooting guide with common issues and solutions:
+      1. Document common implementation issues and solutions
+      2. Include error messages and their meanings
+      3. Provide debugging approaches and diagnostic tools
+      4. Address performance issues and optimization
+      5. Include edge cases and unusual scenarios
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: common-issues
+        title: Common Issues and Solutions
+        repeatable: true
+        template: |
+          **Issue:** {{issue_title}}
+          **Frequency:** {{issue_frequency}}
+          **Severity:** {{issue_severity}}
+          
+          **Symptoms:**
+          {{#each symptoms}}
+          - {{symptom_description}}
+          {{/each}}
+          
+          **Cause:**
+          {{issue_cause}}
+          
+          **Solution:**
+          {{#each solution_steps}}
+          {{step_number}}. {{step_description}}
+          {{#if step_code}}
+          ```{{language}}
+          {{step_code}}
+          ```
+          {{/if}}
+          {{/each}}
+          
+          **Prevention:**
+          {{prevention_strategy}}
+
+      - id: diagnostic-guide
+        title: Diagnostic Guide
+        template: |
+          **Debugging Checklist:**
+          {{#each debug_checklist}}
+          - [ ] {{checklist_item}}
+          {{/each}}
+          
+          **Diagnostic Commands:**
+          {{#each diagnostic_commands}}
+          **{{command_purpose}}:**
+          ```bash
+          {{command_syntax}}
+          ```
+          Expected output: {{expected_output}}
+          {{/each}}
+          
+          **Log Analysis:**
+          - **Log Location:** {{log_location}}
+          - **Key Log Patterns:** {{log_patterns}}
+          - **Error Indicators:** {{error_indicators}}
+
+      - id: performance-optimization
+        title: Performance Optimization
+        template: |
+          **Performance Characteristics:**
+          - **Typical Performance:** {{typical_performance}}
+          - **Best Case:** {{best_case_performance}}
+          - **Worst Case:** {{worst_case_performance}}
+          - **Scaling Behavior:** {{scaling_behavior}}
+          
+          **Optimization Techniques:**
+          {{#each optimization_techniques}}
+          **{{technique_name}}:**
+          - **Description:** {{technique_description}}
+          - **Performance Gain:** {{performance_improvement}}
+          - **Implementation:**
+          ```{{language}}
+          {{optimization_code}}
+          ```
+          {{/each}}
+          
+          **Performance Monitoring:**
+          {{#each monitoring_approaches}}
+          - **{{monitoring_name}}:** {{monitoring_description}}
+          {{/each}}
+
+  - id: testing-validation
+    title: Testing and Validation
+    instruction: |
+      Provide comprehensive testing and validation guidance:
+      1. Document testing strategies and approaches
+      2. Provide test examples and test cases
+      3. Include validation criteria and success measures
+      4. Address integration testing requirements
+      5. Include performance and security testing considerations
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: testing-strategy
+        title: Testing Strategy
+        template: |
+          **Testing Approach:**
+          {{testing_approach_description}}
+          
+          **Test Categories:**
+          {{#each test_categories}}
+          - **{{category_name}}:** {{category_description}}
+            - **Coverage:** {{category_coverage}}
+            - **Tools:** {{category_tools}}
+          {{/each}}
+          
+          **Test Structure:**
+          ```{{test_framework}}
+          {{test_structure_example}}
+          ```
+
+      - id: test-examples
+        title: Test Examples
+        repeatable: true
+        template: |
+          **Test Case:** {{test_case_name}}
+          **Category:** {{test_category}}
+          **Purpose:** {{test_purpose}}
+          
+          ```{{test_language}}
+          {{test_code}}
+          ```
+          
+          **Expected Result:**
+          {{expected_result}}
+          
+          **Edge Cases:**
+          {{#each edge_cases}}
+          - {{edge_case_description}}
+          {{/each}}
+
+      - id: validation-criteria
+        title: Validation Criteria
+        template: |
+          **Success Criteria:**
+          {{#each success_criteria}}
+          - {{criteria_description}}
+          {{/each}}
+          
+          **Quality Gates:**
+          {{#each quality_gates}}
+          - **{{gate_name}}:** {{gate_criteria}}
+            - **Threshold:** {{gate_threshold}}
+            - **Measurement:** {{gate_measurement}}
+          {{/each}}
+          
+          **Acceptance Testing:**
+          {{#each acceptance_tests}}
+          - **Scenario:** {{test_scenario}}
+          - **Validation:** {{validation_approach}}
+          {{/each}}
+
+  - id: security-considerations
+    title: Security Considerations
+    instruction: |
+      Document comprehensive security considerations and best practices:
+      1. Identify security implications and risks
+      2. Provide security best practices and guidelines
+      3. Document security testing and validation approaches
+      4. Address compliance and regulatory considerations
+      5. Include threat modeling and risk assessment
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: security-implications
+        title: Security Implications
+        template: |
+          **Security Assessment:**
+          - **Risk Level:** {{security_risk_level}}
+          - **Attack Surface:** {{attack_surface_description}}
+          - **Threat Model:** {{threat_model_summary}}
+          
+          **Security Considerations:**
+          {{#each security_considerations}}
+          - **{{consideration_category}}:** {{consideration_description}}
+            - **Risk:** {{risk_level}}
+            - **Mitigation:** {{mitigation_strategy}}
+          {{/each}}
+
+      - id: security-best-practices
+        title: Security Best Practices
+        template: |
+          **Implementation Security:**
+          {{#each implementation_security}}
+          - {{practice_description}}
+          {{/each}}
+          
+          **Data Protection:**
+          {{#each data_protection}}
+          - **{{data_type}}:** {{protection_approach}}
+          {{/each}}
+          
+          **Access Control:**
+          {{#each access_controls}}
+          - **{{control_name}}:** {{control_implementation}}
+          {{/each}}
+          
+          **Secure Configuration:**
+          ```{{config_language}}
+          {{secure_config_example}}
+          ```
+
+      - id: compliance-considerations
+        title: Compliance and Regulatory Considerations
+        template: |
+          **Compliance Frameworks:**
+          {{#each compliance_frameworks}}
+          - **{{framework_name}}:** {{compliance_status}}
+            - **Requirements:** {{framework_requirements}}
+            - **Implementation:** {{compliance_implementation}}
+          {{/each}}
+          
+          **Audit Trail:**
+          - **Logging Requirements:** {{logging_requirements}}
+          - **Audit Data:** {{audit_data_description}}
+          - **Retention:** {{data_retention_policy}}
+
+  - id: constitutional-compliance
+    title: Constitutional Framework Compliance
+    instruction: |
+      Document SEAD constitutional framework compliance and governance integration:
+      1. Detail constitutional requirements and adherence
+      2. Document mode-aware behavior and constraints
+      3. Provide context preservation capabilities
+      4. Address audit trail and governance requirements
+      5. Include compliance validation and monitoring
+    constitutional_validation: mandatory
+    sections:
+      - id: constitutional-integration
+        title: Constitutional Framework Integration
+        template: |
+          **Framework Compliance:**
+          - **Framework Version:** {{constitutional_framework_version}}
+          - **Compliance Level:** {{compliance_level}}
+          - **Integration Date:** {{integration_date}}
+          - **Validation Status:** {{validation_status}}
+          
+          **Mode-Aware Behavior:**
+          - **Prototype Mode:** {{prototype_mode_behavior}}
+          - **Development Mode:** {{development_mode_behavior}}
+          - **Build-to-Deploy Mode:** {{build_deploy_mode_behavior}}
+          
+          **Constraint Enforcement:**
+          {{#each constraints}}
+          - **{{constraint_name}}:** {{constraint_description}}
+            - **Enforcement Level:** {{enforcement_level}}
+            - **Validation:** {{validation_approach}}
+          {{/each}}
+
+      - id: context-preservation
+        title: Context Preservation and Agent Handoffs
+        template: |
+          **Context Preservation:**
+          - **State Serialization:** {{state_serialization_approach}}
+          - **Context Metadata:** {{context_metadata_description}}
+          - **Handoff Support:** {{handoff_support_level}}
+          
+          **Agent Handoff Requirements:**
+          {{#each handoff_requirements}}
+          - {{requirement_description}}
+          {{/each}}
+          
+          **Context Validation:**
+          ```{{validation_language}}
+          {{context_validation_code}}
+          ```
+
+      - id: governance-integration
+        title: Governance and Audit Integration
+        template: |
+          **Governance Framework:**
+          - **Governance Level:** {{governance_level}}
+          - **Approval Process:** {{approval_process}}
+          - **Review Requirements:** {{review_requirements}}
+          
+          **Audit Trail:**
+          - **Audit Events:** {{audit_events}}
+          - **Log Format:** {{audit_log_format}}
+          - **Retention Policy:** {{audit_retention_policy}}
+          
+          **Compliance Monitoring:**
+          {{#each monitoring_mechanisms}}
+          - **{{mechanism_name}}:** {{mechanism_description}}
+          {{/each}}
+
+  - id: maintenance-evolution
+    title: Maintenance and Evolution
+    instruction: |
+      Document long-term maintenance and evolution planning:
+      1. Define maintenance procedures and responsibilities
+      2. Plan version management and backward compatibility
+      3. Establish update and enhancement processes
+      4. Document deprecation and migration strategies
+      5. Include community contribution guidelines
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: maintenance-procedures
+        title: Maintenance Procedures
+        template: |
+          **Maintenance Responsibilities:**
+          - **Primary Maintainer:** {{primary_maintainer}}
+          - **Maintenance Team:** {{maintenance_team}}
+          - **Community Role:** {{community_maintenance_role}}
+          
+          **Maintenance Schedule:**
+          - **Regular Reviews:** {{review_schedule}}
+          - **Update Cycle:** {{update_cycle}}
+          - **Security Updates:** {{security_update_policy}}
+          
+          **Maintenance Tasks:**
+          {{#each maintenance_tasks}}
+          - **{{task_name}}:** {{task_description}} ({{task_frequency}})
+          {{/each}}
+
+      - id: version-management
+        title: Version Management
+        template: |
+          **Versioning Strategy:**
+          - **Scheme:** {{versioning_scheme}}
+          - **Compatibility Policy:** {{compatibility_policy}}
+          - **Breaking Changes:** {{breaking_change_policy}}
+          
+          **Version History:**
+          {{#each version_history}}
+          - **{{version_number}}:** {{version_description}} ({{version_date}})
+          {{/each}}
+          
+          **Migration Support:**
+          - **Migration Tools:** {{migration_tools}}
+          - **Migration Timeline:** {{migration_timeline}}
+          - **Support Period:** {{legacy_support_period}}
+
+      - id: evolution-planning
+        title: Evolution and Enhancement Planning
+        template: |
+          **Evolution Roadmap:**
+          {{#each roadmap_items}}
+          - **{{milestone_name}}:** {{milestone_description}}
+            - **Timeline:** {{milestone_timeline}}
+            - **Priority:** {{milestone_priority}}
+            - **Dependencies:** {{milestone_dependencies}}
+          {{/each}}
+          
+          **Enhancement Process:**
+          1. {{enhancement_step_1}}
+          2. {{enhancement_step_2}}
+          3. {{enhancement_step_3}}
+          4. {{enhancement_step_4}}
+          
+          **Community Contributions:**
+          - **Contribution Guidelines:** {{contribution_guidelines}}
+          - **Review Process:** {{contribution_review_process}}
+          - **Recognition:** {{contributor_recognition}}
+
+  - id: appendices
+    title: Appendices and Reference Materials
+    instruction: |
+      Provide comprehensive reference materials and supporting documentation:
+      1. Include detailed API reference and parameter documentation
+      2. Provide comprehensive code examples and snippets
+      3. Include performance benchmarks and metrics
+      4. Add glossary of terms and concepts
+      5. Provide links to related resources and documentation
+    sections:
+      - id: api-reference
+        title: API Reference
+        template: |
+          **API Overview:**
+          {{api_overview}}
+          
+          **Methods/Functions:**
+          {{#each api_methods}}
+          **{{method_name}}**
+          - **Purpose:** {{method_purpose}}
+          - **Parameters:**
+            {{#each parameters}}
+            - `{{parameter_name}}` ({{parameter_type}}): {{parameter_description}}
+            {{/each}}
+          - **Returns:** {{return_description}}
+          - **Example:**
+          ```{{language}}
+          {{method_example}}
+          ```
+          {{/each}}
+
+      - id: code-examples
+        title: Complete Code Examples
+        type: code
+        language: "{{primary_language}}"
+        repeatable: true
+        template: |
+          // Example: {{example_title}}
+          // Description: {{example_description}}
+          // Use Case: {{example_use_case}}
+          
+          {{example_code}}
+          
+          // Notes:
+          // {{example_notes}}
+
+      - id: performance-benchmarks
+        title: Performance Benchmarks
+        template: |
+          **Benchmark Environment:**
+          - **System:** {{benchmark_system}}
+          - **Load:** {{benchmark_load}}
+          - **Date:** {{benchmark_date}}
+          
+          **Results:**
+          {{#each benchmark_results}}
+          - **{{benchmark_name}}:** {{benchmark_result}}
+            - **Baseline:** {{baseline_comparison}}
+            - **Trend:** {{performance_trend}}
+          {{/each}}
+          
+          **Scaling Analysis:**
+          {{scaling_analysis_results}}
+
+      - id: glossary
+        title: Glossary
+        template: |
+          **Terms and Concepts:**
+          {{#each glossary_terms}}
+          - **{{term_name}}:** {{term_definition}}
+          {{/each}}
+
+      - id: references
+        title: References and Related Resources
+        template: |
+          **Related Patterns:**
+          {{#each related_patterns}}
+          - [{{pattern_name}}]({{pattern_link}}) - {{pattern_relationship}}
+          {{/each}}
+          
+          **External Resources:**
+          {{#each external_resources}}
+          - [{{resource_title}}]({{resource_url}}) - {{resource_description}}
+          {{/each}}
+          
+          **Further Reading:**
+          {{#each further_reading}}
+          - {{reading_title}} - {{reading_description}}
+          {{/each}}
