@@ -1,0 +1,567 @@
+# SEAD Data Architecture Pattern Documentation Template
+template:
+  id: data-pattern-template-v1
+  name: SEAD Data Architecture Pattern Documentation Template
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  pattern_domain: data_architecture
+  output:
+    format: markdown
+    filename: "{{pattern_name}}-data-pattern.md"
+    title: "{{pattern_name}} Data Architecture Pattern Documentation"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  quality_validation: continuous
+  anti_pattern_detection: enabled
+
+workflow:
+  mode: constitutional_interactive
+  elicitation: guided_extraction
+  catalog_validation: enabled
+  constraint_enforcement: progressive
+
+sections:
+  - id: constitutional-initialization
+    title: Constitutional Framework Initialization
+    instruction: |
+      Establish constitutional context for data architecture pattern documentation:
+      1. Identify development mode and data architecture quality requirements
+      2. Load constitutional framework for data governance
+      3. Configure catalog integration validation requirements
+      4. Establish context preservation for data pattern handoffs
+      5. Set quality gates appropriate for data pattern tier
+    sections:
+      - id: pattern-context
+        title: Data Pattern Context and Constitutional Framework
+        template: |
+          **Documentation Date:** {{documentation_date}}
+          **Development Mode:** {{development_mode}}
+          **Constitutional Framework:** {{constitutional_version}}
+          **Pattern Agent:** sead-pattern-extraction
+          **Data Quality Tier:** {{pattern_quality_tier}}
+          **Catalog Domain:** Data Architecture > {{data_subdomain}}
+          **Constitutional Compliance:** {{constitutional_compliance_level}}
+
+  - id: data-pattern-overview
+    title: Data Architecture Pattern Overview
+    instruction: |
+      Provide comprehensive data architecture pattern overview focusing on data modeling and persistence:
+      1. Define data pattern purpose and data management problem it solves
+      2. Establish data scope, boundaries, and persistence responsibilities
+      3. Document when to use this data pattern and when NOT to use
+      4. Identify target systems and data integration prerequisites
+      5. Provide value proposition and data architecture benefits
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: data-pattern-summary
+        title: Data Pattern Summary
+        template: |
+          **Data Pattern Name:** {{pattern_name}}
+          **Data Domain:** {{data_subdomain}}
+          **Quality Tier:** {{quality_tier}}
+          **Data Complexity Level:** {{complexity_level}}
+          **Persistence Scope:** {{persistence_scope}}
+          
+          **Data Purpose:**
+          {{data_purpose}}
+          
+          **Data Management Problem Solved:**
+          {{data_problem_description}}
+          
+          **Key Data Architecture Benefits:**
+          {{#each data_benefits}}
+          - {{benefit_description}}
+          {{/each}}
+
+      - id: data-usage-guidance
+        title: Data Usage Guidance
+        template: |
+          **When to Use This Data Pattern:**
+          {{#each data_use_cases}}
+          - {{use_case_description}}
+          {{/each}}
+          
+          **When NOT to Use This Data Pattern:**
+          {{#each data_anti_use_cases}}
+          - {{anti_use_case_description}}
+          {{/each}}
+          
+          **Data Integration Prerequisites:**
+          {{#each data_prerequisites}}
+          - {{prerequisite_description}}
+          {{/each}}
+          
+          **Target Systems and Scale:**
+          - **System Types:** {{target_system_types}}
+          - **Data Volume:** {{expected_data_volume}}
+          - **Performance Requirements:** {{performance_requirements}}
+
+  - id: data-model-design
+    title: Data Model Design and Schema Architecture
+    instruction: |
+      Document comprehensive data model design and schema architecture:
+      1. Define entity relationships, data structures, and constraints
+      2. Document schema design patterns and normalization strategies
+      3. Specify data validation rules and integrity constraints
+      4. Include indexing strategies and query optimization
+      5. Address schema evolution and migration approaches
+    elicit: true
+    constitutional_validation: critical
+    sections:
+      - id: entity-relationship-design
+        title: Entity Relationship Design
+        template: |
+          **Database Type:** {{database_type}}
+          **Modeling Approach:** {{modeling_approach}}
+          
+          **Core Entities:**
+          {{#each core_entities}}
+          - **{{entity_name}}:**
+            - **Purpose:** {{entity_purpose}}
+            - **Key Attributes:** {{entity_key_attributes}}
+            - **Relationships:** {{entity_relationships}}
+          {{/each}}
+          
+          **Entity Relationship Diagram:**
+          ```mermaid
+          {{erd_diagram}}
+          ```
+
+      - id: schema-definition
+        title: Schema Definition and Structure
+        template: |
+          **Primary Schema:**
+          ```sql
+          {{primary_schema_definition}}
+          ```
+          
+          **Foreign Key Constraints:**
+          ```sql
+          {{foreign_key_constraints}}
+          ```
+          
+          **Check Constraints:**
+          ```sql
+          {{check_constraints}}
+          ```
+          
+          **Indexes:**
+          ```sql
+          {{index_definitions}}
+          ```
+
+      - id: data-validation-integrity
+        title: Data Validation and Integrity
+        template: |
+          **Validation Strategy:** {{validation_strategy}}
+          
+          **Field-Level Validation:**
+          {{#each field_validations}}
+          - **{{field_name}}:** {{validation_rules}}
+          {{/each}}
+          
+          **Business Rule Validation:**
+          ```sql
+          {{business_rule_validation_example}}
+          ```
+          
+          **Referential Integrity:**
+          ```sql
+          {{referential_integrity_example}}
+          ```
+
+      - id: normalization-optimization
+        title: Normalization and Query Optimization
+        template: |
+          **Normalization Level:** {{normalization_level}}
+          **Optimization Strategy:** {{optimization_strategy}}
+          
+          **Normalization Example:**
+          ```sql
+          {{normalization_example}}
+          ```
+          
+          **Denormalization Considerations:**
+          {{#each denormalization_cases}}
+          - **{{case_name}}:** {{case_justification}}
+          {{/each}}
+          
+          **Query Optimization Patterns:**
+          ```sql
+          {{query_optimization_example}}
+          ```
+
+  - id: data-access-layer
+    title: Data Access Layer Implementation
+    instruction: |
+      Document comprehensive data access layer implementation:
+      1. Define data access patterns and repository implementations
+      2. Document query patterns and data retrieval strategies
+      3. Include transaction management and connection handling
+      4. Address caching strategies and performance optimization
+      5. Include error handling and retry mechanisms
+    elicit: true
+    constitutional_validation: critical
+    sections:
+      - id: repository-patterns
+        title: Repository and Data Access Patterns
+        template: |
+          **Data Access Framework:** {{data_access_framework}}
+          **Pattern Type:** {{repository_pattern_type}}
+          
+          **Repository Interface:**
+          ```{{programming_language}}
+          {{repository_interface_example}}
+          ```
+          
+          **Repository Implementation:**
+          ```{{programming_language}}
+          {{repository_implementation_example}}
+          ```
+          
+          **Unit of Work Pattern:**
+          ```{{programming_language}}
+          {{unit_of_work_example}}
+          ```
+
+      - id: query-patterns
+        title: Query Patterns and Data Retrieval
+        template: |
+          **Query Strategy:** {{query_strategy}}
+          
+          **Basic CRUD Operations:**
+          ```{{programming_language}}
+          {{crud_operations_example}}
+          ```
+          
+          **Complex Query Patterns:**
+          ```{{programming_language}}
+          {{complex_query_example}}
+          ```
+          
+          **Query Builder Usage:**
+          ```{{programming_language}}
+          {{query_builder_example}}
+          ```
+
+      - id: transaction-management
+        title: Transaction Management
+        template: |
+          **Transaction Strategy:** {{transaction_strategy}}
+          
+          **Transaction Scope:**
+          ```{{programming_language}}
+          {{transaction_scope_example}}
+          ```
+          
+          **Connection Management:**
+          ```{{programming_language}}
+          {{connection_management_example}}
+          ```
+          
+          **Error Handling in Transactions:**
+          ```{{programming_language}}
+          {{transaction_error_handling_example}}
+          ```
+
+      - id: caching-performance
+        title: Caching and Performance Optimization
+        template: |
+          **Caching Strategy:** {{caching_strategy}}
+          
+          **Query Result Caching:**
+          ```{{programming_language}}
+          {{query_caching_example}}
+          ```
+          
+          **Connection Pooling:**
+          ```{{configuration_language}}
+          {{connection_pooling_config}}
+          ```
+          
+          **Performance Monitoring:**
+          ```{{programming_language}}
+          {{performance_monitoring_example}}
+          ```
+
+  - id: data-migration-evolution
+    title: Data Migration and Schema Evolution
+    instruction: |
+      Document data migration and schema evolution strategies:
+      1. Define migration scripts and versioning approaches
+      2. Document backward compatibility and rollback strategies
+      3. Include data transformation and cleanup procedures
+      4. Address zero-downtime migration techniques
+      5. Include data validation and integrity verification
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: migration-strategy
+        title: Migration Strategy and Versioning
+        template: |
+          **Migration Framework:** {{migration_framework}}
+          **Versioning Scheme:** {{schema_versioning_scheme}}
+          
+          **Migration Script Example:**
+          ```sql
+          {{migration_script_example}}
+          ```
+          
+          **Rollback Script:**
+          ```sql
+          {{rollback_script_example}}
+          ```
+          
+          **Migration Execution:**
+          ```{{script_language}}
+          {{migration_execution_example}}
+          ```
+
+      - id: data-transformation
+        title: Data Transformation and Cleanup
+        template: |
+          **Transformation Strategy:** {{transformation_strategy}}
+          
+          **Data Transformation Script:**
+          ```sql
+          {{data_transformation_example}}
+          ```
+          
+          **Data Cleanup Procedures:**
+          ```sql
+          {{data_cleanup_example}}
+          ```
+          
+          **Validation After Migration:**
+          ```sql
+          {{post_migration_validation}}
+          ```
+
+      - id: zero-downtime-migration
+        title: Zero-Downtime Migration Techniques
+        template: |
+          **Zero-Downtime Strategy:** {{zero_downtime_strategy}}
+          
+          **Blue-Green Database Migration:**
+          ```{{script_language}}
+          {{blue_green_migration_example}}
+          ```
+          
+          **Shadow Table Approach:**
+          ```sql
+          {{shadow_table_example}}
+          ```
+          
+          **Gradual Migration Process:**
+          {{#each gradual_migration_steps}}
+          {{step_number}}. {{step_description}}
+          {{/each}}
+
+  - id: data-testing-validation
+    title: Data Testing and Validation
+    instruction: |
+      Document comprehensive data testing and validation approaches:
+      1. Define data testing strategies and test categories
+      2. Provide unit testing examples for data access logic
+      3. Include integration testing with database systems
+      4. Address performance testing and load validation
+      5. Include data integrity and consistency testing
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: data-testing-strategy
+        title: Data Testing Strategy
+        template: |
+          **Testing Framework:** {{testing_framework}}
+          **Testing Database:** {{testing_database_approach}}
+          
+          **Test Categories:**
+          {{#each test_categories}}
+          - **{{category_name}}:** {{category_description}}
+            - **Coverage:** {{category_coverage}}
+            - **Tools:** {{category_tools}}
+          {{/each}}
+
+      - id: unit-integration-testing
+        title: Unit and Integration Testing
+        template: |
+          **Repository Unit Tests:**
+          ```{{test_language}}
+          {{repository_unit_test_example}}
+          ```
+          
+          **Database Integration Tests:**
+          ```{{test_language}}
+          {{database_integration_test_example}}
+          ```
+          
+          **Migration Testing:**
+          ```{{test_language}}
+          {{migration_test_example}}
+          ```
+
+      - id: performance-integrity-testing
+        title: Performance and Data Integrity Testing
+        template: |
+          **Performance Test Example:**
+          ```{{test_language}}
+          {{performance_test_example}}
+          ```
+          
+          **Data Integrity Tests:**
+          ```{{test_language}}
+          {{data_integrity_test_example}}
+          ```
+          
+          **Consistency Validation:**
+          ```{{test_language}}
+          {{consistency_validation_test_example}}
+          ```
+
+  - id: data-security-compliance
+    title: Data Security and Compliance
+    instruction: |
+      Document comprehensive data security and compliance considerations:
+      1. Address data encryption at rest and in transit
+      2. Document access control and authentication patterns
+      3. Include data privacy and GDPR compliance approaches
+      4. Address audit logging and data governance
+      5. Include backup and disaster recovery strategies
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: data-security-implementation
+        title: Data Security Implementation
+        template: |
+          **Security Risk Assessment:** {{data_security_risk_level}}
+          
+          **Encryption at Rest:**
+          ```{{configuration_language}}
+          {{encryption_at_rest_config}}
+          ```
+          
+          **Encryption in Transit:**
+          ```{{configuration_language}}
+          {{encryption_in_transit_config}}
+          ```
+          
+          **Access Control:**
+          ```sql
+          {{access_control_example}}
+          ```
+
+      - id: privacy-compliance
+        title: Data Privacy and Compliance
+        template: |
+          **Compliance Frameworks:**
+          {{#each compliance_frameworks}}
+          - **{{framework_name}}:** {{compliance_status}}
+          {{/each}}
+          
+          **Data Classification:**
+          {{#each data_classifications}}
+          - **{{classification_level}}:** {{classification_description}}
+          {{/each}}
+          
+          **Data Retention Policies:**
+          ```sql
+          {{data_retention_example}}
+          ```
+          
+          **Data Anonymization:**
+          ```sql
+          {{data_anonymization_example}}
+          ```
+
+      - id: backup-disaster-recovery
+        title: Backup and Disaster Recovery
+        template: |
+          **Backup Strategy:** {{backup_strategy}}
+          
+          **Backup Configuration:**
+          ```{{script_language}}
+          {{backup_config_example}}
+          ```
+          
+          **Disaster Recovery Plan:**
+          {{#each disaster_recovery_steps}}
+          {{step_number}}. {{step_description}}
+          {{/each}}
+          
+          **Recovery Testing:**
+          ```{{script_language}}
+          {{recovery_testing_example}}
+          ```
+
+  - id: constitutional-compliance
+    title: Constitutional Framework Compliance
+    instruction: |
+      Document SEAD constitutional framework compliance for data architecture patterns:
+      1. Detail constitutional requirements for data design and governance
+      2. Document mode-aware behavior for different development phases
+      3. Provide context preservation capabilities for data pattern handoffs
+      4. Address audit trail and governance requirements for data evolution
+      5. Include compliance validation and monitoring for data patterns
+    constitutional_validation: mandatory
+    sections:
+      - id: constitutional-integration
+        title: Constitutional Framework Integration
+        template: |
+          **Framework Compliance:**
+          - **Framework Version:** {{constitutional_framework_version}}
+          - **Data Compliance Level:** {{data_compliance_level}}
+          - **Integration Date:** {{integration_date}}
+          - **Validation Status:** {{validation_status}}
+          
+          **Mode-Aware Data Behavior:**
+          - **Prototype Mode:** {{prototype_mode_data_behavior}}
+          - **Development Mode:** {{development_mode_data_behavior}}
+          - **Build-to-Deploy Mode:** {{build_deploy_mode_data_behavior}}
+          
+          **Data Constraint Enforcement:**
+          {{#each data_constraints}}
+          - **{{constraint_name}}:** {{constraint_description}}
+            - **Enforcement Level:** {{enforcement_level}}
+            - **Validation:** {{validation_approach}}
+          {{/each}}
+
+      - id: data-context-preservation
+        title: Context Preservation and Agent Handoffs
+        template: |
+          **Data Context Preservation:**
+          - **Schema Serialization:** {{data_schema_serialization_approach}}
+          - **Context Metadata:** {{data_context_metadata_description}}
+          - **Handoff Support:** {{data_handoff_support_level}}
+          
+          **Data Agent Handoff Requirements:**
+          {{#each data_handoff_requirements}}
+          - {{requirement_description}}
+          {{/each}}
+          
+          **Data Context Validation:**
+          ```{{validation_language}}
+          {{data_context_validation_code}}
+          ```
+
+      - id: data-governance-integration
+        title: Governance and Audit Integration
+        template: |
+          **Data Governance Framework:**
+          - **Governance Level:** {{data_governance_level}}
+          - **Approval Process:** {{data_approval_process}}
+          - **Review Requirements:** {{data_review_requirements}}
+          
+          **Data Audit Trail:**
+          - **Audit Events:** {{data_audit_events}}
+          - **Log Format:** {{data_audit_log_format}}
+          - **Retention Policy:** {{data_audit_retention_policy}}
+          
+          **Data Compliance Monitoring:**
+          {{#each data_monitoring_mechanisms}}
+          - **{{mechanism_name}}:** {{mechanism_description}}
+          {{/each}}
