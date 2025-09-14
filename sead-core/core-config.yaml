@@ -373,7 +373,7 @@ deployment_strategy:
 # Agent Configuration
 agents:
   devLoadAlwaysFiles:
-    - "sead-core/core-config.yaml"
+    - ".sead-core/core-config.yaml"
     - "sead-catalog/README.md"
     - "sead.config.yaml"
     

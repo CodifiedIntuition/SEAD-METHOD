@@ -365,49 +365,13 @@ class IdeSetup extends BaseIdeSetup {
     rootPath,
   ) {
     const commandsBaseDir = path.join(installDir, '.claude', 'commands', slashPrefix);
-    const agentsDir = path.join(commandsBaseDir, 'agents');
     const tasksDir = path.join(commandsBaseDir, 'tasks');
 
-    // Ensure directories exist
-    await fileManager.ensureDirectory(agentsDir);
+    // Ensure directories exist (only tasks directory for commands)
     await fileManager.ensureDirectory(tasksDir);
 
-    // Setup agents
-    for (const agentId of agentIds) {
-      // Find the agent file - for expansion packs, prefer the expansion pack version
-      let agentPath;
-      if (packageName === 'core') {
-        // For core, use the normal search
-        agentPath = await this.findAgentPath(agentId, installDir);
-      } else {
-        // For expansion packs, first try to find the agent in the expansion pack directory
-        const expansionPackPath = path.join(installDir, rootPath, 'agents', `${agentId}.md`);
-        if (await fileManager.pathExists(expansionPackPath)) {
-          agentPath = expansionPackPath;
-        } else {
-          // Fall back to core if not found in expansion pack
-          agentPath = await this.findAgentPath(agentId, installDir);
-        }
-      }
-
-      const commandPath = path.join(agentsDir, `${agentId}.md`);
-
-      if (agentPath) {
-        // Create command file with agent content
-        let agentContent = await fileManager.readFile(agentPath);
-
-        // Replace {root} placeholder with the appropriate root path for this context
-        agentContent = agentContent.replaceAll('{root}', rootPath);
-
-        // Add command header
-        let commandContent = `# /${agentId} Command\n\n`;
-        commandContent += `When this command is used, adopt the following agent persona:\n\n`;
-        commandContent += agentContent;
-
-        await fileManager.writeFile(commandPath, commandContent);
-        console.log(chalk.green(`✓ Created agent command: /${agentId}`));
-      }
-    }
+    // Note: Agents are handled separately in .claude/agents/ directory, not in commands
+    // This prevents incorrect duplication of agents in commands/agents/ subdirectory
 
     // Setup tasks
     for (const taskId of taskIds) {

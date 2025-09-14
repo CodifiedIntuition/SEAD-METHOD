@@ -180,21 +180,19 @@ program
     }
   });
 
-// Uninstall command - removes global .sead-method workspace
+// Uninstall command - removes project .sead-core installation
 program
   .command('uninstall')
-  .description('Uninstall SEAD-METHOD global workspace')
+  .description('Uninstall SEAD-METHOD from current project')
   .option('--confirm', 'confirm removal without prompt')
   .action(async (options) => {
-    console.log(chalk.yellow('🗑️  Uninstalling SEAD-METHOD global workspace...'));
+    console.log(chalk.yellow('🗑️  Uninstalling SEAD-METHOD from current project...'));
     
     try {
-      const os = require('os');
-      const homeDir = os.homedir();
-      const globalSeadDir = path.join(homeDir, '.sead-method');
+      const projectSeadDir = path.join(process.cwd(), '.sead-core');
       
-      if (!(await fs.pathExists(globalSeadDir))) {
-        console.log(chalk.yellow('⚠️  ~/.sead-method does not exist'));
+      if (!(await fs.pathExists(projectSeadDir))) {
+        console.log(chalk.yellow('⚠️  .sead-core not found in current directory'));
         return;
       }
       
@@ -203,7 +201,7 @@ program
         const { confirmed } = await inquirer.prompt([{
           type: 'confirm',
           name: 'confirmed',
-          message: 'Remove ~/.sead-method workspace? This will not affect your projects.',
+          message: 'Remove .sead-core from current project?',
           default: false
         }]);
         
@@ -213,9 +211,9 @@ program
         }
       }
       
-      await fs.remove(globalSeadDir);
-      console.log(chalk.green('✅ SEAD-METHOD global workspace removed'));
-      console.log(chalk.white('Your projects are unaffected. Run "sead install" to reinstall.'));
+      await fs.remove(projectSeadDir);
+      console.log(chalk.green('✅ SEAD-METHOD removed from current project'));
+      console.log(chalk.white('Run "sead init" or "sead install" to reinstall.'));
       
     } catch (error) {
       console.error(chalk.red('❌ Uninstall failed:'), error.message);
@@ -836,46 +834,39 @@ sead status
     catalogReadme
   );
   
-  // Create .sead-method directory structure for AI tools
-  console.log(chalk.blue('🤖 Setting up .sead-method workspace...'));
-  const seadMethodDir = path.join(projectPath, '.sead-method');
-  const seadMethodDirs = [
-    'agents',
-    'constitutional-rules', 
-    'tasks',
-    'templates',
-    'workflows',
-    'checklists'
-  ];
-  
-  for (const dir of seadMethodDirs) {
-    await fs.ensureDir(path.join(seadMethodDir, dir));
-  }
+  // .sead-method workspace removed - now using .sead-core directly
   
   // Copy SEAD-core resources to project for self-contained operation
   console.log(chalk.blue('📦 Copying SEAD resources...'));
   const seadCoreSrc = path.resolve(__dirname, 'sead-core');
-  const seadCoreDest = path.join(projectPath, 'sead-core');
+  const seadCoreDest = path.join(projectPath, '.sead-core');
   
-  try {
+  // Check if .sead-core already exists
+  if (await fs.pathExists(seadCoreDest)) {
+    console.log(chalk.yellow('⚠️  .sead-core already exists'));
+    
+    const inquirer = require('inquirer');
+    const { overwrite } = await inquirer.prompt([{
+      type: 'confirm',
+      name: 'overwrite',
+      message: 'Overwrite existing .sead-core installation?',
+      default: false
+    }]);
+    
+    if (!overwrite) {
+      console.log(chalk.blue('ℹ️  Skipping .sead-core installation (keeping existing)'));
+    } else {
+      console.log(chalk.blue('🔄 Removing existing .sead-core...'));
+      await fs.remove(seadCoreDest);
+      await fs.copy(seadCoreSrc, seadCoreDest);
+      console.log(chalk.green('✅ SEAD resources copied successfully'));
+    }
+  } else {
     await fs.copy(seadCoreSrc, seadCoreDest);
     console.log(chalk.green('✅ SEAD resources copied successfully'));
-    
-    // Also copy key resources to .sead-method for AI tool access
-    console.log(chalk.blue('🔄 Setting up .sead-method workspace...'));
-    await fs.copy(path.join(seadCoreSrc, 'agents'), path.join(seadMethodDir, 'agents'));
-    await fs.copy(path.join(seadCoreSrc, 'constitutional-rules'), path.join(seadMethodDir, 'constitutional-rules'));
-    await fs.copy(path.join(seadCoreSrc, 'tasks'), path.join(seadMethodDir, 'tasks'));
-    await fs.copy(path.join(seadCoreSrc, 'templates'), path.join(seadMethodDir, 'templates'));
-    await fs.copy(path.join(seadCoreSrc, 'workflows'), path.join(seadMethodDir, 'workflows'));
-    await fs.copy(path.join(seadCoreSrc, 'checklists'), path.join(seadMethodDir, 'checklists'));
-    
-    console.log(chalk.green('✅ .sead-method workspace configured'));
-    
-  } catch (error) {
-    console.error(chalk.yellow(`⚠️  Warning: Could not copy SEAD resources: ${error.message}`));
-    console.error(chalk.yellow('   Project will reference resources from CLI installation'));
   }
+  
+  // Resources are now available directly in .sead-core directory
 }
 
 async function runAgentBasedCatalogGeneration(options) {
