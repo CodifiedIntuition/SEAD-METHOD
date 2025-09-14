@@ -1,0 +1,6 @@
+[submodule "ccclaude/ccclaude/.claude"]
+	path = ccclaude/ccclaude/.claude
+	url = https://github.com/CaptainCrouton89/.claude.git
+[submodule "ccclaude/.claude"]
+	path = ccclaude/.claude
+	url = https://github.com/CaptainCrouton89/.claude.git
