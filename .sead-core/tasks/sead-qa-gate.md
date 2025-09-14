@@ -1,7 +1,3 @@
-# /sead-qa-gate Task
-
-When this command is used, execute the following task:
-
 <!-- Powered by SEAD-METHOD™ Core -->
 
 # SEAD QA Gate

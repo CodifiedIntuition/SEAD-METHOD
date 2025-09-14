@@ -1,0 +1,348 @@
+# SEAD-Enhanced Implementation Plan Template
+# Combines Spec-Kit proven planning structure with SEAD catalog integration and constitutional framework
+
+template_info:
+  name: "SEAD Spec-Kit Implementation Plan Template"
+  version: "1.0"
+  source: "Adapted from spec-kit/templates/plan-template.md"
+  purpose: "Constitutional implementation planning with catalog integration"
+  
+sead_config:
+  template_type: "implementation_plan"
+  mode_support: ["prototype", "development", "build-to-deploy"] 
+  catalog_integration: true
+  constitutional_compliance: true
+  agent_coordination: true
+
+content: |
+  # Implementation Plan: {{FEATURE_NAME}}
+  
+  **Branch**: `{{BRANCH_NAME}}` | **Date**: {{CREATION_DATE}} | **Spec**: [link to spec]({{SPEC_LINK}})
+  **SEAD Mode**: {{SEAD_MODE}} | **Catalog Status**: {{CATALOG_STATUS}} | **Constitutional Level**: {{CONSTITUTIONAL_LEVEL}}
+  **Input**: Feature specification from `{{FEATURE_SPEC_PATH}}`
+  
+  ## Execution Flow (/plan command scope)
+  ```
+  1. Load feature spec from Input path
+     → If not found: ERROR "No feature spec at {path}"
+  2. Fill Technical Context (scan for NEEDS CLARIFICATION)
+     → Detect Project Type from context (web=frontend+backend, mobile=app+api)
+     → Set Structure Decision based on project type
+     → SEAD Enhancement: Integrate catalog pattern context
+  3. Evaluate Constitution Check section below
+     → If violations exist: Document in Complexity Tracking
+     → If no justification possible: ERROR "Simplify approach first"
+     → Update Progress Tracking: Initial Constitution Check
+     → SEAD Enhancement: Apply mode-specific constraints
+  4. Execute Phase 0 → research.md
+     → If NEEDS CLARIFICATION remain: ERROR "Resolve unknowns"
+     → SEAD Enhancement: Include catalog pattern research
+  5. Execute Phase 1 → contracts, data-model.md, quickstart.md, agent context
+     → SEAD Enhancement: Integrate catalog patterns into design
+  6. Re-evaluate Constitution Check section
+     → If new violations: Refactor design, return to Phase 1
+     → Update Progress Tracking: Post-Design Constitution Check
+     → SEAD Enhancement: Validate catalog pattern compliance
+  7. Plan Phase 2 → Describe task generation approach (DO NOT create tasks.md)
+     → SEAD Enhancement: Include catalog implementation tasks
+  8. STOP - Ready for /tasks command
+  ```
+  
+  **IMPORTANT**: The /plan command STOPS at step 7. Phase 2 execution by separate task command.
+  
+  ## Summary
+  {{SUMMARY_FROM_SPEC}}
+  
+  **SEAD Integration**: {{CATALOG_PATTERNS_COUNT}} catalog patterns identified, {{SEAD_MODE}} mode constraints applied, constitutional compliance framework configured.
+  
+  ## Technical Context
+  **Language/Version**: {{LANGUAGE_VERSION}}  
+  **Primary Dependencies**: {{PRIMARY_DEPENDENCIES}}  
+  **Storage**: {{STORAGE_REQUIREMENTS}}  
+  **Testing**: {{TESTING_STRATEGY}}  
+  **Target Platform**: {{TARGET_PLATFORM}}
+  **Project Type**: {{PROJECT_TYPE}} - determines source structure  
+  **Performance Goals**: {{PERFORMANCE_GOALS}}  
+  **Constraints**: {{TECHNICAL_CONSTRAINTS}}  
+  **Scale/Scope**: {{SCALE_SCOPE}}
+  
+  ### SEAD Technical Context Enhancements
+  **SEAD Mode**: {{SEAD_MODE}} - {{MODE_DESCRIPTION}}
+  **Catalog Patterns**: {{CATALOG_PATTERNS_SUMMARY}}
+  **Constitutional Constraints**: {{CONSTITUTIONAL_CONSTRAINTS_SUMMARY}}
+  **Agent Coordination**: {{AGENT_COORDINATION_REQUIREMENTS}}
+  
+  ## Constitution Check
+  *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+  
+  ### Spec-Kit Constitutional Requirements (Preserved)
+  
+  **Simplicity**:
+  - Projects: {{PROJECT_COUNT}} (max 3 - e.g., api, cli, tests)
+  - Using framework directly? {{FRAMEWORK_DIRECT_USAGE}}
+  - Single data model? {{SINGLE_DATA_MODEL}}
+  - Avoiding patterns? {{AVOIDING_PATTERNS}}
+  
+  **Architecture**:
+  - EVERY feature as library? {{FEATURE_AS_LIBRARY}}
+  - Libraries listed: {{LIBRARY_LIST}}
+  - CLI per library: {{CLI_PER_LIBRARY}}
+  - Library docs: llms.txt format planned? {{LLMS_TXT_PLANNED}}
+  
+  **Testing (NON-NEGOTIABLE)**:
+  - RED-GREEN-Refactor cycle enforced? {{RED_GREEN_REFACTOR}}
+  - Git commits show tests before implementation? {{TESTS_FIRST_COMMITS}}
+  - Order: Contract→Integration→E2E→Unit strictly followed? {{TEST_ORDER_STRICT}}
+  - Real dependencies used? {{REAL_DEPENDENCIES}}
+  - Integration tests for: new libraries, contract changes, shared schemas? {{INTEGRATION_TEST_COVERAGE}}
+  - FORBIDDEN: Implementation before test, skipping RED phase
+  
+  **Observability**:
+  - Structured logging included? {{STRUCTURED_LOGGING}}
+  - Frontend logs → backend? {{UNIFIED_LOGGING}}
+  - Error context sufficient? {{ERROR_CONTEXT}}
+  
+  **Versioning**:
+  - Version number assigned? {{VERSION_ASSIGNED}}
+  - BUILD increments on every change? {{BUILD_INCREMENT}}
+  - Breaking changes handled? {{BREAKING_CHANGES_HANDLED}}
+  
+  ### SEAD Constitutional Enhancements
+  
+  **Catalog Integration**:
+  - Required catalog patterns identified? {{CATALOG_PATTERNS_IDENTIFIED}}
+  - Pattern extensions documented? {{PATTERN_EXTENSIONS_DOCUMENTED}}
+  - New pattern creation justified? {{NEW_PATTERN_CREATION_JUSTIFIED}}
+  - Cross-pattern consistency maintained? {{CROSS_PATTERN_CONSISTENCY}}
+  
+  **Mode Compliance**: {{SEAD_MODE}} Requirements
+  {{#if (eq SEAD_MODE "prototype")}}
+  - Pattern experimentation planned and documented? {{PATTERN_EXPERIMENTATION}}
+  - Learning objectives defined? {{LEARNING_OBJECTIVES}}
+  - Pattern promotion strategy considered? {{PATTERN_PROMOTION_STRATEGY}}
+  {{/if}}
+  {{#if (eq SEAD_MODE "development")}}
+  - Catalog pattern usage preferred over custom solutions? {{CATALOG_PREFERRED}}
+  - Pattern extensions properly documented? {{EXTENSIONS_DOCUMENTED}}
+  - Quality gates configured for validation? {{QUALITY_GATES_CONFIGURED}}
+  {{/if}}
+  {{#if (eq SEAD_MODE "build-to-deploy")}}
+  - Strict catalog pattern compliance enforced? {{STRICT_COMPLIANCE}}
+  - All deviations documented and approved? {{DEVIATIONS_APPROVED}}
+  - Production readiness validated? {{PRODUCTION_READINESS}}
+  {{/if}}
+  
+  **Agent Coordination**:
+  - Context preservation configured between agents? {{CONTEXT_PRESERVATION}}
+  - Agent handoff validation points defined? {{HANDOFF_VALIDATION}}
+  - Quality gate responsibilities assigned? {{QA_RESPONSIBILITIES}}
+  
+  ## Project Structure
+  
+  ### Documentation (this feature)
+  ```
+  sead-workspace/features/{{BRANCH_NAME}}/
+  ├── specification.md        # This feature's spec (created)
+  ├── plan.md                 # This file (/plan command output)
+  ├── research.md             # Phase 0 output (/plan command)
+  ├── data-model.md           # Phase 1 output (/plan command)
+  ├── quickstart.md           # Phase 1 output (/plan command)
+  ├── contracts/              # Phase 1 output (/plan command)
+  └── tasks.md                # Phase 2 output (/tasks command - NOT by /plan)
+  
+  sead-workspace/
+  ├── specifications/         # Linked specifications
+  ├── planning/              # Linked plans  
+  ├── stories/               # Generated stories
+  └── implementations/       # Implementation outputs
+  ```
+  
+  ### Source Code (repository root)
+  ```
+  {{SOURCE_STRUCTURE}}
+  ```
+  
+  **Structure Decision**: {{STRUCTURE_DECISION}}
+  
+  ## Phase 0: Outline & Research
+  
+  ### Spec-Kit Research Process (Enhanced with SEAD)
+  1. **Extract unknowns from Technical Context** above:
+     - For each NEEDS CLARIFICATION → research task
+     - For each dependency → best practices task
+     - For each integration → patterns task
+     - **SEAD Enhancement**: For each catalog gap → pattern research task
+  
+  2. **Generate and dispatch research agents**:
+     ```
+     For each unknown in Technical Context:
+       Task: "Research {unknown} for {feature context}"
+     For each technology choice:
+       Task: "Find best practices for {tech} in {domain}"
+     SEAD Enhancement - For each catalog pattern:
+       Task: "Research catalog pattern {pattern} for {usage context}"
+     ```
+  
+  3. **Consolidate findings** in `research.md` using format:
+     - Decision: [what was chosen]
+     - Rationale: [why chosen]
+     - Alternatives considered: [what else evaluated]
+     - **SEAD Enhancement**: Catalog pattern integration plan
+  
+  **Output**: research.md with all NEEDS CLARIFICATION resolved and catalog patterns researched
+  
+  ## Phase 1: Design & Contracts
+  *Prerequisites: research.md complete*
+  
+  ### Spec-Kit Design Process (Enhanced with SEAD)
+  1. **Extract entities from feature spec** → `data-model.md`:
+     - Entity name, fields, relationships
+     - Validation rules from requirements
+     - State transitions if applicable
+     - **SEAD Enhancement**: Map to catalog shared types, plan extensions
+  
+  2. **Generate API contracts** from functional requirements:
+     - For each user action → endpoint
+     - Use standard REST/GraphQL patterns
+     - Output OpenAPI/GraphQL schema to `/contracts/`
+     - **SEAD Enhancement**: Integrate with catalog API contracts
+  
+  3. **Generate contract tests** from contracts:
+     - One test file per endpoint
+     - Assert request/response schemas
+     - Tests must fail (no implementation yet)
+     - **SEAD Enhancement**: Use catalog test patterns
+  
+  4. **Extract test scenarios** from user stories:
+     - Each story → integration test scenario
+     - Quickstart test = story validation steps
+     - **SEAD Enhancement**: Reference catalog test patterns
+  
+  5. **Update agent file incrementally** (SEAD enhanced):
+     - Run SEAD agent context update script
+     - Add NEW tech from current plan only
+     - Preserve manual additions between markers
+     - **SEAD Enhancement**: Include catalog pattern context
+     - Keep under 150 lines for token efficiency
+  
+  **Output**: data-model.md, /contracts/*, failing tests, quickstart.md, updated agent context
+  
+  ## Phase 2: Task Planning Approach
+  *This section describes what the /tasks command will do - DO NOT execute during /plan*
+  
+  ### SEAD-Enhanced Task Generation Strategy
+  **Spec-Kit Task Generation** (preserved):
+  - Load task template as base
+  - Generate tasks from Phase 1 design docs
+  - Each contract → contract test task [P]
+  - Each entity → model creation task [P] 
+  - Each user story → integration test task
+  - Implementation tasks to make tests pass
+  
+  **SEAD Task Generation Enhancements**:
+  - **Catalog Implementation Tasks**: 
+    - Pattern setup tasks for each required pattern
+    - Pattern extension tasks where needed
+    - Pattern validation tasks [P] (parallel per domain)
+  - **Constitutional Compliance Tasks**:
+    - Mode constraint validation tasks
+    - Quality gate checkpoint tasks
+    - Constitutional compliance verification tasks
+  - **Agent Coordination Tasks**:
+    - Context preservation tasks
+    - Agent handoff validation tasks
+    - Cross-agent communication checkpoints
+  
+  **Ordering Strategy** (SEAD enhanced):
+  - Catalog pattern setup first
+  - TDD order: Tests before implementation 
+  - Dependency order: Models before services before UI
+  - Constitutional checkpoints at logical boundaries
+  - Mark [P] for parallel execution (independent files/patterns)
+  
+  **Estimated Output**: {{ESTIMATED_TASK_COUNT}} numbered, ordered tasks in tasks.md
+  
+  **IMPORTANT**: This phase is executed by the /tasks command, NOT by /plan
+  
+  ## Phase 3+: Future Implementation
+  *These phases are beyond the scope of the /plan command*
+  
+  **Phase 3**: Task execution (tasks.md created by /tasks command)  
+  **Phase 4**: Implementation (execute tasks with SEAD agent coordination)  
+  **Phase 5**: Validation (tests, quickstart, constitutional compliance validation)
+  
+  ## SEAD Integration Summary
+  
+  ### Catalog Pattern Integration
+  {{#each CATALOG_PATTERNS}}
+  - **{{domain}}**: {{pattern_name}}
+    - Status: {{#if available}}Available{{else}}{{#if extend}}Extend Required{{else}}Create Required{{/if}}{{/if}}
+    - Usage: {{usage_description}}
+    - Implementation: {{implementation_plan}}
+  {{/each}}
+  
+  ### Constitutional Compliance Configuration
+  - **Mode**: {{SEAD_MODE}} with {{MODE_FLEXIBILITY}} flexibility
+  - **Quality Gates**: {{QUALITY_GATE_COUNT}} checkpoints configured
+  - **Validation Requirements**: {{VALIDATION_REQUIREMENTS_SUMMARY}}
+  - **Agent Coordination**: {{AGENT_COUNT}} agents with handoff points defined
+  
+  ### Context Preservation Setup
+  - **For Task Generation Agent**: Design documents, catalog patterns, constitutional requirements
+  - **For Implementation Agents**: Technical context, pattern guidance, constraint summary  
+  - **For QA Agents**: Validation criteria, compliance checkpoints, test strategy
+  
+  ## Complexity Tracking
+  *Fill ONLY if Constitution Check has violations that must be justified*
+  
+  | Violation | Why Needed | Simpler Alternative Rejected Because | SEAD Mitigation |
+  |-----------|------------|-------------------------------------|------------------|
+  {{#each CONSTITUTIONAL_VIOLATIONS}}
+  | {{violation}} | {{justification}} | {{alternative_rejected}} | {{sead_mitigation}} |
+  {{/each}}
+  
+  ## Progress Tracking
+  *This checklist is updated during execution flow*
+  
+  **Phase Status**:
+  - [ ] Phase 0: Research complete (/plan command)
+  - [ ] Phase 1: Design complete (/plan command)
+  - [ ] Phase 2: Task planning complete (/plan command - describe approach only)
+  - [ ] Phase 3: Tasks generated (/tasks command)
+  - [ ] Phase 4: Implementation complete
+  - [ ] Phase 5: Validation passed
+  
+  **Gate Status**:
+  - [ ] Initial Constitution Check: PASS
+  - [ ] Post-Design Constitution Check: PASS
+  - [ ] All NEEDS CLARIFICATION resolved
+  - [ ] Complexity deviations documented
+  
+  **SEAD Integration Status**:
+  - [ ] SEAD mode constraints validated
+  - [ ] Catalog pattern integration planned
+  - [ ] Constitutional compliance framework configured
+  - [ ] Agent handoff context prepared
+  - [ ] Quality gates positioned appropriately
+  
+  ## Artifact Relationships *(SEAD Enhancement)*
+  - **Plan ID**: plan-{{SANITIZED_FEATURE_NAME}}-{{TIMESTAMP}}
+  - **Specification ID**: {{SPEC_ID}}
+  - **Branch**: {{BRANCH_NAME}}
+  - **SEAD Mode**: {{SEAD_MODE}}
+  - **Catalog Patterns**: {{CATALOG_PATTERN_IDS}}
+  - **Next Artifact**: Task Breakdown (task generation phase)
+  - **Agent Handoff**: Ready for Task Generation Agent with complete context
+  
+  ---
+  *Based on Spec-Kit Constitution enhanced with SEAD Constitutional Framework*
+
+# Template processing instructions for SEAD agents
+processing_instructions:
+  - Replace all {{VARIABLE}} placeholders with actual values
+  - Process conditional blocks based on SEAD_MODE and catalog status
+  - Integrate catalog pattern information throughout document
+  - Apply mode-specific constitutional requirements
+  - Preserve Spec-Kit constitutional checking logic
+  - Configure agent handoff context appropriately
+  - Maintain execution flow integrity

@@ -407,13 +407,14 @@ class IdeSetup extends BaseIdeSetup {
 
         await fileManager.writeFile(commandPath, commandContent);
         console.log(chalk.green(`✓ Created task command: /${taskId}`));
+      } else {
+        console.log(chalk.yellow(`⚠️  Could not find task file for: ${taskId}`));
       }
     }
 
     console.log(
       chalk.green(`\n✓ Created Claude Code commands for ${packageName} in ${commandsBaseDir}`),
     );
-    console.log(chalk.dim(`  - Agents in: ${agentsDir}`));
     console.log(chalk.dim(`  - Tasks in: ${tasksDir}`));
   }
 

@@ -1,0 +1,254 @@
+# SEAD Brownfield UI Enhancement Workflow
+workflow:
+  id: sead-brownfield-ui
+  name: SEAD Constitutional Brownfield UI/Frontend Enhancement
+  description: >-
+    Constitutional agent workflow for enhancing existing frontend applications with new features,
+    modernization, or design improvements. Handles existing UI analysis with catalog integration,
+    governance validation, and safe constitutional integration with context preservation.
+  type: constitutional_brownfield_ui
+  constitutional_framework: true
+  catalog_integration: true
+  governance_validation: enabled
+  context_preservation: enforced
+  project_types:
+    - constitutional-ui-modernization
+    - constitutional-framework-migration
+    - constitutional-design-refresh
+    - constitutional-frontend-enhancement
+    - design-system-catalog-evolution
+    - ui-governance-compliance
+
+  constitutional_requirements:
+    mode_detection: required
+    catalog_read: mandatory
+    governance_validation: continuous
+    context_preservation: enforced
+    agent_handoff_validation: required
+
+  sequence:
+    - step: constitutional_ui_analysis
+      agent: sead-architect
+      action: analyze existing project with constitutional UI compliance and use sead-document-project
+      creates: multiple constitutional documents per the sead-document-project template
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Review existing constitutional frontend application with catalog integration:
+        - Design-system catalog pattern analysis and governance compliance assessment
+        - User feedback with constitutional UI validation requirements
+        - Analytics data with governance monitoring integration
+        - Improvement areas with catalog evolution opportunities
+        - Context preservation requirements for UI interactions
+
+    - agent: sead-product-owner
+      creates: sead-prd.md
+      uses: sead-brownfield-prd-tmpl
+      requires: constitutional_existing_ui_analysis
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Creates comprehensive constitutional PRD focused on UI enhancement with:
+        - Existing constitutional system analysis with governance validation
+        - Design-system catalog integration and evolution strategy
+        - UI governance compliance requirements and validation framework
+        - Context preservation strategy for UI interactions and agent handoffs
+        CONSTITUTIONAL SAVE OUTPUT: Copy final sead-prd.md to your project's docs/ folder with catalog integration references.
+
+    - agent: sead-ux-expert
+      creates: sead-front-end-spec.md
+      uses: sead-front-end-spec-tmpl
+      requires: sead-prd.md
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Creates constitutional UI/UX specification with comprehensive catalog integration:
+        - Integration with existing constitutional design patterns
+        - Design-system catalog compliance and evolution contribution
+        - Constitutional UI governance validation framework
+        - Context preservation for UI interactions and agent handoffs
+        CONSTITUTIONAL SAVE OUTPUT: Copy final sead-front-end-spec.md to your project's docs/ folder with catalog pattern references.
+
+    - agent: sead-architect
+      creates: sead-architecture.md
+      uses: sead-brownfield-architecture-tmpl
+      requires:
+        - sead-prd.md
+        - sead-front-end-spec.md
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Creates constitutional frontend architecture with comprehensive catalog integration:
+        - Component integration strategy with design-system catalog compliance
+        - Migration planning with constitutional validation framework
+        - Constitutional UI patterns and catalog evolution contribution
+        - Context preservation architecture for UI interactions and agent handoffs
+        CONSTITUTIONAL SAVE OUTPUT: Copy final sead-architecture.md to your project's docs/ folder with catalog pattern references.
+
+    - agent: sead-product-owner
+      validates: all_constitutional_artifacts
+      uses: sead-po-master-checklist
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Validates all constitutional documents for UI integration safety with governance compliance:
+        - Design consistency with catalog patterns validation
+        - Constitutional UI integration safety with governance validation
+        - Context preservation validation for UI interactions
+        May require updates to any constitutional document with catalog integration improvements.
+
+    - agent: various_constitutional_agents
+      updates: any_flagged_constitutional_documents
+      condition: constitutional_po_checklist_issues
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        If Constitutional PO finds issues, return to relevant constitutional agent to fix and re-export 
+        updated constitutional documents to docs/ folder with:
+        - UI governance validation compliance
+        - Design-system catalog integration improvements
+        - Context preservation enhancements
+
+    - agent: sead-product-owner
+      action: shard_constitutional_documents
+      creates: sharded_constitutional_docs
+      requires: all_constitutional_artifacts_in_project
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Shard constitutional documents for IDE development with catalog integration:
+        - Option A: Use Constitutional PO agent to shard: @sead-product-owner then ask to shard docs/sead-prd.md
+        - Option B: Manual: Drag sead-shard-doc task + docs/sead-prd.md into chat
+        - Creates docs/sead-prd/ and docs/sead-architecture/ folders with sharded constitutional content
+        - All shards include design-system catalog references and governance validation requirements
+
+    - agent: sead-scrum-master
+      action: create_constitutional_story
+      creates: sead-story.md
+      requires: sharded_constitutional_docs
+      repeats: for_each_constitutional_epic
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Constitutional story creation cycle with governance validation:
+        - Constitutional SM Agent (New Chat): @sead-scrum-master → *create
+        - Creates next constitutional story from sharded docs with catalog integration
+        - Constitutional story starts in "Draft" status with governance validation pending
+        - All stories include design-system catalog compliance requirements
+        - Context preservation requirements documented for UI interactions
+
+    - agent: sead-analyst/sead-project-manager
+      action: review_draft_constitutional_story
+      updates: sead-story.md
+      requires: sead-story.md
+      optional: true
+      condition: user_wants_constitutional_story_review
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        OPTIONAL: Review and approve draft constitutional story with governance validation:
+        - NOTE: sead-story-review task with design-system catalog compliance verification
+        - Review constitutional story completeness, catalog compliance, and governance alignment
+        - Update constitutional story status: Draft → Approved with governance validation
+        - Validate UI integration safety and context preservation requirements
+
+    - agent: sead-developer
+      action: implement_constitutional_story
+      creates: constitutional_implementation_files
+      requires: sead-story.md
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Constitutional Dev Agent (New Chat): @sead-developer with UI governance validation
+        - Implements approved constitutional story with design-system catalog compliance
+        - Updates File List with all constitutional changes and UI integration references
+        - Ensures governance validation throughout UI implementation
+        - Maintains context preservation for UI interactions and agent handoffs
+        - Marks constitutional story as "Review" when complete with governance compliance
+
+    - agent: sead-qa
+      action: review_constitutional_implementation
+      updates: constitutional_implementation_files
+      requires: constitutional_implementation_files
+      optional: true
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        OPTIONAL: Constitutional QA Agent (New Chat): @sead-qa → sead-review-story with UI governance validation
+        - Senior constitutional dev review with catalog-compliant UI refactoring ability
+        - Fixes small constitutional UI issues directly with governance validation
+        - Leaves constitutional checklist for remaining UI items with design-system catalog compliance requirements
+        - Updates constitutional story status (Review → Done or stays Review) with governance validation
+        - Validates UI integration safety and context preservation
+
+    - agent: sead-developer
+      action: address_constitutional_qa_feedback
+      updates: constitutional_implementation_files
+      condition: constitutional_qa_left_unchecked_items
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        If Constitutional QA left unchecked UI items with governance implications:
+        - Constitutional Dev Agent (New Chat): Address remaining constitutional UI items with design-system catalog compliance
+        - Return to Constitutional QA for final UI governance validation approval
+        - Ensure UI integration safety and context preservation throughout feedback resolution
+
+    - step: repeat_constitutional_development_cycle
+      action: continue_for_all_constitutional_stories
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Repeat constitutional story cycle (Constitutional SM → Constitutional Dev → Constitutional QA) for all constitutional UI epic stories
+        Continue until all constitutional stories in PRD are complete with:
+        - UI governance validation and design-system catalog compliance
+        - Context preservation across all UI interactions and agent handoffs
+
+    - agent: sead-product-owner
+      action: constitutional_epic_retrospective
+      creates: sead-epic-retrospective.md
+      condition: constitutional_epic_complete
+      optional: true
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        OPTIONAL: After constitutional UI epic completion with governance validation
+        - NOTE: sead-epic-retrospective task with design-system catalog evolution assessment
+        - Validate constitutional UI epic was completed correctly with governance compliance
+        - Document constitutional UI learnings, catalog evolution contributions, and governance improvements
+        - Assess UI integration safety and context preservation effectiveness across agent handoffs
+
+    - step: constitutional_workflow_end
+      action: constitutional_project_complete
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        All constitutional UI stories implemented and reviewed with governance validation!
+        Constitutional UI project development phase complete with:
+        - Design-system catalog integration and evolution
+        - UI governance compliance and validation
+        - Context preservation across UI interactions
+
+        Constitutional Reference: .sead-core/data/sead-kb.md#Constitutional UI Development Workflow
+
+  constitutional_handoff_prompts:
+    constitutional_analyst_to_pm: |
+      Constitutional UI analysis complete with governance validation and catalog integration. 
+      Create comprehensive constitutional PRD with UI integration strategy, governance validation, and catalog compliance.
+
+    constitutional_pm_to_ux: |
+      Constitutional PRD ready with governance validation and design-system catalog integration. 
+      Save it as docs/sead-prd.md with catalog pattern references, then create the constitutional UI/UX specification.
+
+    constitutional_ux_to_architect: |
+      Constitutional UI/UX spec complete with comprehensive catalog integration and governance validation. 
+      Save it as docs/sead-front-end-spec.md with design-system catalog references, then create the constitutional frontend architecture.
+
+    constitutional_architect_to_po: |
+      Constitutional architecture complete with comprehensive catalog integration and governance validation. 
+      Save it as docs/sead-architecture.md with catalog pattern references. 
+      Please validate all constitutional artifacts for UI integration safety with governance compliance.
+
+    constitutional_complete: |
+      All constitutional planning artifacts validated and saved in docs/ folder with governance compliance and catalog integration. 
+      Constitutional UI artifacts include design-system catalog compliance validation and context preservation documentation.
+      Move to IDE environment to begin constitutional development with catalog-aware UI implementation.

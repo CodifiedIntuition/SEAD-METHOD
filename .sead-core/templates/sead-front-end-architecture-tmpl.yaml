@@ -1,0 +1,743 @@
+# SEAD Frontend Architecture Template
+template:
+  id: sead-frontend-architecture-template-v1
+  name: SEAD Frontend Architecture Document
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/sead-ui-architecture.md
+    title: "{{project_name}} SEAD Frontend Architecture Document"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  governance_validation: continuous
+
+workflow:
+  mode: constitutional_interactive
+  elicitation: sead-advanced-elicitation
+  catalog_validation: enabled
+  constraint_enforcement: progressive
+
+sections:
+  - id: constitutional-template-framework-selection
+    title: Constitutional Template and Framework Selection
+    instruction: |
+      Review constitutional documents with catalog integration awareness:
+      
+      1. **Context Review**: Access SEAD PRD, SEAD UX-UI Spec, SEAD Architecture Document
+      2. **Catalog Assessment**: Review design-system catalog patterns and frontend constraints
+      3. **Constitutional Compliance**: Ensure frontend choices support governance framework
+      4. **Template Analysis**: Evaluate starter templates with constitutional and catalog considerations
+      
+      Before proceeding, analyze catalog-compliant frontend templates and governance requirements.
+    constitutional_validation: required
+    instruction_continuation: |
+      Constitutional frontend template evaluation process:
+
+      1. **Catalog-Aware Template Review**: Check for mentions of:
+         - SEAD-enhanced frontend starters with design-system catalog integration
+         - Constitutional UI kit implementations with governance validation
+         - Existing catalog-compliant frontend projects
+         - Design system catalog implementations
+         - Constitutional component library starters
+
+      2. **Constitutional Template Assessment**:
+         - Analyze constitutional compliance capabilities
+         - Evaluate design-system catalog integration support
+         - Check governance framework compatibility
+         - Assess context preservation mechanisms for agent handoffs
+         - Review catalog pattern evolution support
+
+      3. **Catalog-Compliant Framework Selection**:
+         Based on constitutional framework choice, suggest catalog-enhanced starters:
+         - **Constitutional React**: Next.js with design-system catalog + governance validation
+         - **Constitutional Vue**: Nuxt.js with catalog patterns + constitutional compliance
+         - **Constitutional Angular**: Angular with catalog integration + governance framework
+         - Include constitutional UI templates supporting catalog evolution
+
+      4. **Constitutional Constraints Documentation**:
+         - Note constitutional compliance requirements imposed by template choice
+         - Document catalog integration constraints and opportunities
+         - Plan governance validation touchpoints
+         - Ensure context preservation compatibility
+
+      Document constitutional template decision and catalog integration plan.
+    sections:
+      - id: constitutional-changelog
+        title: Constitutional Change Log
+        type: table
+        columns: [Date, Version, Description, Constitutional Impact, Catalog Changes, Author]
+        instruction: Track document versions with constitutional and catalog impact
+
+  - id: constitutional-frontend-tech-stack
+    title: Constitutional Frontend Tech Stack
+    instruction: |
+      Extract from main constitutional architecture with catalog compliance validation.
+      This section MUST remain synchronized with constitutional architecture document and respect catalog constraints.
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-tech-stack-table
+        title: Constitutional Technology Stack Table
+        type: table
+        columns: [Category, Technology, Version, Purpose, Constitutional Rationale, Catalog Integration]
+        instruction: |
+          Fill technology choices with constitutional compliance and catalog integration:
+          - All choices must support design-system catalog patterns
+          - Include governance validation capabilities
+          - Ensure context preservation support
+          - Plan catalog evolution contribution
+        examples:
+          - ["Framework", "Next.js", "14.1.0", "Constitutional React framework", "SSG supports governance validation at build time", "design-system catalog optimized"]
+          - ["UI Library", "Shadcn/ui", "latest", "Constitutional component library", "Governance-compliant components with validation", "design-system catalog native"]
+          - ["State Management", "Zustand", "4.5.0", "Constitutional state management", "Simple patterns support governance constraints", "state-management catalog integration"]
+          - ["Styling", "TailwindCSS", "3.4.0", "Constitutional utility-first CSS", "Design tokens align with governance framework", "design-system catalog foundation"]
+
+  - id: constitutional-project-structure
+    title: Constitutional Project Structure
+    instruction: |
+      Define constitutional directory structure with catalog integration and governance support.
+      Be specific about catalog domain organization and constitutional validation touchpoints.
+    elicit: true
+    constitutional_validation: required
+    type: code
+    language: plaintext
+    template: |
+      src/
+      ├── .sead/                          # Constitutional frontend configuration
+      │   ├── constitutional-ui.yaml      # UI governance constraints
+      │   └── catalog-integration.yaml    # Design-system catalog config
+      ├── components/                     # Constitutional components
+      │   ├── ui/                         # Design-system catalog components
+      │   │   ├── button/                 # Constitutional button implementation
+      │   │   ├── form/                   # Constitutional form components
+      │   │   └── layout/                 # Constitutional layout components
+      │   ├── constitutional/             # Governance validation components
+      │   │   ├── validation-wrapper/     # Constitutional validation UI
+      │   │   ├── context-preserver/      # Agent handoff UI components
+      │   │   └── governance-indicators/  # Constitutional compliance UI
+      │   ├── catalog/                    # Catalog-aware components
+      │   │   ├── pattern-showcase/       # Design-system catalog demos
+      │   │   └── evolution-tracker/      # Catalog evolution UI
+      │   └── business/                   # Domain-specific components
+      ├── pages/                          # Constitutional routing
+      │   ├── constitutional/             # Governance pages
+      │   └── catalog/                    # Catalog management pages
+      ├── hooks/                          # Constitutional custom hooks
+      │   ├── constitutional/             # Governance hooks
+      │   ├── catalog/                    # Catalog integration hooks
+      │   └── context-preservation/       # Agent handoff hooks
+      ├── services/                       # Constitutional API services
+      │   ├── constitutional/             # Governance API calls
+      │   ├── catalog/                    # Catalog API integration
+      │   └── context/                    # Context preservation services
+      ├── stores/                         # Constitutional state management
+      │   ├── constitutional/             # Governance state
+      │   ├── catalog/                    # Catalog integration state
+      │   └── context/                    # Context preservation state
+      ├── styles/                         # Constitutional styling
+      │   ├── constitutional/             # Governance-compliant styles
+      │   ├── catalog/                    # Design-system catalog styles
+      │   └── globals/                    # Constitutional global styles
+      └── utils/                          # Constitutional utilities
+          ├── constitutional/             # Governance utility functions
+          ├── catalog/                    # Catalog integration utilities
+          └── validation/                 # Constitutional validation helpers
+
+  - id: constitutional-component-standards
+    title: Constitutional Component Standards
+    instruction: |
+      Define constitutional component patterns with catalog integration and governance compliance.
+      Include design-system catalog usage and constitutional validation requirements.
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-component-template
+        title: Constitutional Component Template
+        instruction: |
+          Generate constitutional component template with catalog integration:
+          - Include design-system catalog pattern usage
+          - Add constitutional validation capabilities
+          - Ensure context preservation for agent handoffs
+          - Include governance compliance validation
+        type: code
+        language: typescript
+        template: |
+          // Constitutional Component Template
+          // Design System Catalog: {{design_system_catalog_reference}}
+          // Governance Level: {{governance_level}}
+          // Context Preservation: {{context_preservation_level}}
+          
+          import React from 'react';
+          import { cn } from '@/utils/constitutional/class-names';
+          import { useConstitutionalValidation } from '@/hooks/constitutional/validation';
+          import { useCatalogPattern } from '@/hooks/catalog/pattern-integration';
+          import { preserveContext } from '@/utils/context-preservation/agent-handoff';
+          
+          // Catalog-integrated types from shared-types catalog
+          import type { 
+            ConstitutionalComponentProps,
+            CatalogPatternProps,
+            GovernanceValidationProps 
+          } from '@/types/constitutional';
+          
+          interface {{ComponentName}}Props extends 
+            ConstitutionalComponentProps,
+            CatalogPatternProps,
+            GovernanceValidationProps {
+            children: React.ReactNode;
+            variant?: 'constitutional' | 'catalog-compliant' | 'governance-validated';
+            className?: string;
+          }
+          
+          export function {{ComponentName}}({
+            children,
+            variant = 'constitutional',
+            className,
+            constitutionalValidation,
+            catalogPattern,
+            governanceLevel,
+            contextPreservation,
+            ...props
+          }: {{ComponentName}}Props) {
+            // Constitutional validation hook
+            const { isValid, validationErrors } = useConstitutionalValidation({
+              component: '{{ComponentName}}',
+              governanceLevel,
+              constitutionalValidation
+            });
+          
+            // Catalog pattern integration
+            const { catalogClasses, patternValidation } = useCatalogPattern({
+              pattern: catalogPattern,
+              component: '{{ComponentName}}'
+            });
+          
+            // Context preservation for agent handoffs
+            React.useEffect(() => {
+              if (contextPreservation) {
+                preserveContext({
+                  component: '{{ComponentName}}',
+                  state: { variant, catalogPattern, governanceLevel },
+                  agentHandoffData: { constitutionalValidation, catalogPattern }
+                });
+              }
+            }, [contextPreservation, variant, catalogPattern, governanceLevel]);
+          
+            return (
+              <div
+                className={cn(
+                  // Constitutional base styles from design-system catalog
+                  'constitutional-component',
+                  catalogClasses,
+                  // Governance validation indicators
+                  isValid ? 'governance-valid' : 'governance-warning',
+                  // Custom className with constitutional validation
+                  className
+                )}
+                data-constitutional-component="{{ComponentName}}"
+                data-catalog-pattern={catalogPattern}
+                data-governance-level={governanceLevel}
+                {...props}
+              >
+                {children}
+                
+                {/* Constitutional validation indicators */}
+                {!isValid && validationErrors && (
+                  <div className="constitutional-validation-errors">
+                    {validationErrors.map(error => (
+                      <div key={error.code} className="governance-error">
+                        {error.message}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          }
+      - id: constitutional-naming-conventions
+        title: Constitutional Naming Conventions
+        instruction: |
+          Provide constitutional naming conventions with catalog integration:
+          - Component naming supporting governance and catalog patterns
+          - File organization respecting constitutional constraints
+          - State management with catalog integration
+        type: table
+        columns: [Element, Convention, Constitutional Rationale, Catalog Integration]
+        examples:
+          - ["Components", "PascalCase + Constitutional suffix", "Clear governance identification", "design-system catalog naming"]
+          - ["Hooks", "useConstitutional[Purpose]", "Governance hook identification", "state-management catalog patterns"]
+          - ["Services", "constitutional[Domain]Service", "Service governance validation", "api-contracts catalog alignment"]
+
+  - id: constitutional-state-management
+    title: Constitutional State Management
+    instruction: |
+      Define constitutional state management with catalog integration and governance compliance.
+      Include state-management catalog patterns and constitutional validation.
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-store-structure
+        title: Constitutional Store Structure
+        instruction: |
+          Generate constitutional state directory with catalog integration and governance support
+        type: code
+        language: plaintext
+        template: |
+          stores/
+          ├── constitutional/                # Constitutional governance state
+          │   ├── validation-store.ts        # Governance validation state
+          │   ├── compliance-store.ts        # Constitutional compliance tracking
+          │   └── context-store.ts           # Context preservation state
+          ├── catalog/                       # Catalog integration state
+          │   ├── pattern-store.ts           # Design-system patterns state
+          │   ├── evolution-store.ts         # Catalog evolution tracking
+          │   └── integration-store.ts       # Catalog integration state
+          ├── business/                      # Domain-specific state
+          │   └── {{domain}}-store.ts        # Business logic state
+          └── index.ts                       # Constitutional store composition
+      - id: constitutional-state-template
+        title: Constitutional State Management Template
+        instruction: |
+          Provide constitutional state template with catalog integration and governance validation
+        type: code
+        language: typescript
+        template: |
+          // Constitutional State Management Template
+          // State Management Catalog: {{state_catalog_reference}}
+          // Governance Validation: {{governance_validation_level}}
+          
+          import { create } from 'zustand';
+          import { devtools } from 'zustand/middleware';
+          import { immer } from 'zustand/middleware/immer';
+          
+          // Constitutional types from shared-types catalog
+          import type {
+            ConstitutionalState,
+            CatalogIntegrationState,
+            GovernanceValidationState,
+            ContextPreservationState
+          } from '@/types/constitutional/state';
+          
+          interface {{StoreName}}State extends 
+            ConstitutionalState,
+            CatalogIntegrationState,
+            GovernanceValidationState,
+            ContextPreservationState {
+            // Business state
+            {{businessState}}: {{BusinessStateType}};
+            
+            // Constitutional actions
+            updateWithGovernanceValidation: (
+              updates: Partial<{{BusinessStateType}}>,
+              validationLevel: GovernanceLevel
+            ) => Promise<void>;
+            
+            // Catalog integration actions
+            applyCatalogPattern: (
+              pattern: CatalogPattern,
+              patternData: CatalogPatternData
+            ) => void;
+            
+            // Context preservation actions
+            preserveForAgentHandoff: (
+              handoffData: AgentHandoffData
+            ) => void;
+          }
+          
+          export const use{{StoreName}}Store = create<{{StoreName}}State>()(
+            devtools(
+              immer((set, get) => ({
+                // Initial constitutional state
+                governanceLevel: 'constitutional',
+                catalogIntegration: 'enabled',
+                contextPreservation: 'active',
+                validationStatus: 'pending',
+                
+                // Business state initialization
+                {{businessState}}: {{initialBusinessState}},
+                
+                // Constitutional action implementation
+                updateWithGovernanceValidation: async (updates, validationLevel) => {
+                  const { validateConstitutionalUpdate } = await import(
+                    '@/utils/constitutional/validation'
+                  );
+                  
+                  const validation = await validateConstitutionalUpdate(
+                    updates,
+                    validationLevel,
+                    get().catalogIntegration
+                  );
+                  
+                  if (validation.isValid) {
+                    set((state) => {
+                      Object.assign(state.{{businessState}}, updates);
+                      state.validationStatus = 'valid';
+                      state.lastGovernanceCheck = new Date();
+                    });
+                  } else {
+                    set((state) => {
+                      state.validationStatus = 'invalid';
+                      state.governanceErrors = validation.errors;
+                    });
+                  }
+                },
+                
+                // Catalog integration implementation
+                applyCatalogPattern: (pattern, patternData) => {
+                  set((state) => {
+                    state.catalogPattern = pattern;
+                    state.patternData = patternData;
+                    state.catalogEvolution = {
+                      ...state.catalogEvolution,
+                      lastPatternUpdate: new Date(),
+                      patternsUsed: [...(state.catalogEvolution.patternsUsed || []), pattern]
+                    };
+                  });
+                },
+                
+                // Context preservation implementation
+                preserveForAgentHandoff: (handoffData) => {
+                  set((state) => {
+                    state.agentHandoffContext = {
+                      ...handoffData,
+                      timestamp: new Date(),
+                      constitutionalState: {
+                        governanceLevel: state.governanceLevel,
+                        validationStatus: state.validationStatus,
+                        catalogIntegration: state.catalogIntegration
+                      }
+                    };
+                  });
+                }
+              })),
+              { name: '{{storeName}}-constitutional-store' }
+            )
+          );
+
+  - id: constitutional-api-integration
+    title: Constitutional API Integration
+    instruction: |
+      Define constitutional API service patterns with catalog integration and governance validation.
+      Include api-contracts catalog usage and constitutional compliance requirements.
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-service-template
+        title: Constitutional Service Template
+        instruction: |
+          Provide constitutional API service with catalog compliance and governance validation
+        type: code
+        language: typescript
+        template: |
+          // Constitutional API Service Template
+          // API Contracts Catalog: {{api_contracts_catalog_reference}}
+          // Governance Validation: {{governance_validation_level}}
+          
+          import { z } from 'zod';
+          
+          // Constitutional API client from catalog
+          import { constitutionalApiClient } from '@/services/constitutional/api-client';
+          import { validateGovernanceCompliance } from '@/utils/constitutional/api-validation';
+          import { preserveApiContext } from '@/utils/context-preservation/api-context';
+          
+          // API contracts from catalog
+          import type {
+            {{ServiceName}}Request,
+            {{ServiceName}}Response,
+            ConstitutionalApiResponse,
+            GovernanceValidatedResponse
+          } from '@/types/constitutional/api-contracts';
+          
+          // Constitutional validation schemas from catalog
+          const {{serviceName}}RequestSchema = z.object({
+            // Request validation with constitutional constraints
+            {{requestValidation}}: z.{{validationType}}(),
+            constitutionalValidation: z.object({
+              governanceLevel: z.enum(['prototype', 'development', 'build-to-deploy']),
+              catalogCompliance: z.boolean(),
+              contextPreservation: z.boolean().optional()
+            })
+          });
+          
+          export class Constitutional{{ServiceName}}Service {
+            private readonly apiClient = constitutionalApiClient;
+            private readonly serviceName = '{{serviceName}}';
+            
+            async {{methodName}}(
+              request: {{ServiceName}}Request,
+              options?: {
+                governanceLevel?: GovernanceLevel;
+                catalogValidation?: boolean;
+                contextPreservation?: boolean;
+              }
+            ): Promise<GovernanceValidatedResponse<{{ServiceName}}Response>> {
+              try {
+                // Constitutional request validation
+                const validatedRequest = {{serviceName}}RequestSchema.parse({
+                  ...request,
+                  constitutionalValidation: {
+                    governanceLevel: options?.governanceLevel || 'development',
+                    catalogCompliance: options?.catalogValidation ?? true,
+                    contextPreservation: options?.contextPreservation
+                  }
+                });
+                
+                // Governance compliance validation
+                const governanceValidation = await validateGovernanceCompliance(
+                  this.serviceName,
+                  '{{methodName}}',
+                  validatedRequest,
+                  options?.governanceLevel
+                );
+                
+                if (!governanceValidation.isValid) {
+                  throw new ConstitutionalApiError(
+                    'Governance validation failed',
+                    governanceValidation.errors
+                  );
+                }
+                
+                // API call with constitutional headers
+                const response = await this.apiClient.post<{{ServiceName}}Response>(
+                  '/{{apiEndpoint}}',
+                  validatedRequest,
+                  {
+                    headers: {
+                      'X-Constitutional-Governance': options?.governanceLevel || 'development',
+                      'X-Catalog-Integration': 'enabled',
+                      'X-Context-Preservation': options?.contextPreservation ? 'enabled' : 'disabled'
+                    }
+                  }
+                );
+                
+                // Context preservation for agent handoffs
+                if (options?.contextPreservation) {
+                  await preserveApiContext({
+                    service: this.serviceName,
+                    method: '{{methodName}}',
+                    request: validatedRequest,
+                    response: response.data,
+                    governanceLevel: options.governanceLevel,
+                    timestamp: new Date()
+                  });
+                }
+                
+                return {
+                  data: response.data,
+                  constitutional: {
+                    governanceValidation,
+                    catalogCompliance: true,
+                    contextPreserved: options?.contextPreservation || false
+                  }
+                };
+              } catch (error) {
+                // Constitutional error handling
+                const constitutionalError = await this.handleConstitutionalError(
+                  error,
+                  '{{methodName}}',
+                  request,
+                  options
+                );
+                
+                throw constitutionalError;
+              }
+            }
+            
+            private async handleConstitutionalError(
+              error: unknown,
+              method: string,
+              request: any,
+              options?: any
+            ): Promise<ConstitutionalApiError> {
+              // Constitutional error processing with catalog integration
+              const errorContext = {
+                service: this.serviceName,
+                method,
+                request,
+                options,
+                governanceLevel: options?.governanceLevel,
+                catalogIntegration: options?.catalogValidation,
+                timestamp: new Date()
+              };
+              
+              // Preserve error context for agent handoffs
+              await preserveApiContext({
+                ...errorContext,
+                error: error instanceof Error ? error.message : 'Unknown error',
+                isError: true
+              });
+              
+              return new ConstitutionalApiError(
+                `Constitutional ${this.serviceName}.${method} failed`,
+                error,
+                errorContext
+              );
+            }
+          }
+      - id: constitutional-api-client-config
+        title: Constitutional API Client Configuration
+        instruction: |
+          Show constitutional HTTP client configuration with catalog integration and governance validation
+        type: code
+        language: typescript
+        template: |
+          // Constitutional API Client Configuration
+          // Auth Patterns Catalog: {{auth_patterns_catalog_reference}}
+          // Error Handling Catalog: {{error_handling_catalog_reference}}
+          
+          import axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios';
+          import { useConstitutionalAuthStore } from '@/stores/constitutional/auth-store';
+          import { validateApiGovernanceCompliance } from '@/utils/constitutional/api-governance';
+          import { preserveApiCallContext } from '@/utils/context-preservation/api-context';
+          
+          // Constitutional API client with catalog integration
+          class ConstitutionalApiClient {
+            private client: AxiosInstance;
+            
+            constructor() {
+              this.client = axios.create({
+                baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+                timeout: 10000,
+                headers: {
+                  'Content-Type': 'application/json',
+                  'X-Constitutional-Framework': 'SEAD-v1',
+                  'X-Catalog-Integration': 'enabled'
+                }
+              });
+              
+              this.setupConstitutionalInterceptors();
+            }
+            
+            private setupConstitutionalInterceptors() {
+              // Constitutional request interceptor
+              this.client.interceptors.request.use(
+                async (config) => {
+                  // Governance validation
+                  const governanceValidation = await validateApiGovernanceCompliance(
+                    config.url || '',
+                    config.method || 'get',
+                    config.data
+                  );
+                  
+                  if (!governanceValidation.isValid) {
+                    throw new Error(`Constitutional governance validation failed: ${governanceValidation.message}`);
+                  }
+                  
+                  // Auth patterns from catalog
+                  const authStore = useConstitutionalAuthStore.getState();
+                  if (authStore.token) {
+                    config.headers.Authorization = `Bearer ${authStore.token}`;
+                  }
+                  
+                  // Context preservation headers
+                  config.headers['X-Context-Preservation-ID'] = crypto.randomUUID();
+                  config.headers['X-Agent-Handoff-Context'] = JSON.stringify({
+                    timestamp: new Date().toISOString(),
+                    governanceLevel: authStore.governanceLevel,
+                    catalogIntegration: 'enabled'
+                  });
+                  
+                  return config;
+                },
+                (error) => {
+                  return Promise.reject(error);
+                }
+              );
+              
+              // Constitutional response interceptor
+              this.client.interceptors.response.use(
+                async (response) => {
+                  // Preserve successful API context
+                  await preserveApiCallContext({
+                    url: response.config.url,
+                    method: response.config.method,
+                    status: response.status,
+                    headers: response.headers,
+                    contextPreservationId: response.config.headers['X-Context-Preservation-ID'],
+                    success: true
+                  });
+                  
+                  return response;
+                },
+                async (error) => {
+                  // Constitutional error handling with catalog patterns
+                  await preserveApiCallContext({
+                    url: error.config?.url,
+                    method: error.config?.method,
+                    status: error.response?.status,
+                    error: error.message,
+                    contextPreservationId: error.config?.headers['X-Context-Preservation-ID'],
+                    success: false
+                  });
+                  
+                  // Handle constitutional authentication errors
+                  if (error.response?.status === 401) {
+                    const authStore = useConstitutionalAuthStore.getState();
+                    authStore.clearConstitutionalAuth();
+                    
+                    // Redirect to constitutional login if not already there
+                    if (typeof window !== 'undefined' && !window.location.pathname.includes('/constitutional-auth')) {
+                      window.location.href = '/constitutional-auth/login';
+                    }
+                  }
+                  
+                  return Promise.reject(error);
+                }
+              );
+            }
+            
+            // Expose constitutional HTTP methods
+            get = this.client.get;
+            post = this.client.post;
+            put = this.client.put;
+            delete = this.client.delete;
+            patch = this.client.patch;
+          }
+          
+          export const constitutionalApiClient = new ConstitutionalApiClient();
+
+  - id: constitutional-checklist-results
+    title: Constitutional Frontend Checklist Results
+    instruction: |
+      Execute constitutional frontend architecture checklist validating:
+      - Design-system catalog integration completeness
+      - Constitutional UI component compliance
+      - Frontend governance validation implementation
+      - Context preservation for agent handoffs
+      
+      Before running checklist, offer to output complete constitutional frontend architecture.
+    constitutional_validation: mandatory
+
+  - id: constitutional-next-steps
+    title: Constitutional Next Steps
+    instruction: |
+      Define constitutional frontend implementation steps with catalog integration and governance validation
+    constitutional_validation: required
+    content: |
+      **Constitutional Frontend Implementation Phases:**
+      
+      1. **Constitutional UI Foundation** (Agent: Constitutional Frontend Developer)
+      - Set up design-system catalog integration
+      - Implement constitutional component templates
+      - Configure governance validation framework
+      
+      2. **Catalog Pattern Implementation** (Agent: Constitutional UX Developer)
+      - Implement all design-system catalog patterns
+      - Set up constitutional validation touchpoints
+      - Configure context preservation for agent handoffs
+      
+      3. **Constitutional Development Workflow** (Agent: Constitutional Team)
+      - All frontend development must maintain constitutional compliance
+      - Context preservation validated across all UI agent handoffs
+      - Design-system catalog evolution documented and governance-approved
+      
+      **Critical Constitutional Context for Next Frontend Agents:**
+      - Development Mode: {{development_mode}} (UI Governance Level: {{ui_governance_level}})
+      - Design-System Catalog State: {{design_system_catalog_state}}
+      - Constitutional UI Requirements: {{constitutional_ui_requirements}}
+      - Context Preservation: All UI agents must reference .sead/ui-context.yaml for continuity

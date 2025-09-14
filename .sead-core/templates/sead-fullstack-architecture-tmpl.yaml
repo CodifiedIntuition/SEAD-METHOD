@@ -1,0 +1,579 @@
+# SEAD Fullstack Architecture Template
+template:
+  id: sead-fullstack-architecture-template-v1
+  name: SEAD Fullstack Architecture Document
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/sead-fullstack-architecture.md
+    title: "{{project_name}} SEAD Fullstack Architecture Document"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  governance_validation: continuous
+
+workflow:
+  mode: constitutional_interactive
+  elicitation: sead-advanced-elicitation
+  catalog_validation: enabled
+  constraint_enforcement: progressive
+
+sections:
+  - id: constitutional-introduction
+    title: Constitutional Introduction
+    instruction: |
+      Before proceeding with fullstack architecture, establish constitutional framework:
+      
+      1. **Context Review**: Access sead-prd.md, sead-front-end-spec.md, and all catalog domains
+      2. **Constitutional Compliance**: Ensure architecture respects governance constraints
+      3. **Catalog Integration**: Leverage existing patterns across all domains
+      4. **Mode Awareness**: Apply appropriate constraints for current development mode
+      
+      This constitutional template creates unified fullstack architecture ensuring catalog compliance and governance validation.
+    elicit: true
+    constitutional_validation: mandatory
+    content: |
+      This document outlines the complete SEAD-compliant fullstack architecture for {{project_name}}, integrating backend systems, frontend implementation, and constitutional governance framework. It serves as the constitutional source of truth for catalog-aware AI-driven development, ensuring consistency across the entire technology stack with governance validation.
+
+      **Constitutional Enhancements:**
+      - **Catalog Integration**: All architectural decisions leverage existing catalog patterns
+      - **Governance Compliance**: Architecture supports constitutional constraint enforcement
+      - **Context Preservation**: Design enables seamless agent handoffs with context continuity
+      - **Progressive Validation**: Architecture adapts to development mode requirements
+    sections:
+      - id: constitutional-starter-template
+        title: Constitutional Starter Template Analysis
+        instruction: |
+          Analyze starter templates with constitutional and catalog awareness:
+
+          1. Review PRD and constitutional documents for mentions of catalog-compliant templates
+          2. If templates are mentioned, assess:
+          - Constitutional compliance capabilities
+          - Catalog pattern integration support
+          - Governance framework compatibility
+          - Context preservation mechanisms
+
+          3. For greenfield projects, suggest catalog-compliant fullstack starters:
+          - SEAD-enhanced templates with constitutional frameworks
+          - Catalog-integrated monorepo templates
+          - Governance-compliant platform starters
+
+          4. Document constitutional implications and catalog integration requirements
+        constitutional_validation: required
+      - id: constitutional-changelog
+        title: Constitutional Change Log
+        type: table
+        columns: [Date, Version, Description, Constitutional Impact, Catalog Changes, Author]
+        instruction: Track document versions with constitutional and catalog impact
+
+  - id: constitutional-high-level-architecture
+    title: Constitutional High Level Architecture
+    instruction: |
+      Establish constitutional architecture foundation with comprehensive catalog integration.
+      Present all subsections together with constitutional compliance validation.
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-technical-summary
+        title: Constitutional Technical Summary
+        instruction: |
+          Provide constitutional overview including:
+          - Architectural style supporting catalog patterns and governance constraints
+          - Technology choices respecting constitutional framework
+          - Integration points leveraging catalog domains
+          - Infrastructure supporting context preservation
+          - Constitutional compliance enablement throughout architecture
+      - id: constitutional-platform-infrastructure
+        title: Constitutional Platform and Infrastructure Choice
+        instruction: |
+          Make platform recommendation with constitutional and catalog considerations:
+
+          1. Consider constitutional compliance capabilities:
+          - **SEAD + Vercel + Supabase**: Rapid development with catalog-compliant auth patterns
+          - **Constitutional AWS**: Enterprise governance with catalog domain separation
+          - **SEAD Azure**: Governance-integrated Microsoft ecosystem
+          - **Constitutional GCP**: AI/ML with catalog pattern support
+
+          2. Present options with constitutional pros/cons and catalog integration capabilities
+          3. Recommend platform supporting governance framework and catalog evolution
+          4. Get explicit user confirmation including constitutional requirements
+
+          Document choice with governance rationale and catalog integration plan.
+        constitutional_validation: critical
+        template: |
+          **Constitutional Platform:** {{selected_platform}}
+          **Catalog Integration Capabilities:** {{catalog_integration_capabilities}}
+          **Governance Support Level:** {{governance_support_level}}
+          **Key Services:** {{core_services_list}} (Catalog Domains: {{catalog_domains_supported}})
+          **Constitutional Deployment Regions:** {{regions}} (Compliance Level: {{compliance_level}})
+      - id: constitutional-repository-structure
+        title: Constitutional Repository Structure
+        instruction: |
+          Define repository approach with constitutional and catalog organization:
+
+          1. Prioritize catalog domain alignment and constitutional governance
+          2. Consider SEAD-enhanced monorepo tools with governance integration
+          3. Define boundaries supporting catalog pattern separation
+          4. Plan shared catalog components and constitutional frameworks
+        template: |
+          **Constitutional Structure:** {{repo_structure_choice}}
+          **Catalog Organization Strategy:** {{catalog_organization_strategy}}
+          **Governance Integration Tool:** {{governance_integration_tool}}
+          **Constitutional Package Strategy:** {{constitutional_package_strategy}}
+      - id: constitutional-architecture-diagram
+        title: Constitutional Architecture Diagram
+        type: mermaid
+        mermaid_type: graph
+        instruction: |
+          Create Mermaid diagram showing constitutional system architecture:
+          - User entry points with catalog auth-patterns
+          - Frontend leveraging design-system catalog
+          - API layer using api-contracts catalog
+          - Backend services with catalog integration
+          - Databases supporting catalog data-strategy
+          - External integrations via catalog integration-patterns
+          - Constitutional governance touchpoints
+          - Context preservation flow across components
+      - id: constitutional-architectural-patterns
+        title: Constitutional Architectural Patterns
+        instruction: |
+          List constitutional patterns integrating catalog domains:
+          - Overall patterns supporting catalog evolution and governance compliance
+          - Frontend patterns using design-system catalog
+          - Backend patterns leveraging api-contracts and shared-types catalogs
+          - Integration patterns from catalog integration-patterns domain
+          - Constitutional governance patterns ensuring compliance validation
+        repeatable: true
+        template: "- **{{pattern_name}}:** {{pattern_description}} - _Constitutional Rationale:_ {{constitutional_rationale}} - _Catalog Integration:_ {{catalog_integration}}"
+        examples:
+          - "**Constitutional Jamstack:** Static generation with catalog-compliant serverless APIs - _Constitutional Rationale:_ Supports governance validation at build time - _Catalog Integration:_ Uses api-contracts and deployment-strategy catalogs"
+
+  - id: constitutional-tech-stack
+    title: Constitutional Tech Stack
+    instruction: |
+      DEFINITIVE technology selection with constitutional compliance and catalog integration:
+
+      Key constitutional considerations:
+      - Catalog pattern compatibility and evolution support
+      - Governance framework integration capabilities
+      - Context preservation and agent handoff support
+      - Constitutional constraint enforcement mechanisms
+      - Progressive validation and compliance monitoring
+
+      This table is the constitutional source of truth - all development must respect governance constraints.
+    elicit: true
+    constitutional_validation: critical
+    sections:
+      - id: constitutional-tech-stack-table
+        title: Constitutional Technology Stack Table
+        type: table
+        columns: [Category, Technology, Version, Purpose, Constitutional Rationale, Catalog Integration]
+        instruction: |
+          Define technologies with constitutional compliance and catalog integration:
+          - All choices must support governance framework
+          - Prioritize catalog pattern compatibility
+          - Include constitutional validation capabilities
+          - Ensure context preservation support
+        examples:
+          - ["Frontend Language", "TypeScript", "5.3.3", "Type-safe development", "Strong typing supports constitutional validation", "shared-types catalog integration"]
+          - ["Backend Framework", "NestJS", "10.3.2", "Enterprise backend", "Governance patterns align with constitutional framework", "api-contracts and validation-schemas catalogs"]
+
+  - id: constitutional-data-models
+    title: Constitutional Data Models
+    instruction: |
+      Define constitutional data models with catalog integration:
+
+      1. Review constitutional PRD requirements and shared-types catalog
+      2. Identify entities using catalog patterns and governance constraints
+      3. Create TypeScript interfaces supporting constitutional validation
+      4. Show relationships respecting catalog data-strategy patterns
+      5. Include constitutional compliance validation requirements
+      6. Plan catalog evolution contribution opportunities
+    elicit: true
+    constitutional_validation: required
+    repeatable: true
+    sections:
+      - id: constitutional-model
+        title: "{{model_name}} (Constitutional)"
+        template: |
+          **Constitutional Purpose:** {{constitutional_purpose}}
+          **Catalog Domain:** {{catalog_domain}} (Pattern: {{catalog_pattern}})
+          **Governance Compliance:** {{governance_compliance_requirements}}
+
+          **Constitutional Attributes:**
+          - {{attribute_1}}: {{type_1}} (Catalog Type: {{catalog_type_reference}}) - {{description_1}} - _Validation:_ {{constitutional_validation_1}}
+        sections:
+          - id: constitutional-typescript-interface
+            title: Constitutional TypeScript Interface
+            type: code
+            language: typescript
+            template: |
+              // Constitutional interface with catalog integration
+              // Catalog Domain: {{catalog_domain}}
+              // Governance Level: {{governance_level}}
+              
+              {{constitutional_model_interface}}
+          - id: constitutional-relationships
+            title: Constitutional Relationships
+            type: bullet-list
+            template: "- {{relationship}} (Catalog Pattern: {{catalog_pattern}}, Governance: {{governance_constraint}})"
+
+  - id: constitutional-api-spec
+    title: Constitutional API Specification
+    instruction: |
+      Create API specification with constitutional compliance and catalog integration:
+
+      1. Use api-contracts catalog patterns and constitutional validation
+      2. Include authentication using auth-patterns catalog
+      3. Define schemas using shared-types catalog with governance validation
+      4. Document constitutional compliance requirements
+      5. Include context preservation for agent handoffs
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-rest-api
+        title: Constitutional REST API Specification
+        condition: API style is REST
+        type: code
+        language: yaml
+        template: |
+          openapi: 3.0.0
+          info:
+            title: {{api_title}}
+            version: {{api_version}}
+            description: {{api_description}}
+            x-constitutional-compliance: {{constitutional_compliance_level}}
+            x-catalog-integration: {{catalog_integration_level}}
+          servers:
+            - url: {{server_url}}
+              description: {{server_description}}
+          components:
+            schemas:
+              # Reference catalog shared-types
+              $ref: '../sead-catalog/shared-types/{{constitutional_types}}.yaml'
+            securitySchemes:
+              # Reference catalog auth-patterns
+              $ref: '../sead-catalog/auth-patterns/{{auth_scheme}}.yaml'
+
+  - id: constitutional-components
+    title: Constitutional Components
+    instruction: |
+      Define constitutional components with catalog integration and governance compliance:
+
+      1. Identify components using catalog patterns and constitutional boundaries
+      2. Define interfaces leveraging api-contracts catalog
+      3. Specify dependencies respecting catalog domain separation
+      4. Include constitutional validation and context preservation capabilities
+      5. Plan component evolution within catalog framework
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-component-list
+        repeatable: true
+        title: "{{component_name}} (Constitutional)"
+        template: |
+          **Constitutional Responsibility:** {{constitutional_responsibility}}
+          **Catalog Patterns Used:** {{catalog_patterns_used}}
+          **Governance Constraints:** {{governance_constraints}}
+
+          **Constitutional Key Interfaces:**
+          - {{interface_1}} (Catalog Pattern: {{catalog_api_pattern}})
+          - {{interface_2}} (Constitutional Validation: {{constitutional_validation}})
+
+          **Catalog Dependencies:** {{catalog_dependencies}}
+          **Context Preservation:** {{context_preservation_capabilities}}
+
+          **Constitutional Technology Stack:** {{constitutional_component_tech}}
+      - id: constitutional-component-diagrams
+        title: Constitutional Component Diagrams
+        type: mermaid
+        instruction: |
+          Create constitutional component diagrams:
+          - C4 Container diagram with catalog domain boundaries
+          - Component diagram showing constitutional governance integration
+          - Sequence diagrams with context preservation flows
+          - Constitutional validation touchpoints
+
+  - id: constitutional-external-apis
+    title: Constitutional External APIs
+    condition: Project requires external API integrations
+    instruction: |
+      Document external APIs with constitutional and catalog integration:
+
+      1. Identify APIs with integration-patterns catalog compliance
+      2. Ensure authentication using auth-patterns catalog
+      3. Document constitutional compliance and governance constraints
+      4. Plan integration supporting context preservation
+      5. Include catalog pattern evolution opportunities
+    elicit: true
+    constitutional_validation: required
+    repeatable: true
+    sections:
+      - id: constitutional-api
+        title: "{{api_name}} API (Constitutional)"
+        template: |
+          - **Constitutional Purpose:** {{constitutional_purpose}}
+          - **Catalog Integration Pattern:** {{catalog_integration_pattern}}
+          - **Governance Compliance:** {{governance_compliance_level}}
+          - **Documentation:** {{api_docs_url}}
+          - **Constitutional Base URL(s):** {{constitutional_base_urls}}
+          - **Auth Pattern:** {{auth_method}} (Catalog: {{catalog_auth_pattern}})
+          - **Constitutional Rate Limits:** {{constitutional_rate_limits}}
+
+          **Constitutional Key Endpoints:**
+          - `{{method}} {{endpoint_path}}` - {{endpoint_purpose}} (Catalog Contract: {{catalog_contract}})
+
+          **Constitutional Integration Notes:** {{constitutional_integration_considerations}}
+
+  - id: constitutional-core-workflows
+    title: Constitutional Core Workflows
+    type: mermaid
+    mermaid_type: sequence
+    instruction: |
+      Illustrate constitutional workflows with catalog integration:
+
+      1. Identify critical user journeys with catalog touchpoints
+      2. Show component interactions using catalog patterns
+      3. Include constitutional validation points and governance checkpoints
+      4. Document context preservation across agent handoffs
+      5. Create diagrams showing catalog evolution opportunities
+    elicit: true
+    constitutional_validation: required
+
+  - id: constitutional-database-schema
+    title: Constitutional Database Schema
+    instruction: |
+      Transform constitutional models into catalog-compliant database schemas:
+
+      1. Use database from constitutional tech stack
+      2. Integrate with data-strategy catalog patterns
+      3. Include constitutional validation constraints
+      4. Consider catalog evolution and governance compliance
+      5. Support context preservation for data operations
+    elicit: true
+    constitutional_validation: required
+
+  - id: constitutional-frontend-architecture
+    title: Constitutional Frontend Architecture
+    instruction: |
+      Define constitutional frontend architecture with catalog integration.
+      All subsections must leverage design-system catalog and support governance validation.
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-component-architecture
+        title: Constitutional Component Architecture
+        instruction: |
+          Define component organization with design-system catalog integration and constitutional compliance
+        sections:
+          - id: constitutional-component-organization
+            title: Constitutional Component Organization
+            type: code
+            language: text
+            template: |
+              # Constitutional component structure with catalog integration
+              {{constitutional_component_structure}}
+          - id: constitutional-component-template
+            title: Constitutional Component Template
+            type: code
+            language: typescript
+            template: |
+              // Constitutional component template with catalog patterns
+              // Design System: {{design_system_catalog_reference}}
+              // Governance Level: {{governance_level}}
+              
+              {{constitutional_component_template}}
+      - id: constitutional-state-management
+        title: Constitutional State Management Architecture
+        instruction: |
+          Detail constitutional state management with catalog state-management patterns
+        sections:
+          - id: constitutional-state-structure
+            title: Constitutional State Structure
+            type: code
+            language: typescript
+            template: |
+              // Constitutional state with catalog integration
+              // State Management Catalog: {{state_catalog_reference}}
+              // Context Preservation: {{context_preservation_level}}
+              
+              {{constitutional_state_structure}}
+
+  - id: constitutional-backend-architecture
+    title: Constitutional Backend Architecture
+    instruction: |
+      Define constitutional backend architecture with catalog integration and governance compliance
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-service-architecture
+        title: Constitutional Service Architecture
+        instruction: |
+          Define service organization with catalog domain alignment and constitutional governance
+        sections:
+          - id: constitutional-serverless-architecture
+            condition: Serverless architecture chosen
+            sections:
+              - id: constitutional-function-organization
+                title: Constitutional Function Organization
+                type: code
+                language: text
+                template: |
+                  # Constitutional serverless structure with catalog integration
+                  {{constitutional_function_structure}}
+              - id: constitutional-function-template
+                title: Constitutional Function Template
+                type: code
+                language: typescript
+                template: |
+                  // Constitutional serverless function with catalog patterns
+                  // API Contracts: {{api_contracts_catalog_reference}}
+                  // Governance Validation: {{governance_validation_level}}
+                  
+                  {{constitutional_function_template}}
+
+  - id: constitutional-unified-project-structure
+    title: Constitutional Unified Project Structure
+    instruction: |
+      Create constitutional monorepo structure with catalog integration and governance support
+    elicit: true
+    constitutional_validation: critical
+    type: code
+    language: plaintext
+    template: |
+      {{project-name}}/
+      ├── .sead/                          # Constitutional configuration
+      │   ├── constitutional-framework.yaml
+      │   ├── catalog-integration.yaml
+      │   └── context-preservation.yaml
+      ├── sead-catalog/                   # Local catalog extensions
+      │   ├── api-contracts/
+      │   ├── shared-types/
+      │   ├── design-system/
+      │   ├── state-management/
+      │   ├── error-handling/
+      │   ├── validation-schemas/
+      │   ├── test-patterns/
+      │   ├── auth-patterns/
+      │   ├── integration-patterns/
+      │   ├── data-strategy/
+      │   └── deployment-strategy/
+      ├── apps/                           # Constitutional applications
+      │   ├── web/                        # Constitutional frontend
+      │   │   ├── src/
+      │   │   │   ├── components/         # Design-system catalog compliant
+      │   │   │   ├── pages/              # Constitutional routing
+      │   │   │   ├── hooks/              # Catalog-aware custom hooks
+      │   │   │   ├── services/           # API-contracts integration
+      │   │   │   ├── stores/             # State-management catalog
+      │   │   │   ├── constitutional/     # Governance validation
+      │   │   │   └── utils/              # Constitutional utilities
+      │   │   └── tests/                  # Test-patterns catalog
+      │   └── api/                        # Constitutional backend
+      │       ├── src/
+      │       │   ├── routes/             # API-contracts compliance
+      │       │   ├── services/           # Constitutional business logic
+      │       │   ├── models/             # Shared-types integration
+      │       │   ├── middleware/         # Auth-patterns catalog
+      │       │   ├── constitutional/     # Governance enforcement
+      │       │   └── utils/              # Constitutional utilities
+      │       └── tests/                  # Test-patterns catalog
+      ├── packages/                       # Constitutional shared packages
+      │   ├── constitutional-shared/      # Constitutional shared utilities
+      │   │   ├── src/
+      │   │   │   ├── types/              # Shared-types catalog
+      │   │   │   ├── validation/         # Validation-schemas catalog
+      │   │   │   ├── governance/         # Constitutional framework
+      │   │   │   └── catalog/            # Catalog integration utilities
+      │   └── constitutional-ui/          # Constitutional UI components
+      │       ├── src/
+      │       └── design-system/          # Design-system catalog
+      ├── constitutional/                 # Constitutional governance
+      │   ├── constraints/                # Constitutional constraint files
+      │   ├── validation/                 # Governance validation
+      │   └── context-preservation/       # Agent handoff support
+      ├── docs/                           # Constitutional documentation
+      │   ├── sead-prd.md
+      │   ├── sead-front-end-spec.md
+      │   └── sead-fullstack-architecture.md
+      └── README.md
+
+  - id: constitutional-coding-standards
+    title: Constitutional Coding Standards
+    instruction: |
+      Define CRITICAL constitutional standards for catalog compliance and governance validation.
+      Focus on project-specific rules preventing constitutional violations.
+    elicit: true
+    constitutional_validation: mandatory
+    sections:
+      - id: constitutional-critical-rules
+        title: Constitutional Critical Rules
+        repeatable: true
+        template: "- **{{rule_name}}:** {{rule_description}} (Constitutional Impact: {{constitutional_impact}}, Catalog Domain: {{catalog_domain}})"
+        examples:
+          - "**Catalog Type Sharing:** Always use shared-types catalog - never duplicate type definitions (Constitutional Impact: Prevents type drift, Catalog Domain: shared-types)"
+          - "**Constitutional API Calls:** Use api-contracts catalog patterns - never direct HTTP without catalog compliance (Constitutional Impact: Ensures governance validation, Catalog Domain: api-contracts)"
+          - "**Context Preservation:** All agent handoffs must preserve constitutional context via .sead/context.yaml (Constitutional Impact: Maintains governance continuity, Catalog Domain: context-management)"
+
+  - id: constitutional-monitoring
+    title: Constitutional Monitoring and Observability
+    instruction: |
+      Define constitutional monitoring with catalog integration and governance validation
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-monitoring-stack
+        title: Constitutional Monitoring Stack
+        template: |
+          - **Constitutional Frontend Monitoring:** {{constitutional_frontend_monitoring}} (Catalog Integration: {{catalog_frontend_monitoring}})
+          - **Constitutional Backend Monitoring:** {{constitutional_backend_monitoring}} (Governance Validation: {{governance_backend_monitoring}})
+          - **Constitutional Error Tracking:** {{constitutional_error_tracking}} (Context Preservation: {{context_error_tracking}})
+          - **Catalog Evolution Monitoring:** {{catalog_evolution_monitoring}} (Pattern Usage Tracking: {{pattern_usage_tracking}})
+
+  - id: constitutional-checklist-results
+    title: Constitutional Checklist Results Report
+    instruction: |
+      Execute constitutional fullstack architecture checklist validating:
+      - Constitutional compliance completeness across all architectural layers
+      - Catalog integration validation for all domains
+      - Governance framework adherence throughout system design
+      - Context preservation implementation across all components
+      
+      Before running checklist, offer to output complete constitutional architecture document.
+    constitutional_validation: mandatory
+
+  - id: constitutional-next-steps
+    title: Constitutional Next Steps
+    instruction: |
+      Define next steps ensuring constitutional continuity and catalog integration:
+      - Agent handoffs preserving architectural context
+      - Implementation phases respecting governance constraints
+      - Catalog evolution opportunities and governance compliance validation
+    constitutional_validation: required
+    content: |
+      **Constitutional Implementation Phases:**
+      
+      1. **Constitutional Foundation Setup** (Agent: Constitutional Developer)
+      - Initialize constitutional project structure with catalog integration
+      - Set up governance validation framework
+      - Implement context preservation mechanisms
+      
+      2. **Catalog Integration Implementation** (Agent: Constitutional Architect)
+      - Implement all catalog domain integrations
+      - Set up constitutional validation pipelines
+      - Configure governance compliance monitoring
+      
+      3. **Constitutional Development Workflow** (Agent: Constitutional Team)
+      - All subsequent development must maintain constitutional compliance
+      - Context preservation validated across all agent handoffs
+      - Catalog evolution documented and governance-approved
+      
+      **Critical Constitutional Context for Next Agents:**
+      - Development Mode: {{development_mode}} (Governance Level: {{governance_level}})
+      - Catalog Integration State: {{catalog_integration_state}}
+      - Constitutional Validation Requirements: {{constitutional_validation_requirements}}
+      - Context Preservation: All agents must reference .sead/context.yaml for continuity
