@@ -1,0 +1,359 @@
+# SEAD Project Brief Template
+template:
+  id: sead-project-brief-template-v1
+  name: SEAD Project Brief
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/sead-project-brief.md
+    title: "SEAD Project Brief: {{project_name}}"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  governance_validation: continuous
+
+workflow:
+  mode: constitutional_interactive
+  elicitation: sead-advanced-elicitation
+  catalog_validation: enabled
+  constraint_enforcement: progressive
+  custom_elicitation:
+    title: "Constitutional Project Brief Elicitation Actions"
+    options:
+      - "Expand section with catalog pattern awareness"
+      - "Validate against catalog-compliant successful products"
+      - "Stress test assumptions within constitutional constraints"
+      - "Explore alternative solutions using catalog patterns"
+      - "Analyze resource trade-offs respecting governance principles"
+      - "Generate risk mitigation with catalog integration"
+      - "Challenge scope from constitutional MVP perspective"
+      - "Brainstorm catalog-enhanced feature possibilities"
+      - "Assess constitutional compliance requirements"
+      - "Proceed to next section"
+
+sections:
+  - id: constitutional-introduction
+    title: Constitutional Framework Introduction
+    instruction: |
+      Before creating the project brief, establish constitutional framework context:
+      
+      1. **Mode Detection**: Identify current development mode (prototype/development/build-to-deploy)
+      2. **Catalog Assessment**: Review existing catalog domains relevant to project scope
+      3. **Constitutional Constraints**: Document governance principles applicable to this project
+      4. **Context Preservation**: Plan agent handoff requirements for development workflow
+      
+      Ask user for mode preference and available inputs (brainstorming results, catalog references, constitutional requirements).
+    sections:
+      - id: constitutional-context
+        title: Constitutional Framework Context
+        template: |
+          **Development Mode:** {{development_mode}}
+          **Catalog Domains Applicable:** {{applicable_catalog_domains}}
+          **Constitutional Constraints:** {{governance_constraints}}
+          **Context Preservation Requirements:** {{context_requirements}}
+          
+          **Catalog Integration Assessment:**
+          - **Existing Patterns Available:** {{existing_patterns}}
+          - **Pattern Evolution Opportunities:** {{pattern_evolution}}
+          - **Catalog Compliance Level Required:** {{compliance_level}}
+
+  - id: introduction
+    title: Introduction
+    instruction: |
+      This SEAD template creates a constitutional project brief that integrates with catalog patterns and governance framework.
+      
+      **Constitutional Workflow Options:**
+      1. **Constitutional Interactive Mode** - Collaborative development with catalog validation
+      2. **Constitutional YOLO Mode** - Generate catalog-aware draft for governance review
+      
+      Before proceeding, assess:
+      - Available catalog patterns and integration points
+      - Constitutional compliance requirements
+      - Context preservation needs for agent handoffs
+      - Governance validation touchpoints
+
+  - id: executive-summary
+    title: Executive Summary
+    instruction: |
+      Create constitutional executive summary with catalog awareness. Include:
+      - Product concept aligned with catalog patterns
+      - Primary problem with catalog-compliant solution potential
+      - Target market within governance constraints
+      - Value proposition enhanced by catalog integration
+      - Constitutional compliance overview
+    constitutional_validation: required
+    template: |
+      {{executive_summary_content}}
+      
+      **Constitutional Compliance:** {{constitutional_summary}}
+      **Catalog Integration:** {{catalog_integration_summary}}
+
+  - id: problem-statement
+    title: Problem Statement
+    instruction: |
+      Articulate problem with constitutional perspective and catalog context:
+      - Current state considering existing catalog patterns
+      - Impact assessment within governance framework
+      - Why catalog-enhanced solutions could succeed
+      - Constitutional urgency and compliance considerations
+    catalog_validation: required
+    template: |
+      {{detailed_problem_description}}
+      
+      **Catalog Pattern Analysis:** {{catalog_pattern_relevance}}
+      **Constitutional Implications:** {{governance_implications}}
+
+  - id: proposed-solution
+    title: Proposed Solution
+    instruction: |
+      Describe constitutional solution approach with catalog integration:
+      - Core concept leveraging existing catalog patterns
+      - Differentiators through catalog-enhanced capabilities
+      - Success factors including constitutional compliance
+      - High-level vision supporting catalog evolution
+    constitutional_validation: required
+    template: |
+      {{solution_description}}
+      
+      **Catalog Pattern Integration:** {{catalog_integration_approach}}
+      **Constitutional Alignment:** {{governance_alignment}}
+
+  - id: target-users
+    title: Target Users
+    instruction: |
+      Define users with constitutional and catalog considerations:
+      - User segments respecting governance constraints
+      - Workflows that benefit from catalog patterns
+      - Needs addressable through constitutional framework
+      - Goals achievable via catalog-compliant solutions
+    sections:
+      - id: primary-segment
+        title: "Primary User Segment: {{segment_name}}"
+        template: |
+          {{primary_user_description}}
+          
+          **Catalog Pattern Benefits:** {{catalog_benefits_for_segment}}
+          **Constitutional Considerations:** {{governance_considerations}}
+      - id: secondary-segment
+        title: "Secondary User Segment: {{segment_name}}"
+        condition: Has secondary user segment
+        template: |
+          {{secondary_user_description}}
+          
+          **Catalog Pattern Benefits:** {{catalog_benefits_for_segment}}
+          **Constitutional Considerations:** {{governance_considerations}}
+
+  - id: goals-metrics
+    title: Goals & Success Metrics
+    instruction: |
+      Establish constitutional objectives with catalog-aware metrics. Include:
+      - SMART goals supporting catalog evolution
+      - Success metrics including governance compliance
+      - KPIs measuring constitutional adherence
+    constitutional_validation: required
+    sections:
+      - id: business-objectives
+        title: Business Objectives
+        type: bullet-list
+        template: "- {{objective_with_metric}} (Catalog Domain: {{catalog_domain}}, Constitutional Principle: {{governance_principle}})"
+      - id: user-success-metrics
+        title: User Success Metrics
+        type: bullet-list
+        template: "- {{user_metric}} (Catalog Integration: {{catalog_measurement}})"
+      - id: constitutional-kpis
+        title: Constitutional KPIs
+        type: bullet-list
+        template: "- {{constitutional_kpi}}: {{definition_and_target}} (Governance Validation: {{validation_method}})"
+
+  - id: mvp-scope
+    title: Constitutional MVP Scope
+    instruction: |
+      Define constitutional MVP with catalog pattern priorities:
+      - Core features using existing catalog patterns
+      - Scope boundaries respecting governance constraints
+      - Success criteria including constitutional compliance
+      - Pattern evolution opportunities within MVP
+    constitutional_validation: critical
+    sections:
+      - id: core-features
+        title: Core Features (Constitutional Must-Haves)
+        type: bullet-list
+        template: "- **{{feature}}:** {{description_and_rationale}} (Catalog Pattern: {{catalog_pattern}}, Governance: {{constitutional_requirement}})"
+      - id: out-of-scope
+        title: Out of Constitutional MVP Scope
+        type: bullet-list
+        template: "- {{feature_or_capability}} (Rationale: {{constitutional_rationale}})"
+      - id: mvp-success-criteria
+        title: Constitutional MVP Success Criteria
+        template: |
+          {{mvp_success_definition}}
+          
+          **Catalog Compliance Criteria:** {{catalog_success_metrics}}
+          **Constitutional Validation Gates:** {{governance_validation_criteria}}
+
+  - id: post-mvp-vision
+    title: Post-MVP Constitutional Vision
+    instruction: |
+      Outline constitutional long-term direction with catalog evolution:
+      - Phase planning respecting governance constraints
+      - Vision supporting catalog pattern development
+      - Expansion opportunities within constitutional framework
+    sections:
+      - id: phase-2-features
+        title: Constitutional Phase 2 Features
+        template: |
+          {{next_priority_features}}
+          
+          **Catalog Evolution Requirements:** {{catalog_evolution_needs}}
+      - id: long-term-vision
+        title: Constitutional Long-term Vision
+        template: |
+          {{one_two_year_vision}}
+          
+          **Governance Framework Evolution:** {{constitutional_growth_plan}}
+      - id: catalog-expansion-opportunities
+        title: Catalog-Enhanced Expansion Opportunities
+        template: |
+          {{potential_expansions}}
+          
+          **Pattern Innovation Areas:** {{pattern_development_opportunities}}
+
+  - id: technical-considerations
+    title: Constitutional Technical Considerations
+    instruction: |
+      Document technical constraints with constitutional and catalog integration:
+      - Platform requirements supporting catalog patterns
+      - Technology preferences respecting governance framework
+      - Architecture considerations for constitutional compliance
+    catalog_validation: required
+    sections:
+      - id: platform-requirements
+        title: Constitutional Platform Requirements
+        template: |
+          - **Target Platforms:** {{platforms}} (Catalog Support: {{catalog_platform_support}})
+          - **Browser/OS Support:** {{specific_requirements}} (Constitutional Constraints: {{governance_platform_constraints}})
+          - **Performance Requirements:** {{performance_specs}} (Catalog Pattern Performance: {{catalog_performance_requirements}})
+      - id: technology-preferences
+        title: Catalog-Aware Technology Preferences
+        template: |
+          - **Frontend:** {{frontend_preferences}} (Catalog Integration: {{frontend_catalog_support}})
+          - **Backend:** {{backend_preferences}} (API Contracts: {{api_catalog_integration}})
+          - **Database:** {{database_preferences}} (Data Strategy: {{data_catalog_alignment}})
+          - **Hosting/Infrastructure:** {{infrastructure_preferences}} (Deployment Catalog: {{deployment_catalog_support}})
+      - id: constitutional-architecture-considerations
+        title: Constitutional Architecture Considerations
+        template: |
+          - **Repository Structure:** {{repo_thoughts}} (Catalog Organization: {{catalog_structure_requirements}})
+          - **Service Architecture:** {{service_thoughts}} (Constitutional Boundaries: {{governance_service_constraints}})
+          - **Integration Requirements:** {{integration_needs}} (Catalog Patterns: {{integration_catalog_support}})
+          - **Security/Compliance:** {{security_requirements}} (Constitutional Security: {{governance_security_framework}})
+
+  - id: constraints-assumptions
+    title: Constitutional Constraints & Assumptions
+    instruction: |
+      Document limitations with constitutional and catalog context:
+      - Constraints affecting catalog integration
+      - Assumptions about governance compliance
+      - Constitutional limitations and opportunities
+    constitutional_validation: required
+    sections:
+      - id: constitutional-constraints
+        title: Constitutional Constraints
+        template: |
+          - **Budget:** {{budget_info}} (Catalog Investment: {{catalog_budget_considerations}})
+          - **Timeline:** {{timeline_info}} (Constitutional Validation Time: {{governance_timeline_impact}})
+          - **Resources:** {{resource_info}} (Catalog Expertise: {{catalog_skill_requirements}})
+          - **Technical:** {{technical_constraints}} (Constitutional Technical Limits: {{governance_technical_constraints}})
+          - **Governance:** {{governance_constraints}} (Constitutional Compliance Requirements: {{constitutional_limitations}})
+      - id: constitutional-assumptions
+        title: Constitutional Key Assumptions
+        type: bullet-list
+        template: "- {{assumption}} (Constitutional Impact: {{governance_impact}}, Catalog Relevance: {{catalog_relevance}})"
+
+  - id: risks-questions
+    title: Constitutional Risks & Open Questions
+    instruction: |
+      Identify constitutional unknowns and catalog integration challenges:
+      - Risks to governance compliance
+      - Questions about catalog pattern applicability
+      - Research needs for constitutional validation
+    constitutional_validation: required
+    sections:
+      - id: constitutional-risks
+        title: Constitutional Key Risks
+        type: bullet-list
+        template: "- **{{risk}}:** {{description_and_impact}} (Constitutional Mitigation: {{governance_mitigation}}, Catalog Support: {{catalog_risk_mitigation}})"
+      - id: constitutional-questions
+        title: Constitutional Open Questions
+        type: bullet-list
+        template: "- {{question}} (Governance Implications: {{constitutional_implications}}, Catalog Research: {{catalog_research_needs}})"
+      - id: constitutional-research-areas
+        title: Constitutional Research Areas
+        type: bullet-list
+        template: "- {{research_topic}} (Constitutional Validation: {{governance_research_requirements}}, Catalog Investigation: {{catalog_research_scope}})"
+
+  - id: appendices
+    title: Constitutional Appendices
+    sections:
+      - id: catalog-research-summary
+        title: A. Catalog & Constitutional Research Summary
+        condition: Has research findings
+        instruction: |
+          Summarize constitutional and catalog findings from:
+          - Market research with governance considerations
+          - Competitive analysis including constitutional approaches
+          - User interviews covering catalog pattern preferences
+          - Technical feasibility with constitutional constraints
+          - Catalog pattern analysis and applicability assessment
+      - id: constitutional-stakeholder-input
+        title: B. Constitutional Stakeholder Input
+        condition: Has stakeholder feedback
+        template: |
+          {{stakeholder_feedback}}
+          
+          **Constitutional Alignment Assessment:** {{governance_stakeholder_alignment}}
+          **Catalog Integration Preferences:** {{catalog_stakeholder_preferences}}
+      - id: constitutional-references
+        title: C. Constitutional References
+        template: |
+          {{relevant_links_and_docs}}
+          
+          **Catalog Pattern References:** {{catalog_pattern_documentation}}
+          **Constitutional Framework References:** {{governance_documentation}}
+
+  - id: constitutional-next-steps
+    title: Constitutional Next Steps
+    instruction: |
+      Define next steps with constitutional compliance and catalog integration:
+      - Immediate actions supporting governance framework
+      - Handoff requirements for constitutional continuity
+      - Catalog integration planning
+    constitutional_validation: mandatory
+    sections:
+      - id: constitutional-immediate-actions
+        title: Constitutional Immediate Actions
+        type: numbered-list
+        template: "{{action_item}} (Constitutional Validation: {{governance_validation_required}}, Catalog Integration: {{catalog_integration_needed}})"
+      - id: constitutional-pm-handoff
+        title: Constitutional PM Handoff
+        content: |
+          This Constitutional Project Brief provides full context for {{project_name}} with SEAD methodology integration.
+          
+          **Next Agent Instructions:**
+          Please start in 'Constitutional PRD Generation Mode' with the following requirements:
+          1. **Catalog Integration**: Review applicable catalog domains and existing patterns
+          2. **Constitutional Compliance**: Ensure all PRD elements respect governance framework
+          3. **Context Preservation**: Maintain constitutional context throughout development
+          4. **Mode Awareness**: Respect current development mode constraints ({{development_mode}})
+          
+          Review this constitutional brief thoroughly and work with the user to create the SEAD PRD section by section, ensuring catalog compliance and constitutional adherence throughout.
+          
+          **Critical Constitutional Requirements:**
+          - All features must align with catalog patterns or provide evolution path
+          - Technical decisions must respect governance constraints
+          - User stories must support constitutional compliance validation
+          - Architecture must enable context preservation across agent handoffs

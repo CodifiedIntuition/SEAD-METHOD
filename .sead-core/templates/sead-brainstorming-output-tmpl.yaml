@@ -1,0 +1,255 @@
+# SEAD Brainstorming Session Results Template
+template:
+  id: sead-brainstorming-output-template-v1
+  name: SEAD Brainstorming Session Results
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/sead-brainstorming-session-results.md
+    title: "SEAD Brainstorming Session Results"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  governance_validation: continuous
+
+workflow:
+  mode: constitutional_non_interactive
+  catalog_validation: enabled
+  constraint_enforcement: progressive
+
+sections:
+  - id: constitutional-header
+    title: Constitutional Session Header
+    content: |
+      **Session Date:** {{date}}
+      **SEAD Facilitator:** {{agent_role}} {{agent_name}}
+      **Participant:** {{user_name}}
+      **Development Mode:** {{development_mode}}
+      **Catalog Integration:** {{catalog_integration_level}}
+      **Constitutional Framework:** {{constitutional_framework_version}}
+
+  - id: constitutional-executive-summary
+    title: Constitutional Executive Summary
+    sections:
+      - id: constitutional-summary-details
+        template: |
+          **Topic:** {{session_topic}}
+          **Constitutional Context:** {{governance_context}}
+          **Catalog Domains Referenced:** {{catalog_domains}}
+
+          **Session Goals:** {{stated_goals}}
+          **Constitutional Objectives:** {{governance_objectives}}
+          **Catalog Evolution Opportunities:** {{catalog_opportunities}}
+
+          **Techniques Used:** {{techniques_list}}
+          **Constitutional Validation Applied:** {{governance_validation_methods}}
+
+          **Total Ideas Generated:** {{total_ideas}}
+          **Catalog-Compliant Ideas:** {{catalog_compliant_ideas}}
+          **Constitutional Innovation Score:** {{constitutional_innovation_score}}
+      - id: constitutional-key-themes
+        title: "Constitutional Key Themes Identified:"
+        type: bullet-list
+        template: "- {{theme}} (Catalog Relevance: {{catalog_relevance}}, Constitutional Alignment: {{governance_alignment}})"
+
+  - id: constitutional-technique-sessions
+    title: Constitutional Technique Sessions
+    repeatable: true
+    sections:
+      - id: constitutional-technique
+        title: "{{technique_name}} - {{duration}} (Constitutional Mode)"
+        sections:
+          - id: constitutional-description
+            template: |
+              **Description:** {{technique_description}}
+              **Constitutional Enhancement:** {{governance_enhancement}}
+              **Catalog Integration Method:** {{catalog_integration_method}}
+          - id: constitutional-ideas-generated
+            title: "Constitutional Ideas Generated:"
+            type: numbered-list
+            template: "{{idea}} (Catalog Pattern: {{catalog_pattern}}, Constitutional Compliance: {{governance_compliance}})"
+          - id: constitutional-insights
+            title: "Constitutional Insights Discovered:"
+            type: bullet-list
+            template: "- {{insight}} (Governance Implication: {{governance_implication}}, Catalog Evolution: {{catalog_evolution_potential}})"
+          - id: constitutional-connections
+            title: "Constitutional Notable Connections:"
+            type: bullet-list
+            template: "- {{connection}} (Cross-Catalog Integration: {{catalog_integration}}, Constitutional Synergy: {{governance_synergy}})"
+
+  - id: constitutional-idea-categorization
+    title: Constitutional Idea Categorization
+    sections:
+      - id: constitutional-immediate-opportunities
+        title: Constitutional Immediate Opportunities
+        content: "*Catalog-compliant ideas ready for constitutional implementation*"
+        repeatable: true
+        type: numbered-list
+        template: |
+          **{{idea_name}}** (Constitutional Priority: {{constitutional_priority}})
+          - Description: {{description}}
+          - Catalog Pattern Support: {{catalog_pattern_support}}
+          - Constitutional Rationale: {{governance_rationale}}
+          - Why immediate: {{rationale}} (Governance Constraints: {{governance_constraints}})
+          - Resources needed: {{requirements}} (Catalog Dependencies: {{catalog_dependencies}})
+          - Constitutional Validation Requirements: {{validation_requirements}}
+      - id: constitutional-future-innovations
+        title: Constitutional Future Innovations
+        content: "*Ideas requiring catalog evolution and constitutional development*"
+        repeatable: true
+        type: numbered-list
+        template: |
+          **{{idea_name}}** (Constitutional Development Stage: {{constitutional_stage}})
+          - Description: {{description}}
+          - Catalog Evolution Needed: {{catalog_evolution_needed}}
+          - Constitutional Framework Development: {{governance_development_needed}}
+          - Development needed: {{development_needed}} (Constitutional Validation: {{validation_development}})
+          - Timeline estimate: {{timeline}} (Constitutional Milestones: {{governance_milestones}})
+          - Catalog Pattern Innovation Potential: {{pattern_innovation_potential}}
+      - id: constitutional-moonshots
+        title: Constitutional Moonshots
+        content: "*Constitutionally ambitious, catalog-transformative concepts*"
+        repeatable: true
+        type: numbered-list
+        template: |
+          **{{idea_name}}** (Constitutional Innovation Level: {{constitutional_innovation_level}})
+          - Description: {{description}}
+          - Catalog Transformation Potential: {{catalog_transformation_potential}}
+          - Constitutional Framework Impact: {{governance_framework_impact}}
+          - Transformative potential: {{potential}} (Governance Revolution: {{governance_revolution_potential}})
+          - Challenges to overcome: {{challenges}} (Constitutional Challenges: {{governance_challenges}})
+          - Catalog Pattern Paradigm Shifts: {{pattern_paradigm_shifts}}
+      - id: constitutional-insights-learnings
+        title: Constitutional Insights & Learnings
+        content: "*Key constitutional realizations and catalog evolution insights*"
+        type: bullet-list
+        template: "- {{insight}}: {{description_and_implications}} (Constitutional Learning: {{governance_learning}}, Catalog Evolution: {{catalog_evolution_insight}})"
+
+  - id: constitutional-action-planning
+    title: Constitutional Action Planning
+    sections:
+      - id: constitutional-top-priorities
+        title: Top 3 Constitutional Priority Ideas
+        sections:
+          - id: constitutional-priority-1
+            title: "#1 Constitutional Priority: {{idea_name}}"
+            template: |
+              - Constitutional Rationale: {{constitutional_rationale}}
+              - Catalog Integration Benefits: {{catalog_integration_benefits}}
+              - Governance Compliance Value: {{governance_compliance_value}}
+              - Rationale: {{rationale}} (Constitutional Framework Support: {{governance_framework_support}})
+              - Next steps: {{next_steps}} (Constitutional Validation Steps: {{validation_steps}})
+              - Resources needed: {{resources}} (Catalog Dependencies: {{catalog_dependencies}})
+              - Timeline: {{timeline}} (Constitutional Milestones: {{governance_timeline}})
+              - Context Preservation Plan: {{context_preservation_plan}}
+          - id: constitutional-priority-2
+            title: "#2 Constitutional Priority: {{idea_name}}"
+            template: |
+              - Constitutional Rationale: {{constitutional_rationale}}
+              - Catalog Integration Benefits: {{catalog_integration_benefits}}
+              - Governance Compliance Value: {{governance_compliance_value}}
+              - Rationale: {{rationale}} (Constitutional Framework Support: {{governance_framework_support}})
+              - Next steps: {{next_steps}} (Constitutional Validation Steps: {{validation_steps}})
+              - Resources needed: {{resources}} (Catalog Dependencies: {{catalog_dependencies}})
+              - Timeline: {{timeline}} (Constitutional Milestones: {{governance_timeline}})
+              - Context Preservation Plan: {{context_preservation_plan}}
+          - id: constitutional-priority-3
+            title: "#3 Constitutional Priority: {{idea_name}}"
+            template: |
+              - Constitutional Rationale: {{constitutional_rationale}}
+              - Catalog Integration Benefits: {{catalog_integration_benefits}}
+              - Governance Compliance Value: {{governance_compliance_value}}
+              - Rationale: {{rationale}} (Constitutional Framework Support: {{governance_framework_support}})
+              - Next steps: {{next_steps}} (Constitutional Validation Steps: {{validation_steps}})
+              - Resources needed: {{resources}} (Catalog Dependencies: {{catalog_dependencies}})
+              - Timeline: {{timeline}} (Constitutional Milestones: {{governance_timeline}})
+              - Context Preservation Plan: {{context_preservation_plan}}
+
+  - id: constitutional-reflection-followup
+    title: Constitutional Reflection & Follow-up
+    sections:
+      - id: constitutional-what-worked
+        title: What Worked Well (Constitutional Perspective)
+        type: bullet-list
+        template: "- {{aspect}} (Constitutional Enhancement: {{governance_enhancement}}, Catalog Integration: {{catalog_integration_success}})"
+      - id: constitutional-areas-exploration
+        title: Constitutional Areas for Further Exploration
+        type: bullet-list
+        template: "- {{area}}: {{reason}} (Catalog Evolution Potential: {{catalog_potential}}, Constitutional Development: {{governance_development}})"
+      - id: constitutional-recommended-techniques
+        title: Constitutional Recommended Follow-up Techniques
+        type: bullet-list
+        template: "- {{technique}}: {{reason}} (Constitutional Enhancement: {{governance_enhancement}}, Catalog Integration: {{catalog_integration}})"
+      - id: constitutional-questions-emerged
+        title: Constitutional Questions That Emerged
+        type: bullet-list
+        template: "- {{question}} (Governance Implications: {{governance_implications}}, Catalog Research Needed: {{catalog_research}})"
+      - id: constitutional-next-session
+        title: Constitutional Next Session Planning
+        template: |
+          - **Suggested constitutional topics:** {{followup_topics}} (Catalog Domains: {{catalog_domains}})
+          - **Constitutional validation focus:** {{governance_focus}}
+          - **Catalog evolution priorities:** {{catalog_evolution_priorities}}
+          - **Recommended timeframe:** {{timeframe}} (Constitutional Development Time: {{governance_development_time}})
+          - **Preparation needed:** {{preparation}} (Catalog Research: {{catalog_research}}, Constitutional Framework Review: {{governance_review}})
+          - **Context preservation requirements:** {{context_preservation_requirements}}
+
+  - id: constitutional-catalog-integration-summary
+    title: Constitutional Catalog Integration Summary
+    sections:
+      - id: catalog-patterns-identified
+        title: Catalog Patterns Identified for Development
+        type: bullet-list
+        template: "- {{catalog_domain}}: {{pattern_name}} - {{pattern_description}} (Constitutional Alignment: {{governance_alignment}})"
+      - id: catalog-evolution-opportunities
+        title: Catalog Evolution Opportunities
+        type: bullet-list
+        template: "- {{evolution_opportunity}} (Timeline: {{timeline}}, Constitutional Requirements: {{governance_requirements}})"
+      - id: constitutional-governance-insights
+        title: Constitutional Governance Insights
+        type: bullet-list
+        template: "- {{governance_insight}} (Catalog Impact: {{catalog_impact}}, Implementation Priority: {{implementation_priority}})"
+
+  - id: constitutional-agent-handoff-context
+    title: Constitutional Agent Handoff Context
+    instruction: |
+      Document context preservation requirements for future agents:
+      - Constitutional framework continuity
+      - Catalog integration state
+      - Governance validation checkpoints
+      - Innovation context preservation
+    sections:
+      - id: context-preservation-summary
+        title: Context Preservation Summary
+        template: |
+          **Constitutional State:** {{constitutional_state}}
+          **Catalog Integration Level:** {{catalog_integration_level}}
+          **Governance Validation Status:** {{governance_validation_status}}
+          **Innovation Context:** {{innovation_context}}
+          **Next Agent Requirements:** {{next_agent_requirements}}
+      - id: constitutional-handoff-instructions
+        title: Constitutional Handoff Instructions
+        template: |
+          **For Next Constitutional Agent:**
+          1. Review constitutional brainstorming context and governance framework continuity
+          2. Validate catalog integration opportunities identified in this session
+          3. Maintain constitutional compliance throughout implementation planning
+          4. Preserve innovation context while respecting governance constraints
+          5. Continue catalog pattern evolution as identified in priority ideas
+          
+          **Critical Constitutional Context:**
+          - Development Mode: {{development_mode}} (Constraints: {{mode_constraints}})
+          - Catalog Domains: {{active_catalog_domains}} (Integration Level: {{integration_level}})
+          - Governance Priorities: {{governance_priorities}}
+          - Context Preservation: {{context_preservation_state}}
+
+  - id: constitutional-footer
+    content: |
+      ---
+
+      *Constitutional brainstorming session facilitated using the SEAD-METHOD™ framework*
+      *Catalog integration enabled • Constitutional compliance validated • Context preserved*

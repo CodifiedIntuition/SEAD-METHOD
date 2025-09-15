@@ -1,0 +1,358 @@
+# External Adoption Strategy Template
+# Used by external-adoption-strategy.md task to generate comprehensive team adoption plans
+
+metadata:
+  template_name: "external-adoption-strategy-tmpl.yaml"
+  version: "1.0.0"
+  purpose: "Structure comprehensive adoption strategy for external asset integration"
+  generated_by: "sead-catalog-architect"
+  target_file: "docs/external-asset-adoption-strategy.md"
+
+template_structure:
+  document_header:
+    title: "External Asset Adoption Strategy"
+    date: "{{ strategy_date }}"
+    strategist: "{{ strategist_name }}"
+    project: "{{ project_name }}"
+    mode: "{{ project_mode }}"
+    version: "{{ strategy_version }}"
+
+  executive_summary:
+    description: "Strategic overview of external asset adoption approach"
+    content:
+      adoption_scope: "{{ adoption_scope }}"
+      strategic_objectives: "{{ adoption_objectives }}"
+      target_outcomes: "{{ target_outcomes }}"
+      success_metrics: "{{ success_metrics_summary }}"
+      implementation_timeline: "{{ implementation_timeline }}"
+
+  adoption_readiness_assessment:
+    description: "Current state analysis and readiness evaluation"
+    team_readiness:
+      current_capabilities:
+        - sead_methodology_proficiency: "{{ sead_proficiency }}"
+        - external_asset_familiarity: "{{ external_asset_familiarity }}"
+        - technical_skill_assessment: "{{ technical_skills }}"
+        - change_management_readiness: "{{ change_readiness }}"
+      
+      skill_gap_analysis:
+        - identified_skill_gaps: "{{ skill_gaps }}"
+        - training_requirements: "{{ training_requirements }}"
+        - mentoring_needs: "{{ mentoring_needs }}"
+        - resource_allocation_needs: "{{ resource_needs }}"
+      
+      team_structure_assessment:
+        - team_composition: "{{ team_composition }}"
+        - role_responsibilities: "{{ role_responsibilities }}"
+        - communication_channels: "{{ communication_channels }}"
+        - decision_making_processes: "{{ decision_processes }}"
+
+    project_readiness:
+      current_project_state:
+        - existing_pattern_usage: "{{ existing_patterns }}"
+        - development_workflow_maturity: "{{ workflow_maturity }}"
+        - tool_chain_compatibility: "{{ toolchain_compatibility }}"
+        - quality_assurance_processes: "{{ qa_processes }}"
+      
+      integration_impact_assessment:
+        - workflow_disruption_potential: "{{ workflow_disruption }}"
+        - migration_complexity: "{{ migration_complexity }}"
+        - timeline_impact: "{{ timeline_impact }}"
+        - resource_reallocation_needs: "{{ resource_reallocation }}"
+
+    infrastructure_readiness:
+      development_environment:
+        - environment_compatibility: "{{ env_compatibility }}"
+        - tool_integration_readiness: "{{ tool_integration }}"
+        - build_system_preparation: "{{ build_system_prep }}"
+        - deployment_pipeline_readiness: "{{ deployment_readiness }}"
+
+  phased_adoption_strategy:
+    description: "Multi-phase approach to external asset adoption"
+    adoption_phases:
+      phase_1_exploration:
+        objectives:
+          - "{{ phase_1_objective_1 }}"
+          - "{{ phase_1_objective_2 }}"
+          - "{{ phase_1_objective_3 }}"
+        
+        activities:
+          - pattern_exploration_workshops: "{{ exploration_workshops }}"
+          - sandbox_environment_setup: "{{ sandbox_setup }}"
+          - proof_of_concept_development: "{{ poc_development }}"
+          - initial_feedback_collection: "{{ initial_feedback }}"
+        
+        deliverables:
+          - "{{ phase_1_deliverable_1 }}"
+          - "{{ phase_1_deliverable_2 }}"
+          - "{{ phase_1_deliverable_3 }}"
+        
+        success_criteria:
+          - "{{ phase_1_success_1 }}"
+          - "{{ phase_1_success_2 }}"
+          - "{{ phase_1_success_3 }}"
+        
+        timeline: "{{ phase_1_timeline }}"
+
+      phase_2_integration:
+        objectives:
+          - "{{ phase_2_objective_1 }}"
+          - "{{ phase_2_objective_2 }}"
+          - "{{ phase_2_objective_3 }}"
+        
+        activities:
+          - pattern_migration_implementation: "{{ migration_implementation }}"
+          - team_training_program_execution: "{{ training_execution }}"
+          - quality_gate_establishment: "{{ quality_gates }}"
+          - usage_guideline_creation: "{{ usage_guidelines }}"
+        
+        deliverables:
+          - "{{ phase_2_deliverable_1 }}"
+          - "{{ phase_2_deliverable_2 }}"
+          - "{{ phase_2_deliverable_3 }}"
+        
+        success_criteria:
+          - "{{ phase_2_success_1 }}"
+          - "{{ phase_2_success_2 }}"
+          - "{{ phase_2_success_3 }}"
+        
+        timeline: "{{ phase_2_timeline }}"
+
+      phase_3_standardization:
+        objectives:
+          - "{{ phase_3_objective_1 }}"
+          - "{{ phase_3_objective_2 }}"
+          - "{{ phase_3_objective_3 }}"
+        
+        activities:
+          - workflow_integration_finalization: "{{ workflow_integration }}"
+          - governance_process_establishment: "{{ governance_establishment }}"
+          - maintenance_process_creation: "{{ maintenance_processes }}"
+          - team_autonomy_enablement: "{{ autonomy_enablement }}"
+        
+        deliverables:
+          - "{{ phase_3_deliverable_1 }}"
+          - "{{ phase_3_deliverable_2 }}"
+          - "{{ phase_3_deliverable_3 }}"
+        
+        success_criteria:
+          - "{{ phase_3_success_1 }}"
+          - "{{ phase_3_success_2 }}"
+          - "{{ phase_3_success_3 }}"
+        
+        timeline: "{{ phase_3_timeline }}"
+
+  training_and_knowledge_transfer:
+    description: "Comprehensive training strategy for successful adoption"
+    training_program:
+      role_based_training:
+        developers:
+          - external_pattern_usage_fundamentals: "{{ dev_fundamentals }}"
+          - sead_integration_best_practices: "{{ dev_best_practices }}"
+          - troubleshooting_and_debugging: "{{ dev_troubleshooting }}"
+          - advanced_customization_techniques: "{{ dev_advanced }}"
+        
+        designers:
+          - design_system_integration_training: "{{ designer_integration }}"
+          - token_usage_and_customization: "{{ designer_tokens }}"
+          - accessibility_compliance_training: "{{ designer_accessibility }}"
+          - design_to_development_handoff: "{{ designer_handoff }}"
+        
+        project_managers:
+          - adoption_timeline_management: "{{ pm_timeline }}"
+          - resource_planning_and_allocation: "{{ pm_resources }}"
+          - risk_management_strategies: "{{ pm_risk_management }}"
+          - success_metrics_tracking: "{{ pm_metrics }}"
+        
+        qa_engineers:
+          - external_pattern_testing_strategies: "{{ qa_testing }}"
+          - validation_process_integration: "{{ qa_validation }}"
+          - automated_testing_setup: "{{ qa_automation }}"
+          - compliance_verification_processes: "{{ qa_compliance }}"
+
+      training_delivery:
+        workshop_series:
+          - introduction_workshop: "{{ intro_workshop }}"
+          - hands_on_implementation_workshop: "{{ hands_on_workshop }}"
+          - advanced_techniques_workshop: "{{ advanced_workshop }}"
+          - troubleshooting_workshop: "{{ troubleshooting_workshop }}"
+        
+        documentation_resources:
+          - quick_start_guides: "{{ quick_start }}"
+          - comprehensive_reference_documentation: "{{ reference_docs }}"
+          - video_tutorials_and_walkthroughs: "{{ video_tutorials }}"
+          - faq_and_troubleshooting_guides: "{{ faq_guides }}"
+        
+        mentoring_program:
+          - champion_identification_and_training: "{{ champion_program }}"
+          - peer_mentoring_network: "{{ peer_mentoring }}"
+          - expert_consultation_availability: "{{ expert_consultation }}"
+          - community_of_practice_establishment: "{{ community_practice }}"
+
+  migration_and_integration_support:
+    description: "Support systems for successful pattern migration"
+    migration_strategy:
+      migration_approach:
+        - incremental_migration_methodology: "{{ incremental_migration }}"
+        - parallel_implementation_strategy: "{{ parallel_implementation }}"
+        - rollback_safety_mechanisms: "{{ rollback_mechanisms }}"
+        - validation_checkpoints: "{{ validation_checkpoints }}"
+      
+      migration_tools:
+        - automated_migration_scripts: "{{ migration_scripts }}"
+        - pattern_transformation_utilities: "{{ transformation_utilities }}"
+        - validation_and_testing_tools: "{{ validation_tools }}"
+        - monitoring_and_tracking_systems: "{{ monitoring_systems }}"
+      
+      migration_support:
+        - dedicated_migration_support_team: "{{ migration_support_team }}"
+        - expert_consultation_hours: "{{ consultation_hours }}"
+        - pair_programming_sessions: "{{ pair_programming }}"
+        - code_review_and_feedback_processes: "{{ code_review_process }}"
+
+    integration_assistance:
+      technical_support:
+        - architectural_guidance: "{{ architectural_guidance }}"
+        - implementation_best_practices: "{{ implementation_practices }}"
+        - performance_optimization_guidance: "{{ performance_optimization }}"
+        - security_compliance_support: "{{ security_support }}"
+      
+      process_integration:
+        - workflow_customization_assistance: "{{ workflow_customization }}"
+        - tool_chain_integration_support: "{{ toolchain_integration }}"
+        - quality_assurance_process_adaptation: "{{ qa_adaptation }}"
+        - deployment_process_optimization: "{{ deployment_optimization }}"
+
+  governance_and_quality_assurance:
+    description: "Governance framework for sustainable adoption"
+    governance_framework:
+      adoption_governance:
+        - adoption_decision_processes: "{{ adoption_decisions }}"
+        - pattern_usage_standards: "{{ usage_standards }}"
+        - quality_gate_definitions: "{{ quality_gate_definitions }}"
+        - compliance_monitoring_processes: "{{ compliance_monitoring }}"
+      
+      change_management:
+        - external_asset_update_management: "{{ update_management }}"
+        - breaking_change_communication: "{{ breaking_change_communication }}"
+        - deprecation_and_migration_planning: "{{ deprecation_planning }}"
+        - version_compatibility_management: "{{ version_compatibility }}"
+
+    quality_assurance:
+      quality_standards:
+        - pattern_usage_quality_criteria: "{{ usage_quality_criteria }}"
+        - documentation_quality_standards: "{{ documentation_standards }}"
+        - code_quality_requirements: "{{ code_quality_requirements }}"
+        - performance_quality_thresholds: "{{ performance_thresholds }}"
+      
+      monitoring_and_validation:
+        - continuous_quality_monitoring: "{{ continuous_monitoring }}"
+        - regular_compliance_audits: "{{ compliance_audits }}"
+        - performance_impact_tracking: "{{ performance_tracking }}"
+        - user_satisfaction_measurement: "{{ satisfaction_measurement }}"
+
+  success_measurement_and_optimization:
+    description: "Metrics and optimization approach for adoption success"
+    success_metrics:
+      adoption_metrics:
+        quantitative_metrics:
+          - pattern_adoption_rate: "{{ adoption_rate }}"
+          - team_onboarding_completion_rate: "{{ onboarding_rate }}"
+          - migration_completion_percentage: "{{ migration_completion }}"
+          - usage_frequency_and_coverage: "{{ usage_frequency }}"
+        
+        qualitative_metrics:
+          - developer_satisfaction_scores: "{{ developer_satisfaction }}"
+          - ease_of_use_ratings: "{{ ease_of_use }}"
+          - perceived_value_assessments: "{{ perceived_value }}"
+          - overall_adoption_sentiment: "{{ adoption_sentiment }}"
+
+      business_impact_metrics:
+        - development_velocity_improvement: "{{ velocity_improvement }}"
+        - code_quality_and_consistency_improvement: "{{ quality_improvement }}"
+        - maintenance_overhead_reduction: "{{ maintenance_reduction }}"
+        - time_to_market_improvement: "{{ time_to_market }}"
+
+      technical_metrics:
+        - pattern_compliance_rates: "{{ compliance_rates }}"
+        - defect_reduction_rates: "{{ defect_reduction }}"
+        - performance_impact_measurements: "{{ performance_impact }}"
+        - security_compliance_improvements: "{{ security_improvements }}"
+
+    optimization_approach:
+      continuous_improvement:
+        - feedback_collection_mechanisms: "{{ feedback_mechanisms }}"
+        - regular_strategy_review_cycles: "{{ review_cycles }}"
+        - process_optimization_initiatives: "{{ optimization_initiatives }}"
+        - best_practice_sharing_forums: "{{ best_practice_sharing }}"
+      
+      adaptation_strategies:
+        - strategy_refinement_processes: "{{ refinement_processes }}"
+        - training_program_updates: "{{ training_updates }}"
+        - tool_and_process_improvements: "{{ tool_improvements }}"
+        - governance_framework_evolution: "{{ governance_evolution }}"
+
+  risk_management_and_mitigation:
+    description: "Risk identification and mitigation for adoption success"
+    adoption_risks:
+      team_adoption_risks:
+        - resistance_to_change: "{{ change_resistance_mitigation }}"
+        - skill_gap_challenges: "{{ skill_gap_mitigation }}"
+        - workflow_disruption_concerns: "{{ workflow_disruption_mitigation }}"
+        - training_effectiveness_risks: "{{ training_effectiveness_mitigation }}"
+      
+      technical_risks:
+        - integration_complexity_risks: "{{ integration_complexity_mitigation }}"
+        - performance_impact_risks: "{{ performance_impact_mitigation }}"
+        - compatibility_issues: "{{ compatibility_mitigation }}"
+        - quality_degradation_risks: "{{ quality_degradation_mitigation }}"
+      
+      organizational_risks:
+        - resource_availability_risks: "{{ resource_availability_mitigation }}"
+        - timeline_pressure_risks: "{{ timeline_pressure_mitigation }}"
+        - stakeholder_alignment_risks: "{{ stakeholder_alignment_mitigation }}"
+        - long_term_maintenance_risks: "{{ maintenance_risk_mitigation }}"
+
+  implementation_timeline_and_milestones:
+    description: "Detailed implementation timeline with key milestones"
+    timeline_overview:
+      total_duration: "{{ total_timeline }}"
+      major_milestones:
+        - milestone_1: "{{ milestone_1 }}"
+        - milestone_2: "{{ milestone_2 }}"
+        - milestone_3: "{{ milestone_3 }}"
+        - milestone_4: "{{ milestone_4 }}"
+
+    detailed_schedule:
+      month_1_activities: "{{ month_1_activities }}"
+      month_2_activities: "{{ month_2_activities }}"
+      month_3_activities: "{{ month_3_activities }}"
+      ongoing_activities: "{{ ongoing_activities }}"
+
+  resource_requirements:
+    description: "Resource allocation and requirements for successful adoption"
+    human_resources:
+      - dedicated_adoption_team: "{{ adoption_team_requirements }}"
+      - subject_matter_experts: "{{ sme_requirements }}"
+      - training_facilitators: "{{ training_facilitator_requirements }}"
+      - change_management_support: "{{ change_management_requirements }}"
+
+    technology_resources:
+      - development_environment_setup: "{{ dev_env_requirements }}"
+      - training_platform_requirements: "{{ training_platform_requirements }}"
+      - monitoring_and_analytics_tools: "{{ monitoring_tool_requirements }}"
+      - collaboration_and_communication_tools: "{{ collaboration_tool_requirements }}"
+
+    budget_considerations:
+      - training_program_costs: "{{ training_costs }}"
+      - tool_and_platform_costs: "{{ tool_costs }}"
+      - consulting_and_expert_support_costs: "{{ consulting_costs }}"
+      - ongoing_maintenance_and_support_costs: "{{ maintenance_costs }}"
+
+# Template Usage Instructions
+usage_instructions:
+  - "Replace all {{ variable }} placeholders with actual adoption strategy details"
+  - "Customize sections based on specific team capabilities and project requirements"
+  - "Include mode-specific adoption approaches based on project development mode"
+  - "Ensure alignment with organizational change management practices"
+  - "Provide actionable guidance for adoption team and stakeholders"

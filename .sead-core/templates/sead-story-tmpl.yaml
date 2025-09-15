@@ -1,0 +1,373 @@
+# <!-- Powered by SEAD-METHOD™ Core -->
+template:
+  id: sead-story-template-v1
+  name: SEAD Story Document
+  version: 1.0
+  methodology: SEAD-METHOD
+  output:
+    format: markdown
+    filename: docs/stories/{{epic_num}}.{{story_num}}.{{story_title_short}}.md
+    title: "SEAD Story {{epic_num}}.{{story_num}}: {{story_title_short}}"
+
+workflow:
+  mode: interactive
+  elicitation: sead-advanced-elicitation
+  catalog_integration: true
+  constraint_validation: true
+
+agent_config:
+  editable_sections:
+    - Status
+    - Story
+    - Acceptance Criteria
+    - Tasks / Subtasks
+    - Dev Notes
+    - Testing
+    - Change Log
+    - SEAD Mode Configuration
+    - Catalog Component References
+    - Constraint Validation Criteria
+
+sead_configuration:
+  mode_enforcement: true
+  catalog_validation: true
+  context_preservation: true
+  constraint_tracking: true
+
+sections:
+  - id: sead-header
+    title: SEAD Configuration
+    type: header
+    instruction: SEAD-METHOD configuration and metadata
+    owner: sead-scrum-master
+    
+  - id: sead-mode
+    title: SEAD Mode
+    type: choice
+    choices: [prototype, development, build-to-deploy]
+    instruction: Select the SEAD development mode for this story based on complexity, risk, and constraints
+    required: true
+    owner: sead-scrum-master
+    editors: [sead-scrum-master, sead-architect]
+    validation: mode-appropriate-constraints
+
+  - id: mode-rationale
+    title: Mode Rationale
+    type: text
+    instruction: Explain why this SEAD mode was selected for this story
+    required: true
+    owner: sead-scrum-master
+    
+  - id: catalog-dependencies
+    title: Catalog Dependencies
+    type: structured-list
+    structure: |
+      - **Component**: {{catalog_component_id}}
+        - **Domain**: {{catalog_domain}}
+        - **Version**: {{component_version}}
+        - **Usage**: {{usage_description}}
+        - **Status**: {{available|partial|missing|needs_extension}}
+    instruction: List all catalog components this story depends on or will create
+    required: true
+    owner: sead-scrum-master
+    editors: [sead-architect, sead-developer]
+
+  - id: status
+    title: Status
+    type: choice
+    choices: [Draft, Approved, InProgress, Review, Done]
+    instruction: Select the current status of the story
+    owner: sead-scrum-master
+    editors: [sead-scrum-master, sead-dev-agent]
+    sead_enhancement: includes catalog compliance validation
+
+  - id: story
+    title: Story
+    type: template-text
+    template: |
+      **As a** {{role}},
+      **I want** {{action}},
+      **so that** {{benefit}}
+      
+      **SEAD Context**: This story will be implemented using {{catalog_patterns}} with {{sead_mode}} constraints.
+    instruction: Define the user story using the standard format enhanced with SEAD catalog context
+    elicit: true
+    owner: sead-scrum-master
+    editors: [sead-scrum-master]
+
+  - id: acceptance-criteria
+    title: Acceptance Criteria
+    type: numbered-list
+    instruction: Copy the acceptance criteria numbered list from the epic file, enhanced with catalog compliance requirements
+    elicit: true
+    owner: sead-scrum-master
+    editors: [sead-scrum-master, sead-pm]
+    sead_enhancement: includes mode-specific validation criteria
+
+  - id: spec-kit-acceptance-scenarios
+    title: Given-When-Then Acceptance Scenarios (Spec-Kit Enhancement)
+    type: structured-list
+    structure: |
+      **Scenario {{scenario_number}}**: {{scenario_title}}
+      - **Given** {{precondition_or_initial_state}}
+      - **When** {{user_action_or_trigger}}
+      - **Then** {{expected_measurable_outcome}}
+      
+      **Edge Case {{edge_case_number}}**: {{edge_case_title}}
+      - **Given** {{boundary_condition}}
+      - **When** {{action_or_condition}}
+      - **Then** {{specific_expected_behavior}}
+    instruction: Transform acceptance criteria into testable Given-When-Then scenarios. Each scenario must be measurable - no vague outcomes like "works well" or "is user-friendly"
+    required: true
+    owner: sead-scrum-master
+    editors: [sead-scrum-master, sead-pm]
+    validation: business-language-appropriate
+
+  - id: business-language-validation
+    title: Business Language Validation (Spec-Kit Enhancement)
+    type: structured-text
+    template: |
+      **Stakeholder Readiness**: {{non_technical_stakeholder_friendly}}
+      
+      **Technical Details Removed**: 
+      {{#each removed_technical_details}}
+      - {{this}} → Moved to implementation plan
+      {{/each}}
+      
+      **Business Value Clarity**:
+      - **User Value**: {{clear_user_value}}
+      - **Business Outcomes**: {{measurable_business_outcomes}}
+      - **WHAT vs HOW Separation**: {{what_vs_how_properly_separated}}
+      
+      **Language Validation Status**: {{validation_status}}
+    instruction: Ensure story content is appropriate for non-technical stakeholders, with user needs (WHAT) clearly separated from implementation details (HOW)
+    required: true
+    owner: sead-scrum-master
+
+  - id: sead-acceptance-criteria
+    title: SEAD Catalog Compliance Criteria
+    type: numbered-list
+    template: |
+      1. **Catalog Pattern Usage**: Implementation must use specified catalog patterns: {{required_patterns}}
+      2. **Mode Constraint Adherence**: Implementation must comply with {{sead_mode}} constraints
+      3. **Context Preservation**: All catalog component references must be maintained for agent handoffs
+      4. **Validation Gates**: Implementation must pass {{mode_validation_requirements}}
+      {{#if development_mode}}
+      5. **Pattern Capture**: New patterns discovered must be documented for catalog promotion
+      {{/if}}
+      {{#if build_to_deploy_mode}}
+      5. **Strict Compliance**: Zero deviations from catalog patterns allowed
+      6. **Security Validation**: Full security scan must pass
+      7. **Performance Validation**: Performance benchmarks must be met
+      {{/if}}
+    instruction: Define SEAD-specific acceptance criteria based on selected mode and catalog dependencies
+    required: true
+    owner: sead-scrum-master
+
+  - id: constraint-validation-criteria
+    title: Constraint Validation Criteria
+    type: structured-text
+    template: |
+      **Mode**: {{sead_mode}}
+      
+      **Validation Level**: {{mode_validation_level}}
+      
+      **Catalog Enforcement**: {{catalog_enforcement_policy}}
+      
+      **Required Validations**:
+      {{#each mode_validations}}
+      - {{this}}
+      {{/each}}
+      
+      **Blocking Violations**:
+      {{#each blocking_violations}}
+      - {{this}}
+      {{/each}}
+      
+      **Quality Gates**:
+      {{#each quality_gates}}
+      - {{this}}
+      {{/each}}
+    instruction: Define specific validation criteria based on SEAD mode configuration
+    required: true
+    owner: sead-scrum-master
+    
+  - id: tasks
+    title: Tasks / Subtasks
+    type: checklist
+    instruction: Break down implementation into specific tasks, referencing catalog patterns where applicable
+    owner: sead-scrum-master
+    editors: [sead-dev-agent]
+    sead_enhancement: tasks include catalog pattern integration steps
+
+  - id: catalog-component-references
+    title: Catalog Component References
+    type: structured-list
+    structure: |
+      **{{catalog_domain}}**:
+      {{#each domain_components}}
+      - **{{component_id}}** (v{{version}})
+        - **Purpose**: {{usage_purpose}}
+        - **Integration**: {{integration_approach}}
+        - **Constraints**: {{applicable_constraints}}
+      {{/each}}
+    instruction: Document all catalog components that will be used or extended in this story
+    required: true
+    owner: sead-architect
+    editors: [sead-developer, sead-scrum-master]
+
+  - id: architecture-context
+    title: Architecture Context
+    type: reference-text
+    instruction: Reference relevant architecture sections and catalog patterns for this story
+    owner: sead-architect
+    editors: [sead-scrum-master]
+    sead_enhancement: includes three-tier data/deployment considerations
+
+  - id: dev-notes
+    title: Dev Notes
+    type: text
+    instruction: Additional technical notes and implementation guidance with catalog pattern usage
+    owner: sead-scrum-master
+    editors: [sead-scrum-master, sead-architect]
+
+  - id: testing
+    title: Testing
+    type: structured-text
+    template: |
+      **Test Strategy**: {{test_approach}}
+      
+      **Catalog Test Patterns**: {{catalog_test_patterns_to_use}}
+      
+      **Unit Tests**: {{unit_test_requirements}}
+      
+      **Integration Tests**: {{integration_test_requirements}}
+      
+      **Catalog Compliance Tests**: {{catalog_compliance_tests}}
+      
+      **Constraint Validation Tests**: {{constraint_validation_tests}}
+      
+      **Test Data**: {{test_data_approach}} (using catalog/test-patterns/)
+    instruction: Define comprehensive testing approach using catalog test patterns
+    owner: sead-scrum-master
+    editors: [sead-qa, sead-developer]
+
+  - id: context-preservation
+    title: Context Preservation Data
+    type: structured-text
+    template: |
+      **Agent Handoff Package**:
+      - **Required Catalog Patterns**: {{handoff_catalog_patterns}}
+      - **Mode Configuration**: {{handoff_mode_config}}
+      - **Constraint Summary**: {{handoff_constraints}}
+      - **Architecture References**: {{handoff_architecture_refs}}
+      - **Previous Story Context**: {{handoff_previous_context}}
+      
+      **Developer Agent Context**:
+      - **Catalog Component IDs**: {{dev_catalog_components}}
+      - **Implementation Guidance**: {{dev_implementation_guidance}}
+      - **Validation Checkpoints**: {{dev_validation_checkpoints}}
+    instruction: Package context data for seamless agent handoffs
+    required: true
+    owner: sead-scrum-master
+    
+  # Standard sections enhanced with SEAD awareness
+  - id: dev-agent-record
+    title: Dev Agent Record
+    type: structured-section
+    owner: sead-dev-agent
+    editors: [sead-dev-agent]
+    subsections:
+      - id: agent-model-used
+        title: Agent Model Used
+        type: text
+        
+      - id: catalog-patterns-used
+        title: Catalog Patterns Used
+        type: structured-list
+        structure: |
+          - **{{pattern_id}}**: {{usage_description}}
+            - **Compliance**: {{compliance_status}}
+            - **Deviations**: {{deviations_if_any}}
+            - **New Patterns Captured**: {{new_patterns_captured}}
+        
+      - id: constraint-compliance
+        title: Constraint Compliance
+        type: structured-text
+        template: |
+          **Mode Constraints Met**: {{constraints_met}}
+          **Validation Results**: {{validation_results}}
+          **Deviations**: {{deviations_documented}}
+          **Compliance Score**: {{compliance_percentage}}
+          
+      - id: debug-log-references
+        title: Debug Log References
+        type: text
+        
+      - id: completion-notes
+        title: Completion Notes
+        type: text
+        
+      - id: file-list
+        title: File List
+        type: text
+        
+      - id: change-log
+        title: Change Log
+        type: text
+
+  - id: qa-results
+    title: QA Results
+    type: structured-section
+    owner: sead-qa
+    editors: [sead-qa]
+    subsections:
+      - id: catalog-compliance-review
+        title: Catalog Compliance Review
+        type: structured-text
+        template: |
+          **Pattern Usage Review**: {{pattern_usage_assessment}}
+          **Constraint Adherence**: {{constraint_adherence_assessment}}
+          **Quality Score**: {{quality_score}}
+          **Recommendations**: {{improvement_recommendations}}
+          
+      - id: mode-validation-results
+        title: Mode Validation Results
+        type: structured-text
+        template: |
+          **Validation Level**: {{validation_level_met}}
+          **Quality Gates**: {{quality_gates_status}}
+          **Performance**: {{performance_results}}
+          **Security**: {{security_scan_results}}
+          
+      - id: pattern-evolution-review
+        title: Pattern Evolution Review
+        type: text
+        condition: development_mode
+        instruction: Review any new patterns captured for catalog promotion
+
+validation_rules:
+  - rule: mode_constraint_consistency
+    description: Ensure acceptance criteria match selected SEAD mode constraints
+    validator: sead-mode-validator
+    
+  - rule: catalog_dependency_availability
+    description: Verify all required catalog components are available or planned
+    validator: sead-catalog-validator
+    
+  - rule: context_preservation_completeness
+    description: Ensure all context preservation data is complete for agent handoffs
+    validator: sead-context-validator
+
+handoff_validation:
+  - agent: sead-developer
+    required_context:
+      - catalog_component_references
+      - constraint_validation_criteria
+      - context_preservation_data
+      
+  - agent: sead-qa
+    required_context:
+      - sead_acceptance_criteria
+      - catalog_compliance_criteria
+      - mode_validation_requirements

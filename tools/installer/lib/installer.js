@@ -228,9 +228,16 @@ class Installer {
     switch (config.installType) {
       case 'full': {
         // Full installation - copy entire .sead-core folder as a subdirectory
-        spinner.text = 'Copying complete .sead-core folder...';
+        spinner.text = 'Checking for existing installation...';
         const sourceDir = resourceLocator.getSeadCorePath();
         const bmadCoreDestDir = path.join(installDir, '.sead-core');
+        
+        // Check if .sead-core already exists
+        if (await fileManager.pathExists(bmadCoreDestDir)) {
+          throw new Error('.sead-core already exists. Use reinstall mode or remove existing installation first.');
+        }
+        
+        spinner.text = 'Copying complete .sead-core folder...';
         await fileManager.copyDirectoryWithRootReplacement(
           sourceDir,
           bmadCoreDestDir,
