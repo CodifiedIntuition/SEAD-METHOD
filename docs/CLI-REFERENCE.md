@@ -1,7 +1,7 @@
 # SEAD-METHOD™ CLI Reference
 
-**Version**: 1.0  
-**Date**: 2025-01-05  
+**Version**: 1.3.3  
+**Date**: 2025-01-15  
 **Status**: Production Ready
 
 ## Table of Contents
@@ -56,9 +56,9 @@ npm install -g sead-method-core
 sead --version
 ```
 
-### Professional Installer System
+### Installation System
 
-SEAD features a **BMAD-style professional installer** for IDE integration:
+SEAD uses a two-stage installation process for IDE integration:
 
 #### `sead install`
 Interactive installation with IDE setup and agent configuration.
