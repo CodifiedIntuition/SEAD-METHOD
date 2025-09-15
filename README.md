@@ -4,7 +4,7 @@
 
 A revolutionary development methodology that combines AI agents with constitutional constraints and catalog-based patterns to deliver consistent, high-quality software development at scale. Now with comprehensive external asset integration for seamless design system, API specification, and component library adoption.
 
-[![Version](https://img.shields.io/badge/version-1.3.0-blue.svg)](https://github.com/CodifiedIntuition/SEAD-METHOD)
+[![Version](https://img.shields.io/badge/version-1.3.3-blue.svg)](https://github.com/CodifiedIntuition/SEAD-METHOD)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen.svg)](https://nodejs.org/)
 
@@ -34,25 +34,22 @@ Traditional AI-assisted development suffers from:
 npm install -g sead-method-core
 
 # Or use directly with npx
-npx sead-method-core install
+npx sead-method-core init my-project
 ```
 
-### Professional Installation Experience
-SEAD features a **BMAD-style professional installer** with interactive setup:
+### Two-Stage Installation Process
+SEAD uses a simple two-stage installation:
 
 ```bash
-# Interactive installation with IDE selection
+# 1. Initialize project structure
+sead init my-project
+cd my-project
+
+# 2. Install SEAD agents and tools
 sead install
 
-# Install for specific IDE (15+ supported)
-sead install --ide claude-code
-sead install --ide cursor
-sead install --ide vs-code
-
-# Installation options
-sead install --full                    # Complete SEAD system
-sead install --constitutional          # Constitutional framework focus
-sead install --agent sead-architect   # Single agent installation
+# Installation will detect your IDE and configure accordingly
+# Supports 15+ IDEs including Claude Code, Cursor, VS Code, Windsurf
 ```
 
 ### Verify Installation
@@ -65,20 +62,13 @@ sead list-agents
 
 # See all 12 agents with descriptions
 sead agents
-```
-
-### Initialize Your First Project
-```bash
-# Create new SEAD project
-sead init my-project
-cd my-project
 
 # SEAD is now installed to .sead-core/ with IDE integration ready!
 ```
 
 ## 🔧 IDE Integration
 
-SEAD automatically integrates with **15+ popular IDEs** using the same professional installation system as BMAD-METHOD:
+SEAD automatically integrates with **15+ popular IDEs** with intelligent detection and configuration:
 
 ### Supported IDEs
 - **Claude Code** (recommended) - Slash commands: `/sead-architect`, `/sead-developer`
@@ -93,7 +83,7 @@ SEAD automatically integrates with **15+ popular IDEs** using the same professio
 ```bash
 ✓ .sead-core/ - Hidden directory with all SEAD resources
   ├── agents/           # 12 constitutional AI agents
-  ├── tasks/            # 23 development tasks
+  ├── tasks/            # 28+ development tasks
   ├── templates/        # Reusable code templates
   ├── workflows/        # Multi-step processes  
   ├── checklists/       # Quality assurance lists
@@ -104,7 +94,11 @@ SEAD automatically integrates with **15+ popular IDEs** using the same professio
   /sead-developer      # Implementation with catalog awareness
   /sead-qa            # Quality assurance and validation
   /sead-orchestrator  # Multi-agent coordination
-  [and 8 more specialized agents]
+  /sead-master        # Universal task execution
+  /sead-analyst       # Requirements analysis
+  /sead-product-owner # Product management
+  /sead-ux-expert     # UX and design system coordination
+  [and 4 more specialized agents]
 ```
 
 ### Agent Usage Examples
@@ -136,7 +130,7 @@ sead implement auth-001 --mode development --validate-compliance
 
 ## 🔄 External Asset Integration
 
-**NEW IN v1.3.0** - Seamlessly integrate external assets while maintaining SEAD's constitutional compliance:
+**Available since v1.3.0** - Seamlessly integrate external assets while maintaining SEAD's constitutional compliance:
 
 ### Supported External Assets
 - **🎨 Design Systems**: Figma exports, design tokens, web chat design systems
@@ -221,7 +215,7 @@ SEAD-METHOD provides both **high-level workflow commands** (from Spec-Kit) and *
 **🔄 Workflow Layer**: Constitutional development lifecycle
 - `sead specify` → `sead plan` → `sead stories` → `sead implement`
 
-**🎯 Task Layer**: 22+ specialized development tasks
+**🎯 Task Layer**: 33 specialized development tasks
 - Quality gates, elicitation, documentation, brownfield integration
 - Each task maps to specific SEAD agents with slash commands (`*help`, `*qa-gate`, etc.)
 - Agent coordination with catalog awareness and constitutional compliance
@@ -243,13 +237,13 @@ sead stories                  # Generate constraint-aware user stories
 sead implement <story-id>     # Implement with catalog constraints
 ```
 
-### Rich Task Ecosystem (21+ SEAD Development Tasks)
+### Rich Task Ecosystem (33 SEAD Development Tasks)
 
 SEAD-METHOD provides a comprehensive task system that directly integrates with the 12-agent ecosystem. Each task provides guided execution with constitutional constraints and catalog awareness.
 
 ```bash
 # List and explore tasks
-sead task list                          # Show all 21+ available development tasks
+sead task list                          # Show all 33 available development tasks
 sead task list --category quality       # Filter by category (quality|analysis|documentation|workflow)
 sead task list --detailed --agent-mapping  # Show agent assignments and detailed descriptions
 ```

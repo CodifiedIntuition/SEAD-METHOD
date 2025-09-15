@@ -1,0 +1,680 @@
+# SEAD Catalog Taxonomy Template
+template:
+  id: catalog-taxonomy-template-v1
+  name: SEAD Catalog Taxonomy Design
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/catalog-taxonomy-design.md
+    title: "{{project_name}} Catalog Taxonomy Design"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  governance_validation: continuous
+
+workflow:
+  mode: constitutional_interactive
+  elicitation: catalog-taxonomy-design
+  catalog_validation: enabled
+  constraint_enforcement: progressive
+
+sections:
+  - id: constitutional-initialization
+    title: Constitutional Framework Initialization
+    instruction: |
+      Establish constitutional context for taxonomy design:
+      1. Identify development mode and taxonomy complexity requirements
+      2. Load constitutional constraints for catalog organization
+      3. Configure governance validation for taxonomy decisions
+      4. Establish context preservation for taxonomy evolution
+      5. Set quality gates for taxonomy validation and adoption
+    sections:
+      - id: taxonomy-context
+        title: Taxonomy Context and Constitutional Framework
+        template: |
+          **Design Date:** {{design_date}}
+          **Development Mode:** {{development_mode}}
+          **Constitutional Framework:** {{constitutional_version}}
+          **Taxonomy Architect:** {{architect_agent}}
+          **Scope:** {{taxonomy_scope}}
+          **Complexity Level:** {{complexity_requirements}}
+          **Quality Gates:** {{quality_requirements}}
+
+  - id: taxonomy-overview
+    title: Taxonomy Overview and Objectives
+    instruction: |
+      Define comprehensive taxonomy overview with constitutional alignment:
+      1. Establish taxonomy purpose and scope within SEAD framework
+      2. Define organizational principles and structural goals
+      3. Identify stakeholder needs and usage requirements
+      4. Plan constitutional compliance and governance integration
+      5. Set success criteria and validation approaches
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: taxonomy-purpose
+        title: Taxonomy Purpose and Scope
+        template: |
+          **Primary Purpose:** {{taxonomy_primary_purpose}}
+          **Constitutional Alignment:** {{constitutional_alignment_rationale}}
+          
+          **Scope Definition:**
+          - **Domain Coverage:** {{domain_coverage_scope}}
+          - **Pattern Types:** {{pattern_types_included}}
+          - **Organizational Depth:** {{organizational_depth_level}}
+          - **Evolution Timeline:** {{evolution_planning_horizon}}
+          
+          **Strategic Objectives:**
+          - **Discoverability:** {{discoverability_objectives}}
+          - **Reusability:** {{reusability_objectives}}
+          - **Governance:** {{governance_objectives}}
+          - **Constitutional Compliance:** {{compliance_objectives}}
+
+      - id: stakeholder-requirements
+        title: Stakeholder Requirements Analysis
+        repeatable: true
+        template: |
+          **Stakeholder Group:** {{stakeholder_group}}
+          **Primary Use Cases:** {{stakeholder_use_cases}}
+          **Navigation Preferences:** {{navigation_preferences}}
+          **Search Requirements:** {{search_requirements}}
+          **Quality Expectations:** {{quality_expectations}}
+          **Constitutional Compliance Needs:** {{compliance_requirements}}
+          **Success Criteria:** {{stakeholder_success_criteria}}
+
+      - id: design-principles
+        title: Taxonomy Design Principles
+        template: |
+          **Core Principles:**
+          1. **{{principle_1}}** - {{principle_1_description}}
+          2. **{{principle_2}}** - {{principle_2_description}}
+          3. **{{principle_3}}** - {{principle_3_description}}
+          4. **{{principle_4}}** - {{principle_4_description}}
+          
+          **Constitutional Principles Integration:**
+          - **Governance Alignment:** {{governance_principle_integration}}
+          - **Context Preservation:** {{context_preservation_principles}}
+          - **Quality Standards:** {{quality_principle_integration}}
+          - **Evolution Support:** {{evolution_principle_integration}}
+
+  - id: domain-architecture
+    title: Catalog Domain Architecture
+    instruction: |
+      Define comprehensive domain architecture with constitutional framework:
+      1. Design primary domain structure aligned with SEAD principles
+      2. Plan subdomain organization and hierarchical relationships
+      3. Establish cross-domain relationships and dependencies
+      4. Design constitutional compliance integration throughout domains
+      5. Plan domain evolution and extension mechanisms
+    elicit: true
+    catalog_validation: required
+    sections:
+      - id: primary-domains
+        title: Primary Domain Structure
+        repeatable: true
+        template: |
+          **Domain:** {{domain_name}}
+          **Purpose:** {{domain_purpose}}
+          **Constitutional Alignment:** {{constitutional_domain_rationale}}
+          
+          **Domain Characteristics:**
+          - **Pattern Types:** {{domain_pattern_types}}
+          - **Complexity Level:** {{domain_complexity}}
+          - **Maturity Stage:** {{domain_maturity}}
+          - **Usage Frequency:** {{expected_usage_frequency}}
+          
+          **Organizational Structure:**
+          - **Subdomain Count:** {{subdomain_count}}
+          - **Hierarchy Depth:** {{hierarchy_depth}}
+          - **Cross-References:** {{cross_reference_count}}
+          - **Constitutional Integration:** {{constitutional_integration_approach}}
+          
+          **Quality Standards:**
+          - **Entry Criteria:** {{domain_entry_criteria}}
+          - **Quality Gates:** {{domain_quality_gates}}
+          - **Validation Requirements:** {{domain_validation_requirements}}
+          - **Evolution Policies:** {{domain_evolution_policies}}
+
+      - id: domain-relationships
+        title: Inter-Domain Relationships
+        template: |
+          **Relationship Matrix:**
+          {{#each domain_relationships}}
+          - **{{source_domain}}** → **{{target_domain}}**
+            - **Relationship Type:** {{relationship_type}}
+            - **Dependency Level:** {{dependency_level}}
+            - **Constitutional Implications:** {{constitutional_impact}}
+            - **Evolution Coupling:** {{evolution_coupling_level}}
+          {{/each}}
+          
+          **Dependency Management:**
+          - **Circular Dependency Prevention:** {{circular_prevention_strategy}}
+          - **Version Compatibility:** {{version_compatibility_approach}}
+          - **Constitutional Consistency:** {{constitutional_consistency_enforcement}}
+          - **Change Impact Assessment:** {{change_impact_methodology}}
+
+      - id: hierarchical-organization
+        title: Hierarchical Organization Design
+        template: |
+          **Organizational Depth Strategy:** {{depth_strategy}}
+          **Constitutional Compliance:** {{hierarchical_constitutional_approach}}
+          
+          **Level Definitions:**
+          - **Level 1 (Domains):** {{level1_definition}} - {{level1_criteria}}
+          - **Level 2 (Categories):** {{level2_definition}} - {{level2_criteria}}
+          - **Level 3 (Subcategories):** {{level3_definition}} - {{level3_criteria}}
+          - **Level 4 (Patterns):** {{level4_definition}} - {{level4_criteria}}
+          
+          **Navigation Design:**
+          - **Breadcrumb Strategy:** {{breadcrumb_approach}}
+          - **Cross-Navigation:** {{cross_navigation_design}}
+          - **Search Integration:** {{search_integration_approach}}
+          - **Constitutional Path Preservation:** {{constitutional_navigation_requirements}}
+
+  - id: pattern-classification
+    title: Pattern Classification System
+    instruction: |
+      Design comprehensive pattern classification with constitutional integration:
+      1. Define pattern quality tiers and classification criteria
+      2. Establish pattern lifecycle and maturity stages
+      3. Design tagging and metadata systems for discoverability
+      4. Plan constitutional compliance classification and validation
+      5. Create classification evolution and migration strategies
+    elicit: true
+    constitutional_validation: critical
+    sections:
+      - id: quality-tier-system
+        title: Quality Tier Classification System
+        template: |
+          **Tier System Overview:** {{tier_system_description}}
+          **Constitutional Alignment:** {{tier_constitutional_rationale}}
+          
+          **Tier Definitions:**
+          - **Tier 1 (Foundational):**
+            - **Criteria:** {{tier1_criteria}}
+            - **Quality Requirements:** {{tier1_quality_standards}}
+            - **Constitutional Requirements:** {{tier1_constitutional_standards}}
+            - **Usage Expectations:** {{tier1_usage_expectations}}
+            - **Evolution Constraints:** {{tier1_evolution_rules}}
+          
+          - **Tier 2 (Specialized):**
+            - **Criteria:** {{tier2_criteria}}
+            - **Quality Requirements:** {{tier2_quality_standards}}
+            - **Constitutional Requirements:** {{tier2_constitutional_standards}}
+            - **Usage Expectations:** {{tier2_usage_expectations}}
+            - **Evolution Constraints:** {{tier2_evolution_rules}}
+          
+          - **Tier 3 (Contextual):**
+            - **Criteria:** {{tier3_criteria}}
+            - **Quality Requirements:** {{tier3_quality_standards}}
+            - **Constitutional Requirements:** {{tier3_constitutional_standards}}
+            - **Usage Expectations:** {{tier3_usage_expectations}}
+            - **Evolution Constraints:** {{tier3_evolution_rules}}
+          
+          - **Tier 4 (Experimental):**
+            - **Criteria:** {{tier4_criteria}}
+            - **Quality Requirements:** {{tier4_quality_standards}}
+            - **Constitutional Requirements:** {{tier4_constitutional_standards}}
+            - **Usage Expectations:** {{tier4_usage_expectations}}
+            - **Evolution Constraints:** {{tier4_evolution_rules}}
+
+      - id: lifecycle-stages
+        title: Pattern Lifecycle and Maturity Stages
+        template: |
+          **Lifecycle Management:** {{lifecycle_management_approach}}
+          **Constitutional Integration:** {{lifecycle_constitutional_approach}}
+          
+          **Maturity Stages:**
+          - **Experimental:** {{experimental_stage_criteria}} - Duration: {{experimental_duration}}
+          - **Validated:** {{validated_stage_criteria}} - Duration: {{validated_duration}}
+          - **Stable:** {{stable_stage_criteria}} - Duration: {{stable_duration}}
+          - **Mature:** {{mature_stage_criteria}} - Duration: {{mature_duration}}
+          - **Legacy:** {{legacy_stage_criteria}} - Duration: {{legacy_duration}}
+          - **Deprecated:** {{deprecated_stage_criteria}} - Duration: {{deprecated_duration}}
+          
+          **Stage Transitions:**
+          - **Promotion Criteria:** {{promotion_criteria}}
+          - **Validation Requirements:** {{stage_validation_requirements}}
+          - **Constitutional Checkpoints:** {{constitutional_stage_checkpoints}}
+          - **Stakeholder Approval:** {{stakeholder_approval_requirements}}
+
+      - id: tagging-and-metadata
+        title: Tagging and Metadata System
+        template: |
+          **Metadata Framework:** {{metadata_framework_name}}
+          **Constitutional Integration:** {{metadata_constitutional_approach}}
+          
+          **Core Metadata Fields:**
+          - **Pattern Identity:** {{identity_metadata_fields}}
+          - **Technical Metadata:** {{technical_metadata_fields}}
+          - **Usage Metadata:** {{usage_metadata_fields}}
+          - **Quality Metadata:** {{quality_metadata_fields}}
+          - **Constitutional Metadata:** {{constitutional_metadata_fields}}
+          
+          **Tagging Strategy:**
+          - **Technology Tags:** {{technology_tagging_approach}}
+          - **Domain Tags:** {{domain_tagging_strategy}}
+          - **Usage Tags:** {{usage_tagging_methodology}}
+          - **Quality Tags:** {{quality_tagging_approach}}
+          - **Constitutional Tags:** {{constitutional_tagging_system}}
+          
+          **Search and Discovery:**
+          - **Search Indexing:** {{search_indexing_strategy}}
+          - **Faceted Search:** {{faceted_search_design}}
+          - **Recommendation Engine:** {{recommendation_approach}}
+          - **Constitutional Filtering:** {{constitutional_filtering_capabilities}}
+
+  - id: navigation-and-discovery
+    title: Navigation and Discovery Design
+    instruction: |
+      Design comprehensive navigation and discovery system:
+      1. Plan intuitive navigation paths and user journeys
+      2. Design search and filtering capabilities
+      3. Create recommendation and related pattern systems
+      4. Plan constitutional compliance integration in discovery
+      5. Design responsive and accessible navigation experiences
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: navigation-structure
+        title: Navigation Structure Design
+        template: |
+          **Navigation Philosophy:** {{navigation_philosophy}}
+          **Constitutional Navigation:** {{constitutional_navigation_approach}}
+          
+          **Primary Navigation:**
+          - **Main Menu:** {{main_menu_structure}}
+          - **Domain Navigation:** {{domain_navigation_design}}
+          - **Pattern Navigation:** {{pattern_navigation_approach}}
+          - **Constitutional Navigation:** {{constitutional_navigation_integration}}
+          
+          **Secondary Navigation:**
+          - **Breadcrumbs:** {{breadcrumb_design}}
+          - **Related Patterns:** {{related_patterns_approach}}
+          - **Cross-References:** {{cross_reference_navigation}}
+          - **Constitutional Paths:** {{constitutional_path_preservation}}
+
+      - id: search-and-filtering
+        title: Search and Filtering System
+        template: |
+          **Search Strategy:** {{search_strategy_name}}
+          **Constitutional Search:** {{constitutional_search_integration}}
+          
+          **Search Capabilities:**
+          - **Full-Text Search:** {{fulltext_search_approach}}
+          - **Faceted Search:** {{faceted_search_capabilities}}
+          - **Advanced Search:** {{advanced_search_features}}
+          - **Constitutional Filtering:** {{constitutional_filtering_options}}
+          
+          **Filter Categories:**
+          - **Domain Filters:** {{domain_filtering_options}}
+          - **Quality Filters:** {{quality_filtering_capabilities}}
+          - **Technology Filters:** {{technology_filtering_approach}}
+          - **Usage Filters:** {{usage_filtering_options}}
+          - **Constitutional Filters:** {{constitutional_filtering_design}}
+
+      - id: recommendation-system
+        title: Pattern Recommendation System
+        template: |
+          **Recommendation Engine:** {{recommendation_engine_type}}
+          **Constitutional Recommendations:** {{constitutional_recommendation_approach}}
+          
+          **Recommendation Types:**
+          - **Similar Patterns:** {{similar_patterns_algorithm}}
+          - **Complementary Patterns:** {{complementary_patterns_approach}}
+          - **Usage-Based:** {{usage_based_recommendations}}
+          - **Constitutional Suggestions:** {{constitutional_recommendation_logic}}
+          
+          **Recommendation Factors:**
+          - **Pattern Similarity:** {{similarity_calculation_method}}
+          - **Usage Patterns:** {{usage_pattern_analysis}}
+          - **Quality Alignment:** {{quality_alignment_factors}}
+          - **Constitutional Compliance:** {{constitutional_recommendation_weighting}}
+
+  - id: governance-and-maintenance
+    title: Governance and Maintenance Framework
+    instruction: |
+      Design comprehensive governance and maintenance framework:
+      1. Plan taxonomy evolution and change management processes
+      2. Design quality assurance and validation procedures
+      3. Establish roles and responsibilities for taxonomy stewardship
+      4. Plan constitutional compliance monitoring and enforcement
+      5. Create continuous improvement and feedback integration processes
+    elicit: true
+    constitutional_validation: mandatory
+    sections:
+      - id: evolution-management
+        title: Taxonomy Evolution Management
+        template: |
+          **Evolution Strategy:** {{evolution_strategy_name}}
+          **Constitutional Evolution:** {{constitutional_evolution_approach}}
+          
+          **Change Management:**
+          - **Change Proposal Process:** {{change_proposal_workflow}}
+          - **Impact Assessment:** {{change_impact_assessment_process}}
+          - **Stakeholder Review:** {{stakeholder_review_process}}
+          - **Constitutional Validation:** {{constitutional_change_validation}}
+          - **Implementation Planning:** {{change_implementation_approach}}
+          
+          **Evolution Triggers:**
+          - **Pattern Growth:** {{pattern_growth_thresholds}}
+          - **Usage Patterns:** {{usage_pattern_evolution_triggers}}
+          - **Quality Improvements:** {{quality_improvement_triggers}}
+          - **Constitutional Updates:** {{constitutional_update_triggers}}
+
+      - id: stewardship-roles
+        title: Stewardship Roles and Responsibilities
+        template: |
+          **Governance Structure:** {{governance_structure_type}}
+          **Constitutional Authority:** {{constitutional_authority_structure}}
+          
+          **Key Roles:**
+          - **Taxonomy Architect:** {{architect_responsibilities}}
+          - **Domain Stewards:** {{domain_steward_responsibilities}}
+          - **Quality Assurance:** {{qa_responsibilities}}
+          - **Constitutional Guardian:** {{constitutional_guardian_responsibilities}}
+          
+          **Decision-Making Authority:**
+          - **Domain Changes:** {{domain_change_authority}}
+          - **Classification Updates:** {{classification_authority}}
+          - **Quality Standards:** {{quality_standards_authority}}
+          - **Constitutional Compliance:** {{constitutional_authority}}
+
+      - id: quality-assurance
+        title: Quality Assurance and Validation
+        template: |
+          **QA Framework:** {{qa_framework_name}}
+          **Constitutional QA:** {{constitutional_qa_approach}}
+          
+          **Validation Processes:**
+          - **Taxonomy Consistency:** {{consistency_validation_process}}
+          - **Classification Accuracy:** {{classification_validation_approach}}
+          - **Navigation Effectiveness:** {{navigation_validation_method}}
+          - **Constitutional Compliance:** {{constitutional_validation_process}}
+          
+          **Quality Metrics:**
+          - **Discoverability:** {{discoverability_metrics}}
+          - **Usability:** {{usability_metrics}}
+          - **Consistency:** {{consistency_metrics}}
+          - **Constitutional Adherence:** {{constitutional_adherence_metrics}}
+
+  - id: implementation-plan
+    title: Implementation Plan and Timeline
+    instruction: |
+      Develop comprehensive implementation plan with constitutional integration:
+      1. Plan phased implementation approach with clear milestones
+      2. Design migration strategy from existing organization
+      3. Plan testing and validation phases with stakeholder involvement
+      4. Establish constitutional compliance checkpoints throughout implementation
+      5. Create rollback and contingency planning for risk mitigation
+    elicit: true
+    constitutional_validation: critical
+    sections:
+      - id: implementation-phases
+        title: Phased Implementation Plan
+        repeatable: true
+        template: |
+          **Phase {{phase_number}}: {{phase_name}}**
+          **Duration:** {{phase_duration}}
+          **Priority:** {{phase_priority}}
+          
+          **Objectives:**
+          {{#each phase_objectives}}
+          - {{objective_description}}
+          {{/each}}
+          
+          **Deliverables:**
+          - {{deliverable_1}}
+          - {{deliverable_2}}
+          - {{deliverable_3}}
+          
+          **Constitutional Milestones:**
+          - {{constitutional_milestone_1}}
+          - {{constitutional_milestone_2}}
+          
+          **Success Criteria:**
+          - {{success_criterion_1}}
+          - {{success_criterion_2}}
+          - {{constitutional_success_criterion}}
+          
+          **Dependencies:** {{phase_dependencies}}
+          **Risks:** {{phase_risks}}
+          **Mitigation:** {{risk_mitigation_strategies}}
+
+      - id: migration-strategy
+        title: Migration Strategy
+        template: |
+          **Migration Approach:** {{migration_approach_name}}
+          **Constitutional Migration:** {{constitutional_migration_strategy}}
+          
+          **Current State Analysis:**
+          - **Existing Organization:** {{existing_organization_assessment}}
+          - **Pattern Count:** {{current_pattern_count}}
+          - **Inconsistencies:** {{identified_inconsistencies}}
+          - **Constitutional Gaps:** {{constitutional_gaps}}
+          
+          **Migration Plan:**
+          - **Data Migration:** {{data_migration_approach}}
+          - **Structure Migration:** {{structure_migration_process}}
+          - **Metadata Migration:** {{metadata_migration_strategy}}
+          - **Constitutional Compliance Migration:** {{constitutional_migration_process}}
+          
+          **Validation and Testing:**
+          - **Migration Testing:** {{migration_testing_approach}}
+          - **User Acceptance Testing:** {{user_acceptance_testing_plan}}
+          - **Constitutional Validation:** {{constitutional_migration_validation}}
+          - **Performance Testing:** {{performance_testing_strategy}}
+
+      - id: rollout-and-adoption
+        title: Rollout and Adoption Strategy
+        template: |
+          **Rollout Strategy:** {{rollout_strategy_name}}
+          **Constitutional Rollout:** {{constitutional_rollout_approach}}
+          
+          **Rollout Phases:**
+          1. **Pilot Group:** {{pilot_group_details}} ({{pilot_timeline}})
+          2. **Early Adopters:** {{early_adopter_details}} ({{early_adopter_timeline}})
+          3. **Broad Rollout:** {{broad_rollout_details}} ({{broad_rollout_timeline}})
+          4. **Full Adoption:** {{full_adoption_details}} ({{full_adoption_timeline}})
+          
+          **Support and Training:**
+          - **Documentation:** {{support_documentation_plan}}
+          - **Training Sessions:** {{training_session_schedule}}
+          - **Support Channels:** {{support_channel_setup}}
+          - **Constitutional Training:** {{constitutional_training_plan}}
+
+  - id: success-metrics
+    title: Success Metrics and Monitoring
+    instruction: |
+      Define comprehensive success metrics and monitoring approach:
+      1. Establish quantitative and qualitative success measures
+      2. Design monitoring dashboards and reporting systems
+      3. Plan regular review cycles and improvement processes
+      4. Create constitutional compliance monitoring and validation
+      5. Establish long-term evolution metrics and benchmarks
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: success-criteria
+        title: Success Criteria and KPIs
+        template: |
+          **Primary Success Metrics:**
+          - **Discoverability:** {{discoverability_target}} (Current: {{discoverability_baseline}})
+          - **Usage Rate:** {{usage_rate_target}} (Current: {{usage_rate_baseline}})
+          - **User Satisfaction:** {{satisfaction_target}} (Current: {{satisfaction_baseline}})
+          - **Constitutional Compliance:** {{compliance_target}} (Current: {{compliance_baseline}})
+          
+          **Secondary Metrics:**
+          - **Search Success Rate:** {{search_success_target}}
+          - **Navigation Efficiency:** {{navigation_efficiency_target}}
+          - **Content Quality:** {{content_quality_target}}
+          - **Evolution Velocity:** {{evolution_velocity_target}}
+
+      - id: monitoring-approach
+        title: Monitoring and Reporting Approach
+        template: |
+          **Monitoring Strategy:** {{monitoring_strategy_name}}
+          **Constitutional Monitoring:** {{constitutional_monitoring_approach}}
+          
+          **Data Collection:**
+          - **Usage Analytics:** {{usage_analytics_approach}}
+          - **User Feedback:** {{user_feedback_collection}}
+          - **Quality Metrics:** {{quality_metrics_collection}}
+          - **Constitutional Metrics:** {{constitutional_metrics_collection}}
+          
+          **Reporting Schedule:**
+          - **Daily Monitoring:** {{daily_monitoring_scope}}
+          - **Weekly Reports:** {{weekly_reporting_content}}
+          - **Monthly Analysis:** {{monthly_analysis_scope}}
+          - **Quarterly Reviews:** {{quarterly_review_process}}
+          - **Constitutional Audits:** {{constitutional_audit_schedule}}
+
+      - id: continuous-improvement
+        title: Continuous Improvement Process
+        template: |
+          **Improvement Framework:** {{improvement_framework_name}}
+          **Constitutional Improvement:** {{constitutional_improvement_approach}}
+          
+          **Improvement Cycle:**
+          1. **Data Collection:** {{improvement_data_collection}} ({{collection_frequency}})
+          2. **Analysis:** {{improvement_analysis_process}} ({{analysis_frequency}})
+          3. **Planning:** {{improvement_planning_approach}} ({{planning_frequency}})
+          4. **Implementation:** {{improvement_implementation}} ({{implementation_cycle}})
+          5. **Validation:** {{improvement_validation}} ({{validation_frequency}})
+          
+          **Feedback Integration:**
+          - **User Feedback:** {{user_feedback_integration}}
+          - **Stakeholder Input:** {{stakeholder_input_integration}}
+          - **Usage Pattern Analysis:** {{usage_pattern_integration}}
+          - **Constitutional Evolution:** {{constitutional_evolution_integration}}
+
+  - id: constitutional-compliance-framework
+    title: Constitutional Compliance Framework
+    instruction: |
+      Define comprehensive constitutional compliance framework for taxonomy:
+      1. Establish constitutional validation requirements for all taxonomy elements
+      2. Design compliance monitoring and enforcement mechanisms
+      3. Plan constitutional evolution and framework updates
+      4. Create audit trail and documentation requirements
+      5. Establish governance oversight and decision authority
+    constitutional_validation: mandatory
+    sections:
+      - id: compliance-requirements
+        title: Constitutional Compliance Requirements
+        template: |
+          **Framework Integration:** {{constitutional_framework_integration}}
+          **Compliance Level:** {{required_compliance_level}}
+          
+          **Domain-Level Requirements:**
+          - **Governance Alignment:** {{domain_governance_requirements}}
+          - **Quality Standards:** {{domain_quality_requirements}}
+          - **Evolution Control:** {{domain_evolution_requirements}}
+          - **Audit Trail:** {{domain_audit_requirements}}
+          
+          **Pattern-Level Requirements:**
+          - **Classification Validation:** {{pattern_classification_requirements}}
+          - **Quality Assurance:** {{pattern_quality_requirements}}
+          - **Usage Monitoring:** {{pattern_usage_requirements}}
+          - **Evolution Tracking:** {{pattern_evolution_requirements}}
+
+      - id: enforcement-mechanisms
+        title: Compliance Enforcement Mechanisms
+        template: |
+          **Enforcement Strategy:** {{enforcement_strategy_name}}
+          **Authority Structure:** {{enforcement_authority_structure}}
+          
+          **Enforcement Points:**
+          - **Pattern Submission:** {{submission_enforcement}}
+          - **Classification Changes:** {{classification_enforcement}}
+          - **Quality Updates:** {{quality_enforcement}}
+          - **Taxonomy Evolution:** {{evolution_enforcement}}
+          
+          **Violation Handling:**
+          - **Detection Methods:** {{violation_detection_methods}}
+          - **Escalation Process:** {{violation_escalation_process}}
+          - **Remediation Procedures:** {{violation_remediation_procedures}}
+          - **Appeals Process:** {{appeals_process}}
+
+      - id: governance-oversight
+        title: Constitutional Governance Oversight
+        template: |
+          **Oversight Structure:** {{oversight_structure_type}}
+          **Decision Authority:** {{constitutional_decision_authority}}
+          
+          **Governance Bodies:**
+          - **Constitutional Committee:** {{constitutional_committee_structure}}
+          - **Domain Governance:** {{domain_governance_structure}}
+          - **Quality Council:** {{quality_council_structure}}
+          - **Evolution Board:** {{evolution_board_structure}}
+          
+          **Decision-Making Process:**
+          - **Proposal Review:** {{proposal_review_process}}
+          - **Impact Assessment:** {{impact_assessment_requirements}}
+          - **Approval Workflow:** {{approval_workflow_process}}
+          - **Implementation Oversight:** {{implementation_oversight_approach}}
+
+  - id: taxonomy-validation
+    title: Taxonomy Validation and Testing
+    instruction: |
+      Define comprehensive validation and testing approach:
+      1. Plan taxonomy structure validation and consistency checks
+      2. Design user experience testing with target stakeholders
+      3. Create performance and scalability validation processes
+      4. Plan constitutional compliance validation throughout taxonomy
+      5. Establish acceptance criteria and sign-off procedures
+    constitutional_validation: mandatory
+    sections:
+      - id: validation-approach
+        title: Comprehensive Validation Approach
+        template: |
+          **Validation Strategy:** {{validation_strategy_name}}
+          **Constitutional Validation:** {{constitutional_validation_approach}}
+          
+          **Validation Dimensions:**
+          - **Structural Integrity:** {{structural_validation_approach}}
+          - **User Experience:** {{user_experience_validation}}
+          - **Performance:** {{performance_validation_approach}}
+          - **Constitutional Compliance:** {{constitutional_validation_method}}
+          
+          **Validation Timeline:**
+          - **Pre-Implementation:** {{pre_implementation_validation}} ({{pre_timeline}})
+          - **Implementation:** {{implementation_validation}} ({{implementation_timeline}})
+          - **Post-Implementation:** {{post_implementation_validation}} ({{post_timeline}})
+
+      - id: acceptance-criteria
+        title: Acceptance Criteria and Sign-off
+        type: checklist
+        template: |
+          **Structural Validation:**
+          - [ ] Domain structure meets design specifications
+          - [ ] Hierarchical organization supports all use cases
+          - [ ] Cross-domain relationships function correctly
+          - [ ] Constitutional integration validated across all domains
+          
+          **User Experience Validation:**
+          - [ ] Navigation paths tested with target users
+          - [ ] Search and filtering meet performance targets
+          - [ ] Recommendation system provides relevant suggestions
+          - [ ] Constitutional compliance supports user workflows
+          
+          **Performance Validation:**
+          - [ ] Search response times meet requirements
+          - [ ] Navigation performance scales with content growth
+          - [ ] Recommendation engine performs within targets
+          - [ ] Constitutional validation processes perform efficiently
+          
+          **Constitutional Compliance:**
+          - [ ] All governance requirements implemented and tested
+          - [ ] Quality gates function according to framework
+          - [ ] Audit trail captures all required information
+          - [ ] Evolution processes support constitutional principles
+          
+          **Stakeholder Acceptance:**
+          - [ ] Domain experts approve domain organization
+          - [ ] End users validate navigation and discovery
+          - [ ] Quality assurance approves validation processes
+          - [ ] Constitutional authority certifies compliance integration

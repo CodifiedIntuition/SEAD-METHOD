@@ -2,8 +2,8 @@
 
 **Get up and running with SEAD in 15 minutes**
 
-**Version**: 1.0  
-**Date**: 2025-01-05  
+**Version**: 1.3.3  
+**Date**: 2025-01-15  
 **Status**: Production Ready
 
 ---
@@ -31,17 +31,22 @@ npm install -g sead-method-core
 sead --version
 ```
 
-### Step 2: Run Professional Installer
-SEAD features a **BMAD-style professional installer** with interactive IDE setup:
+### Step 2: Initialize Your First Project
+SEAD uses a simple two-stage installation process:
 
 ```bash
-# Interactive installation (recommended)
+# Create and initialize project
+sead init my-first-project
+cd my-first-project
+
+# Install SEAD agents and tools
 sead install
 
-# The installer will ask you:
-# 1. Which IDE you use (Claude Code, Cursor, VS Code, etc.)
-# 2. Installation type (full, constitutional, or specific agents)
-# 3. Where to install (.sead-core directory)
+# The installer will:
+# 1. Detect your IDE automatically
+# 2. Install all 12 agents to .sead-core/
+# 3. Set up 33 development tasks
+# 4. Configure IDE-specific commands
 ```
 
 ### Step 3: Verify Setup
@@ -70,11 +75,12 @@ sead agents
 ### Step 1: Initialize Project (1 minute)
 
 ```bash
-# Create new project in development mode
-sead init my-first-app --mode development --template fullstack
-
-# Navigate to project
+# Create new project with default settings
+sead init my-first-app
 cd my-first-app
+
+# Install SEAD agents and tools
+sead install
 
 # Check project structure
 ls -la
@@ -450,9 +456,9 @@ SEAD-METHOD™ is revolutionizing AI-assisted development. Join us to:
 
 ---
 
-**Document Version**: 1.0  
-**Last Updated**: 2025-01-05  
-**SEAD-METHOD™ Version**: 1.0  
+**Document Version**: 1.3.3  
+**Last Updated**: 2025-01-15  
+**SEAD-METHOD™ Version**: 1.3.3  
 **Status**: Production Ready
 
 **Get started now**: `npm install -g sead-method-core && sead init my-project`

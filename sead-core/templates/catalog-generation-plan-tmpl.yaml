@@ -1,0 +1,441 @@
+# SEAD Catalog Generation Plan Template
+template:
+  id: catalog-generation-plan-template-v1
+  name: SEAD Catalog Generation Plan
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/catalog-generation-plan.md
+    title: "{{project_name}} Catalog Generation Plan"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  governance_validation: continuous
+
+workflow:
+  mode: constitutional_interactive
+  elicitation: pattern-identification-workflow
+  catalog_validation: enabled
+  constraint_enforcement: progressive
+
+sections:
+  - id: constitutional-initialization
+    title: Constitutional Framework Initialization
+    instruction: |
+      Establish constitutional framework context for catalog generation:
+      1. Identify current development mode (prototype/development/build-to-deploy)
+      2. Load constitutional constraints for catalog generation
+      3. Review existing catalog domains and patterns
+      4. Configure quality gates and validation requirements
+      5. Establish context preservation for agent coordination
+    sections:
+      - id: constitutional-context
+        title: Constitutional Context
+        template: |
+          **Development Mode:** {{development_mode}}
+          **Constitutional Framework:** {{constitutional_version}}
+          **Quality Gates:** {{quality_requirements}}
+          **Validation Level:** {{validation_strictness}}
+          **Context Preservation:** {{context_requirements}}
+          **Agent Coordination:** {{coordination_level}}
+
+  - id: project-overview
+    title: Project and Catalog Context
+    instruction: |
+      Establish comprehensive project context with catalog awareness:
+      1. Review project requirements and existing architecture
+      2. Analyze current codebase for pattern extraction opportunities
+      3. Assess existing catalog domains and integration points
+      4. Identify stakeholder needs and adoption requirements
+      5. Document constitutional compliance requirements
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: project-summary
+        title: Project Summary
+        template: |
+          **Project Name:** {{project_name}}
+          **Project Type:** {{project_type}}
+          **Technology Stack:** {{tech_stack}}
+          **Current Architecture:** {{architecture_summary}}
+          **Team Size:** {{team_size}}
+          **Timeline:** {{project_timeline}}
+          
+          **Catalog Context:**
+          - **Existing Catalog Integration:** {{existing_catalog_usage}}
+          - **Target Domains:** {{target_domains}}
+          - **Pattern Sources:** {{pattern_sources}}
+          - **Quality Expectations:** {{quality_expectations}}
+
+      - id: stakeholder-analysis
+        title: Stakeholder Analysis
+        template: |
+          **Primary Stakeholders:**
+          - **{{stakeholder_role}}:** {{stakeholder_needs}} (Priority: {{priority}})
+          
+          **Catalog Adoption Requirements:**
+          - **Learning Curve:** {{learning_tolerance}}
+          - **Integration Timeline:** {{integration_timeline}}
+          - **Quality Standards:** {{quality_standards}}
+          - **Constitutional Compliance:** {{compliance_requirements}}
+
+  - id: catalog-scope-definition
+    title: Catalog Generation Scope
+    instruction: |
+      Define comprehensive scope for catalog generation with constitutional alignment:
+      1. Identify target catalog domains for generation/enhancement
+      2. Assess pattern extraction scope and quality requirements
+      3. Plan catalog integration strategy and dependencies
+      4. Define success criteria aligned with development mode
+      5. Establish validation and quality assurance approach
+    elicit: true
+    catalog_validation: required
+    sections:
+      - id: target-domains
+        title: Target Catalog Domains
+        repeatable: true
+        template: |
+          **Domain:** {{domain_name}}
+          **Current Status:** {{current_status}}
+          **Target State:** {{target_state}}
+          **Priority:** {{priority_level}}
+          **Pattern Sources:** {{pattern_sources}}
+          **Quality Requirements:** {{quality_standards}}
+          **Constitutional Constraints:** {{mode_constraints}}
+          **Integration Dependencies:** {{dependencies}}
+
+      - id: extraction-scope
+        title: Pattern Extraction Scope
+        template: |
+          **Source Analysis:**
+          - **Codebase Size:** {{codebase_metrics}}
+          - **Pattern Complexity:** {{complexity_assessment}}
+          - **Extraction Timeline:** {{extraction_timeline}}
+          - **Resource Requirements:** {{resource_needs}}
+          
+          **Quality Thresholds:**
+          - **Tier 1 (Foundational):** {{tier1_requirements}}
+          - **Tier 2 (Specialized):** {{tier2_requirements}}
+          - **Tier 3 (Contextual):** {{tier3_requirements}}
+          - **Tier 4 (Experimental):** {{tier4_requirements}}
+
+  - id: generation-strategy
+    title: Catalog Generation Strategy
+    instruction: |
+      Define strategic approach to catalog generation with constitutional compliance:
+      1. Select appropriate generation methodology based on project context
+      2. Plan phased approach respecting development mode constraints
+      3. Identify critical dependencies and sequencing requirements
+      4. Design validation and quality assurance checkpoints
+      5. Establish governance integration and compliance monitoring
+    elicit: true
+    constitutional_validation: critical
+    sections:
+      - id: generation-methodology
+        title: Generation Methodology
+        template: |
+          **Primary Approach:** {{methodology_name}}
+          **Constitutional Alignment:** {{constitutional_rationale}}
+          **Mode Considerations:** {{mode_specific_adaptations}}
+          
+          **Methodology Components:**
+          - **Pattern Identification:** {{identification_approach}}
+          - **Quality Assessment:** {{quality_approach}}
+          - **Documentation Generation:** {{documentation_approach}}
+          - **Integration Planning:** {{integration_approach}}
+          - **Validation Strategy:** {{validation_strategy}}
+
+      - id: phased-approach
+        title: Phased Implementation Plan
+        repeatable: true
+        template: |
+          **Phase {{phase_number}}: {{phase_name}}**
+          **Timeline:** {{phase_timeline}}
+          **Deliverables:** {{phase_deliverables}}
+          **Success Criteria:** {{phase_success_criteria}}
+          **Constitutional Gates:** {{constitutional_checkpoints}}
+          **Dependencies:** {{phase_dependencies}}
+          **Risk Mitigation:** {{risk_strategies}}
+
+  - id: resource-planning
+    title: Resource and Timeline Planning
+    instruction: |
+      Plan resources and timeline with constitutional framework considerations:
+      1. Assess agent coordination requirements and capabilities
+      2. Plan human stakeholder involvement and review cycles
+      3. Estimate timeline based on development mode and quality requirements
+      4. Identify potential bottlenecks and risk mitigation strategies
+      5. Plan constitutional validation and governance checkpoints
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: agent-coordination
+        title: Agent Coordination Plan
+        template: |
+          **Primary Agents:**
+          - **SEAD Catalog Architect:** {{architect_role}} ({{time_allocation}})
+          - **SEAD Pattern Extraction:** {{extraction_role}} ({{time_allocation}})
+          - **SEAD QA:** {{qa_role}} ({{time_allocation}})
+          - **Domain Experts:** {{expert_requirements}} ({{expert_allocation}})
+          
+          **Coordination Requirements:**
+          - **Handoff Points:** {{handoff_schedule}}
+          - **Context Preservation:** {{context_strategy}}
+          - **Collaboration Tools:** {{collaboration_approach}}
+          - **Constitutional Validation:** {{validation_coordination}}
+
+      - id: timeline-breakdown
+        title: Detailed Timeline
+        type: table
+        columns: [Phase, Activity, Duration, Dependencies, Agent Responsibility, Constitutional Gates]
+        instruction: |
+          Break down catalog generation into specific activities with:
+          - Realistic time estimates based on development mode
+          - Clear agent responsibilities and handoff points
+          - Constitutional validation checkpoints
+          - Risk buffer for quality assurance
+
+      - id: risk-assessment
+        title: Risk Assessment and Mitigation
+        repeatable: true
+        template: |
+          **Risk:** {{risk_description}}
+          **Probability:** {{risk_probability}}
+          **Impact:** {{risk_impact}}
+          **Constitutional Implications:** {{constitutional_impact}}
+          **Mitigation Strategy:** {{mitigation_approach}}
+          **Contingency Plan:** {{contingency_strategy}}
+
+  - id: quality-framework
+    title: Quality Framework and Standards
+    instruction: |
+      Define comprehensive quality framework with constitutional compliance:
+      1. Establish quality standards appropriate for development mode
+      2. Define validation checkpoints and success criteria
+      3. Plan testing and verification approaches
+      4. Design feedback loops and continuous improvement
+      5. Integrate constitutional compliance throughout quality process
+    elicit: true
+    constitutional_validation: mandatory
+    sections:
+      - id: quality-standards
+        title: Quality Standards by Development Mode
+        template: |
+          **Current Mode:** {{development_mode}}
+          
+          **Quality Requirements:**
+          - **Documentation Completeness:** {{documentation_standard}}
+          - **Example Coverage:** {{example_requirements}}
+          - **Testing Requirements:** {{testing_standards}}
+          - **Review Process:** {{review_requirements}}
+          - **Constitutional Compliance:** {{compliance_standards}}
+          
+          **Mode-Specific Adaptations:**
+          - **Prototype Mode:** {{prototype_adaptations}}
+          - **Development Mode:** {{development_adaptations}}
+          - **Build-to-Deploy Mode:** {{production_adaptations}}
+
+      - id: validation-checkpoints
+        title: Validation Checkpoints
+        repeatable: true
+        template: |
+          **Checkpoint:** {{checkpoint_name}}
+          **Timing:** {{checkpoint_timing}}
+          **Validation Criteria:** {{validation_criteria}}
+          **Success Thresholds:** {{success_thresholds}}
+          **Constitutional Requirements:** {{constitutional_criteria}}
+          **Responsible Agent:** {{responsible_agent}}
+          **Escalation Process:** {{escalation_procedure}}
+
+  - id: integration-strategy
+    title: Catalog Integration Strategy
+    instruction: |
+      Plan integration of generated catalog with existing systems:
+      1. Assess current catalog structure and integration points
+      2. Plan smooth integration minimizing disruption
+      3. Design migration strategy for existing patterns
+      4. Plan team adoption and change management
+      5. Establish ongoing maintenance and evolution procedures
+    elicit: true
+    catalog_integration: mandatory
+    sections:
+      - id: current-state-analysis
+        title: Current Catalog State Analysis
+        template: |
+          **Existing Catalog Domains:**
+          {{#each existing_domains}}
+          - **{{domain_name}}:** {{current_status}} ({{pattern_count}} patterns, Quality: {{quality_level}})
+          {{/each}}
+          
+          **Integration Complexity:** {{integration_complexity}}
+          **Migration Requirements:** {{migration_needs}}
+          **Compatibility Assessment:** {{compatibility_analysis}}
+
+      - id: integration-approach
+        title: Integration Approach
+        template: |
+          **Integration Strategy:** {{integration_strategy}}
+          **Constitutional Compliance:** {{compliance_integration}}
+          
+          **Integration Phases:**
+          1. **Preparation:** {{prep_activities}} ({{prep_timeline}})
+          2. **Pilot Integration:** {{pilot_approach}} ({{pilot_timeline}})
+          3. **Full Integration:** {{full_integration}} ({{full_timeline}})
+          4. **Validation:** {{integration_validation}} ({{validation_timeline}})
+          
+          **Rollback Plan:** {{rollback_strategy}}
+
+      - id: adoption-strategy
+        title: Team Adoption Strategy
+        template: |
+          **Change Management:**
+          - **Communication Plan:** {{communication_approach}}
+          - **Training Requirements:** {{training_plan}}
+          - **Support Resources:** {{support_strategy}}
+          - **Feedback Mechanisms:** {{feedback_approach}}
+          
+          **Adoption Timeline:**
+          - **Early Adopters:** {{early_adopter_timeline}}
+          - **Broad Adoption:** {{broad_adoption_timeline}}
+          - **Full Adoption:** {{full_adoption_timeline}}
+
+  - id: success-metrics
+    title: Success Metrics and Monitoring
+    instruction: |
+      Define measurable success criteria and monitoring approach:
+      1. Establish quantitative and qualitative success metrics
+      2. Plan ongoing monitoring and feedback collection
+      3. Design continuous improvement processes
+      4. Set constitutional compliance monitoring requirements
+      5. Plan long-term catalog evolution and maintenance
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: success-criteria
+        title: Success Criteria
+        template: |
+          **Quantitative Metrics:**
+          - **Pattern Coverage:** {{coverage_target}} ({{current_baseline}})
+          - **Quality Score:** {{quality_target}} ({{quality_measurement}})
+          - **Adoption Rate:** {{adoption_target}} ({{adoption_timeline}})
+          - **Usage Frequency:** {{usage_target}} ({{usage_measurement}})
+          
+          **Qualitative Metrics:**
+          - **Developer Satisfaction:** {{satisfaction_measurement}}
+          - **Learning Curve:** {{learning_assessment}}
+          - **Integration Effectiveness:** {{integration_assessment}}
+          - **Constitutional Compliance:** {{compliance_measurement}}
+
+      - id: monitoring-plan
+        title: Ongoing Monitoring Plan
+        template: |
+          **Monitoring Approach:**
+          - **Frequency:** {{monitoring_frequency}}
+          - **Metrics Collection:** {{metrics_approach}}
+          - **Feedback Channels:** {{feedback_channels}}
+          - **Review Cycles:** {{review_schedule}}
+          
+          **Continuous Improvement:**
+          - **Improvement Triggers:** {{improvement_triggers}}
+          - **Enhancement Process:** {{enhancement_process}}
+          - **Constitutional Updates:** {{constitutional_evolution}}
+          - **Stakeholder Engagement:** {{stakeholder_involvement}}
+
+  - id: constitutional-compliance-plan
+    title: Constitutional Compliance Plan
+    instruction: |
+      Define comprehensive constitutional compliance throughout catalog generation:
+      1. Plan constitutional validation at all major checkpoints
+      2. Design compliance monitoring and reporting
+      3. Establish governance oversight and audit procedures
+      4. Plan compliance updates and framework evolution
+      5. Ensure context preservation across all agent interactions
+    constitutional_validation: mandatory
+    sections:
+      - id: compliance-framework
+        title: Compliance Framework
+        template: |
+          **Constitutional Version:** {{constitutional_version}}
+          **Compliance Level:** {{required_compliance_level}}
+          **Mode Constraints:** {{applicable_constraints}}
+          **Governance Requirements:** {{governance_requirements}}
+          
+          **Compliance Checkpoints:**
+          {{#each compliance_checkpoints}}
+          - **{{checkpoint_name}}:** {{compliance_requirements}} ({{timing}})
+          {{/each}}
+
+      - id: audit-and-oversight
+        title: Audit and Oversight
+        template: |
+          **Audit Schedule:** {{audit_frequency}}
+          **Audit Scope:** {{audit_coverage}}
+          **Audit Criteria:** {{audit_standards}}
+          **Remediation Process:** {{remediation_approach}}
+          
+          **Governance Integration:**
+          - **Oversight Body:** {{oversight_structure}}
+          - **Reporting Requirements:** {{reporting_schedule}}
+          - **Escalation Procedures:** {{escalation_process}}
+          - **Constitutional Updates:** {{update_process}}
+
+  - id: execution-readiness
+    title: Execution Readiness Checklist
+    instruction: |
+      Validate readiness to begin catalog generation execution:
+      1. Confirm all planning elements are complete and validated
+      2. Verify agent coordination and resource availability
+      3. Validate constitutional compliance preparation
+      4. Confirm stakeholder approval and commitment
+      5. Execute final readiness assessment
+    constitutional_validation: mandatory
+    sections:
+      - id: readiness-checklist
+        title: Execution Readiness Checklist
+        type: checklist
+        template: |
+          **Planning Validation:**
+          - [ ] Scope clearly defined and stakeholder-approved
+          - [ ] Resource allocation confirmed and available
+          - [ ] Timeline validated and realistic
+          - [ ] Quality framework established and understood
+          - [ ] Risk mitigation strategies in place
+          
+          **Constitutional Compliance:**
+          - [ ] Development mode identified and constraints loaded
+          - [ ] Quality gates configured appropriately
+          - [ ] Agent coordination plan established
+          - [ ] Context preservation mechanisms ready
+          - [ ] Governance validation checkpoints scheduled
+          
+          **Technical Preparation:**
+          - [ ] Pattern sources identified and accessible
+          - [ ] Tool chain configured and tested
+          - [ ] Integration points validated
+          - [ ] Backup and rollback procedures ready
+          - [ ] Monitoring and feedback systems prepared
+          
+          **Stakeholder Alignment:**
+          - [ ] Adoption strategy communicated and accepted
+          - [ ] Training plans developed and scheduled
+          - [ ] Support resources allocated and ready
+          - [ ] Success criteria agreed upon and documented
+          - [ ] Change management process initiated
+
+      - id: next-steps
+        title: Immediate Next Steps
+        template: |
+          **Immediate Actions:**
+          1. {{immediate_action_1}} (Responsible: {{responsible_agent_1}}, Timeline: {{timeline_1}})
+          2. {{immediate_action_2}} (Responsible: {{responsible_agent_2}}, Timeline: {{timeline_2}})
+          3. {{immediate_action_3}} (Responsible: {{responsible_agent_3}}, Timeline: {{timeline_3}})
+          
+          **First Phase Execution:**
+          - **Start Date:** {{phase_start_date}}
+          - **First Milestone:** {{first_milestone}} ({{milestone_date}})
+          - **Initial Review:** {{initial_review_date}}
+          - **Constitutional Checkpoint:** {{first_constitutional_review}}

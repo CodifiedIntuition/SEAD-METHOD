@@ -1,7 +1,7 @@
 # SEAD-METHOD™ User Guide
 
-**Version**: 1.0  
-**Date**: 2025-01-05  
+**Version**: 1.3.3  
+**Date**: 2025-01-15  
 **Status**: Production Ready
 
 ## Table of Contents
@@ -62,8 +62,8 @@ npm install -g sead-method-core
 sead --version
 ```
 
-#### Step 2: Professional IDE Integration
-SEAD features a **BMAD-style professional installer** that automatically integrates with your IDE:
+#### Step 2: Two-Stage Installation
+SEAD uses a simple two-stage installation process that automatically integrates with your IDE:
 
 ```bash
 # Interactive installation (recommended)

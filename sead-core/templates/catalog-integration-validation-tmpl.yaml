@@ -1,0 +1,561 @@
+# SEAD Catalog Integration Validation Template
+template:
+  id: catalog-integration-validation-template-v1
+  name: SEAD Catalog Integration Validation Report
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/catalog-integration-validation-report.md
+    title: "{{project_name}} Catalog Integration Validation Report"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  governance_validation: continuous
+
+workflow:
+  mode: constitutional_interactive
+  elicitation: catalog-validation-workflow
+  catalog_validation: enabled
+  constraint_enforcement: progressive
+
+sections:
+  - id: constitutional-initialization
+    title: Constitutional Framework Initialization
+    instruction: |
+      Establish constitutional context for catalog integration validation:
+      1. Identify development mode and validation rigor requirements
+      2. Load constitutional framework for integration governance
+      3. Configure catalog compliance validation requirements
+      4. Establish context preservation for validation handoffs
+      5. Set quality gates appropriate for integration validation
+    sections:
+      - id: validation-context
+        title: Validation Context and Constitutional Framework
+        template: |
+          **Validation Date:** {{validation_date}}
+          **Development Mode:** {{development_mode}}
+          **Constitutional Framework:** {{constitutional_version}}
+          **Validation Agent:** {{validation_agent}}
+          **Integration Scope:** {{integration_scope}}
+          **Validation Rigor:** {{validation_rigor_level}}
+          **Quality Gates:** {{quality_gate_configuration}}
+
+  - id: executive-summary
+    title: Executive Summary
+    instruction: |
+      Provide comprehensive summary of catalog integration validation:
+      1. Summarize integration scope and validation methodology
+      2. Highlight key findings and compliance achievements
+      3. Present critical issues and remediation requirements
+      4. Assess overall integration readiness and recommendations
+      5. Provide constitutional compliance certification status
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: validation-overview
+        title: Validation Overview
+        template: |
+          **Integration Scope:**
+          - **Domains Validated:** {{domains_validated_count}}
+          - **Patterns Validated:** {{patterns_validated_count}}
+          - **Integration Points:** {{integration_points_count}}
+          - **Validation Timeline:** {{validation_timeline}}
+          
+          **Key Results:**
+          - **Overall Compliance Score:** {{overall_compliance_score}}/100
+          - **Critical Issues:** {{critical_issues_count}}
+          - **Constitutional Compliance:** {{constitutional_compliance_score}}/100
+          - **Integration Readiness:** {{integration_readiness_status}}
+
+      - id: critical-findings
+        title: Critical Findings and Recommendations
+        template: |
+          **High-Priority Issues:**
+          {{#each critical_issues}}
+          - **{{issue_title}}** - Severity: {{severity_level}} - Impact: {{impact_assessment}}
+          {{/each}}
+          
+          **Primary Recommendations:**
+          1. **{{recommendation_1}}** - Priority: {{priority_1}} - Timeline: {{timeline_1}}
+          2. **{{recommendation_2}}** - Priority: {{priority_2}} - Timeline: {{timeline_2}}
+          3. **{{recommendation_3}}** - Priority: {{priority_3}} - Timeline: {{timeline_3}}
+          
+          **Constitutional Actions Required:**
+          - **Immediate:** {{immediate_constitutional_actions}}
+          - **Short-term:** {{shortterm_constitutional_actions}}
+          - **Long-term:** {{longterm_constitutional_actions}}
+
+  - id: integration-scope-analysis
+    title: Integration Scope Analysis
+    instruction: |
+      Analyze comprehensive scope of catalog integration validation:
+      1. Document all catalog domains and integration points validated
+      2. Assess integration complexity and architectural alignment
+      3. Evaluate constitutional compliance across integration scope
+      4. Identify validation coverage and any gaps or limitations
+      5. Plan additional validation requirements if needed
+    elicit: true
+    catalog_validation: required
+    sections:
+      - id: domain-integration-analysis
+        title: Domain Integration Analysis
+        repeatable: true
+        template: |
+          **Domain:** {{domain_name}}
+          **Integration Status:** {{integration_status}}
+          **Constitutional Alignment:** {{constitutional_alignment_score}}/10
+          
+          **Integration Points:**
+          - **API Contracts:** {{api_contracts_integration}} ({{api_validation_status}})
+          - **Shared Types:** {{shared_types_integration}} ({{types_validation_status}})
+          - **Design Patterns:** {{design_patterns_integration}} ({{patterns_validation_status}})
+          - **Data Schemas:** {{data_schemas_integration}} ({{schemas_validation_status}})
+          
+          **Validation Results:**
+          - **Compliance Score:** {{domain_compliance_score}}/100
+          - **Issues Found:** {{domain_issues_count}}
+          - **Constitutional Gaps:** {{constitutional_gaps_count}}
+          - **Remediation Required:** {{remediation_status}}
+
+      - id: architectural-alignment
+        title: Architectural Alignment Assessment
+        template: |
+          **Architecture Compatibility:** {{architecture_compatibility_score}}/10
+          **Constitutional Architecture:** {{constitutional_architecture_alignment}}
+          
+          **Alignment Analysis:**
+          - **Pattern Consistency:** {{pattern_consistency_assessment}}
+          - **Dependency Management:** {{dependency_management_assessment}}
+          - **Interface Compatibility:** {{interface_compatibility_assessment}}
+          - **Data Flow Integration:** {{data_flow_integration_assessment}}
+          - **Constitutional Workflows:** {{constitutional_workflow_alignment}}
+          
+          **Integration Complexity:**
+          - **Technical Complexity:** {{technical_complexity_level}}
+          - **Constitutional Complexity:** {{constitutional_complexity_level}}
+          - **Migration Effort:** {{migration_effort_assessment}}
+          - **Risk Level:** {{integration_risk_level}}
+
+      - id: coverage-assessment
+        title: Validation Coverage Assessment
+        template: |
+          **Coverage Metrics:**
+          - **Domain Coverage:** {{domain_coverage_percentage}}%
+          - **Pattern Coverage:** {{pattern_coverage_percentage}}%
+          - **Integration Point Coverage:** {{integration_point_coverage}}%
+          - **Constitutional Coverage:** {{constitutional_coverage_percentage}}%
+          
+          **Validation Gaps:**
+          {{#each validation_gaps}}
+          - **{{gap_area}}:** {{gap_description}} - Priority: {{gap_priority}}
+          {{/each}}
+          
+          **Additional Validation Needed:**
+          - **Scope:** {{additional_validation_scope}}
+          - **Timeline:** {{additional_validation_timeline}}
+          - **Resources:** {{additional_validation_resources}}
+          - **Constitutional Requirements:** {{additional_constitutional_validation}}
+
+  - id: compliance-validation-results
+    title: Compliance Validation Results
+    instruction: |
+      Present detailed compliance validation results across all areas:
+      1. Assess catalog pattern compliance and adherence to standards
+      2. Evaluate constitutional framework integration and governance
+      3. Validate quality standards and documentation requirements
+      4. Check integration testing and validation completeness
+      5. Review security and performance compliance requirements
+    elicit: true
+    constitutional_validation: critical
+    sections:
+      - id: pattern-compliance
+        title: Pattern Compliance Assessment
+        type: table
+        columns: [Pattern Category, Compliance Score, Issues Found, Critical Gaps, Remediation Status]
+        instruction: |
+          Assess compliance for each pattern category:
+          - API Contracts: Interface definitions, versioning, documentation
+          - Shared Types: Type definitions, validation, evolution
+          - Design System: Component standards, accessibility, consistency
+          - State Management: Data flow, consistency, performance
+          - Error Handling: Standards, logging, recovery procedures
+
+      - id: constitutional-compliance
+        title: Constitutional Framework Compliance
+        template: |
+          **Framework Integration Score:** {{constitutional_integration_score}}/100
+          **Governance Compliance:** {{governance_compliance_score}}/100
+          
+          **Compliance Areas:**
+          - **Mode-Aware Constraints:** {{mode_constraints_compliance}}% - Status: {{mode_constraints_status}}
+          - **Context Preservation:** {{context_preservation_compliance}}% - Status: {{context_preservation_status}}
+          - **Quality Gates:** {{quality_gates_compliance}}% - Status: {{quality_gates_status}}
+          - **Audit Trail:** {{audit_trail_compliance}}% - Status: {{audit_trail_status}}
+          - **Agent Handoffs:** {{agent_handoffs_compliance}}% - Status: {{agent_handoffs_status}}
+          
+          **Critical Constitutional Issues:**
+          {{#each constitutional_issues}}
+          - **{{issue_area}}:** {{issue_description}} - Severity: {{issue_severity}}
+          {{/each}}
+
+      - id: quality-standards-validation
+        title: Quality Standards Validation
+        template: |
+          **Quality Framework Compliance:** {{quality_framework_compliance}}/100
+          **Documentation Standards:** {{documentation_standards_score}}/100
+          
+          **Quality Dimensions:**
+          - **Documentation Completeness:** {{documentation_completeness}}%
+          - **Example Coverage:** {{example_coverage}}%
+          - **Test Coverage:** {{test_coverage}}%
+          - **Performance Standards:** {{performance_standards_compliance}}
+          - **Security Standards:** {{security_standards_compliance}}
+          
+          **Quality Issues:**
+          {{#each quality_issues}}
+          - **{{quality_area}}:** {{quality_issue_description}} - Impact: {{quality_impact}}
+          {{/each}}
+
+  - id: integration-testing-results
+    title: Integration Testing Results
+    instruction: |
+      Present comprehensive integration testing results and validation:
+      1. Document all integration tests executed and their results
+      2. Validate end-to-end workflows and user scenarios
+      3. Test performance and scalability under realistic conditions
+      4. Validate error handling and recovery procedures
+      5. Confirm constitutional compliance throughout testing
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: test-execution-summary
+        title: Test Execution Summary
+        template: |
+          **Testing Scope:** {{testing_scope_description}}
+          **Constitutional Testing:** {{constitutional_testing_approach}}
+          
+          **Test Results:**
+          - **Total Tests:** {{total_tests_executed}}
+          - **Passed:** {{tests_passed}} ({{pass_percentage}}%)
+          - **Failed:** {{tests_failed}} ({{fail_percentage}}%)
+          - **Skipped:** {{tests_skipped}} ({{skip_percentage}}%)
+          - **Constitutional Tests:** {{constitutional_tests_executed}} ({{constitutional_pass_rate}}% passed)
+          
+          **Test Categories:**
+          - **Unit Tests:** {{unit_tests_results}}
+          - **Integration Tests:** {{integration_tests_results}}
+          - **End-to-End Tests:** {{e2e_tests_results}}
+          - **Performance Tests:** {{performance_tests_results}}
+          - **Constitutional Tests:** {{constitutional_tests_results}}
+
+      - id: workflow-validation
+        title: End-to-End Workflow Validation
+        repeatable: true
+        template: |
+          **Workflow:** {{workflow_name}}
+          **Test Status:** {{workflow_test_status}}
+          **Constitutional Compliance:** {{workflow_constitutional_status}}
+          
+          **Validation Results:**
+          - **Functionality:** {{workflow_functionality_result}}
+          - **Performance:** {{workflow_performance_result}}
+          - **Error Handling:** {{workflow_error_handling_result}}
+          - **Constitutional Adherence:** {{workflow_constitutional_result}}
+          
+          **Issues Identified:**
+          {{#each workflow_issues}}
+          - **{{issue_type}}:** {{issue_description}} - Severity: {{issue_severity}}
+          {{/each}}
+
+      - id: performance-validation
+        title: Performance and Scalability Validation
+        template: |
+          **Performance Baseline:** {{performance_baseline}}
+          **Scalability Requirements:** {{scalability_requirements}}
+          
+          **Performance Results:**
+          - **Response Times:** {{response_time_results}}
+          - **Throughput:** {{throughput_results}}
+          - **Resource Utilization:** {{resource_utilization_results}}
+          - **Scalability Limits:** {{scalability_limits_identified}}
+          
+          **Performance Issues:**
+          {{#each performance_issues}}
+          - **{{performance_area}}:** {{performance_issue}} - Impact: {{performance_impact}}
+          {{/each}}
+
+  - id: security-and-governance
+    title: Security and Governance Validation
+    instruction: |
+      Validate security and governance aspects of catalog integration:
+      1. Assess security controls and access management integration
+      2. Validate governance processes and approval workflows
+      3. Test audit trail and monitoring capabilities
+      4. Verify compliance with security and privacy requirements
+      5. Confirm constitutional governance framework integration
+    elicit: true
+    constitutional_validation: critical
+    sections:
+      - id: security-validation
+        title: Security Controls Validation
+        template: |
+          **Security Framework:** {{security_framework_name}}
+          **Security Compliance Score:** {{security_compliance_score}}/100
+          
+          **Security Controls:**
+          - **Authentication:** {{authentication_validation}} - Status: {{auth_status}}
+          - **Authorization:** {{authorization_validation}} - Status: {{authz_status}}
+          - **Data Protection:** {{data_protection_validation}} - Status: {{data_protection_status}}
+          - **Audit Logging:** {{audit_logging_validation}} - Status: {{audit_status}}
+          - **Constitutional Security:** {{constitutional_security_validation}} - Status: {{constitutional_security_status}}
+          
+          **Security Issues:**
+          {{#each security_issues}}
+          - **{{security_area}}:** {{security_issue}} - Risk Level: {{risk_level}}
+          {{/each}}
+
+      - id: governance-validation
+        title: Governance Framework Validation
+        template: |
+          **Governance Integration:** {{governance_integration_status}}
+          **Constitutional Governance:** {{constitutional_governance_score}}/100
+          
+          **Governance Processes:**
+          - **Approval Workflows:** {{approval_workflow_validation}}
+          - **Change Management:** {{change_management_validation}}
+          - **Quality Gates:** {{quality_gates_validation}}
+          - **Compliance Monitoring:** {{compliance_monitoring_validation}}
+          - **Constitutional Oversight:** {{constitutional_oversight_validation}}
+          
+          **Governance Gaps:**
+          {{#each governance_gaps}}
+          - **{{governance_area}}:** {{governance_gap}} - Priority: {{gap_priority}}
+          {{/each}}
+
+      - id: audit-and-monitoring
+        title: Audit Trail and Monitoring Validation
+        template: |
+          **Audit Trail Completeness:** {{audit_trail_completeness}}%
+          **Monitoring Coverage:** {{monitoring_coverage}}%
+          
+          **Audit Capabilities:**
+          - **Activity Logging:** {{activity_logging_status}}
+          - **Change Tracking:** {{change_tracking_status}}
+          - **Access Monitoring:** {{access_monitoring_status}}
+          - **Performance Monitoring:** {{performance_monitoring_status}}
+          - **Constitutional Compliance Monitoring:** {{constitutional_monitoring_status}}
+          
+          **Monitoring Alerts:**
+          - **Critical Events:** {{critical_events_monitoring}}
+          - **Performance Degradation:** {{performance_alerts_status}}
+          - **Security Events:** {{security_events_monitoring}}
+          - **Constitutional Violations:** {{constitutional_violations_monitoring}}
+
+  - id: issue-analysis-and-remediation
+    title: Issue Analysis and Remediation Plan
+    instruction: |
+      Analyze all identified issues and create comprehensive remediation plan:
+      1. Categorize and prioritize all issues by severity and impact
+      2. Develop specific remediation strategies for each issue category
+      3. Create timeline and resource allocation for issue resolution
+      4. Plan constitutional compliance remediation and validation
+      5. Establish monitoring and prevention strategies for future issues
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: issue-categorization
+        title: Issue Categorization and Prioritization
+        type: table
+        columns: [Issue Category, Count, Severity Distribution, Business Impact, Constitutional Impact, Priority]
+        instruction: |
+          Categorize all identified issues:
+          - Critical: Issues blocking integration or causing system failures
+          - High: Issues significantly impacting functionality or compliance
+          - Medium: Issues affecting user experience or performance
+          - Low: Minor issues or improvements
+          - Constitutional: Issues affecting governance or compliance framework
+
+      - id: remediation-strategies
+        title: Remediation Strategies by Category
+        repeatable: true
+        template: |
+          **Issue Category:** {{issue_category}}
+          **Total Issues:** {{category_issue_count}}
+          **Severity:** {{category_severity_level}}
+          
+          **Remediation Approach:**
+          {{remediation_strategy_description}}
+          
+          **Specific Actions:**
+          {{#each remediation_actions}}
+          - **{{action_title}}:** {{action_description}}
+            - **Effort:** {{action_effort}} person-days
+            - **Timeline:** {{action_timeline}}
+            - **Dependencies:** {{action_dependencies}}
+            - **Constitutional Impact:** {{action_constitutional_impact}}
+          {{/each}}
+          
+          **Success Criteria:**
+          - {{success_criterion_1}}
+          - {{success_criterion_2}}
+          - {{constitutional_success_criterion}}
+
+      - id: implementation-timeline
+        title: Remediation Implementation Timeline
+        template: |
+          **Overall Timeline:** {{overall_remediation_timeline}}
+          **Constitutional Remediation:** {{constitutional_remediation_timeline}}
+          
+          **Phase 1 - Critical Issues ({{phase1_timeline}}):**
+          {{#each phase1_issues}}
+          - {{issue_title}} - Owner: {{issue_owner}} - Deadline: {{issue_deadline}}
+          {{/each}}
+          
+          **Phase 2 - High Priority ({{phase2_timeline}}):**
+          {{#each phase2_issues}}
+          - {{issue_title}} - Owner: {{issue_owner}} - Deadline: {{issue_deadline}}
+          {{/each}}
+          
+          **Phase 3 - Medium Priority ({{phase3_timeline}}):**
+          {{#each phase3_issues}}
+          - {{issue_title}} - Owner: {{issue_owner}} - Deadline: {{issue_deadline}}
+          {{/each}}
+
+      - id: resource-allocation
+        title: Resource Allocation and Ownership
+        template: |
+          **Total Effort Required:** {{total_remediation_effort}} person-days
+          **Timeline:** {{remediation_total_timeline}}
+          
+          **Resource Requirements:**
+          - **Development:** {{development_effort}} person-days
+          - **Testing:** {{testing_effort}} person-days
+          - **Documentation:** {{documentation_effort}} person-days
+          - **Constitutional Validation:** {{constitutional_effort}} person-days
+          
+          **Ownership Assignment:**
+          {{#each issue_owners}}
+          - **{{owner_name}}:** {{owner_responsibilities}} ({{owner_effort}} person-days)
+          {{/each}}
+
+  - id: certification-and-approval
+    title: Integration Certification and Approval
+    instruction: |
+      Provide comprehensive certification and approval recommendation:
+      1. Assess overall integration readiness based on validation results
+      2. Provide conditional or unconditional approval recommendation
+      3. Document certification criteria and compliance achievements
+      4. Identify required actions before full integration approval
+      5. Establish ongoing monitoring and compliance requirements
+    constitutional_validation: mandatory
+    sections:
+      - id: certification-assessment
+        title: Integration Certification Assessment
+        template: |
+          **Overall Assessment:** {{overall_assessment_status}}
+          **Certification Recommendation:** {{certification_recommendation}}
+          **Constitutional Certification:** {{constitutional_certification_status}}
+          
+          **Certification Criteria:**
+          - **Functional Compliance:** {{functional_compliance_status}} ({{functional_score}}/100)
+          - **Performance Standards:** {{performance_standards_status}} ({{performance_score}}/100)
+          - **Security Requirements:** {{security_requirements_status}} ({{security_score}}/100)
+          - **Constitutional Framework:** {{constitutional_framework_status}} ({{constitutional_score}}/100)
+          - **Quality Standards:** {{quality_standards_status}} ({{quality_score}}/100)
+          
+          **Overall Certification Score:** {{overall_certification_score}}/100
+
+      - id: approval-conditions
+        title: Approval Conditions and Requirements
+        template: |
+          **Approval Type:** {{approval_type}} (Unconditional/Conditional/Deferred)
+          **Constitutional Approval:** {{constitutional_approval_status}}
+          
+          **Conditions for Approval:**
+          {{#each approval_conditions}}
+          - **{{condition_title}}:** {{condition_description}}
+            - **Priority:** {{condition_priority}}
+            - **Timeline:** {{condition_timeline}}
+            - **Owner:** {{condition_owner}}
+            - **Verification:** {{condition_verification_method}}
+          {{/each}}
+          
+          **Pre-Production Requirements:**
+          - {{requirement_1}}
+          - {{requirement_2}}
+          - {{constitutional_requirement}}
+
+      - id: ongoing-requirements
+        title: Ongoing Monitoring and Compliance Requirements
+        template: |
+          **Monitoring Strategy:** {{ongoing_monitoring_strategy}}
+          **Constitutional Monitoring:** {{constitutional_ongoing_monitoring}}
+          
+          **Ongoing Requirements:**
+          - **Performance Monitoring:** {{performance_monitoring_requirements}}
+          - **Security Monitoring:** {{security_monitoring_requirements}}
+          - **Compliance Validation:** {{compliance_validation_schedule}}
+          - **Quality Assurance:** {{ongoing_qa_requirements}}
+          - **Constitutional Compliance:** {{constitutional_ongoing_requirements}}
+          
+          **Review Schedule:**
+          - **Weekly Reviews:** {{weekly_review_scope}}
+          - **Monthly Assessments:** {{monthly_assessment_scope}}
+          - **Quarterly Audits:** {{quarterly_audit_scope}}
+          - **Annual Certification:** {{annual_certification_process}}
+
+  - id: appendices
+    title: Appendices and Supporting Documentation
+    instruction: |
+      Include comprehensive supporting documentation and evidence:
+      1. Detailed test results and validation artifacts
+      2. Configuration files and integration specifications
+      3. Issue logs and remediation tracking
+      4. Constitutional compliance documentation
+      5. Stakeholder sign-offs and approvals
+    sections:
+      - id: validation-artifacts
+        title: Validation Artifacts and Evidence
+        template: |
+          **Test Artifacts:**
+          - **Test Plans:** {{test_plans_location}}
+          - **Test Results:** {{test_results_location}}
+          - **Performance Reports:** {{performance_reports_location}}
+          - **Security Assessments:** {{security_assessments_location}}
+          
+          **Configuration Artifacts:**
+          - **Integration Configurations:** {{integration_configs_location}}
+          - **Constitutional Settings:** {{constitutional_settings_location}}
+          - **Quality Gate Configurations:** {{quality_gate_configs_location}}
+          - **Monitoring Configurations:** {{monitoring_configs_location}}
+
+      - id: constitutional-documentation
+        title: Constitutional Compliance Documentation
+        template: |
+          **Constitutional Framework:**
+          - **Framework Version:** {{constitutional_framework_version}}
+          - **Compliance Checklist:** {{constitutional_checklist_location}}
+          - **Validation Reports:** {{constitutional_validation_reports}}
+          - **Governance Documentation:** {{governance_documentation_location}}
+          
+          **Audit Trail:**
+          - **Decision Log:** {{decision_log_location}}
+          - **Change Records:** {{change_records_location}}
+          - **Approval History:** {{approval_history_location}}
+          - **Compliance Certificates:** {{compliance_certificates_location}}
+
+      - id: stakeholder-approvals
+        title: Stakeholder Approvals and Sign-offs
+        type: table
+        columns: [Stakeholder, Role, Approval Status, Date, Comments, Constitutional Authority]
+        instruction: |
+          Document all stakeholder approvals and sign-offs:
+          - Technical approval from architecture and development teams
+          - Quality assurance approval from testing and validation teams
+          - Security approval from security and compliance teams
+          - Business approval from product and stakeholder representatives
+          - Constitutional approval from governance and oversight authorities
