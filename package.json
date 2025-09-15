@@ -1,6 +1,6 @@
 {
   "name": "sead-method-core",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "Specification Enforced Agentic Agile Development - A hybrid methodology preventing AI agent drift through catalog-based constraints with comprehensive external asset integration",
   "main": "cli.js",
   "bin": {
