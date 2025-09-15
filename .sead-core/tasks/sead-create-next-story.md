@@ -1,7 +1,3 @@
-# /sead-create-next-story Task
-
-When this command is used, execute the following task:
-
 <!-- Powered by SEAD-METHOD™ Core -->
 
 # SEAD Create Next Story Task

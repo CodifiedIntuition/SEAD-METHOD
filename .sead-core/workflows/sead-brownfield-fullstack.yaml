@@ -1,0 +1,416 @@
+# SEAD Brownfield Full-Stack Enhancement Workflow
+workflow:
+  id: sead-brownfield-fullstack
+  name: SEAD Constitutional Brownfield Full-Stack Enhancement
+  description: >-
+    Constitutional agent workflow for enhancing existing full-stack applications with new features,
+    modernization, or significant changes. Handles existing system analysis with catalog integration,
+    governance validation, and safe constitutional integration with context preservation.
+  type: constitutional_brownfield
+  constitutional_framework: true
+  catalog_integration: true
+  governance_validation: enabled
+  context_preservation: enforced
+  project_types:
+    - constitutional-feature-addition
+    - constitutional-refactoring
+    - constitutional-modernization
+    - constitutional-integration-enhancement
+    - catalog-pattern-evolution
+    - governance-compliance-enhancement
+
+  constitutional_requirements:
+    mode_detection: required
+    catalog_read: mandatory
+    governance_validation: continuous
+    context_preservation: enforced
+    agent_handoff_validation: required
+
+  sequence:
+    - step: constitutional_enhancement_classification
+      agent: sead-analyst
+      action: classify enhancement scope with constitutional governance
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Constitutional enhancement complexity determination with governance validation:
+        - Single constitutional story (< 4 hours) → Use sead-brownfield-create-story task
+        - Small constitutional feature (1-3 stories) → Use sead-brownfield-create-epic task  
+        - Major constitutional enhancement (multiple epics) → Continue with full constitutional workflow
+
+        Constitutional classification must include:
+        - Governance validation level required (prototype/development/build-to-deploy)
+        - Catalog integration impact assessment
+        - Context preservation requirements
+        - Agent handoff complexity
+
+        Ask user: "Can you describe the constitutional enhancement scope with governance requirements? Is this a small constitutional fix, a catalog-integrated feature addition, or a major enhancement requiring constitutional architectural changes with governance validation?"
+
+    - step: constitutional_routing_decision
+      condition: based_on_constitutional_classification
+      constitutional_validation: required
+      routes:
+        constitutional_single_story:
+          agent: sead-project-manager
+          uses: sead-brownfield-create-story
+          constitutional_validation: required
+          catalog_integration: required
+          notes: |
+            Create single constitutional story with governance validation for immediate implementation. 
+            Exit workflow after constitutional story creation with context preservation.
+        constitutional_small_feature:
+          agent: sead-project-manager
+          uses: sead-brownfield-create-epic
+          constitutional_validation: required
+          catalog_integration: required
+          notes: |
+            Create focused constitutional epic with catalog integration and 1-3 governance-validated stories. 
+            Exit workflow after constitutional epic creation with context preservation.
+        constitutional_major_enhancement:
+          continue: to_constitutional_next_step
+          constitutional_validation: required
+          catalog_integration: required
+          notes: |
+            Continue with comprehensive constitutional planning workflow with governance validation,
+            catalog integration, and context preservation below.
+
+    - step: constitutional_documentation_check
+      agent: sead-analyst
+      action: check existing documentation with catalog pattern assessment
+      condition: constitutional_major_enhancement_path
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Constitutional documentation assessment with catalog integration:
+        - Look for existing constitutional architecture docs, catalog patterns, API specs, governance standards
+        - Assess if documentation includes catalog integration and constitutional compliance
+        - Check governance validation documentation and context preservation strategies
+        - If constitutional adequate: Skip sead-document-project, proceed to constitutional PRD
+        - If constitutionally inadequate: Run sead-document-project with catalog integration first
+
+    - step: constitutional_project_analysis
+      agent: sead-architect
+      action: analyze existing project with constitutional compliance and use sead-document-project
+      creates: sead-brownfield-architecture.md (or multiple constitutional documents)
+      condition: constitutional_documentation_inadequate
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Run constitutional sead-document-project to capture current system state with:
+        - Constitutional compliance assessment and governance validation
+        - Catalog pattern integration analysis and evolution opportunities
+        - Technical debt with governance impact assessment
+        - Context preservation requirements for agent handoffs
+        Pass constitutional findings to PRD creation with catalog integration.
+
+    - agent: sead-product-owner
+      creates: sead-prd.md
+      uses: sead-brownfield-prd-tmpl
+      requires: constitutional_existing_documentation_or_analysis
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Creates constitutional PRD for major enhancement with governance validation and catalog integration.
+        If constitutional sead-document-project was run, reference its output with catalog patterns to avoid re-analysis.
+        If skipped, use existing constitutional project documentation with governance compliance assessment.
+        CONSTITUTIONAL SAVE OUTPUT: Copy final sead-prd.md to your project's docs/ folder with catalog integration references.
+
+    - step: constitutional_architecture_decision
+      agent: sead-product-owner/sead-architect
+      action: determine if constitutional architecture document needed
+      condition: after_constitutional_prd_creation
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Review constitutional PRD to determine if architectural planning with governance validation is needed:
+        - New constitutional architectural patterns → Create constitutional architecture doc
+        - New catalog-integrated libraries/frameworks → Create constitutional architecture doc
+        - Constitutional platform/infrastructure changes → Create constitutional architecture doc
+        - Following existing constitutional patterns with catalog compliance → Skip to constitutional story creation
+
+    - agent: sead-architect
+      creates: sead-architecture.md
+      uses: sead-brownfield-architecture-tmpl
+      requires: sead-prd.md
+      condition: constitutional_architecture_changes_needed
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Creates constitutional architecture ONLY for significant constitutional architectural changes with:
+        - Comprehensive catalog integration across all 11 domains
+        - Governance validation requirements and compliance framework
+        - Context preservation strategy for agent handoffs
+        CONSTITUTIONAL SAVE OUTPUT: Copy final sead-architecture.md to your project's docs/ folder with catalog references.
+
+    - agent: sead-product-owner
+      validates: all_constitutional_artifacts
+      uses: sead-po-master-checklist
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Validates all constitutional documents for integration safety, catalog compliance, and governance validation completeness. 
+        May require updates to any constitutional document with catalog integration improvements.
+
+    - agent: various_constitutional_agents
+      updates: any_flagged_constitutional_documents
+      condition: constitutional_po_checklist_issues
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        If Constitutional PO finds issues, return to relevant constitutional agent to fix and re-export 
+        updated constitutional documents to docs/ folder with catalog integration validation.
+
+    - agent: sead-product-owner
+      action: shard_constitutional_documents
+      creates: sharded_constitutional_docs
+      requires: all_constitutional_artifacts_in_project
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Shard constitutional documents for IDE development with catalog integration:
+        - Option A: Use Constitutional PO agent to shard: @sead-product-owner then ask to shard docs/sead-prd.md
+        - Option B: Manual: Drag sead-shard-doc task + docs/sead-prd.md into chat
+        - Creates docs/sead-prd/ and docs/sead-architecture/ folders with sharded constitutional content
+        - All shards include catalog pattern references and governance validation requirements
+
+    - agent: sead-scrum-master
+      action: create_constitutional_story
+      creates: sead-story.md
+      requires: sharded_constitutional_docs_or_brownfield_constitutional_docs
+      repeats: for_each_constitutional_epic_or_enhancement
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Constitutional story creation cycle with governance validation:
+        - For sharded constitutional PRD: @sead-scrum-master → *create (uses sead-create-next-story)
+        - For constitutional brownfield docs: @sead-scrum-master → use sead-create-brownfield-story task
+        - Creates constitutional story from available documentation with catalog integration
+        - Constitutional story starts in "Draft" status with governance validation pending
+        - May require additional constitutional context gathering for brownfield with catalog compliance
+        - All stories include context preservation requirements for agent handoffs
+
+    - agent: sead-analyst/sead-project-manager
+      action: review_draft_constitutional_story
+      updates: sead-story.md
+      requires: sead-story.md
+      optional: true
+      condition: user_wants_constitutional_story_review
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        OPTIONAL: Review and approve draft constitutional story with governance validation:
+        - NOTE: sead-story-review task with catalog integration validation
+        - Review constitutional story completeness, catalog compliance, and governance alignment
+        - Update constitutional story status: Draft → Approved with governance validation
+        - Validate context preservation requirements for agent handoffs
+
+    - agent: sead-developer
+      action: implement_constitutional_story
+      creates: constitutional_implementation_files
+      requires: sead-story.md
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Constitutional Dev Agent (New Chat): @sead-developer with governance validation
+        - Implements approved constitutional story with catalog pattern compliance
+        - Updates File List with all constitutional changes and catalog integration references
+        - Ensures governance validation throughout implementation
+        - Maintains context preservation for agent handoffs
+        - Marks constitutional story as "Review" when complete with governance compliance
+
+    - agent: sead-qa
+      action: review_constitutional_implementation
+      updates: constitutional_implementation_files
+      requires: constitutional_implementation_files
+      optional: true
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        OPTIONAL: Constitutional QA Agent (New Chat): @sead-qa → sead-review-story with governance validation
+        - Senior constitutional dev review with catalog-compliant refactoring ability
+        - Fixes small constitutional issues directly with governance validation
+        - Leaves constitutional checklist for remaining items with catalog compliance requirements
+        - Updates constitutional story status (Review → Done or stays Review) with governance validation
+        - Validates context preservation for agent handoffs
+
+    - agent: sead-developer
+      action: address_constitutional_qa_feedback
+      updates: constitutional_implementation_files
+      condition: constitutional_qa_left_unchecked_items
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        If Constitutional QA left unchecked items with governance implications:
+        - Constitutional Dev Agent (New Chat): Address remaining constitutional items with catalog compliance
+        - Return to Constitutional QA for final governance validation approval
+        - Ensure context preservation throughout feedback resolution
+
+    - step: repeat_constitutional_development_cycle
+      action: continue_for_all_constitutional_stories
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        Repeat constitutional story cycle (Constitutional SM → Constitutional Dev → Constitutional QA) for all constitutional epic stories
+        Continue until all constitutional stories in PRD are complete with governance validation and catalog integration
+        Maintain context preservation across all story cycles and agent handoffs
+
+    - agent: sead-product-owner
+      action: constitutional_epic_retrospective
+      creates: sead-epic-retrospective.md
+      condition: constitutional_epic_complete
+      optional: true
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        OPTIONAL: After constitutional epic completion with governance validation
+        - NOTE: sead-epic-retrospective task with catalog evolution assessment
+        - Validate constitutional epic was completed correctly with governance compliance
+        - Document constitutional learnings, catalog evolution contributions, and governance improvements
+        - Assess context preservation effectiveness across agent handoffs
+
+    - step: constitutional_workflow_end
+      action: constitutional_project_complete
+      constitutional_validation: required
+      catalog_integration: required
+      notes: |
+        All constitutional stories implemented and reviewed with governance validation!
+        Constitutional project development phase complete with catalog integration and context preservation.
+
+        Constitutional Reference: .sead-core/data/sead-kb.md#Constitutional IDE Development Workflow
+
+  constitutional_flow_diagram: |
+    ```mermaid
+    graph TD
+        A[Start: Constitutional Brownfield Enhancement] --> B[sead-analyst: classify constitutional enhancement scope]
+        B --> C{Constitutional Enhancement Size?}
+        
+        C -->|Single Constitutional Story| D[sead-pm: sead-brownfield-create-story]
+        C -->|1-3 Constitutional Stories| E[sead-pm: sead-brownfield-create-epic]
+        C -->|Major Constitutional Enhancement| F[sead-analyst: check constitutional documentation]
+        
+        D --> END1[To Constitutional Dev Implementation]
+        E --> END2[To Constitutional Story Creation]
+        
+        F --> G{Constitutional Docs Adequate?}
+        G -->|No| H[sead-architect: sead-document-project]
+        G -->|Yes| I[sead-po: constitutional brownfield PRD]
+        H --> I
+        
+        I --> J{Constitutional Architecture Needed?}
+        J -->|Yes| K[sead-architect: constitutional architecture.md]
+        J -->|No| L[sead-po: validate constitutional artifacts]
+        K --> L
+        
+        L --> M{Constitutional PO finds issues?}
+        M -->|Yes| N[Fix constitutional issues]
+        M -->|No| O[sead-po: shard constitutional documents]
+        N --> L
+        
+        O --> P[sead-sm: create constitutional story]
+        P --> Q{Constitutional Story Type?}
+        Q -->|Sharded Constitutional PRD| R[sead-create-next-story]
+        Q -->|Constitutional Brownfield Docs| S[sead-create-brownfield-story]
+        
+        R --> T{Review constitutional draft?}
+        S --> T
+        T -->|Yes| U[review & approve constitutional story]
+        T -->|No| V[sead-dev: implement constitutional story]
+        U --> V
+        
+        V --> W{Constitutional QA review?}
+        W -->|Yes| X[sead-qa: constitutional review]
+        W -->|No| Y{More constitutional stories?}
+        X --> Z{Constitutional Issues?}
+        Z -->|Yes| AA[sead-dev: fix constitutional issues]
+        Z -->|No| Y
+        AA --> X
+        Y -->|Yes| P
+        Y -->|No| AB{Constitutional Retrospective?}
+        AB -->|Yes| AC[sead-po: constitutional retrospective]
+        AB -->|No| AD[Constitutional Complete]
+        AC --> AD
+
+        style AD fill:#90EE90
+        style END1 fill:#90EE90
+        style END2 fill:#90EE90
+        style D fill:#87CEEB
+        style E fill:#87CEEB
+        style I fill:#FFE4B5
+        style K fill:#FFE4B5
+        style O fill:#ADD8E6
+        style P fill:#ADD8E6
+        style V fill:#ADD8E6
+        style U fill:#F0E68C
+        style X fill:#F0E68C
+        style AC fill:#F0E68C
+    ```
+
+  constitutional_decision_guidance:
+    when_to_use:
+      - Constitutional enhancement requires coordinated governance-validated stories
+      - Constitutional architectural changes with catalog integration are needed
+      - Significant constitutional integration work with governance validation required
+      - Constitutional risk assessment and governance mitigation planning necessary
+      - Multiple constitutional team members will work on related changes with context preservation
+      - Catalog pattern evolution with governance compliance required
+
+  constitutional_handoff_prompts:
+    constitutional_classification_complete: |
+      Constitutional enhancement classified as: {{constitutional_enhancement_type}} with governance level: {{governance_level}}
+      Catalog integration impact: {{catalog_integration_impact}}
+      Context preservation requirements: {{context_preservation_requirements}}
+      
+      {{if constitutional_single_story}}: Proceeding with sead-brownfield-create-story task for immediate constitutional implementation with governance validation.
+      {{if constitutional_small_feature}}: Creating focused constitutional epic with sead-brownfield-create-epic task and catalog integration.
+      {{if constitutional_major_enhancement}}: Continuing with comprehensive constitutional planning workflow with governance validation and catalog integration.
+
+    constitutional_documentation_assessment: |
+      Constitutional documentation assessment complete with catalog integration review:
+      Governance compliance level: {{governance_compliance_level}}
+      Catalog integration status: {{catalog_integration_status}}
+      Context preservation documentation: {{context_preservation_documentation}}
+      
+      {{if constitutional_adequate}}: Existing constitutional documentation with catalog integration is sufficient. Proceeding directly to constitutional PRD creation.
+      {{if constitutional_inadequate}}: Running constitutional sead-document-project to capture current system state with governance validation and catalog integration before constitutional PRD.
+
+    constitutional_document_project_to_pm: |
+      Constitutional project analysis complete with governance validation and catalog integration. Key constitutional findings documented in:
+      - {{constitutional_document_list}}
+      - Catalog pattern analysis: {{catalog_pattern_analysis}}
+      - Governance compliance assessment: {{governance_compliance_assessment}}
+      - Context preservation strategy: {{context_preservation_strategy}}
+      
+      Use these constitutional findings with catalog integration to inform PRD creation and avoid re-analyzing the same constitutional aspects.
+
+    constitutional_pm_to_architect_decision: |
+      Constitutional PRD complete and saved as docs/sead-prd.md with governance validation and catalog integration. 
+      Constitutional architectural changes identified: {{yes/no}}
+      Catalog evolution requirements: {{catalog_evolution_requirements}}
+      Governance validation needs: {{governance_validation_needs}}
+      
+      {{if yes}}: Proceeding to create constitutional architecture document for: {{specific_constitutional_changes}} with catalog integration and governance validation
+      {{if no}}: No constitutional architectural changes needed. Proceeding to constitutional validation with catalog compliance.
+
+    constitutional_architect_to_po: |
+      Constitutional architecture complete with comprehensive catalog integration and governance validation. 
+      Save it as docs/sead-architecture.md with catalog pattern references. 
+      Please validate all constitutional artifacts for integration safety, catalog compliance, and governance validation.
+
+    constitutional_po_to_sm: |
+      All constitutional artifacts validated with governance compliance and catalog integration. 
+      Constitutional documentation type available: {{sharded_constitutional_prd / constitutional_brownfield_docs}}
+      Context preservation strategy: {{context_preservation_strategy}}
+      
+      {{if sharded}}: Use standard sead-create-next-story task with constitutional validation and catalog integration.
+      {{if constitutional_brownfield}}: Use sead-create-brownfield-story task to handle varied constitutional documentation formats with governance validation.
+
+    constitutional_sm_story_creation: |
+      Creating constitutional story from {{constitutional_documentation_type}} with governance validation and catalog integration.
+      Context preservation requirements: {{context_preservation_requirements}}
+      
+      {{if missing_constitutional_context}}: May need to gather additional constitutional context from user during story creation with governance validation.
+
+    constitutional_complete: |
+      All constitutional planning artifacts validated with governance compliance and catalog integration, and constitutional development can begin. 
+      Constitutional stories will be created based on available constitutional documentation format with context preservation for agent handoffs.
+      Catalog evolution contributions documented and governance validation framework established.

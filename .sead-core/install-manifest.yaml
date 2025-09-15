@@ -1,0 +1,308 @@
+version: 1.3.1
+installed_at: '2025-09-14T20:23:13.327Z'
+install_type: full
+agent: null
+ides_setup:
+  - claude-code
+expansion_packs: []
+files:
+  - path: .sead-core/core-config.yaml
+    hash: fd4f7e185f85ef41
+    modified: false
+  - path: .sead-core/workflows/sead-greenfield-ui.yaml
+    hash: 54c43ade490ada0f
+    modified: false
+  - path: .sead-core/workflows/sead-greenfield-service.yaml
+    hash: b4bbc6eb0418eb89
+    modified: false
+  - path: .sead-core/workflows/sead-greenfield-fullstack.yaml
+    hash: eb738ca234b113b3
+    modified: false
+  - path: .sead-core/workflows/sead-brownfield-ui.yaml
+    hash: 017e779d876c60fb
+    modified: false
+  - path: .sead-core/workflows/sead-brownfield-service.yaml
+    hash: 8ce526d8b997d671
+    modified: false
+  - path: .sead-core/workflows/sead-brownfield-fullstack.yaml
+    hash: d8dbd08c27a352e4
+    modified: false
+  - path: .sead-core/templates/sead-story-tmpl.yaml
+    hash: ea841ef9bc122df1
+    modified: false
+  - path: .sead-core/templates/sead-spec-kit-tasks-tmpl.yaml
+    hash: 9b958ca5cbc0f549
+    modified: false
+  - path: .sead-core/templates/sead-spec-kit-specification-tmpl.yaml
+    hash: d4bb8a683ff2a385
+    modified: false
+  - path: .sead-core/templates/sead-spec-kit-plan-tmpl.yaml
+    hash: 1e72f6228c50e3e9
+    modified: false
+  - path: .sead-core/templates/sead-qa-gate-tmpl.yaml
+    hash: 91ceb424b4556126
+    modified: false
+  - path: .sead-core/templates/sead-project-brief-tmpl.yaml
+    hash: ffb44098b4fb63cf
+    modified: false
+  - path: .sead-core/templates/sead-prd-tmpl.yaml
+    hash: fc8fd014ec7f8ccb
+    modified: false
+  - path: .sead-core/templates/sead-fullstack-architecture-tmpl.yaml
+    hash: 3ad17d5009d86f00
+    modified: false
+  - path: .sead-core/templates/sead-front-end-spec-tmpl.yaml
+    hash: e1629950ecf6c1a5
+    modified: false
+  - path: .sead-core/templates/sead-front-end-architecture-tmpl.yaml
+    hash: 59ed6db3134468ef
+    modified: false
+  - path: .sead-core/templates/sead-brownfield-prd-tmpl.yaml
+    hash: 7967160811ef10ae
+    modified: false
+  - path: .sead-core/templates/sead-brownfield-architecture-tmpl.yaml
+    hash: 81ad063a56136982
+    modified: false
+  - path: .sead-core/templates/sead-brainstorming-output-tmpl.yaml
+    hash: 2d79c4b1ba31c8cb
+    modified: false
+  - path: .sead-core/templates/sead-architecture-tmpl.yaml
+    hash: 9bbf7a22a1023e38
+    modified: false
+  - path: .sead-core/templates/integration-architecture-tmpl.yaml
+    hash: bb74537e91a3fc3c
+    modified: false
+  - path: .sead-core/templates/external-asset-validation-report-tmpl.yaml
+    hash: f79cd7eb68e2e44a
+    modified: false
+  - path: .sead-core/templates/external-asset-analysis-report-tmpl.yaml
+    hash: 596a45497bd78504
+    modified: false
+  - path: .sead-core/templates/external-adoption-strategy-tmpl.yaml
+    hash: 7f1bffd0c4c6be02
+    modified: false
+  - path: .sead-core/tasks/sead-verify-build.md
+    hash: a577576909084576
+    modified: false
+  - path: .sead-core/tasks/sead-validate-next-story.md
+    hash: 41180c357c5633e8
+    modified: false
+  - path: .sead-core/tasks/sead-shard-doc.md
+    hash: dcfb05c72a3019c6
+    modified: false
+  - path: .sead-core/tasks/sead-risk-profile.md
+    hash: 8e07e3667f24d08d
+    modified: false
+  - path: .sead-core/tasks/sead-review-story.md
+    hash: f70568dcd1dd8091
+    modified: false
+  - path: .sead-core/tasks/sead-qa-gate.md
+    hash: 254402be8dbcd857
+    modified: false
+  - path: .sead-core/tasks/sead-index-docs.md
+    hash: 1b3573b2288d1756
+    modified: false
+  - path: .sead-core/tasks/sead-generate-task-breakdown.md
+    hash: 139c21e81c3d95b2
+    modified: false
+  - path: .sead-core/tasks/sead-generate-project-brief.md
+    hash: e5ba3a6b49cc61ff
+    modified: false
+  - path: .sead-core/tasks/sead-generate-ai-frontend-prompt.md
+    hash: 25ef6538c94779a7
+    modified: false
+  - path: .sead-core/tasks/sead-facilitate-ideation-session.md
+    hash: 70db302827bb4466
+    modified: false
+  - path: .sead-core/tasks/sead-facilitate-brainstorming-session.md
+    hash: 04e5a9196c0a80ec
+    modified: false
+  - path: .sead-core/tasks/sead-document-project.md
+    hash: 3b4543340f64cbd1
+    modified: false
+  - path: .sead-core/tasks/sead-document-issue.md
+    hash: 369d9c0bc33b6b14
+    modified: false
+  - path: .sead-core/tasks/sead-create-specification.md
+    hash: 44ea7e5f3a1cfaf8
+    modified: false
+  - path: .sead-core/tasks/sead-create-simple-spec.md
+    hash: 5390c57cae649c08
+    modified: false
+  - path: .sead-core/tasks/sead-create-next-story.md
+    hash: 563942fadb2d47ca
+    modified: false
+  - path: .sead-core/tasks/sead-create-implementation-plan.md
+    hash: c543f47c9bf0d560
+    modified: false
+  - path: .sead-core/tasks/sead-create-deep-research-prompt.md
+    hash: 4ded3a0fd3b57f46
+    modified: false
+  - path: .sead-core/tasks/sead-correct-course.md
+    hash: 0ea3ba38a8876c18
+    modified: false
+  - path: .sead-core/tasks/sead-brownfield-create-story.md
+    hash: f70ab7a7b3289bd7
+    modified: false
+  - path: .sead-core/tasks/sead-brownfield-create-epic.md
+    hash: 3967f72487b6de1a
+    modified: false
+  - path: .sead-core/tasks/sead-approve-solution.md
+    hash: 669aae4b5781e8e3
+    modified: false
+  - path: .sead-core/tasks/sead-apply-qa-fixes.md
+    hash: 8b83bc1fae274dc5
+    modified: false
+  - path: .sead-core/tasks/sead-advanced-elicitation.md
+    hash: a8b0918326ad03a7
+    modified: false
+  - path: .sead-core/tasks/greenfield-catalog-bootstrap.md
+    hash: 06cdc38695b57751
+    modified: false
+  - path: .sead-core/tasks/external-design-system-transformation.md
+    hash: 45d0398cdc083d54
+    modified: false
+  - path: .sead-core/tasks/external-asset-validation.md
+    hash: 99efd23a7de99330
+    modified: false
+  - path: .sead-core/tasks/external-asset-analysis.md
+    hash: d8884e68681b1138
+    modified: false
+  - path: .sead-core/tasks/external-api-contract-transformation.md
+    hash: 55de3779ea2fa8ed
+    modified: false
+  - path: .sead-core/tasks/external-adoption-strategy.md
+    hash: 20aa6c7f6c608715
+    modified: false
+  - path: .sead-core/tasks/catalog-external-integration.md
+    hash: cd869005ef8fc595
+    modified: false
+  - path: .sead-core/tasks/brownfield-catalog-generation.md
+    hash: 458b5d91eb84fd53
+    modified: false
+  - path: .sead-core/scripts/sead-setup-planning-workspace.sh
+    hash: 3cc8566affff0d8c
+    modified: false
+  - path: .sead-core/scripts/sead-path-resolution.sh
+    hash: 626dbd48861bf889
+    modified: false
+  - path: .sead-core/scripts/sead-create-feature-workspace.sh
+    hash: b175cb9491e0248d
+    modified: false
+  - path: .sead-core/scripts/sead-common-utilities.sh
+    hash: 6a9f1736b5adcd83
+    modified: false
+  - path: .sead-core/data/test-priorities-matrix.md
+    hash: 1dd5698a46ab054e
+    modified: false
+  - path: .sead-core/data/test-levels-framework.md
+    hash: f814f8efed0e96e1
+    modified: false
+  - path: .sead-core/data/technical-preferences.md
+    hash: a829f3172a10b396
+    modified: false
+  - path: .sead-core/data/elicitation-methods.md
+    hash: 8c3ca9b84c8784c9
+    modified: false
+  - path: .sead-core/data/brainstorming-techniques.md
+    hash: 62b0bf50648906b0
+    modified: false
+  - path: .sead-core/data/bmad-kb.md
+    hash: 1d38eeee61c55bf9
+    modified: false
+  - path: .sead-core/constitutional-rules/sead-ux-expert-constraints.yaml
+    hash: d1be985ba702384d
+    modified: false
+  - path: .sead-core/constitutional-rules/sead-scrum-master-constraints.yaml
+    hash: 9e15193fc008ac55
+    modified: false
+  - path: .sead-core/constitutional-rules/sead-qa-constraints.yaml
+    hash: 646f4366a366d629
+    modified: false
+  - path: .sead-core/constitutional-rules/sead-project-manager-constraints.yaml
+    hash: a0ae0d90f2786ffb
+    modified: false
+  - path: .sead-core/constitutional-rules/sead-product-owner-constraints.yaml
+    hash: 23232a606591a24e
+    modified: false
+  - path: .sead-core/constitutional-rules/sead-pattern-extraction-constraints.yaml
+    hash: 2513570850cd3693
+    modified: false
+  - path: .sead-core/constitutional-rules/sead-orchestrator-constraints.yaml
+    hash: 17e70b3e5e434d86
+    modified: false
+  - path: .sead-core/constitutional-rules/sead-master-constraints.yaml
+    hash: 6cf082ca9699c367
+    modified: false
+  - path: .sead-core/constitutional-rules/sead-developer-constraints.yaml
+    hash: e1af3e617bf8a767
+    modified: false
+  - path: .sead-core/constitutional-rules/sead-constitution.md
+    hash: cffaf1920068ab6c
+    modified: false
+  - path: .sead-core/constitutional-rules/sead-catalog-architect-constraints.yaml
+    hash: 8b742e7acb8bd920
+    modified: false
+  - path: .sead-core/constitutional-rules/sead-architect-constraints.yaml
+    hash: 9cfe2a7cd40bcf3a
+    modified: false
+  - path: .sead-core/constitutional-rules/sead-analyst-constraints.yaml
+    hash: 1ee907297103f870
+    modified: false
+  - path: .sead-core/constitutional-rules/README.md
+    hash: 31acaff0fcf2350e
+    modified: false
+  - path: .sead-core/checklists/sead-story-draft-checklist.md
+    hash: e08df25c7ff33374
+    modified: false
+  - path: .sead-core/checklists/sead-story-dod-checklist.md
+    hash: 503e25bf7832955a
+    modified: false
+  - path: .sead-core/checklists/sead-po-master-validation-checklist.md
+    hash: 242d891591e69694
+    modified: false
+  - path: .sead-core/checklists/sead-pm-requirements-checklist.md
+    hash: b6f0fc0fee3bde9f
+    modified: false
+  - path: .sead-core/checklists/sead-change-navigation-checklist.md
+    hash: 53d2d35bdd95d37b
+    modified: false
+  - path: .sead-core/checklists/sead-architect-checklist.md
+    hash: 6b142698d4ac1ceb
+    modified: false
+  - path: .sead-core/agents/sead-ux-expert.md
+    hash: bb53a82082c71455
+    modified: false
+  - path: .sead-core/agents/sead-scrum-master.md
+    hash: 03772cc2dc3fed12
+    modified: false
+  - path: .sead-core/agents/sead-qa.md
+    hash: 63c3fde5246020d6
+    modified: false
+  - path: .sead-core/agents/sead-project-manager.md
+    hash: 2b7b3b2f8ad697b6
+    modified: false
+  - path: .sead-core/agents/sead-product-owner.md
+    hash: 82861c630cb4a5ed
+    modified: false
+  - path: .sead-core/agents/sead-pattern-extraction.md
+    hash: 2221c881e0e75254
+    modified: false
+  - path: .sead-core/agents/sead-orchestrator.md
+    hash: 2d1c80dbd918f42c
+    modified: false
+  - path: .sead-core/agents/sead-master.md
+    hash: 4bf313b12a389fc7
+    modified: false
+  - path: .sead-core/agents/sead-developer.md
+    hash: 5d511c8a128671d6
+    modified: false
+  - path: .sead-core/agents/sead-catalog-architect.md
+    hash: 82936ebc54c23d0d
+    modified: false
+  - path: .sead-core/agents/sead-architect.md
+    hash: dd292bd9cd248b87
+    modified: false
+  - path: .sead-core/agents/sead-analyst.md
+    hash: 46c9e228c9e2d944
+    modified: false

@@ -1,0 +1,265 @@
+# External Asset Analysis Report Template
+# Used by external-asset-analysis.md task to generate comprehensive analysis documentation
+
+metadata:
+  template_name: "external-asset-analysis-report-tmpl.yaml"
+  version: "1.0.0"
+  purpose: "Structure comprehensive analysis of staged external assets"
+  generated_by: "sead-catalog-architect"
+  target_file: "docs/external-asset-analysis.md"
+
+template_structure:
+  document_header:
+    title: "External Asset Analysis Report"
+    date: "{{ analysis_date }}"
+    analyst: "{{ analyst_name }}"
+    mode: "{{ project_mode }}"
+    
+  executive_summary:
+    description: "High-level overview of external assets and integration feasibility"
+    content:
+      - total_assets_analyzed: "{{ asset_count }}"
+      - quality_assessment_summary: "{{ quality_summary }}"
+      - sead_compatibility_rating: "{{ compatibility_rating }}"
+      - integration_complexity: "{{ complexity_assessment }}"
+      - recommended_next_steps: "{{ next_steps_summary }}"
+
+  asset_inventory:
+    description: "Detailed catalog of all discovered external assets"
+    sections:
+      design_system_assets:
+        design_tokens:
+          - file_count: "{{ design_token_count }}"
+          - formats_found: "{{ token_formats }}"
+          - completeness_assessment: "{{ token_completeness }}"
+          - quality_flags: "{{ token_quality_issues }}"
+        
+        ui_components:
+          - component_count: "{{ component_count }}"
+          - frameworks_detected: "{{ component_frameworks }}"
+          - typescript_coverage: "{{ typescript_percentage }}"
+          - documentation_coverage: "{{ component_docs_coverage }}"
+        
+        styling_assets:
+          - css_files: "{{ css_file_count }}"
+          - scss_files: "{{ scss_file_count }}"
+          - theme_variants: "{{ theme_variant_count }}"
+          - responsive_patterns: "{{ responsive_pattern_assessment }}"
+
+      api_specification_assets:
+        specification_files:
+          - openapi_specs: "{{ openapi_count }}"
+          - graphql_schemas: "{{ graphql_count }}"
+          - json_schemas: "{{ json_schema_count }}"
+          - postman_collections: "{{ postman_count }}"
+        
+        coverage_assessment:
+          - endpoint_coverage: "{{ endpoint_coverage_percentage }}"
+          - schema_completeness: "{{ schema_completeness_percentage }}"
+          - documentation_quality: "{{ api_docs_quality }}"
+          - example_availability: "{{ api_examples_coverage }}"
+
+      component_library_assets:
+        library_structure:
+          - total_components: "{{ library_component_count }}"
+          - component_categories: "{{ component_categories }}"
+          - dependency_analysis: "{{ library_dependencies }}"
+          - build_system: "{{ library_build_system }}"
+        
+        quality_metrics:
+          - test_coverage: "{{ library_test_coverage }}"
+          - typescript_support: "{{ library_typescript_support }}"
+          - accessibility_compliance: "{{ library_accessibility }}"
+          - performance_assessment: "{{ library_performance }}"
+
+      documentation_assets:
+        documentation_coverage:
+          - readme_files: "{{ readme_count }}"
+          - api_documentation: "{{ api_docs_count }}"
+          - component_stories: "{{ storybook_stories_count }}"
+          - usage_examples: "{{ usage_examples_count }}"
+        
+        documentation_quality:
+          - completeness_rating: "{{ docs_completeness }}"
+          - accuracy_assessment: "{{ docs_accuracy }}"
+          - up_to_date_status: "{{ docs_currency }}"
+          - accessibility_documentation: "{{ accessibility_docs }}"
+
+  quality_assessment:
+    description: "Comprehensive quality evaluation across all asset categories"
+    quality_dimensions:
+      code_quality:
+        - linting_compliance: "{{ linting_status }}"
+        - typescript_definitions: "{{ typescript_quality }}"
+        - dependency_health: "{{ dependency_health }}"
+        - security_vulnerabilities: "{{ security_scan_results }}"
+      
+      documentation_quality:
+        - coverage_percentage: "{{ overall_docs_coverage }}"
+        - example_completeness: "{{ examples_completeness }}"
+        - usage_guidance_clarity: "{{ usage_guidance_quality }}"
+        - troubleshooting_resources: "{{ troubleshooting_completeness }}"
+      
+      maintainability:
+        - version_consistency: "{{ version_consistency }}"
+        - update_recency: "{{ last_update_assessment }}"
+        - community_activity: "{{ community_activity }}"
+        - long_term_viability: "{{ viability_assessment }}"
+
+    quality_flags:
+      critical_issues:
+        - "{{ critical_quality_issues }}"
+      
+      warning_issues:
+        - "{{ warning_quality_issues }}"
+      
+      improvement_opportunities:
+        - "{{ improvement_opportunities }}"
+
+  sead_compatibility_analysis:
+    description: "Assessment of how well external assets align with SEAD principles"
+    compatibility_dimensions:
+      catalog_structure_alignment:
+        - domain_mapping_feasibility: "{{ domain_mapping_assessment }}"
+        - naming_convention_compatibility: "{{ naming_compatibility }}"
+        - organizational_pattern_alignment: "{{ org_pattern_alignment }}"
+        - dependency_structure_compatibility: "{{ dependency_compatibility }}"
+      
+      constraint_compatibility:
+        - type_system_alignment: "{{ type_system_compatibility }}"
+        - design_token_compatibility: "{{ design_token_compatibility }}"
+        - api_contract_standards: "{{ api_standards_compatibility }}"
+        - validation_schema_alignment: "{{ validation_compatibility }}"
+      
+      workflow_integration:
+        - development_workflow_fit: "{{ dev_workflow_fit }}"
+        - build_system_compatibility: "{{ build_system_compatibility }}"
+        - testing_framework_alignment: "{{ testing_framework_fit }}"
+        - deployment_strategy_compatibility: "{{ deployment_compatibility }}"
+
+    transformation_requirements:
+      structural_transformations:
+        - file_reorganization_needed: "{{ file_reorganization_scope }}"
+        - naming_convention_updates: "{{ naming_update_scope }}"
+        - dependency_restructuring: "{{ dependency_restructure_scope }}"
+        - documentation_enhancement: "{{ docs_enhancement_scope }}"
+      
+      technical_transformations:
+        - typescript_migration_needed: "{{ typescript_migration_scope }}"
+        - api_contract_standardization: "{{ api_standardization_scope }}"
+        - design_token_conversion: "{{ token_conversion_scope }}"
+        - validation_schema_creation: "{{ validation_creation_scope }}"
+
+  integration_planning:
+    description: "Strategic recommendations for successful external asset integration"
+    integration_strategy:
+      recommended_approach:
+        - integration_methodology: "{{ recommended_methodology }}"
+        - phased_rollout_plan: "{{ phased_plan_summary }}"
+        - resource_allocation_estimate: "{{ resource_estimate }}"
+        - timeline_projection: "{{ timeline_estimate }}"
+      
+      transformation_sequence:
+        - phase_1_priorities: "{{ phase_1_assets }}"
+        - phase_2_priorities: "{{ phase_2_assets }}"
+        - phase_3_priorities: "{{ phase_3_assets }}"
+        - dependencies_and_blockers: "{{ integration_dependencies }}"
+
+    catalog_impact_analysis:
+      existing_catalog_changes:
+        - domain_extensions_needed: "{{ domain_extensions }}"
+        - pattern_conflicts_identified: "{{ pattern_conflicts }}"
+        - merge_complexity_assessment: "{{ merge_complexity }}"
+        - backward_compatibility_impact: "{{ backward_compatibility }}"
+      
+      new_catalog_additions:
+        - new_domains_required: "{{ new_domains }}"
+        - pattern_count_expansion: "{{ pattern_expansion }}"
+        - documentation_volume_increase: "{{ docs_volume_increase }}"
+        - maintenance_overhead_estimate: "{{ maintenance_overhead }}"
+
+  risk_assessment:
+    description: "Identification and evaluation of integration risks"
+    risk_categories:
+      technical_risks:
+        - integration_complexity_risks: "{{ integration_complexity_risks }}"
+        - compatibility_risks: "{{ compatibility_risks }}"
+        - performance_impact_risks: "{{ performance_risks }}"
+        - security_vulnerability_risks: "{{ security_risks }}"
+      
+      organizational_risks:
+        - team_adoption_risks: "{{ adoption_risks }}"
+        - training_requirement_risks: "{{ training_risks }}"
+        - workflow_disruption_risks: "{{ workflow_disruption_risks }}"
+        - maintenance_burden_risks: "{{ maintenance_risks }}"
+      
+      project_risks:
+        - timeline_risks: "{{ timeline_risks }}"
+        - resource_availability_risks: "{{ resource_risks }}"
+        - scope_creep_risks: "{{ scope_creep_risks }}"
+        - quality_compromise_risks: "{{ quality_risks }}"
+
+    mitigation_strategies:
+      risk_mitigation_approaches:
+        - phased_implementation: "{{ phased_mitigation }}"
+        - comprehensive_testing: "{{ testing_mitigation }}"
+        - team_training_programs: "{{ training_mitigation }}"
+        - rollback_strategies: "{{ rollback_mitigation }}"
+
+  resource_requirements:
+    description: "Estimated resources needed for successful integration"
+    effort_estimation:
+      development_effort:
+        - analysis_and_planning: "{{ analysis_effort }}"
+        - transformation_implementation: "{{ transformation_effort }}"
+        - integration_and_testing: "{{ integration_effort }}"
+        - documentation_and_training: "{{ documentation_effort }}"
+      
+      skill_requirements:
+        - technical_expertise_needed: "{{ technical_skills }}"
+        - domain_knowledge_requirements: "{{ domain_knowledge }}"
+        - sead_methodology_expertise: "{{ sead_expertise }}"
+        - training_and_mentoring_needs: "{{ training_needs }}"
+
+    timeline_estimation:
+      milestone_timeline:
+        - analysis_completion: "{{ analysis_timeline }}"
+        - transformation_completion: "{{ transformation_timeline }}"
+        - integration_completion: "{{ integration_timeline }}"
+        - validation_and_adoption: "{{ validation_timeline }}"
+
+  next_steps:
+    description: "Immediate and long-term actions required for integration success"
+    immediate_actions:
+      - "{{ immediate_action_1 }}"
+      - "{{ immediate_action_2 }}"
+      - "{{ immediate_action_3 }}"
+    
+    medium_term_actions:
+      - "{{ medium_term_action_1 }}"
+      - "{{ medium_term_action_2 }}"
+      - "{{ medium_term_action_3 }}"
+    
+    long_term_considerations:
+      - "{{ long_term_consideration_1 }}"
+      - "{{ long_term_consideration_2 }}"
+      - "{{ long_term_consideration_3 }}"
+
+  appendices:
+    detailed_asset_inventory:
+      - complete_file_listings: "{{ detailed_file_inventory }}"
+      - dependency_maps: "{{ dependency_mapping }}"
+      - quality_assessment_details: "{{ detailed_quality_assessment }}"
+    
+    technical_specifications:
+      - transformation_requirements_details: "{{ transformation_details }}"
+      - integration_architecture_requirements: "{{ architecture_requirements }}"
+      - validation_criteria_specifications: "{{ validation_specifications }}"
+
+# Template Usage Instructions
+usage_instructions:
+  - "Replace all {{ variable }} placeholders with actual analysis results"
+  - "Customize sections based on specific asset types found"
+  - "Include mode-specific details based on project development mode"
+  - "Ensure all constitutional compliance requirements are addressed"
+  - "Generate actionable recommendations for integration team"

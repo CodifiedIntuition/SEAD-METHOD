@@ -1,0 +1,548 @@
+# SEAD Frontend Specification Template
+template:
+  id: sead-frontend-spec-template-v1
+  name: SEAD UI/UX Specification Document
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/sead-front-end-spec.md
+    title: "{{project_name}} SEAD UI/UX Specification"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  governance_validation: continuous
+
+workflow:
+  mode: constitutional_interactive
+  elicitation: sead-advanced-elicitation
+  catalog_validation: enabled
+  constraint_enforcement: progressive
+
+sections:
+  - id: constitutional-introduction
+    title: Constitutional Introduction
+    instruction: |
+      Review constitutional documents with catalog integration awareness:
+      
+      1. **Context Review**: Access SEAD Project Brief, SEAD PRD, SEAD Architecture Document
+      2. **Catalog Assessment**: Review design-system catalog patterns and UI constraints
+      3. **Constitutional Compliance**: Ensure UI/UX choices support governance framework
+      4. **User Research Integration**: Validate user needs align with constitutional principles
+      
+      Before proceeding, analyze catalog-compliant UI patterns and governance requirements.
+    constitutional_validation: required
+    content: |
+      This document defines the constitutional user experience goals, information architecture, user flows, and visual design specifications for {{project_name}}'s user interface. It serves as the foundation for visual design and constitutional frontend development, ensuring a cohesive, user-centered, and governance-compliant experience.
+      
+      **Constitutional Framework Integration**: All UI/UX decisions must align with SEAD constitutional principles and support catalog pattern evolution. This specification enforces progressive constraint validation and context preservation for seamless agent handoffs.
+    sections:
+      - id: constitutional-ux-goals-principles
+        title: Constitutional UX Goals & Principles
+        instruction: |
+          Work with the user to establish constitutional UX principles with catalog integration:
+
+          1. Target User Personas - elicit details with constitutional compliance considerations
+          2. Key Usability Goals - understand success metrics with governance validation
+          3. Core Design Principles - establish 3-5 guiding principles aligned with SEAD constitution
+          4. Catalog Integration Strategy - define how design-system catalog patterns support user goals
+        elicit: true
+        constitutional_validation: required
+        sections:
+          - id: constitutional-user-personas
+            title: Constitutional User Personas
+            instruction: |
+              Define user personas with constitutional compliance and catalog pattern awareness
+            template: "{{persona_descriptions}}"
+            examples:
+              - "**Constitutional Power User:** Technical professionals who need advanced features with governance validation and catalog pattern consistency"
+              - "**Constitutional Casual User:** Occasional users who prioritize ease of use with constitutional compliance indicators and clear guidance"
+              - "**Constitutional Administrator:** System managers who need control and oversight with comprehensive governance dashboards and catalog management capabilities"
+          - id: constitutional-usability-goals
+            title: Constitutional Usability Goals
+            instruction: |
+              Define usability goals with constitutional compliance and catalog integration metrics
+            template: "{{usability_goals}}"
+            examples:
+              - "Constitutional ease of learning: New users can complete core tasks within 5 minutes with governance guidance"
+              - "Catalog-enhanced efficiency: Power users can complete frequent tasks with catalog-optimized patterns and minimal clicks"
+              - "Constitutional error prevention: Clear validation and confirmation for destructive actions with governance compliance indicators"
+              - "Context-preserved memorability: Infrequent users can return without relearning due to consistent catalog patterns and preserved context"
+          - id: constitutional-design-principles
+            title: Constitutional Design Principles
+            instruction: |
+              Establish design principles aligned with SEAD constitution and catalog integration
+            template: "{{design_principles}}"
+            type: numbered-list
+            examples:
+              - "**Constitutional clarity over cleverness** - Prioritize clear communication and governance transparency over aesthetic innovation"
+              - "**Catalog-driven progressive disclosure** - Show only what's needed using design-system catalog patterns for consistency"
+              - "**Constitutional pattern consistency** - Use catalog-validated UI patterns throughout the application with governance compliance"
+              - "**Context-preserved immediate feedback** - Every action should have clear, immediate response that preserves context for agent handoffs"
+              - "**Constitutionally accessible by default** - Design for all users with governance-compliant accessibility patterns from catalog"
+      - id: constitutional-changelog
+        title: Constitutional Change Log
+        type: table
+        columns: [Date, Version, Description, Constitutional Impact, Catalog Changes, Author]
+        instruction: Track document versions with constitutional and catalog impact assessment
+
+  - id: constitutional-information-architecture
+    title: Constitutional Information Architecture (IA)
+    instruction: |
+      Collaborate with the user to create comprehensive constitutional information architecture:
+
+      1. Build Site Map with catalog pattern integration and governance navigation
+      2. Define Navigation Structure with constitutional compliance indicators
+      3. Use Mermaid diagrams for visual representation with catalog pattern references
+      4. Consider user mental models aligned with constitutional principles
+      5. Integrate design-system catalog navigation patterns for consistency
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-sitemap
+        title: Constitutional Site Map / Screen Inventory
+        instruction: |
+          Create site map with catalog pattern integration and governance navigation structure
+        type: mermaid
+        mermaid_type: graph
+        template: "{{sitemap_diagram}}"
+        examples:
+          - |
+            graph TD
+                A[Constitutional Homepage] --> B[Governance Dashboard]
+                A --> C[Catalog Products]
+                A --> D[Constitutional Account]
+                B --> B1[Constitutional Analytics]
+                B --> B2[Context-Preserved Activity]
+                B --> B3[Governance Compliance]
+                C --> C1[Catalog Browse]
+                C --> C2[Pattern Search]
+                C --> C3[Constitutional Product Details]
+                D --> D1[Constitutional Profile]
+                D --> D2[Governance Settings]
+                D --> D3[Catalog Management]
+                D --> D4[Context Preservation]
+      - id: constitutional-navigation-structure
+        title: Constitutional Navigation Structure
+        instruction: |
+          Define navigation with catalog pattern integration and governance indicators
+        template: |
+          **Constitutional Primary Navigation:** {{primary_nav_description}}
+          - Includes governance compliance indicators
+          - Integrates design-system catalog navigation patterns
+          - Supports context preservation for agent handoffs
+
+          **Catalog-Enhanced Secondary Navigation:** {{secondary_nav_description}}
+          - Uses catalog-validated navigation components
+          - Provides constitutional compliance feedback
+          - Maintains context across navigation transitions
+
+          **Constitutional Breadcrumb Strategy:** {{breadcrumb_strategy}}
+          - Implements catalog breadcrumb patterns
+          - Shows governance validation path
+          - Preserves navigation context for agent handoffs
+
+  - id: constitutional-user-flows
+    title: Constitutional User Flows
+    instruction: |
+      For each critical user task with constitutional compliance and catalog integration:
+
+      1. Define user's goal with constitutional alignment
+      2. Map steps including governance validation decision points
+      3. Consider edge cases and constitutional error states
+      4. Use Mermaid flow diagrams with catalog pattern references
+      5. Include context preservation touchpoints for agent handoffs
+      6. Link to external tools (Figma/Miro) with constitutional annotations
+
+      Create subsections for each major constitutional flow.
+    elicit: true
+    constitutional_validation: required
+    repeatable: true
+    sections:
+      - id: constitutional-flow
+        title: "Constitutional {{flow_name}}"
+        template: |
+          **Constitutional User Goal:** {{flow_goal}}
+          - Governance compliance: {{governance_requirements}}
+          - Catalog pattern integration: {{catalog_patterns_used}}
+
+          **Constitutional Entry Points:** {{entry_points}}
+          - Context preservation: {{context_preservation_strategy}}
+
+          **Constitutional Success Criteria:** {{success_criteria}}
+          - Governance validation: {{governance_success_metrics}}
+          - Catalog compliance: {{catalog_compliance_metrics}}
+        sections:
+          - id: constitutional-flow-diagram
+            title: Constitutional Flow Diagram
+            instruction: |
+              Create flow diagram with catalog pattern references and governance validation points
+            type: mermaid
+            mermaid_type: graph
+            template: "{{flow_diagram}}"
+          - id: constitutional-edge-cases
+            title: "Constitutional Edge Cases & Error Handling"
+            instruction: |
+              Define edge cases with constitutional compliance and catalog error patterns
+            type: bullet-list
+            template: "- {{edge_case}} (Governance: {{governance_handling}}, Catalog: {{catalog_error_pattern}})"
+          - id: constitutional-notes
+            template: |
+              **Constitutional Notes:** {{flow_notes}}
+              **Context Preservation:** {{context_preservation_notes}}
+              **Catalog Integration:** {{catalog_integration_notes}}
+
+  - id: constitutional-wireframes-mockups
+    title: Constitutional Wireframes & Mockups
+    instruction: |
+      Clarify where detailed constitutional visual designs will be created with catalog integration:
+      - Design tool integration with catalog pattern libraries
+      - Constitutional compliance validation in design files
+      - Context preservation annotations for agent handoffs
+      - Governance validation indicators in mockups
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-design-files
+        template: |
+          **Constitutional Primary Design Files:** {{design_tool_link}}
+          - Catalog pattern library integration: {{catalog_library_link}}
+          - Constitutional compliance validation: {{governance_validation_link}}
+          - Context preservation annotations: {{context_annotation_strategy}}
+      - id: constitutional-key-screen-layouts
+        title: Constitutional Key Screen Layouts
+        instruction: |
+          Define key screens with catalog pattern integration and governance compliance
+        repeatable: true
+        sections:
+          - id: constitutional-screen
+            title: "Constitutional {{screen_name}}"
+            template: |
+              **Constitutional Purpose:** {{screen_purpose}}
+              - Governance compliance: {{screen_governance_requirements}}
+              - Catalog patterns: {{screen_catalog_patterns}}
+
+              **Constitutional Key Elements:**
+              - {{element_1}} (Catalog pattern: {{element_1_pattern}})
+              - {{element_2}} (Governance validation: {{element_2_governance}})
+              - {{element_3}} (Context preservation: {{element_3_context}})
+
+              **Constitutional Interaction Notes:** {{interaction_notes}}
+              - Governance validation touchpoints: {{governance_touchpoints}}
+              - Context preservation strategy: {{context_strategy}}
+
+              **Constitutional Design File Reference:** {{specific_frame_link}}
+              - Catalog pattern annotations: {{catalog_annotations}}
+
+  - id: constitutional-component-library
+    title: Constitutional Component Library / Design System
+    instruction: |
+      Define constitutional component approach with catalog integration and governance compliance:
+      - Existing design-system catalog usage vs. new creation
+      - Constitutional validation capabilities in components
+      - Context preservation support in component architecture
+      - Governance compliance indicators and validation
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-design-system-approach
+        template: |
+          **Constitutional Design System Approach:** {{design_system_approach}}
+          - Catalog integration strategy: {{catalog_integration_strategy}}
+          - Governance validation framework: {{governance_validation_framework}}
+          - Context preservation support: {{context_preservation_support}}
+      - id: constitutional-core-components
+        title: Constitutional Core Components
+        instruction: |
+          Define core components with catalog pattern integration and governance compliance
+        repeatable: true
+        sections:
+          - id: constitutional-component
+            title: "Constitutional {{component_name}}"
+            template: |
+              **Constitutional Purpose:** {{component_purpose}}
+              - Catalog pattern reference: {{catalog_pattern_reference}}
+              - Governance validation: {{component_governance_validation}}
+
+              **Constitutional Variants:** {{component_variants}}
+              - Each variant includes governance compliance indicators
+
+              **Constitutional States:** {{component_states}}
+              - Includes constitutional validation states and context preservation states
+
+              **Constitutional Usage Guidelines:** {{usage_guidelines}}
+              - Catalog pattern compliance requirements
+              - Governance validation implementation
+              - Context preservation for agent handoffs
+
+  - id: constitutional-branding-style
+    title: Constitutional Branding & Style Guide
+    instruction: |
+      Link to existing style guide with constitutional compliance or define constitutional brand elements:
+      - Brand guidelines aligned with SEAD constitutional principles
+      - Design-system catalog color and typography integration
+      - Governance compliance visual indicators
+      - Context preservation visual cues
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-visual-identity
+        title: Constitutional Visual Identity
+        template: |
+          **Constitutional Brand Guidelines:** {{brand_guidelines_link}}
+          - Governance compliance integration: {{governance_visual_integration}}
+          - Catalog pattern brand alignment: {{catalog_brand_alignment}}
+      - id: constitutional-color-palette
+        title: Constitutional Color Palette
+        instruction: |
+          Define colors with catalog integration and governance validation indicators
+        type: table
+        columns: ["Color Type", "Hex Code", "Usage", "Catalog Pattern", "Governance Indicator"]
+        rows:
+          - ["Constitutional Primary", "{{primary_color}}", "{{primary_usage}}", "design-system catalog primary", "High governance validation"]
+          - ["Constitutional Secondary", "{{secondary_color}}", "{{secondary_usage}}", "design-system catalog secondary", "Medium governance validation"]
+          - ["Constitutional Accent", "{{accent_color}}", "{{accent_usage}}", "design-system catalog accent", "Context preservation highlight"]
+          - ["Constitutional Success", "{{success_color}}", "Governance validation success", "validation-schemas catalog success", "Constitutional compliance success"]
+          - ["Constitutional Warning", "{{warning_color}}", "Governance warnings", "validation-schemas catalog warning", "Constitutional compliance warning"]
+          - ["Constitutional Error", "{{error_color}}", "Governance violations", "error-handling catalog error", "Constitutional compliance error"]
+          - ["Constitutional Neutral", "{{neutral_colors}}", "Text, borders, backgrounds", "design-system catalog neutral", "Standard governance neutral"]
+      - id: constitutional-typography
+        title: Constitutional Typography
+        instruction: |
+          Define typography with catalog integration and governance readability requirements
+        sections:
+          - id: constitutional-font-families
+            title: Constitutional Font Families
+            template: |
+              - **Constitutional Primary:** {{primary_font}} (Catalog: design-system typography primary)
+              - **Constitutional Secondary:** {{secondary_font}} (Catalog: design-system typography secondary)
+              - **Constitutional Monospace:** {{mono_font}} (Catalog: design-system typography code)
+              - **Governance Indicators:** {{governance_font}} (Constitutional compliance typography)
+          - id: constitutional-type-scale
+            title: Constitutional Type Scale
+            instruction: |
+              Define type scale with catalog pattern integration and governance compliance
+            type: table
+            columns: ["Element", "Size", "Weight", "Line Height", "Catalog Pattern", "Governance Usage"]
+            rows:
+              - ["Constitutional H1", "{{h1_size}}", "{{h1_weight}}", "{{h1_line}}", "design-system h1", "Primary governance headers"]
+              - ["Constitutional H2", "{{h2_size}}", "{{h2_weight}}", "{{h2_line}}", "design-system h2", "Section governance headers"]
+              - ["Constitutional H3", "{{h3_size}}", "{{h3_weight}}", "{{h3_line}}", "design-system h3", "Subsection governance headers"]
+              - ["Constitutional Body", "{{body_size}}", "{{body_weight}}", "{{body_line}}", "design-system body", "Standard governance content"]
+              - ["Constitutional Small", "{{small_size}}", "{{small_weight}}", "{{small_line}}", "design-system small", "Governance metadata text"]
+      - id: constitutional-iconography
+        title: Constitutional Iconography
+        instruction: |
+          Define iconography with catalog integration and governance indicator icons
+        template: |
+          **Constitutional Icon Library:** {{icon_library}}
+          - Catalog integration: {{catalog_icon_integration}}
+          - Governance indicators: {{governance_icon_set}}
+
+          **Constitutional Usage Guidelines:** {{icon_guidelines}}
+          - Context preservation icons: {{context_preservation_icons}}
+          - Governance validation icons: {{governance_validation_icons}}
+      - id: constitutional-spacing-layout
+        title: Constitutional Spacing & Layout
+        instruction: |
+          Define spacing with catalog pattern integration and governance compliance
+        template: |
+          **Constitutional Grid System:** {{grid_system}}
+          - Catalog pattern integration: {{catalog_grid_integration}}
+          - Governance validation grid: {{governance_grid_system}}
+
+          **Constitutional Spacing Scale:** {{spacing_scale}}
+          - Context preservation spacing: {{context_preservation_spacing}}
+          - Governance indicator spacing: {{governance_indicator_spacing}}
+
+  - id: constitutional-accessibility
+    title: Constitutional Accessibility Requirements
+    instruction: |
+      Define constitutional accessibility requirements with catalog integration and governance compliance:
+      - Target compliance level aligned with SEAD constitutional principles
+      - Catalog accessibility pattern integration
+      - Governance validation for accessibility compliance
+      - Context preservation accessibility considerations
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-compliance-target
+        title: Constitutional Compliance Target
+        template: |
+          **Constitutional Standard:** {{compliance_standard}}
+          - Governance validation: {{accessibility_governance_validation}}
+          - Catalog pattern compliance: {{catalog_accessibility_patterns}}
+      - id: constitutional-key-requirements
+        title: Constitutional Key Requirements
+        template: |
+          **Constitutional Visual:**
+          - Color contrast ratios: {{contrast_requirements}} (Catalog: validation-schemas contrast patterns)
+          - Focus indicators: {{focus_requirements}} (Catalog: design-system focus patterns)
+          - Text sizing: {{text_requirements}} (Catalog: design-system typography accessibility)
+          - Governance indicators: {{governance_visual_accessibility}}
+
+          **Constitutional Interaction:**
+          - Keyboard navigation: {{keyboard_requirements}} (Catalog: interaction-patterns keyboard)
+          - Screen reader support: {{screen_reader_requirements}} (Catalog: accessibility-patterns screen-reader)
+          - Touch targets: {{touch_requirements}} (Catalog: interaction-patterns touch)
+          - Context preservation: {{accessibility_context_preservation}}
+
+          **Constitutional Content:**
+          - Alternative text: {{alt_text_requirements}} (Catalog: accessibility-patterns alt-text)
+          - Heading structure: {{heading_requirements}} (Catalog: design-system heading-hierarchy)
+          - Form labels: {{form_requirements}} (Catalog: validation-schemas form-accessibility)
+          - Governance content: {{governance_content_accessibility}}
+      - id: constitutional-testing-strategy
+        title: Constitutional Testing Strategy
+        template: |
+          **Constitutional Accessibility Testing:** {{accessibility_testing}}
+          - Governance compliance testing: {{governance_accessibility_testing}}
+          - Catalog pattern accessibility validation: {{catalog_accessibility_validation}}
+          - Context preservation accessibility testing: {{context_accessibility_testing}}
+
+  - id: constitutional-responsiveness
+    title: Constitutional Responsiveness Strategy
+    instruction: |
+      Define constitutional responsiveness with catalog integration and governance compliance:
+      - Breakpoints aligned with design-system catalog patterns
+      - Governance validation adaptation strategies
+      - Context preservation across device sizes
+      - Constitutional compliance indicators responsiveness
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-breakpoints
+        title: Constitutional Breakpoints
+        instruction: |
+          Define breakpoints with catalog integration and governance validation
+        type: table
+        columns: ["Breakpoint", "Min Width", "Max Width", "Target Devices", "Catalog Pattern", "Governance Adaptation"]
+        rows:
+          - ["Constitutional Mobile", "{{mobile_min}}", "{{mobile_max}}", "{{mobile_devices}}", "design-system mobile", "Mobile governance indicators"]
+          - ["Constitutional Tablet", "{{tablet_min}}", "{{tablet_max}}", "{{tablet_devices}}", "design-system tablet", "Tablet governance dashboard"]
+          - ["Constitutional Desktop", "{{desktop_min}}", "{{desktop_max}}", "{{desktop_devices}}", "design-system desktop", "Full governance interface"]
+          - ["Constitutional Wide", "{{wide_min}}", "-", "{{wide_devices}}", "design-system wide", "Extended governance panels"]
+      - id: constitutional-adaptation-patterns
+        title: Constitutional Adaptation Patterns
+        template: |
+          **Constitutional Layout Changes:** {{layout_adaptations}}
+          - Catalog pattern responsiveness: {{catalog_responsive_patterns}}
+          - Governance indicator adaptation: {{governance_responsive_adaptation}}
+
+          **Constitutional Navigation Changes:** {{nav_adaptations}}
+          - Context preservation navigation: {{context_preservation_navigation}}
+          - Governance navigation responsiveness: {{governance_navigation_responsive}}
+
+          **Constitutional Content Priority:** {{content_adaptations}}
+          - Governance content prioritization: {{governance_content_priority}}
+          - Catalog pattern content adaptation: {{catalog_content_adaptation}}
+
+          **Constitutional Interaction Changes:** {{interaction_adaptations}}
+          - Context preservation interaction: {{context_preservation_interaction}}
+          - Governance validation interaction: {{governance_interaction_adaptation}}
+
+  - id: constitutional-animation
+    title: Constitutional Animation & Micro-interactions
+    instruction: |
+      Define constitutional motion design with catalog integration and governance compliance:
+      - Motion principles aligned with SEAD constitutional principles
+      - Catalog animation pattern integration
+      - Governance validation animations
+      - Context preservation transition animations
+      - Performance and accessibility considerations
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-motion-principles
+        title: Constitutional Motion Principles
+        template: |
+          **Constitutional Motion Principles:** {{motion_principles}}
+          - Governance validation animations: {{governance_animation_principles}}
+          - Catalog pattern motion integration: {{catalog_motion_integration}}
+          - Context preservation transitions: {{context_preservation_motion}}
+      - id: constitutional-key-animations
+        title: Constitutional Key Animations
+        instruction: |
+          Define key animations with catalog pattern references and governance validation
+        repeatable: true
+        template: |
+          - **Constitutional {{animation_name}}:** {{animation_description}} 
+            (Duration: {{duration}}, Easing: {{easing}}, 
+            Catalog: {{catalog_animation_pattern}}, 
+            Governance: {{governance_animation_purpose}})
+
+  - id: constitutional-performance
+    title: Constitutional Performance Considerations
+    instruction: |
+      Define constitutional performance goals with catalog integration and governance validation:
+      - Performance goals supporting governance validation
+      - Catalog pattern performance optimization
+      - Context preservation performance impact
+      - Constitutional compliance performance requirements
+    constitutional_validation: required
+    sections:
+      - id: constitutional-performance-goals
+        title: Constitutional Performance Goals
+        template: |
+          - **Constitutional Page Load:** {{load_time_goal}} (Including governance validation overhead)
+          - **Constitutional Interaction Response:** {{interaction_goal}} (Including catalog pattern validation)
+          - **Constitutional Animation FPS:** {{animation_goal}} (Including context preservation animations)
+          - **Governance Validation Performance:** {{governance_performance_goal}}
+          - **Catalog Integration Performance:** {{catalog_performance_goal}}
+      - id: constitutional-design-strategies
+        title: Constitutional Design Strategies
+        template: |
+          **Constitutional Performance Strategies:** {{performance_strategies}}
+          - Governance validation optimization: {{governance_performance_strategies}}
+          - Catalog pattern performance: {{catalog_performance_strategies}}
+          - Context preservation optimization: {{context_performance_strategies}}
+
+  - id: constitutional-next-steps
+    title: Constitutional Next Steps
+    instruction: |
+      Define constitutional implementation steps with catalog integration and governance validation:
+
+      1. Constitutional stakeholder review with governance validation
+      2. Design-system catalog visual design creation/updates
+      3. Constitutional handoff to Design Architect with context preservation
+      4. Governance compliance validation and catalog evolution documentation
+    constitutional_validation: required
+    sections:
+      - id: constitutional-immediate-actions
+        title: Constitutional Immediate Actions
+        instruction: |
+          Define immediate actions with constitutional compliance and catalog integration
+        type: numbered-list
+        template: "{{action}} (Governance: {{governance_requirement}}, Catalog: {{catalog_requirement}})"
+      - id: constitutional-design-handoff-checklist
+        title: Constitutional Design Handoff Checklist
+        instruction: |
+          Validate constitutional design handoff with catalog integration and governance compliance
+        type: checklist
+        items:
+          - "All constitutional user flows documented with governance validation points"
+          - "Component inventory complete with catalog pattern references"
+          - "Constitutional accessibility requirements defined with governance compliance"
+          - "Responsive strategy clear with catalog pattern integration"
+          - "Brand guidelines incorporated with constitutional alignment"
+          - "Performance goals established with governance validation overhead"
+          - "Design-system catalog integration strategy documented"
+          - "Context preservation strategy defined for agent handoffs"
+          - "Constitutional compliance validation framework established"
+          - "Governance indicator system designed and documented"
+          - "Catalog evolution contribution plan documented"
+
+  - id: constitutional-checklist-results
+    title: Constitutional UI/UX Checklist Results
+    instruction: |
+      Execute constitutional UI/UX specification checklist validating:
+      - Design-system catalog integration completeness
+      - Constitutional compliance indicator implementation
+      - User experience governance validation
+      - Context preservation for agent handoffs
+      
+      Before running checklist, offer to output complete constitutional UI/UX specification with catalog integration.
+    constitutional_validation: mandatory

@@ -1,0 +1,375 @@
+# External Asset Validation Report Template
+# Used by external-asset-validation.md task to generate comprehensive validation documentation
+
+metadata:
+  template_name: "external-asset-validation-report-tmpl.yaml"
+  version: "1.0.0"
+  purpose: "Structure comprehensive validation report for external asset integration"
+  generated_by: "sead-catalog-architect"
+  target_file: "docs/external-asset-validation-report.md"
+
+template_structure:
+  document_header:
+    title: "External Asset Integration Validation Report"
+    date: "{{ validation_date }}"
+    validator: "{{ validator_name }}"
+    project: "{{ project_name }}"
+    mode: "{{ project_mode }}"
+    version: "{{ validation_version }}"
+
+  executive_summary:
+    description: "High-level validation results and compliance status"
+    content:
+      validation_scope: "{{ validation_scope }}"
+      overall_compliance_status: "{{ overall_compliance }}"
+      critical_issues_count: "{{ critical_issues_count }}"
+      validation_pass_rate: "{{ validation_pass_rate }}"
+      production_readiness_status: "{{ production_readiness }}"
+      recommended_actions: "{{ recommended_actions_summary }}"
+
+  validation_overview:
+    description: "Comprehensive overview of validation process and results"
+    validation_summary:
+      assets_validated:
+        - design_system_patterns: "{{ design_system_validation_count }}"
+        - api_contract_patterns: "{{ api_contract_validation_count }}"
+        - component_library_patterns: "{{ component_library_validation_count }}"
+        - integration_patterns: "{{ integration_pattern_validation_count }}"
+        - total_patterns_validated: "{{ total_patterns_validated }}"
+      
+      validation_categories:
+        - structural_integrity: "{{ structural_validation_status }}"
+        - constitutional_compliance: "{{ constitutional_validation_status }}"
+        - pattern_quality: "{{ quality_validation_status }}"
+        - integration_validation: "{{ integration_validation_status }}"
+        - security_compliance: "{{ security_validation_status }}"
+        - performance_validation: "{{ performance_validation_status }}"
+
+  structural_integrity_validation:
+    description: "Validation of catalog structure and organization compliance"
+    catalog_structure_validation:
+      directory_structure_compliance:
+        - sead_catalog_structure_adherence: "{{ structure_adherence }}"
+        - domain_organization_compliance: "{{ domain_organization }}"
+        - file_naming_convention_compliance: "{{ naming_convention }}"
+        - cross_reference_integrity: "{{ cross_reference_integrity }}"
+        - validation_status: "{{ structure_validation_status }}"
+        - identified_issues: "{{ structure_issues }}"
+      
+      pattern_organization_validation:
+        - pattern_categorization_compliance: "{{ pattern_categorization }}"
+        - dependency_mapping_accuracy: "{{ dependency_mapping }}"
+        - index_completeness_validation: "{{ index_completeness }}"
+        - navigation_structure_validation: "{{ navigation_structure }}"
+        - validation_status: "{{ organization_validation_status }}"
+        - identified_issues: "{{ organization_issues }}"
+      
+      integration_markers_validation:
+        - external_pattern_identification: "{{ external_pattern_identification }}"
+        - integration_documentation_completeness: "{{ integration_docs_completeness }}"
+        - migration_pathway_validation: "{{ migration_pathway_validation }}"
+        - version_tracking_compliance: "{{ version_tracking }}"
+        - validation_status: "{{ markers_validation_status }}"
+        - identified_issues: "{{ markers_issues }}"
+
+  constitutional_compliance_validation:
+    description: "Validation of compliance with SEAD constitutional constraints"
+    constraint_enforcement_validation:
+      naming_convention_compliance:
+        - variable_naming_consistency: "{{ variable_naming_compliance }}"
+        - function_naming_compliance: "{{ function_naming_compliance }}"
+        - file_naming_compliance: "{{ file_naming_compliance }}"
+        - type_naming_compliance: "{{ type_naming_compliance }}"
+        - validation_status: "{{ naming_validation_status }}"
+        - identified_violations: "{{ naming_violations }}"
+      
+      type_system_consistency:
+        - shared_type_usage_compliance: "{{ shared_type_compliance }}"
+        - type_definition_consistency: "{{ type_definition_consistency }}"
+        - import_path_compliance: "{{ import_path_compliance }}"
+        - type_extension_compliance: "{{ type_extension_compliance }}"
+        - validation_status: "{{ type_system_validation_status }}"
+        - identified_violations: "{{ type_system_violations }}"
+      
+      design_system_compliance:
+        - design_token_usage_compliance: "{{ token_usage_compliance }}"
+        - component_usage_compliance: "{{ component_usage_compliance }}"
+        - styling_constraint_compliance: "{{ styling_constraint_compliance }}"
+        - theme_usage_compliance: "{{ theme_usage_compliance }}"
+        - validation_status: "{{ design_system_validation_status }}"
+        - identified_violations: "{{ design_system_violations }}"
+      
+      api_contract_compliance:
+        - endpoint_definition_compliance: "{{ endpoint_definition_compliance }}"
+        - schema_validation_compliance: "{{ schema_validation_compliance }}"
+        - error_handling_compliance: "{{ error_handling_compliance }}"
+        - authentication_compliance: "{{ authentication_compliance }}"
+        - validation_status: "{{ api_contract_validation_status }}"
+        - identified_violations: "{{ api_contract_violations }}"
+
+    mode_specific_compliance:
+      prototype_mode_validation:
+        - basic_functionality_validation: "{{ prototype_functionality }}"
+        - minimal_documentation_presence: "{{ prototype_documentation }}"
+        - simple_usage_example_validation: "{{ prototype_examples }}"
+        - validation_status: "{{ prototype_validation_status }}"
+        - identified_issues: "{{ prototype_issues }}"
+      
+      development_mode_validation:
+        - comprehensive_documentation_validation: "{{ development_documentation }}"
+        - complete_usage_example_validation: "{{ development_examples }}"
+        - constraint_validation_presence: "{{ development_constraints }}"
+        - integration_pattern_compliance: "{{ development_integration }}"
+        - validation_status: "{{ development_validation_status }}"
+        - identified_issues: "{{ development_issues }}"
+      
+      build_to_deploy_validation:
+        - production_readiness_validation: "{{ production_readiness_validation }}"
+        - security_compliance_verification: "{{ security_compliance_verification }}"
+        - performance_requirement_compliance: "{{ performance_requirement_compliance }}"
+        - complete_test_coverage_validation: "{{ test_coverage_validation }}"
+        - validation_status: "{{ build_to_deploy_validation_status }}"
+        - identified_issues: "{{ build_to_deploy_issues }}"
+
+  pattern_quality_validation:
+    description: "Comprehensive quality assessment of integrated patterns"
+    design_system_pattern_quality:
+      token_validation:
+        - token_consistency_validation: "{{ token_consistency }}"
+        - semantic_mapping_validation: "{{ semantic_mapping }}"
+        - accessibility_compliance_validation: "{{ token_accessibility }}"
+        - cross_platform_compatibility: "{{ token_cross_platform }}"
+        - validation_status: "{{ token_validation_status }}"
+        - quality_issues: "{{ token_quality_issues }}"
+      
+      component_validation:
+        - typescript_definition_validation: "{{ typescript_definition_validation }}"
+        - prop_interface_validation: "{{ prop_interface_validation }}"
+        - composition_compatibility_validation: "{{ composition_compatibility }}"
+        - responsive_behavior_validation: "{{ responsive_behavior_validation }}"
+        - accessibility_compliance_validation: "{{ component_accessibility }}"
+        - validation_status: "{{ component_validation_status }}"
+        - quality_issues: "{{ component_quality_issues }}"
+
+    api_contract_pattern_quality:
+      schema_validation:
+        - typescript_compilation_validation: "{{ typescript_compilation }}"
+        - type_completeness_validation: "{{ type_completeness }}"
+        - schema_consistency_validation: "{{ schema_consistency }}"
+        - validation_rule_testing: "{{ validation_rule_testing }}"
+        - validation_status: "{{ schema_validation_status }}"
+        - quality_issues: "{{ schema_quality_issues }}"
+      
+      contract_validation:
+        - endpoint_completeness_validation: "{{ endpoint_completeness }}"
+        - request_response_matching_validation: "{{ request_response_matching }}"
+        - error_handling_coverage_validation: "{{ error_handling_coverage }}"
+        - authentication_integration_validation: "{{ auth_integration_validation }}"
+        - validation_status: "{{ contract_validation_status }}"
+        - quality_issues: "{{ contract_quality_issues }}"
+
+    shared_type_pattern_quality:
+      - type_hierarchy_consistency: "{{ type_hierarchy_consistency }}"
+      - interface_completeness_validation: "{{ interface_completeness }}"
+      - export_path_correctness_validation: "{{ export_path_correctness }}"
+      - type_composition_pattern_validation: "{{ type_composition_validation }}"
+      - validation_status: "{{ shared_type_validation_status }}"
+      - quality_issues: "{{ shared_type_quality_issues }}"
+
+  integration_validation:
+    description: "Validation of successful integration with existing catalog"
+    catalog_integration_validation:
+      pattern_discoverability:
+        - catalog_navigation_validation: "{{ catalog_navigation }}"
+        - search_functionality_validation: "{{ search_functionality }}"
+        - cross_reference_validation: "{{ cross_reference_validation }}"
+        - documentation_linking_validation: "{{ documentation_linking }}"
+        - validation_status: "{{ discoverability_validation_status }}"
+        - identified_issues: "{{ discoverability_issues }}"
+      
+      dependency_resolution:
+        - internal_dependency_resolution: "{{ internal_dependency_resolution }}"
+        - external_dependency_validation: "{{ external_dependency_validation }}"
+        - circular_dependency_detection: "{{ circular_dependency_detection }}"
+        - dependency_version_compatibility: "{{ dependency_version_compatibility }}"
+        - validation_status: "{{ dependency_validation_status }}"
+        - identified_issues: "{{ dependency_issues }}"
+
+    usage_validation:
+      pattern_instantiation:
+        - pattern_creation_validation: "{{ pattern_creation }}"
+        - configuration_validation: "{{ configuration_validation }}"
+        - customization_capability_validation: "{{ customization_validation }}"
+        - error_handling_validation: "{{ usage_error_handling }}"
+        - validation_status: "{{ instantiation_validation_status }}"
+        - identified_issues: "{{ instantiation_issues }}"
+      
+      constraint_enforcement:
+        - usage_constraint_validation: "{{ usage_constraint_validation }}"
+        - compliance_monitoring_validation: "{{ compliance_monitoring }}"
+        - violation_detection_validation: "{{ violation_detection }}"
+        - remediation_guidance_validation: "{{ remediation_guidance }}"
+        - validation_status: "{{ constraint_validation_status }}"
+        - identified_issues: "{{ constraint_issues }}"
+
+    migration_validation:
+      adoption_pathway_validation:
+        - migration_script_validation: "{{ migration_script_validation }}"
+        - backward_compatibility_validation: "{{ backward_compatibility_validation }}"
+        - breaking_change_documentation: "{{ breaking_change_documentation }}"
+        - rollback_capability_validation: "{{ rollback_capability }}"
+        - validation_status: "{{ migration_validation_status }}"
+        - identified_issues: "{{ migration_issues }}"
+
+  security_and_compliance_validation:
+    description: "Security and compliance validation of integrated external assets"
+    external_asset_security:
+      security_vulnerability_assessment:
+        - dependency_security_scan_results: "{{ dependency_security_scan }}"
+        - code_security_analysis_results: "{{ code_security_analysis }}"
+        - malicious_code_detection_results: "{{ malicious_code_detection }}"
+        - data_privacy_compliance_validation: "{{ data_privacy_compliance }}"
+        - validation_status: "{{ security_validation_status }}"
+        - identified_vulnerabilities: "{{ security_vulnerabilities }}"
+      
+      licensing_compliance:
+        - license_compatibility_validation: "{{ license_compatibility }}"
+        - third_party_compliance_validation: "{{ third_party_compliance }}"
+        - open_source_requirement_validation: "{{ open_source_requirements }}"
+        - attribution_completeness_validation: "{{ attribution_completeness }}"
+        - validation_status: "{{ licensing_validation_status }}"
+        - identified_issues: "{{ licensing_issues }}"
+
+    integration_security:
+      security_pattern_validation:
+        - api_security_pattern_validation: "{{ api_security_patterns }}"
+        - authentication_implementation_validation: "{{ auth_implementation_validation }}"
+        - authorization_pattern_validation: "{{ authorization_patterns }}"
+        - data_validation_schema_security: "{{ data_validation_security }}"
+        - validation_status: "{{ integration_security_status }}"
+        - identified_issues: "{{ integration_security_issues }}"
+
+  performance_and_production_readiness:
+    description: "Performance impact and production readiness assessment"
+    performance_validation:
+      performance_impact_assessment:
+        - bundle_size_impact_analysis: "{{ bundle_size_impact }}"
+        - runtime_performance_analysis: "{{ runtime_performance }}"
+        - memory_usage_pattern_analysis: "{{ memory_usage_analysis }}"
+        - caching_strategy_validation: "{{ caching_strategy_validation }}"
+        - validation_status: "{{ performance_validation_status }}"
+        - performance_issues: "{{ performance_issues }}"
+      
+      scalability_assessment:
+        - pattern_scalability_validation: "{{ pattern_scalability }}"
+        - integration_performance_validation: "{{ integration_performance }}"
+        - catalog_growth_impact_assessment: "{{ catalog_growth_impact }}"
+        - maintenance_requirement_assessment: "{{ maintenance_requirements }}"
+        - validation_status: "{{ scalability_validation_status }}"
+        - scalability_concerns: "{{ scalability_concerns }}"
+
+    production_readiness:
+      operational_readiness:
+        - deployment_compatibility_validation: "{{ deployment_compatibility }}"
+        - monitoring_integration_validation: "{{ monitoring_integration }}"
+        - logging_pattern_validation: "{{ logging_patterns }}"
+        - debugging_capability_assessment: "{{ debugging_capabilities }}"
+        - validation_status: "{{ operational_readiness_status }}"
+        - readiness_gaps: "{{ readiness_gaps }}"
+
+  validation_results_summary:
+    description: "Consolidated validation results with actionable recommendations"
+    overall_validation_status:
+      compliance_summary:
+        - total_validation_checks: "{{ total_validation_checks }}"
+        - passed_validation_checks: "{{ passed_validation_checks }}"
+        - failed_validation_checks: "{{ failed_validation_checks }}"
+        - warning_validation_checks: "{{ warning_validation_checks }}"
+        - overall_compliance_percentage: "{{ overall_compliance_percentage }}"
+      
+      critical_issues_summary:
+        - blocking_issues: "{{ blocking_issues }}"
+        - high_priority_issues: "{{ high_priority_issues }}"
+        - medium_priority_issues: "{{ medium_priority_issues }}"
+        - low_priority_issues: "{{ low_priority_issues }}"
+
+    certification_status:
+      pattern_certification:
+        - certified_for_prototype_use: "{{ prototype_certification }}"
+        - certified_for_development_use: "{{ development_certification }}"
+        - certified_for_production_use: "{{ production_certification }}"
+        - conditional_certification_requirements: "{{ conditional_requirements }}"
+      
+      approved_usage_contexts:
+        - approved_development_contexts: "{{ approved_dev_contexts }}"
+        - approved_production_contexts: "{{ approved_prod_contexts }}"
+        - restricted_usage_contexts: "{{ restricted_contexts }}"
+        - usage_recommendations: "{{ usage_recommendations }}"
+
+  remediation_recommendations:
+    description: "Detailed remediation steps for identified issues"
+    critical_issue_remediation:
+      blocking_issues:
+        - "{{ blocking_issue_1_remediation }}"
+        - "{{ blocking_issue_2_remediation }}"
+        - "{{ blocking_issue_3_remediation }}"
+      
+      high_priority_issues:
+        - "{{ high_priority_issue_1_remediation }}"
+        - "{{ high_priority_issue_2_remediation }}"
+        - "{{ high_priority_issue_3_remediation }}"
+
+    remediation_timeline:
+      immediate_actions_required:
+        - "{{ immediate_action_1 }}"
+        - "{{ immediate_action_2 }}"
+        - "{{ immediate_action_3 }}"
+      
+      short_term_improvements:
+        - "{{ short_term_improvement_1 }}"
+        - "{{ short_term_improvement_2 }}"
+        - "{{ short_term_improvement_3 }}"
+      
+      long_term_optimization:
+        - "{{ long_term_optimization_1 }}"
+        - "{{ long_term_optimization_2 }}"
+        - "{{ long_term_optimization_3 }}"
+
+    resource_requirements_for_remediation:
+      - development_effort_required: "{{ development_effort_for_remediation }}"
+      - expertise_required: "{{ expertise_required_for_remediation }}"
+      - timeline_for_remediation_completion: "{{ remediation_timeline }}"
+      - impact_on_project_schedule: "{{ schedule_impact }}"
+
+  post_validation_recommendations:
+    description: "Recommendations for ongoing maintenance and improvement"
+    ongoing_validation_strategy:
+      - continuous_monitoring_recommendations: "{{ continuous_monitoring }}"
+      - regular_validation_schedule: "{{ regular_validation_schedule }}"
+      - automated_validation_setup: "{{ automated_validation }}"
+      - quality_gate_integration: "{{ quality_gate_integration }}"
+
+    maintenance_recommendations:
+      - pattern_maintenance_strategy: "{{ pattern_maintenance }}"
+      - documentation_maintenance_plan: "{{ documentation_maintenance }}"
+      - update_management_process: "{{ update_management }}"
+      - community_engagement_strategy: "{{ community_engagement }}"
+
+  appendices:
+    detailed_validation_logs:
+      - complete_validation_test_results: "{{ detailed_test_results }}"
+      - error_logs_and_diagnostics: "{{ error_logs }}"
+      - performance_benchmark_results: "{{ performance_benchmarks }}"
+    
+    validation_methodology:
+      - validation_criteria_specifications: "{{ validation_criteria }}"
+      - test_case_definitions: "{{ test_case_definitions }}"
+      - validation_tool_configurations: "{{ tool_configurations }}"
+
+# Template Usage Instructions
+usage_instructions:
+  - "Replace all {{ variable }} placeholders with actual validation results"
+  - "Include specific details for issues found during validation"
+  - "Customize sections based on mode-specific validation requirements"
+  - "Provide actionable remediation steps with clear priorities"
+  - "Ensure compliance status is clearly communicated to stakeholders"
