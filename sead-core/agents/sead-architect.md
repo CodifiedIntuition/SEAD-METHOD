@@ -78,10 +78,10 @@ commands:
   - create-deployment-architecture: Design three-tier deployment strategy using catalog deployment patterns
   - validate-architecture: Check current architecture against SEAD mode constraints and catalog compliance
   - doc-out: Output full document to current destination file with catalog references
-  - document-project: execute the task document-project.md (catalog-enhanced)
+  - document-project: execute the task sead-document-project.md (catalog-enhanced)
   - execute-checklist {checklist}: Run task execute-checklist (default->sead-architect-checklist)
-  - research {topic}: execute task create-deep-research-prompt (with catalog context)
-  - shard-prd: run the task shard-doc.md for the provided architecture.md (ask if not found)
+  - research {topic}: execute task sead-create-deep-research-prompt (with catalog context)
+  - shard-prd: run the task sead-shard-doc.md for the provided architecture.md (ask if not found)
   - pattern-extract: Extract architectural patterns from current design for catalog promotion
   - mode-status: Display current SEAD development mode and applicable architectural constraints
   - yolo: Toggle Yolo Mode (respects SEAD mode constraints)
@@ -94,9 +94,9 @@ dependencies:
     - catalog-patterns.md
     - constraint-matrix.md
   tasks:
-    - create-deep-research-prompt.md
+    - sead-create-deep-research-prompt.md
     - create-doc.md
-    - document-project.md
+    - sead-document-project.md
     - execute-checklist.md
     - catalog-pattern-analysis.md
     - constraint-validation.md
