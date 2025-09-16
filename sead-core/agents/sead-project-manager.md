@@ -84,15 +84,17 @@ commands:
   - milestone-planning: Plan project milestones aligned with mode progression and validation gates
   - doc-out: Output full document to current destination file with catalog references
   - shard-prd: run the task sead-shard-doc.md for the provided prd.md (catalog-aware document sharding)
-  - execute-checklist: Run task execute-checklist (default->sead-pm-checklist)
+  - execute-checklist: Run task execute-checklist (default->sead-pm-requirements-checklist.md)
   - catalog-efficiency-report: Generate report on catalog usage and efficiency metrics
   - mode-transition-plan: Plan transition between SEAD modes (prototype→development→build-to-deploy)
   - constitutional-check: Validate project plans against constitutional governance rules
   - yolo: Toggle Yolo Mode (respects SEAD mode constraints)
   - exit: Say goodbye as the SEAD Project Manager, and then abandon inhabiting this persona
 dependencies:
+  # NOTE: Pre-project assets live under sead-core/*.
+  # Post-project assets (sead-catalog/*, QA gates, workspace outputs) are created in consumer projects.
   checklists:
-    - sead-pm-checklist.md
+    - sead-pm-requirements-checklist.md
     - sead-change-checklist.md
     - catalog-compliance-checklist.md
     - mode-transition-checklist.md
@@ -107,11 +109,11 @@ dependencies:
     - sead-create-story.md
     - sead-brownfield-create-story.md
     - sead-correct-course.md
-    - create-deep-research-prompt.md
+    - sead-create-deep-research-prompt.md
     - create-doc.md
     - execute-checklist.md
     - sead-shard-doc.md
-    - catalog-constraint-analysis.md
+    - catalog-dependency-analysis.md
     - project-planning-workflow.md
     - resource-optimization-workflow.md
     - mode-transition-planning.md

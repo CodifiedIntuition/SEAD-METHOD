@@ -1,0 +1,19 @@
+generated_by: sead-project-manager
+intended_use: Stakeholder update with catalog/compliance status
+version: 1.0.0
+
+update:
+  date: ""
+  period: ""
+  highlights: []
+  risks: []
+  decisions: []
+  next_steps: []
+  catalog_status:
+    summary: ""
+    changes: []
+  compliance:
+    mode: prototype|development|build-to-deploy
+    qa_gate_status: ""
+    constraints_status: ""
+

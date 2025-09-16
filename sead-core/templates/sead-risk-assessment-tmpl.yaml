@@ -1,0 +1,18 @@
+generated_by: sead-project-manager
+intended_use: Risk matrix with mode and catalog axes
+version: 1.0.0
+
+method:
+  scale:
+    probability: [low, medium, high]
+    impact: [low, medium, high]
+
+risks:
+  - id: R-001
+    description: ""
+    probability: medium
+    impact: medium
+    mode: prototype|development|build-to-deploy
+    catalog_dependency: ""
+    mitigation: ""
+
