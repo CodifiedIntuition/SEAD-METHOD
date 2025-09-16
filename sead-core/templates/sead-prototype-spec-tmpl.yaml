@@ -1,0 +1,94 @@
+# SEAD Prototype Specification Template
+template:
+  id: sead-prototype-spec-template-v1
+  name: SEAD Interactive Prototype Specification
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/{{feature_slug}}-prototype.md
+    title: "{{project_name}} Prototype Specification"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  accessibility_alignment: required
+  governance_validation: continuous
+
+workflow:
+  mode: guided
+  elicitation: sead-advanced-elicitation
+  catalog_validation: enabled
+  constraint_enforcement: mode-aware
+
+sections:
+  - id: overview
+    title: Prototype Overview
+    instruction: |
+      Capture prototype objectives, supported scenarios, and mode-driven fidelity requirements.
+    content: |
+      - **Feature / Flow:** {{feature_name}}
+      - **Mode:** {{sead_mode}}
+      - **Primary Scenarios:** {{scenarios}}
+      - **Devices / Viewports:** {{viewports}}
+      - **Catalog Inputs:** {{catalog_references}}
+      - **Research Hooks:** {{research_dependencies}}
+
+  - id: interaction-map
+    title: Interaction Map
+    instruction: |
+      Describe the flow of interactions using catalog components. Include numbered steps and decision points.
+    type: numbered-list
+    template: "{{interaction_steps}}"
+
+  - id: state-detail
+    title: Component State Details
+    instruction: |
+      Document each key component's states, transitions, and triggers.
+    type: table
+    columns: [Component, State, Trigger, Resulting State, Catalog Reference, Notes]
+
+  - id: data-handling
+    title: Data & Error Handling
+    instruction: |
+      Explain data requirements, loading states, optimistic updates, and error recovery strategies.
+    sections:
+      - id: data-requirements
+        title: Data Requirements
+        type: numbered-list
+        template: "{{data_requirements}}"
+      - id: error-strategy
+        title: Error & Empty States
+        type: numbered-list
+        template: "{{error_states}}"
+
+  - id: accessibility
+    title: Accessibility Behaviors
+    instruction: |
+      Record screen reader announcements, focus management, keyboard shortcuts, and motion considerations.
+    type: numbered-list
+    template: "{{accessibility_behaviors}}"
+
+  - id: responsive-motion
+    title: Responsive & Motion Guidance
+    instruction: |
+      Provide viewport-specific adjustments and motion design instructions referencing catalog tokens.
+    content: |
+      | Breakpoint | Layout Adjustments | Motion Guidance |
+      |------------|-------------------|-----------------|
+      | xs | {{xs_layout}} | {{xs_motion}} |
+      | sm | {{sm_layout}} | {{sm_motion}} |
+      | md | {{md_layout}} | {{md_motion}} |
+      | lg | {{lg_layout}} | {{lg_motion}} |
+      | xl | {{xl_layout}} | {{xl_motion}} |
+
+  - id: validation
+    title: Validation Plan
+    instruction: |
+      Outline usability testing, accessibility checks, and engineering validation needed before approval.
+    content: |
+      - **Usability Validation:** {{usability_plan}}
+      - **Accessibility Validation:** {{accessibility_plan}}
+      - **Engineering Review Items:** {{engineering_notes}}
+      - **Risks / Dependencies:** {{risks}}

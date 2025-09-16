@@ -1,0 +1,95 @@
+# SEAD Wireframe Specification Template
+template:
+  id: sead-wireframe-spec-template-v1
+  name: SEAD Catalog-Aligned Wireframe Plan
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/{{feature_slug}}-wireframe.md
+    title: "{{project_name}} Wireframe Plan"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  governance_validation: progressive
+
+workflow:
+  mode: guided
+  elicitation: sead-advanced-elicitation
+  catalog_validation: enabled
+  constraint_enforcement: mode-aware
+
+sections:
+  - id: introduction
+    title: Engagement Overview
+    instruction: |
+      Summarize goals, users, and success metrics for the wireframe effort.
+      Confirm active SEAD mode and cite catalog sources consulted.
+    content: |
+      - **Feature / Flow:** {{feature_name}}
+      - **Mode:** {{sead_mode}} (see `/sead-core/data/mode-constraint-matrix.md`)
+      - **Primary Personas:** {{personas}}
+      - **Success Metrics:** {{success_metrics}}
+      - **Catalog Inputs:** {{catalog_sources}}
+
+  - id: screen-inventory
+    title: Screen Inventory
+    type: table
+    columns: [# , Screen / View, Goal, Catalog Layout, Notes]
+    instruction: Number each screen or major state. Reference canonical catalog layout names.
+
+  - id: layout-structure
+    title: Layout & Component Mapping
+    instruction: |
+      For each screen, describe the structural hierarchy and component choices using catalog terminology.
+      Present mappings as numbered lists so users can select components quickly.
+    sections:
+      - id: primary-layout
+        title: Catalog Layout Strategy
+        type: numbered-list
+        template: "{{layout_steps}}"
+      - id: component-map
+        title: Component Usage Map
+        type: numbered-list
+        template: "{{component_usage}}"
+
+  - id: responsive-behavior
+    title: Responsive & Adaptive Behavior
+    instruction: |
+      Document behavior at each breakpoint (`xs`..`xl`). Include stacking order, visibility rules, and navigation adjustments.
+    content: |
+      | Breakpoint | Layout Behavior | Priority Content | Interactions |
+      |------------|-----------------|------------------|--------------|
+      | xs | {{xs_behavior}} | {{xs_priority}} | {{xs_interactions}} |
+      | sm | {{sm_behavior}} | {{sm_priority}} | {{sm_interactions}} |
+      | md | {{md_behavior}} | {{md_priority}} | {{md_interactions}} |
+      | lg | {{lg_behavior}} | {{lg_priority}} | {{lg_interactions}} |
+      | xl | {{xl_behavior}} | {{xl_priority}} | {{xl_interactions}} |
+
+  - id: state-coverage
+    title: Interaction States
+    instruction: |
+      Describe expected states (idle, hover, focus, active, loading, error, empty) for critical components.
+      Tie states to catalog micro-interaction patterns.
+    type: table
+    columns: [Component, State, Description, Catalog Reference, Accessibility Notes]
+
+  - id: accessibility
+    title: Accessibility Considerations
+    instruction: |
+      Summarize key accessibility requirements drawn from `/sead-core/data/accessibility-standards.md` and checklist findings.
+    type: numbered-list
+    template: "{{accessibility_actions}}"
+
+  - id: validation-plan
+    title: Validation & Next Steps
+    instruction: |
+      Outline remaining tasks: prototype design, research planning, accessibility audit.
+      Reference checklists or workflows to execute next.
+    content: |
+      - **Pending Tasks:** {{pending_tasks}}
+      - **Risks / Open Questions:** {{open_questions}}
+      - **Proposed Follow-up:** {{follow_up}}

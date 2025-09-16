@@ -1,0 +1,83 @@
+# SEAD Design Handoff Packet Template
+template:
+  id: sead-design-handoff-template-v1
+  name: SEAD UX → Engineering Handoff Packet
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/{{feature_slug}}-ux-handoff.md
+    title: "{{project_name}} UX Handoff"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  governance_validation: continuous
+
+workflow:
+  mode: guided
+  elicitation: sead-advanced-elicitation
+  catalog_validation: enabled
+  constraint_enforcement: mode-aware
+
+sections:
+  - id: summary
+    title: Engagement Summary
+    content: |
+      - **Feature / Flow:** {{feature_name}}
+      - **Mode:** {{sead_mode}}
+      - **Design Status:** {{design_status}}
+      - **Key Contacts:** {{contacts}}
+
+  - id: deliverables
+    title: Delivered Artifacts
+    instruction: Provide links/paths to wireframes, prototypes, specs, research, and audits.
+    type: table
+    columns: [Artifact, Description, Location, Catalog References, Notes]
+
+  - id: implementation-guidance
+    title: Implementation Guidance
+    instruction: |
+      Describe catalog components, variants, and props required for engineering.
+    sections:
+      - id: component-summary
+        title: Component Overview
+        type: table
+        columns: [Component, Variant, Props / States, Catalog Link, Notes]
+      - id: interaction-guidance
+        title: Interaction & State Guidance
+        type: numbered-list
+        template: "{{interaction_guidance}}"
+
+  - id: accessibility
+    title: Accessibility Notes
+    instruction: |
+      Summarize key accessibility requirements, testing evidence, and outstanding work.
+    content: |
+      - **Checklist Status:** {{checklist_status}}
+      - **Assistive Tech Coverage:** {{assistive_tech}}
+      - **Known Issues:** {{known_issues}}
+      - **Remediation Plan:** {{remediation_plan}}
+
+  - id: validation
+    title: Validation Summary
+    instruction: |
+      Capture results from usability and validation activities.
+    content: |
+      - **Test Methods:** {{test_methods}}
+      - **Results:** {{test_results}}
+      - **Decision:** {{decision}}
+
+  - id: risks
+    title: Risks & Follow-up
+    type: numbered-list
+    template: "{{risks}}"
+
+  - id: approvals
+    title: Approvals & Next Steps
+    content: |
+      - **Stakeholder Approvals:** {{approvals}}
+      - **Next Milestones:** {{next_milestones}}
+      - **Open Questions:** {{open_questions}}

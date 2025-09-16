@@ -1,0 +1,108 @@
+# SEAD Design System Pattern Template
+template:
+  id: sead-design-system-pattern-template-v1
+  name: SEAD Catalog Pattern Specification
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: mandatory
+  output:
+    format: markdown
+    filename: sead-catalog/design-system/patterns/{{pattern_slug}}.md
+    title: "{{pattern_name}} Pattern Specification"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  accessibility_alignment: required
+  governance_validation: strict
+
+workflow:
+  mode: guided
+  elicitation: sead-advanced-elicitation
+  catalog_validation: enabled
+  constraint_enforcement: mode-aware
+
+sections:
+  - id: summary
+    title: Pattern Summary
+    instruction: |
+      Introduce the pattern, intended use cases, and justification for creation or update.
+    content: |
+      - **Pattern Name:** {{pattern_name}}
+      - **Pattern Type:** {{pattern_type}}
+      - **Catalog Domain:** design-system
+      - **Mode:** {{sead_mode}}
+      - **Status:** {{status}}
+      - **Related Components:** {{related_components}}
+
+  - id: problem-solution
+    title: Problem & Solution
+    sections:
+      - id: problem
+        title: Problem Statement
+        type: numbered-list
+        template: "{{problem_points}}"
+      - id: solution
+        title: Solution Overview
+        type: numbered-list
+        template: "{{solution_points}}"
+
+  - id: anatomy
+    title: Pattern Anatomy
+    instruction: |
+      Describe structural elements, layout rules, and visual hierarchy.
+    type: table
+    columns: [Element, Description, Catalog Token References, Notes]
+
+  - id: states
+    title: States & Interactions
+    instruction: |
+      Document each state (default, hover, focus, active, loading, error, success) and associated behaviors.
+    type: table
+    columns: [State, Description, Interaction, Accessibility Notes]
+
+  - id: variants
+    title: Variants
+    instruction: |
+      List supported variants and when to use them. Include numbered list for quick selection.
+    type: numbered-list
+    template: "{{variant_list}}"
+
+  - id: responsive
+    title: Responsive Guidance
+    instruction: |
+      Outline behavior across breakpoints and device classes.
+    content: |
+      | Breakpoint | Layout Guidance | Content Priority |
+      |------------|----------------|------------------|
+      | xs | {{xs_guidance}} | {{xs_priority}} |
+      | sm | {{sm_guidance}} | {{sm_priority}} |
+      | md | {{md_guidance}} | {{md_priority}} |
+      | lg | {{lg_guidance}} | {{lg_priority}} |
+      | xl | {{xl_guidance}} | {{xl_priority}} |
+
+  - id: accessibility
+    title: Accessibility Requirements
+    instruction: Reference `/sead-core/data/accessibility-standards.md`.
+    type: numbered-list
+    template: "{{accessibility_requirements}}"
+
+  - id: implementation
+    title: Implementation Notes
+    instruction: |
+      Provide TypeScript prop expectations, dependencies, and performance considerations for engineering.
+    content: |
+      - **Props / API:** {{props}}
+      - **Dependencies:** {{dependencies}}
+      - **Performance Notes:** {{performance}}
+      - **Testing Guidance:** {{testing}}
+
+  - id: validation
+    title: Validation & Governance
+    instruction: |
+      Document required checklists, approval status, and future follow-up.
+    content: |
+      - **Completed Checklists:** {{completed_checklists}}
+      - **Approvals:** {{approvals}}
+      - **Outstanding Actions:** {{outstanding_actions}}
+      - **Version History:** {{version_history}}
