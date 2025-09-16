@@ -1,0 +1,54 @@
+# SEAD Backlog Summary Template
+template:
+  id: sead-backlog-template-v1
+  name: SEAD Catalog-Aware Backlog Summary
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/{{project_name}}-backlog.md
+    title: "{{project_name}} Backlog Summary"
+
+sections:
+  - id: overview
+    title: Backlog Overview
+    content: |
+      - **Project:** {{project_name}}
+      - **Mode:** {{sead_mode}}
+      - **Last Updated:** {{updated}}
+      - **Catalog Efficiency Metrics:** {{metrics_snapshot}}
+      - **Strategic Focus Areas:** {{focus_areas}}
+
+  - id: epic-table
+    title: Epic Summary
+    type: table
+    columns: [Epic, Status, Catalog Impact, Priority Tier, Notes]
+
+  - id: story-table
+    title: Story Summary
+    type: table
+    columns: [Story, Status, Catalog Patterns, Priority, Dependencies, Notes]
+
+  - id: metrics
+    title: Catalog Efficiency Metrics
+    content: |
+      - **Reuse Coverage:** {{reuse_coverage}}
+      - **Deviation Count:** {{deviation_count}}
+      - **Pattern Debt Index:** {{pattern_debt}}
+      - **Validation Throughput:** {{validation_throughput}}
+
+  - id: risks
+    title: Risks & Mitigations
+    type: table
+    columns: [Risk, Impact, Mitigation, Owner, Status]
+
+  - id: upcoming
+    title: Upcoming Milestones & Decisions
+    type: numbered-list
+    template: "{{milestones}}"
+
+  - id: actions
+    title: Action Items
+    type: table
+    columns: [Action, Owner, Due Date, Status]

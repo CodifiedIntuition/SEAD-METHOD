@@ -1,0 +1,58 @@
+# SEAD Acceptance Criteria Template
+template:
+  id: sead-acceptance-criteria-template-v1
+  name: SEAD Catalog-Aware Acceptance Criteria
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/{{story_slug}}-acceptance-criteria.md
+    title: "{{story_title}} Acceptance Criteria"
+
+workflow:
+  mode: guided
+  elicitation: sead-advanced-elicitation
+  catalog_validation: enabled
+
+sections:
+  - id: context
+    title: Story Context
+    content: |
+      - **Story:** {{story_title}}
+      - **Mode:** {{sead_mode}}
+      - **Epic:** {{epic_link}}
+      - **Catalog References:** {{catalog_refs}}
+      - **Stakeholders:** {{stakeholders}}
+
+  - id: criteria
+    title: Acceptance Criteria
+    instruction: Provide numbered, testable criteria referencing catalog components.
+    type: numbered-list
+    template: "{{criteria}}"
+
+  - id: validation
+    title: Validation Activities
+    content: |
+      - **QA Tests:** {{qa_tests}}
+      - **Accessibility Checks:** {{accessibility_checks}}
+      - **UX Validation:** {{ux_validation}}
+      - **Performance/Security:** {{perf_security}}
+
+  - id: metrics
+    title: Success Metrics
+    type: table
+    columns: [Metric, Target, Measurement Method, Notes]
+
+  - id: dependencies
+    title: Dependencies & Follow-up
+    type: table
+    columns: [Dependency, Catalog Domain, Owner, Status, Notes]
+
+  - id: approvals
+    title: Approvals
+    content: |
+      - **Product Owner:** {{po_approval}}
+      - **Engineering Lead:** {{eng_approval}}
+      - **UX Lead:** {{ux_approval}}
+      - **QA Lead:** {{qa_approval}}

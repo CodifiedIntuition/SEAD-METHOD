@@ -102,8 +102,8 @@ dependencies:
     - sead-risk-profile.md
     - sead-test-design.md
     - sead-trace-requirements.md
-    - catalog-compliance-check.md
-    - constraint-validation.md
+    - sead-catalog-compliance-check.md
+    - sead-constraint-validation.md
   templates:
     - sead-qa-gate-tmpl.yaml
     - sead-story-tmpl.yaml

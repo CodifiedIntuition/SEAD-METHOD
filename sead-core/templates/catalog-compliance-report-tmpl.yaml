@@ -1,0 +1,72 @@
+# SEAD Catalog Compliance Report Template
+template:
+  id: sead-catalog-compliance-report-template-v1
+  name: SEAD Catalog Compliance Report
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: qa/catalog-compliance/{{artifact_slug}}-report.md
+    title: "Catalog Compliance Report – {{artifact_name}}"
+
+workflow:
+  mode: guided
+  elicitation: sead-advanced-elicitation
+  catalog_validation: enabled
+  constraint_enforcement: mode-aware
+
+sections:
+  - id: summary
+    title: Summary
+    content: |
+      - **Artifact:** {{artifact_name}}
+      - **Mode:** {{sead_mode}}
+      - **Review Date:** {{review_date}}
+      - **Reviewer:** {{reviewer}}
+      - **Scope:** {{scope_description}}
+
+  - id: catalog-overview
+    title: Catalog Coverage Overview
+    content: |
+      - **Referenced Patterns:** {{pattern_list}}
+      - **New Pattern Proposals:** {{pattern_proposals}}
+      - **Deviation Requests:** {{deviation_requests}}
+
+  - id: validation-results
+    title: Validation Results
+    instruction: Provide PASS/FAIL/CONCERNS per catalog domain.
+    type: table
+    columns: [Domain, Result, Evidence, Notes]
+
+  - id: requirements-traceability
+    title: Requirements Traceability
+    content: |
+      - **Coverage Summary:** {{coverage_summary}}
+      - **Uncovered Requirements:** {{uncovered_requirements}}
+      - **Traceability Notes:** {{traceability_notes}}
+
+  - id: nfr-status
+    title: Non-Functional Assessment
+    content: |
+      - **Performance:** {{performance_status}}
+      - **Security:** {{security_status}}
+      - **Reliability:** {{reliability_status}}
+      - **Accessibility:** {{accessibility_status}}
+
+  - id: risks
+    title: Risks & Deviations
+    type: table
+    columns: [Risk/Deviation, Severity, Mitigation Plan, Owner, Due Date]
+
+  - id: actions
+    title: Required Actions
+    type: numbered-list
+    template: "{{actions}}"
+
+  - id: decision
+    title: Gate Decision
+    content: |
+      - **Recommendation:** {{recommendation}} (PASS / CONCERNS / FAIL / WAIVED)
+      - **Conditions:** {{conditions}}
+      - **Approvals:** {{approvals}}

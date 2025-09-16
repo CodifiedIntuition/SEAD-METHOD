@@ -1,0 +1,92 @@
+# SEAD Feature Specification Template
+template:
+  id: sead-feature-spec-template-v1
+  name: SEAD Catalog-Aware Feature Specification
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/{{feature_slug}}-feature-spec.md
+    title: "{{project_name}} Feature Specification – {{feature_name}}"
+
+workflow:
+  mode: guided
+  elicitation: sead-advanced-elicitation
+  catalog_validation: enabled
+
+sections:
+  - id: overview
+    title: Feature Overview
+    content: |
+      - **Feature Name:** {{feature_name}}
+      - **Epic Link:** {{epic_link}}
+      - **Mode:** {{sead_mode}}
+      - **Personas / Segments:** {{personas}}
+      - **Business Objectives:** {{objectives}}
+      - **Catalog References:** {{catalog_refs}}
+
+  - id: problem
+    title: Problem Statement & Goals
+    type: numbered-list
+    template: "{{problem_points}}"
+
+  - id: solution
+    title: Proposed Solution
+    content: |
+      - **Summary:** {{solution_summary}}
+      - **Key Flows:** {{key_flows}}
+      - **Catalog Patterns Utilized:** {{patterns_utilized}}
+      - **New Patterns Proposed:** {{new_patterns}}
+
+  - id: requirements
+    title: Functional Requirements
+    type: numbered-list
+    template: "{{functional_requirements}}"
+
+  - id: nonfunctional
+    title: Non-functional Requirements
+    content: |
+      - **Performance:** {{performance}}
+      - **Security & Compliance:** {{security}}
+      - **Accessibility:** {{accessibility}}
+      - **Reliability:** {{reliability}}
+
+  - id: data-api
+    title: Data & API Considerations
+    sections:
+      - id: data
+        title: Data Requirements
+        type: table
+        columns: [Data Element, Source, Catalog Reference, Notes]
+      - id: api
+        title: API Requirements
+        type: table
+        columns: [Endpoint, Catalog Contract, Changes Needed, Notes]
+
+  - id: dependencies
+    title: Dependencies & Risks
+    type: table
+    columns: [Dependency, Type, Owner, Status, Notes]
+
+  - id: validation
+    title: Validation Plan
+    content: |
+      - **Acceptance Criteria:** {{acceptance_criteria}}
+      - **Testing Strategy:** {{testing_strategy}}
+      - **Research / UX Validation:** {{ux_validation}}
+      - **Release Criteria:** {{release_criteria}}
+
+  - id: timeline
+    title: Delivery Timeline & Milestones
+    type: table
+    columns: [Milestone, Target Date, Description, Dependencies]
+
+  - id: approvals
+    title: Approvals & Sign-off
+    content: |
+      - **Product Owner:** {{po}}
+      - **Engineering:** {{engineering}}
+      - **UX:** {{ux}}
+      - **QA:** {{qa}}
+      - **Governance:** {{governance}}
