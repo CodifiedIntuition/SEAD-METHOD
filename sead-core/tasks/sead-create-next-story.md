@@ -12,7 +12,8 @@ To identify the next logical story based on project progress and epic definition
 
 - Load `{root}/sead.config.yaml` and `{root}/sead-core/core-config.yaml` from the project root
 - If files do not exist, HALT and inform the user: "SEAD configuration files not found. Run 'sead init' to initialize a SEAD project, or migrate existing project with 'sead catalog generate --source .'"
-- Extract key configurations: `devStoryLocation`, `prd.*`, `architecture.*`, `workflow.*`, `catalog.*`, `modes.*`
+- Extract key configurations: `workspace.discovery_paths.stories`, `workspace.cli_outputs.stories`, `prd.*`, `architecture.*`, `workflow.*`, `catalog.*`, `modes.*`
+- **SEAD Enhancement**: Load workspace configuration for story file discovery across multiple locations
 - **SEAD Enhancement**: Validate catalog availability and current development mode
 - **SEAD Enhancement**: Check catalog completeness for current mode constraints
 
@@ -22,7 +23,8 @@ To identify the next logical story based on project progress and epic definition
 
 - Based on `prdSharded` from config, locate epic files (sharded location/pattern or monolithic PRD sections)
 - **SEAD Enhancement**: Load catalog index to understand available patterns for story implementation
-- If `devStoryLocation` has story files, load the highest `{epicNum}.{storyNum}.story.md` file
+- **SEAD Enhancement**: Search for existing story files using `workspace.discovery_paths.stories` (check each path in order until files are found)
+- If story files exist in any discovery location, load the highest `{epicNum}.{storyNum}.story.md` file
 - **If highest story exists:**
   - Verify status is 'Done' AND catalog compliance validated. If not, alert user: "ALERT: Found incomplete or non-compliant story! File: {lastEpicNum}.{lastStoryNum}.story.md Status: [current status] Catalog Compliance: [compliance status] You should fix this story first, but would you like to accept risk & override to create the next story in draft?"
   - **SEAD Enhancement**: Check if story completion included proper catalog pattern usage and constraint validation
@@ -130,7 +132,10 @@ To identify the next logical story based on project progress and epic definition
 ### 6. Create Story File with SEAD Enhancements
 
 #### 6.1 Initialize Story File Structure
-- Create `{epicNum}.{storyNum}.story.md` file using SEAD Story Template
+- **SEAD Enhancement**: Use workspace configuration to determine story file location:
+  - Check `workspace.cli_outputs.stories` if CLI workflow is being used
+  - Fallback to first available path in `workspace.discovery_paths.stories`
+- Create `{epicNum}.{storyNum}.story.md` file using SEAD Story Template in selected location
 - **SEAD Enhancement**: Include SEAD-specific sections:
   - SEAD Mode Configuration
   - Catalog Component References

@@ -16,7 +16,9 @@ This review task operates with mode-sensitive validation:
 ```yaml
 required:
   - story_id: '{epic}.{story}' # e.g., "1.3"
-  - story_path: '{devStoryLocation}/{epic}.{story}.*.md' # Path from sead.config.yaml
+  - story_path: # Discovered using workspace.discovery_paths.stories from sead.config.yaml
+      discovery_paths: '{workspace.discovery_paths.stories}' 
+      pattern: '{epic}.{story}.*.md'
   - story_title: '{title}' # If missing, derive from story file H1
   - story_slug: '{slug}' # If missing, derive from title (lowercase, hyphenated)
   - sead_mode: '{prototype|development|build-to-deploy}' # Current development mode
@@ -33,7 +35,8 @@ required:
 ## SEAD Configuration and Catalog Context
 
 **ALWAYS** check the `sead.config.yaml` and `sead-core/core-config.yaml` for:
-- `qa.qaLocation/gates` - Gate file location
+- `workspace.discovery_paths.qa_gates` - QA gate file discovery paths
+- `workspace.cli_outputs` - CLI output locations
 - `catalog.path` - Catalog directory path  
 - `mode.current` - Current SEAD development mode
 - `constraints.*` - Mode-specific constraint configuration
@@ -257,11 +260,13 @@ After review and any refactoring, append your SEAD results to the story file in 
 
 ### SEAD Gate Status
 
-SEAD Gate: {STATUS} [{MODE}] → qa.qaLocation/gates/{epic}.{story}-{slug}.yml
+SEAD Gate: {STATUS} [{MODE}] → {qa_gates_path}/{epic}.{story}-{slug}.yml
 Catalog Compliance: {COMPLIANCE_STATUS}
-Risk profile: qa.qaLocation/assessments/{epic}.{story}-risk-{YYYYMMDD}.md
-NFR assessment: qa.qaLocation/assessments/{epic}.{story}-nfr-{YYYYMMDD}.md
-SEAD compliance: qa.qaLocation/assessments/{epic}.{story}-sead-{YYYYMMDD}.md
+Risk profile: {qa_assessments_path}/{epic}.{story}-risk-{YYYYMMDD}.md
+NFR assessment: {qa_assessments_path}/{epic}.{story}-nfr-{YYYYMMDD}.md
+SEAD compliance: {qa_assessments_path}/{epic}.{story}-sead-{YYYYMMDD}.md
+
+Note: Paths determined from workspace.discovery_paths.qa_gates configuration
 
 ### Recommended Status
 
@@ -280,8 +285,10 @@ SEAD compliance: qa.qaLocation/assessments/{epic}.{story}-sead-{YYYYMMDD}.md
 **Template and Directory:**
 
 - Use SEAD-enhanced qa-gate template with catalog compliance sections
-- Create directory defined in `qa.qaLocation/gates` (see `sead.config.yaml`) if missing
-- Save to: `qa.qaLocation/gates/{epic}.{story}-{slug}.yml`
+- **SEAD Enhancement**: Determine QA gate directory using workspace configuration:
+  - Use first available path from `workspace.discovery_paths.qa_gates`
+  - Create directory if missing
+- Save to: `{qa_gates_path}/{epic}.{story}-{slug}.yml`
 
 SEAD Gate file structure:
 
@@ -443,7 +450,7 @@ This review includes specific protections against common AI agent drift patterns
 After SEAD review:
 
 1. Update the QA Results section in the story file with SEAD enhancements
-2. Create the SEAD-compliant gate file in directory from `qa.qaLocation/gates`
+2. Create the SEAD-compliant gate file using workspace.discovery_paths.qa_gates configuration
 3. Recommend status: "Ready for Done with SEAD Compliance" or "Changes Required"
 4. If files were modified, list them in QA Results and ask Dev to update File List
 5. Always provide constructive feedback with catalog pattern references

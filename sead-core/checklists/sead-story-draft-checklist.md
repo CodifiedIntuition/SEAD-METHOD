@@ -16,10 +16,10 @@ Before proceeding with this checklist, you MUST:
 REQUIRED ACCESS:
 Ensure you have access to:
 
-1. The story document being validated (usually in docs/stories/ or provided directly)
+1. The story document being validated (discovered using workspace.discovery_paths.stories from configuration)
 2. The parent epic context with constitutional alignment
 3. Any referenced architecture or design documents with catalog compliance
-4. Previous related stories if this builds on prior work
+4. Previous related stories if this builds on prior work (found via story discovery paths)
 5. SEAD catalog domain patterns relevant to the story scope
 
 CRITICAL: This checklist validates individual stories BEFORE implementation begins with full constitutional compliance validation.

@@ -152,7 +152,7 @@ Write specification to `SPEC_FILE` using enhanced template structure:
 
 #### 5.1 Link Specification to SEAD Workspace
 
-- Create specification link in `sead-workspace/specifications/` directory
+- Create specification link using workspace.cli_outputs.specifications or first available path from workspace.discovery_paths.specifications
 - Update SEAD workspace index if available
 - **SEAD Enhancement**: Prepare artifact relationships for cross-command integration
 - **SEAD Enhancement**: Initialize context preservation data for planning phase
