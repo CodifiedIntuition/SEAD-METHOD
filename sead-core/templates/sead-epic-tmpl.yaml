@@ -1,4 +1,7 @@
 # SEAD Epic Template
+
+import: sead-core/templates/constitutional-base-template.yaml
+
 template:
   id: sead-epic-template-v1
   name: SEAD Catalog-Aligned Epic Specification
@@ -10,10 +13,7 @@ template:
     filename: docs/{{epic_slug}}-epic.md
     title: "{{project_name}} Epic – {{epic_name}}"
 
-constitutional_requirements:
-  mode_detection: required
-  governance_validation: continuous
-  catalog_read: mandatory
+# Constitutional requirements inherited from base template
 
 workflow:
   mode: guided

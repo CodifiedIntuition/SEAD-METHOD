@@ -1,0 +1,390 @@
+# SEAD Unified Pattern Template
+# Consolidates: api-pattern, auth-pattern, component-pattern, data-pattern, 
+#               deployment-pattern, error-pattern, integration-pattern, 
+#               state-pattern, test-pattern templates
+# Reduces 9 domain-specific templates → 1 parameterized template (89% reduction)
+
+import: sead-core/templates/constitutional-base-template.yaml
+
+template:
+  id: sead-unified-pattern-template-v1
+  name: SEAD Unified Pattern Documentation Template
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  
+  # Template parameters for domain specialization
+  parameters:
+    pattern_domain:
+      type: enum
+      values: [api_contracts, auth_patterns, ui_components, data_strategy, deployment_strategy, error_handling, integration_patterns, state_management, test_patterns]
+      description: "Catalog domain for the pattern being documented"
+    
+    pattern_type:
+      type: enum
+      values: [core_pattern, specialized_pattern, composite_pattern, anti_pattern]
+      description: "Type of pattern being documented"
+    
+    complexity_level:
+      type: enum
+      values: [simple, intermediate, advanced, expert]
+      description: "Complexity level affects documentation depth and validation"
+    
+    usage_scope:
+      type: enum
+      values: [project_specific, team_standard, organization_wide, public_catalog]
+      description: "Intended usage scope determines governance requirements"
+
+  output:
+    format: markdown
+    filename: "{{pattern_name}}-{{pattern_domain}}-pattern.md"
+    title: "{{pattern_name}} {{pattern_domain|title}} Pattern Documentation"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  quality_validation: continuous
+  anti_pattern_detection: enabled
+
+workflow:
+  mode: constitutional_interactive
+  elicitation: guided_extraction
+  catalog_validation: enabled
+  constraint_enforcement: progressive
+
+sections:
+  - id: constitutional-initialization
+    title: Constitutional Framework Initialization
+    instruction: |
+      Establish constitutional context for {{pattern_domain}} pattern documentation:
+      1. Identify development mode and {{pattern_domain}} design quality requirements
+      2. Load constitutional framework for {{pattern_domain}} governance
+      3. Configure catalog integration validation requirements
+      4. Establish context preservation for {{pattern_domain}} pattern handoffs
+      5. Set quality gates appropriate for {{complexity_level}} pattern tier
+    sections:
+      - id: pattern-context
+        title: "{{pattern_domain|title}} Pattern Context and Constitutional Framework"
+        template: |
+          **Documentation Date:** {{documentation_date}}
+          **Development Mode:** {{development_mode}}
+          **Constitutional Framework:** {{constitutional_version}}
+          **Pattern Agent:** sead-pattern-extraction
+          **Pattern Quality Tier:** {{pattern_quality_tier}}
+          **Catalog Domain:** {{pattern_domain|title}} > {{pattern_subdomain}}
+          **Pattern Type:** {{pattern_type}}
+          **Complexity Level:** {{complexity_level}}
+          **Usage Scope:** {{usage_scope}}
+          **Constitutional Compliance:** {{constitutional_compliance_level}}
+
+  - id: pattern-overview
+    title: "{{pattern_domain|title}} Pattern Overview"
+    instruction: |
+      Document comprehensive pattern overview with constitutional compliance:
+      
+      {% if pattern_domain == "api_contracts" %}
+      Focus on API design patterns, endpoint structure, and contract definition with governance validation.
+      {% elif pattern_domain == "auth_patterns" %}
+      Focus on authentication and authorization patterns with security governance compliance.
+      {% elif pattern_domain == "ui_components" %}
+      Focus on UI component design patterns with design-system catalog integration.
+      {% elif pattern_domain == "data_strategy" %}
+      Focus on data access patterns, modeling strategies, and data governance compliance.
+      {% elif pattern_domain == "deployment_strategy" %}
+      Focus on deployment patterns, infrastructure as code, and operational governance.
+      {% elif pattern_domain == "error_handling" %}
+      Focus on error handling strategies, logging patterns, and resilience governance.
+      {% elif pattern_domain == "integration_patterns" %}
+      Focus on system integration patterns and external service governance.
+      {% elif pattern_domain == "state_management" %}
+      Focus on application state patterns and data flow governance.
+      {% elif pattern_domain == "test_patterns" %}
+      Focus on testing strategies and quality assurance governance.
+      {% endif %}
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: pattern-description
+        title: Pattern Description
+        template: |
+          **Pattern Name:** {{pattern_name}}
+          **Pattern Category:** {{pattern_category}}
+          **Constitutional Intent:** {{constitutional_intent}}
+          **Problem Addressed:** {{problem_addressed}}
+          **Solution Approach:** {{solution_approach}}
+          **Catalog Integration:** {{catalog_integration_approach}}
+          **Governance Benefits:** {{governance_benefits}}
+      
+      - id: constitutional-rationale
+        title: Constitutional Rationale
+        template: |
+          **Constitutional Justification:** {{constitutional_justification}}
+          **Mode Appropriateness:** {{mode_appropriateness}}
+          **Catalog Evolution Contribution:** {{catalog_evolution_contribution}}
+          **Quality Governance Support:** {{quality_governance_support}}
+          **Context Preservation Benefits:** {{context_preservation_benefits}}
+
+  # Domain-specific implementation sections
+  - id: pattern-implementation
+    title: "{{pattern_domain|title}} Pattern Implementation"
+    instruction: |
+      Provide detailed implementation guidance specific to {{pattern_domain}}:
+      
+      {% if pattern_domain == "api_contracts" %}
+      Include OpenAPI specifications, request/response schemas, error codes, and authentication patterns.
+      {% elif pattern_domain == "auth_patterns" %}
+      Include authentication flows, authorization rules, token management, and security configurations.
+      {% elif pattern_domain == "ui_components" %}
+      Include component interfaces, props definitions, styling patterns, and accessibility requirements.
+      {% elif pattern_domain == "data_strategy" %}
+      Include data models, access patterns, validation schemas, and migration strategies.
+      {% elif pattern_domain == "deployment_strategy" %}
+      Include infrastructure definitions, deployment scripts, configuration management, and monitoring.
+      {% elif pattern_domain == "error_handling" %}
+      Include error types, handling strategies, logging formats, and recovery patterns.
+      {% elif pattern_domain == "integration_patterns" %}
+      Include integration interfaces, data transformation, error handling, and monitoring.
+      {% elif pattern_domain == "state_management" %}
+      Include state models, action definitions, reducer patterns, and persistence strategies.
+      {% elif pattern_domain == "test_patterns" %}
+      Include test structure, assertion patterns, mock strategies, and coverage requirements.
+      {% endif %}
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: implementation-overview
+        title: Implementation Overview
+        template: |
+          **Implementation Strategy:** {{implementation_strategy}}
+          **Constitutional Requirements:** {{constitutional_requirements}}
+          **Catalog Compliance:** {{catalog_compliance_requirements}}
+          **Technology Dependencies:** {{technology_dependencies}}
+          **Quality Gates:** {{quality_gates}}
+      
+      - id: code-examples
+        title: "{{pattern_domain|title}} Code Examples"
+        type: code
+        language: "{{primary_language}}"
+        template: |
+          // {{pattern_domain|title}} Pattern Implementation
+          // Constitutional Framework: {{constitutional_version}}
+          // Catalog Domain: {{pattern_domain}}
+          // Quality Tier: {{pattern_quality_tier}}
+          
+          {{pattern_implementation_code}}
+      
+      - id: configuration-examples
+        title: Configuration Examples
+        condition: "{{pattern_domain}} in ['deployment_strategy', 'api_contracts', 'auth_patterns']"
+        type: code
+        language: yaml
+        template: |
+          # {{pattern_domain|title}} Configuration
+          # Constitutional Compliance: {{constitutional_compliance_level}}
+          # Governance Level: {{governance_level}}
+          
+          {{pattern_configuration}}
+
+  - id: pattern-usage-guidelines
+    title: "{{pattern_domain|title}} Usage Guidelines"
+    instruction: |
+      Define constitutional usage guidelines for {{pattern_domain}} patterns:
+      1. When to use this pattern with constitutional validation
+      2. Implementation constraints and governance requirements
+      3. Integration requirements with other catalog domains
+      4. Quality assurance and validation procedures
+      5. Context preservation considerations for agent handoffs
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: usage-criteria
+        title: Usage Criteria
+        template: |
+          **Applicable Scenarios:** {{applicable_scenarios}}
+          **Constitutional Prerequisites:** {{constitutional_prerequisites}}
+          **Mode-Specific Constraints:** {{mode_constraints}}
+          **Catalog Dependencies:** {{catalog_dependencies}}
+          **Quality Requirements:** {{quality_requirements}}
+      
+      - id: implementation-constraints
+        title: Implementation Constraints
+        repeatable: true
+        template: "- **{{constraint_name}}:** {{constraint_description}} ({{constitutional_rationale}})"
+      
+      - id: integration-requirements
+        title: Integration Requirements
+        template: |
+          **Catalog Domain Integration:**
+          {% for domain in required_catalog_domains %}
+          - {{domain}}: {{integration_requirements[domain]}}
+          {% endfor %}
+          
+          **Constitutional Validation Points:**
+          - {{validation_point_1}}
+          - {{validation_point_2}}
+          
+          **Context Preservation Requirements:**
+          - {{context_preservation_requirement_1}}
+          - {{context_preservation_requirement_2}}
+
+  - id: pattern-testing-validation
+    title: "{{pattern_domain|title}} Testing and Validation"
+    instruction: |
+      Define testing approach for {{pattern_domain}} patterns with constitutional compliance:
+      
+      {% if pattern_domain == "test_patterns" %}
+      Focus on meta-testing approaches and testing framework validation.
+      {% else %}
+      Focus on pattern-specific testing requirements and validation strategies.
+      {% endif %}
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: testing-strategy
+        title: Testing Strategy
+        template: |
+          **Testing Approach:** {{testing_approach}}
+          **Constitutional Validation Tests:** {{constitutional_validation_tests}}
+          **Quality Gate Requirements:** {{quality_gate_requirements}}
+          **Integration Testing:** {{integration_testing_approach}}
+          **Performance Validation:** {{performance_validation}}
+      
+      - id: validation-checklist
+        title: Validation Checklist
+        type: checklist
+        items:
+          - "Constitutional compliance verified for {{pattern_domain}}"
+          - "Catalog integration validated"
+          - "Quality gates passed"
+          - "Context preservation tested"
+          - "Documentation completeness verified"
+          - "Anti-pattern detection run"
+
+  # Domain-specific quality metrics
+  - id: pattern-quality-metrics
+    title: "{{pattern_domain|title}} Quality Metrics"
+    instruction: |
+      Define quality metrics specific to {{pattern_domain}} with constitutional governance:
+      
+      {% if pattern_domain == "api_contracts" %}
+      Include API design quality, contract completeness, and governance compliance metrics.
+      {% elif pattern_domain == "ui_components" %}
+      Include component reusability, accessibility, and design-system compliance metrics.
+      {% elif pattern_domain == "test_patterns" %}
+      Include test coverage, quality gate effectiveness, and validation thoroughness metrics.
+      {% endif %}
+    sections:
+      - id: quality-indicators
+        title: Quality Indicators
+        template: |
+          **Primary Metrics:**
+          - {{primary_metric_1}}: {{metric_1_definition}} (Target: {{metric_1_target}})
+          - {{primary_metric_2}}: {{metric_2_definition}} (Target: {{metric_2_target}})
+          
+          **Constitutional Compliance Metrics:**
+          - Governance Adherence: {{governance_adherence_metric}}
+          - Catalog Integration Score: {{catalog_integration_score}}
+          - Context Preservation Quality: {{context_preservation_quality}}
+      
+      - id: monitoring-approach
+        title: Monitoring and Continuous Improvement
+        template: |
+          **Monitoring Strategy:** {{monitoring_strategy}}
+          **Improvement Triggers:** {{improvement_triggers}}
+          **Pattern Evolution Process:** {{pattern_evolution_process}}
+          **Governance Review Cycle:** {{governance_review_cycle}}
+
+  - id: pattern-relationships
+    title: "{{pattern_domain|title}} Pattern Relationships"
+    instruction: |
+      Document relationships with other patterns and catalog domains:
+      1. Dependencies on other catalog domains
+      2. Complementary patterns within {{pattern_domain}}
+      3. Integration points with constitutional framework
+      4. Evolution pathways and versioning strategy
+    sections:
+      - id: catalog-relationships
+        title: Catalog Domain Relationships
+        repeatable: true
+        template: |
+          **Related Domain:** {{related_domain}}
+          **Relationship Type:** {{relationship_type}}
+          **Integration Points:** {{integration_points}}
+          **Constitutional Constraints:** {{constitutional_constraints}}
+          **Dependency Level:** {{dependency_level}}
+      
+      - id: pattern-composition
+        title: Pattern Composition
+        condition: "{{pattern_type}} == 'composite_pattern'"
+        template: |
+          **Component Patterns:**
+          {% for component in component_patterns %}
+          - {{component.name}} ({{component.domain}}): {{component.role}}
+          {% endfor %}
+          
+          **Composition Strategy:** {{composition_strategy}}
+          **Constitutional Coordination:** {{constitutional_coordination}}
+
+  - id: pattern-evolution-governance
+    title: "{{pattern_domain|title}} Evolution and Governance"
+    instruction: |
+      Define evolution strategy and governance approach for {{pattern_domain}} patterns:
+      1. Pattern versioning and backward compatibility
+      2. Constitutional compliance during evolution
+      3. Catalog integration maintenance
+      4. Community contribution and approval process
+    sections:
+      - id: evolution-strategy
+        title: Evolution Strategy
+        template: |
+          **Versioning Approach:** {{versioning_approach}}
+          **Backward Compatibility:** {{backward_compatibility_strategy}}
+          **Constitutional Migration:** {{constitutional_migration_strategy}}
+          **Breaking Change Process:** {{breaking_change_process}}
+      
+      - id: governance-framework
+        title: Governance Framework
+        template: |
+          **Approval Process:** {{approval_process}}
+          **Quality Review Requirements:** {{quality_review_requirements}}
+          **Constitutional Validation Gates:** {{constitutional_validation_gates}}
+          **Community Contribution Guidelines:** {{community_contribution_guidelines}}
+
+  - id: constitutional-checklist-results
+    title: "Constitutional {{pattern_domain|title}} Pattern Checklist"
+    instruction: |
+      Execute constitutional pattern checklist for {{pattern_domain}}:
+      - Pattern-specific constitutional compliance validation
+      - Catalog domain integration completeness
+      - Quality governance adherence
+      - Context preservation implementation
+      - Anti-pattern detection and remediation
+    constitutional_validation: mandatory
+
+  - id: pattern-documentation-completion
+    title: Pattern Documentation Completion
+    instruction: |
+      Finalize {{pattern_domain}} pattern documentation with constitutional governance:
+      1. Validate all required sections completed
+      2. Ensure constitutional compliance throughout
+      3. Verify catalog integration consistency
+      4. Confirm quality standards met
+      5. Prepare for catalog publication and agent handoffs
+    sections:
+      - id: publication-readiness
+        title: Publication Readiness
+        template: |
+          **Documentation Completeness:** {{documentation_completeness_score}}
+          **Constitutional Compliance:** {{constitutional_compliance_score}}
+          **Catalog Integration:** {{catalog_integration_score}}
+          **Quality Review Status:** {{quality_review_status}}
+          **Ready for Publication:** {{publication_ready}}
+      
+      - id: next-steps
+        title: Next Steps
+        template: |
+          **Publication Process:** {{publication_process}}
+          **Agent Handoff Requirements:** {{agent_handoff_requirements}}
+          **Monitoring and Maintenance:** {{monitoring_maintenance_plan}}
+          **Community Engagement:** {{community_engagement_plan}}
