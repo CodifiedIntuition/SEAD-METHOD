@@ -2,14 +2,36 @@
 
 # SEAD UX Expert Execution Checklist
 
-Purpose: guide the SEAD UX Expert agent through every engagement while enforcing catalog-first behavior, constitutional compliance, and proper user interaction.
+**Purpose:** Guide the SEAD UX Expert agent through every engagement while enforcing catalog-first behavior, constitutional compliance, and proper user interaction.
 
+## Module Imports
+```yaml
+imports:
+  - module: constitutional-compliance-module
+    parameters:
+      role: ux-expert
+      context: design_execution
+      validation_level: standard
+  - module: catalog-pattern-validation-module
+    parameters:
+      artifact_type: ux_deliverable
+      catalog_domains: [components, layouts, themes, patterns, micro-interactions]
+      deviation_tolerance: mode_specific
+  - module: quality-gate-module
+    parameters:
+      quality_context: ux_design
+      stakeholder_roles: [ux, product_owner, engineering, accessibility]
+      validation_depth: design_handoff
+  - module: documentation-standards-module
+    parameters:
+      artifact_types: [wireframes, prototypes, design_specs, handoff_docs]
+      handoff_targets: [engineering_team, qa_team]
+      template_requirements: [wireframe-spec, prototype-spec]
+```
+
+## User Interaction Initialization
 [[LLM: BEFORE starting this checklist you MUST]]
-1. Load `/sead-core/core-config.yaml` and determine current SEAD mode.
-2. Read `/sead-core/data/mode-constraint-matrix.md` for mode-specific UX expectations.
-3. Review `/sead-core/data/design-system-guidelines.md` and `/sead-core/data/ui-pattern-library.md`.
-4. Confirm `/sead-core/data/accessibility-standards.md` is loaded for reference.
-5. Ask user which execution style they prefer: (1) step-by-step guided review, or (2) full analysis then summary. Wait for answer before proceeding.
+1. Ask user which execution style they prefer: (1) step-by-step guided review, or (2) full analysis then summary. Wait for answer before proceeding.
 
 ## 1. Context Intake & Catalog Alignment
 - [ ] Confirm problem statement and success criteria with user; capture clarifying questions.

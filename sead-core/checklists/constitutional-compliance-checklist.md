@@ -2,34 +2,42 @@
 
 # SEAD Constitutional Compliance Checklist (Product Owner)
 
-Purpose: verify backlog decisions respect constitutional governance, catalog enforcement, and project mandates.
+**Purpose:** Verify backlog decisions respect constitutional governance, catalog enforcement, and project mandates.
 
-[[LLM: INITIALIZATION]]
-1. Load `/sead-core/constitutional-rules/sead-product-owner-constraints.yaml`.
-2. Review project charter/vision documents for current initiative.
-3. Confirm mode from `core-config.yaml` and note blocking violations.
+## Module Imports
+```yaml
+imports:
+  - module: constitutional-compliance-module
+    parameters:
+      role: product-owner
+      context: backlog
+      validation_level: standard
+  - module: catalog-pattern-validation-module
+    parameters:
+      artifact_type: backlog_item
+      catalog_domains: [components, patterns, themes]
+      deviation_tolerance: mode_specific
+```
 
-## 1. Governance Alignment
-- [ ] Stories/epics map to approved objectives and KPIs.
-- [ ] Regulatory or policy constraints documented per item.
-- [ ] Risk mitigations aligned with constitutional guidelines.
+## Constitutional Compliance Framework
+*[Imported from constitutional-compliance-module]*
 
-## 2. Catalog Stewardship
-- [ ] Catalog compliance status recorded for each backlog item.
-- [ ] Pattern evolution proposals follow governance workflow.
-- [ ] Anti-drift safeguards (reviews, validation gates) scheduled.
+## Catalog Pattern Validation
+*[Imported from catalog-pattern-validation-module]*
 
-## 3. Mode Enforcement
-- [ ] Prototype: experimentation clearly labeled; follow-up tasks defined.
-- [ ] Development: migration/validation plans exist for deviations.
-- [ ] Build-to-deploy: zero deviations; compliance evidence collected.
+## Product Owner Specific Requirements
 
-## 4. Stakeholder Accountability
-- [ ] Decision logs cite responsible approvers.
-- [ ] Communication plan includes catalog updates and risks.
-- [ ] Escalation paths documented for constraint conflicts.
+### Backlog Constitutional Alignment
+- [ ] All backlog items traced to constitutional objectives and constraints
+- [ ] Product strategy decisions documented with constitutional rationale
+- [ ] Stakeholder communication includes constitutional impact assessment
 
-## 5. Exit Confirmation
-- [ ] All compliance checkpoints passed or waivers approved.
-- [ ] Outstanding actions assigned with deadlines.
-- [ ] Final summary prepared for constitutional audit trail.
+### Risk & Mitigation Planning  
+- [ ] Constitutional risks identified with probability and impact assessment
+- [ ] Mitigation strategies defined for each identified constitutional risk
+- [ ] Escalation triggers documented for constitutional constraint violations
+
+### Audit Trail Preparation
+- [ ] Decision documentation prepared for constitutional audit requirements
+- [ ] Approval workflows completed per constitutional governance model
+- [ ] Compliance evidence packaged for regulatory review if required

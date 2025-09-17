@@ -2,34 +2,52 @@
 
 # SEAD Story Quality Checklist
 
-Ensure every story achieves catalog-informed Definition of Ready before commitment.
+**Purpose:** Ensure every story achieves catalog-informed Definition of Ready before commitment.
 
-[[LLM: PRE-CHECK]]
-1. Load story context (title, description, linked docs).
-2. Review `sead-core/data/catalog-pattern-priorities.md` and `catalog-efficiency-metrics.md` for priority alignment.
-3. Confirm acceptance criteria template selected (`sead-acceptance-criteria-tmpl.yaml`).
+## Module Imports
+```yaml
+imports:
+  - module: catalog-pattern-validation-module
+    parameters:
+      artifact_type: story
+      catalog_domains: [components, patterns, layouts]
+      deviation_tolerance: mode_specific
+  - module: quality-gate-module
+    parameters:
+      quality_context: story
+      stakeholder_roles: [product_owner, ux, engineering, qa]
+      validation_depth: definition_of_ready
+  - module: documentation-standards-module
+    parameters:
+      artifact_types: [story, acceptance_criteria, definition_of_done]
+      handoff_targets: [development_team]
+      template_requirements: [sead-acceptance-criteria-tmpl]
+```
 
-## 1. Clarity & Context
-- [ ] Story goal articulated in plain language with business value.
-- [ ] Linked epic or strategy item documented.
-- [ ] Dependencies, assumptions, and constraints listed.
+## Catalog Pattern Validation
+*[Imported from catalog-pattern-validation-module]*
 
-## 2. Catalog Alignment
-- [ ] Catalog components/patterns referenced by canonical name.
-- [ ] Mode-specific justification provided for any deviation.
-- [ ] Pattern gaps identified and assigned to `sead-pattern-extraction.md` if needed.
+## Quality Gate Standards  
+*[Imported from quality-gate-module]*
 
-## 3. Acceptance Criteria & Validation
-- [ ] Criteria numbered, testable, and tied to catalog artifacts.
-- [ ] Validation activities (QA, UX, accessibility) scheduled per mode.
-- [ ] Metrics or success indicators defined.
+## Documentation Standards
+*[Imported from documentation-standards-module]*
 
-## 4. Implementation Readiness
-- [ ] Required assets available (designs, API specs, data definitions).
-- [ ] Risks and open questions captured with owners.
-- [ ] Story size estimated and within team's working agreement.
+## Story-Specific Requirements
 
-## 5. Sign-off
-- [ ] Product owner confirmed completeness.
-- [ ] Stakeholder reviews recorded (UX/Engineering/QA as applicable).
-- [ ] Story status updated to "Ready" in backlog tool.
+### Story Structure & Context
+- [ ] Story follows standard format: "As a [user] I want [goal] so that [benefit]"
+- [ ] Business value and user impact clearly articulated
+- [ ] Story linked to parent epic or strategy with traceability
+
+### Acceptance Criteria Validation
+- [ ] Acceptance criteria template (`sead-acceptance-criteria-tmpl.yaml`) properly applied
+- [ ] Criteria are numbered, testable, and verifiable
+- [ ] Each criterion tied to specific catalog artifacts or validation steps
+- [ ] Edge cases and error scenarios documented
+
+### Story Sizing & Estimation
+- [ ] Story size estimated using team's standard approach
+- [ ] Story fits within single sprint/iteration boundary
+- [ ] Complexity assessment includes catalog integration effort
+- [ ] Dependencies mapped with other stories in current/future sprints
