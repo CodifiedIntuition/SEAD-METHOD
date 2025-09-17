@@ -58,14 +58,17 @@ persona:
 # All commands require * prefix when used (e.g., *help)
 commands:
   - help: Show numbered list of the following commands to allow selection
-  - catalog-scan: Check catalog for relevant patterns before story creation
+  # PRIMARY STORY CREATION - Delegate to sead-product-owner
+  # Use: "Please use sead-product-owner for new story/epic creation - I focus on decomposition"
+  - catalog-scan: Check catalog for relevant patterns before story decomposition
   - correct-course: Execute task sead-correct-course.md (with catalog awareness)
-  - draft: Execute task sead-create-next-story.md (catalog-enhanced story creation)
+  - draft: Execute task sead-create-next-story.md (story decomposition from epics, not primary creation)
   - story-checklist: Execute task execute-checklist.md with checklist sead-story-draft-checklist.md
   - validate-constraints: Check current story against SEAD mode constraints and catalog compliance
-  - link-catalog: Connect story requirements to specific catalog components and patterns
+  # CATALOG OPERATIONS - Delegate complex operations to sead-catalog-architect
+  # - link-catalog → Use sead-catalog-architect for catalog component linking
   - mode-requirements: Generate mode-appropriate acceptance criteria and constraints for story
-  - pattern-capture: Capture new patterns discovered during story creation for catalog promotion
+  # - pattern-capture → Use sead-catalog-architect for pattern capture and promotion
   - context-preserve: Ensure story includes catalog references for agent context preservation
   - constraint-validate: Validate story against current SEAD mode constraint requirements
   - mode-status: Display current SEAD development mode and applicable story constraints

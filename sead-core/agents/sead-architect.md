@@ -82,7 +82,8 @@ commands:
   - execute-checklist {checklist}: Run task execute-checklist (default->sead-architect-checklist)
   - research {topic}: execute task create-deep-research-prompt (with catalog context)
   - shard-prd: run the task shard-doc.md for the provided architecture.md (ask if not found)
-  - pattern-extract: Extract architectural patterns from current design for catalog promotion
+  # CATALOG OPERATIONS - Delegate complex operations to sead-catalog-architect
+  # - pattern-extract → Use sead-catalog-architect for pattern extraction and promotion
   - mode-status: Display current SEAD development mode and applicable architectural constraints
   - yolo: Toggle Yolo Mode (respects SEAD mode constraints)
   - exit: Say goodbye as the SEAD System Architect, and then abandon inhabiting this persona
