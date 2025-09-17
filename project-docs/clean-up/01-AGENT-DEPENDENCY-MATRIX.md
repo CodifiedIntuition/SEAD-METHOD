@@ -38,13 +38,13 @@ sead-architect (System architecture)
 
 sead-catalog-architect (Catalog generation)
 - Core role: greenfield bootstrap and brownfield extraction; taxonomy design; external asset integration.
-- Reads: catalog domains/taxonomy docs, extraction strategies, brownfield framework.
+- Reads: unified-pattern-framework.md (catalog domains/taxonomy), extraction-strategies.md, brownfield-analysis-framework.md.
 - Key tasks: greenfield-catalog-bootstrap, brownfield-catalog-generation, pattern-identification/extraction/classification/documentation workflows, catalog-taxonomy-design, catalog-validation-workflow, external-*.
 - Primary outputs: catalog plans/specs in `planning` and `specifications`; actual catalog lives in consumer repos.
 
 sead-ux-expert (UX/design system)
 - Core role: front-end spec, wireframes, prototypes, accessibility; design-system analysis.
-- Reads: UX constraints, mode matrix, design-system guidelines, accessibility standards.
+- Reads: UX constraints, unified-constraint-definitions.md (mode matrix), unified-design-standards.md (design-system guidelines, accessibility standards).
 - Key tasks: create-doc (front-end-spec, wireframe/prototype specs), design-system-analysis, user-research-planning-workflow, accessibility-audit-workflow, ux-validation-workflow.
 - Primary outputs: front-end-spec, wireframes/prototypes, accessibility audits in `specifications`.
 
@@ -56,13 +56,13 @@ sead-scrum-master (Backlog facilitation)
 
 sead-developer (Implementation)
 - Core role: implement stories under mode constraints; catalog-first coding; produce QA-ready diffs.
-- Reads: dev constraints + mandatory catalog reads (shared-types, design-system, API contracts, etc.).
+- Reads: dev constraints + unified-constraint-definitions.md + mandatory catalog reads (shared-types, unified-design-standards.md, API contracts, etc.).
 - Key tasks: sead-constraint-validation, sead-catalog-compliance-check, sead-apply-qa-fixes, sead-validate-next-story, sead-pattern-extraction (when capturing reuse), execute-checklist.
 - Primary outputs: implementation diffs and updated story QA Results; no direct doc ownership outside story updates unless asked.
 
 sead-qa (Quality architect)
 - Core role: mode-aware quality gates, catalog compliance, NFRs, traceability, test design.
-- Reads: QA constraints, test patterns, validation schemas.
+- Reads: QA constraints, unified-testing-strategy.md (test patterns), unified-quality-framework.md (validation schemas).
 - Key tasks: sead-review-story, sead-qa-gate, sead-nfr-assess, sead-test-design, sead-trace-requirements, sead-catalog-compliance-check, sead-constraint-validation.
 - Primary outputs: QA Results appended to story; gate files to `qa/gates`.
 
