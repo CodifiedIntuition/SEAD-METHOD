@@ -6,13 +6,13 @@ const { extractYamlFromAgent } = require('./yaml-utils');
 class DependencyResolver {
   constructor(rootDir) {
     this.rootDir = rootDir;
-    this.bmadCore = path.join(rootDir, 'bmad-core');
+    this.seadCore = path.join(rootDir, 'sead-core');
     this.common = path.join(rootDir, 'common');
     this.cache = new Map();
   }
 
   async resolveAgentDependencies(agentId) {
-    const agentPath = path.join(this.bmadCore, 'agents', `${agentId}.md`);
+    const agentPath = path.join(this.seadCore, 'agents', `${agentId}.md`);
     const agentContent = await fs.readFile(agentPath, 'utf8');
 
     // Extract YAML from markdown content with command cleaning
@@ -49,7 +49,7 @@ class DependencyResolver {
   }
 
   async resolveTeamDependencies(teamId) {
-    const teamPath = path.join(this.bmadCore, 'agent-teams', `${teamId}.yaml`);
+    const teamPath = path.join(this.seadCore, 'agent-teams', `${teamId}.yaml`);
     const teamContent = await fs.readFile(teamPath, 'utf8');
     const teamConfig = yaml.load(teamContent);
 
@@ -64,30 +64,30 @@ class DependencyResolver {
       resources: new Map(), // Use Map to deduplicate resources
     };
 
-    // Always add bmad-orchestrator agent first if it's a team
-    const bmadAgent = await this.resolveAgentDependencies('bmad-orchestrator');
-    dependencies.agents.push(bmadAgent.agent);
-    for (const res of bmadAgent.resources) {
+    // Always add sead-orchestrator agent first if it's a team
+    const seadAgent = await this.resolveAgentDependencies('sead-orchestrator');
+    dependencies.agents.push(seadAgent.agent);
+    for (const res of seadAgent.resources) {
       dependencies.resources.set(res.path, res);
     }
 
     // Resolve all agents in the team
     let agentsToResolve = teamConfig.agents || [];
 
-    // Handle wildcard "*" - include all agents except bmad-master
+    // Handle wildcard "*" - include all agents except sead-master
     if (agentsToResolve.includes('*')) {
       const allAgents = await this.listAgents();
-      // Remove wildcard and add all agents except those already in the list and bmad-master
+      // Remove wildcard and add all agents except those already in the list and sead-master
       agentsToResolve = agentsToResolve.filter((a) => a !== '*');
       for (const agent of allAgents) {
-        if (!agentsToResolve.includes(agent) && agent !== 'bmad-master') {
+        if (!agentsToResolve.includes(agent) && agent !== 'sead-master') {
           agentsToResolve.push(agent);
         }
       }
     }
 
     for (const agentId of agentsToResolve) {
-      if (agentId === 'bmad-orchestrator' || agentId === 'bmad-master') continue; // Already added or excluded
+      if (agentId === 'sead-orchestrator' || agentId === 'sead-master') continue; // Already added or excluded
       const agentDeps = await this.resolveAgentDependencies(agentId);
       dependencies.agents.push(agentDeps.agent);
 
@@ -119,12 +119,12 @@ class DependencyResolver {
       let content = null;
       let filePath = null;
 
-      // First try bmad-core
+      // First try sead-core
       try {
-        filePath = path.join(this.bmadCore, type, id);
+        filePath = path.join(this.seadCore, type, id);
         content = await fs.readFile(filePath, 'utf8');
       } catch {
-        // If not found in bmad-core, try common folder
+        // If not found in sead-core, try common folder
         try {
           filePath = path.join(this.common, type, id);
           content = await fs.readFile(filePath, 'utf8');
@@ -155,7 +155,7 @@ class DependencyResolver {
 
   async listAgents() {
     try {
-      const files = await fs.readdir(path.join(this.bmadCore, 'agents'));
+      const files = await fs.readdir(path.join(this.seadCore, 'agents'));
       return files.filter((f) => f.endsWith('.md')).map((f) => f.replace('.md', ''));
     } catch {
       return [];
@@ -164,7 +164,7 @@ class DependencyResolver {
 
   async listTeams() {
     try {
-      const files = await fs.readdir(path.join(this.bmadCore, 'agent-teams'));
+      const files = await fs.readdir(path.join(this.seadCore, 'agent-teams'));
       return files.filter((f) => f.endsWith('.yaml')).map((f) => f.replace('.yaml', ''));
     } catch {
       return [];
