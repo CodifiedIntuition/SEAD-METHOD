@@ -25,9 +25,10 @@ ide-configurations:
     format: multi-file
     command-suffix: .md
     instructions: |
-      # To use SEAD agents in Claude Code:
-      # 1. Type /agent-name (e.g., "/dev", "/pm", "/architect")
-      # 2. Claude will switch to that agent's persona
+      # To use SEAD in Claude Code:
+      # 1. Agents: Use commands under /SEAD/agents/, e.g. "/SEAD/agents/sead-developer" or "/SEAD/agents/sead-qa"
+      # 2. Tasks: Use commands under /SEAD/tasks/, e.g. "/SEAD/tasks/sead-create-implementation-plan"
+      # 3. These appear in the command palette and can be typed in chat.
   crush:
     name: Crush
     rule-dir: .crush/commands/SEAD/
@@ -78,15 +79,15 @@ ide-configurations:
       # 4. Rules are stored in .clinerules/ directory in your project
   gemini:
     name: Gemini CLI
-    rule-dir: .gemini/sead-method/
-    format: single-file
-    command-suffix: .md
+    rule-dir: .gemini/commands/SEAD/
+    format: multi-file
+    command-suffix: .toml
     instructions: |
       # To use SEAD agents with the Gemini CLI:
-      # 1. The installer creates a .gemini/sead-method/ directory in your project.
-      # 2. It concatenates all agent files into a single GEMINI.md file.
-      # 3. Simply mention the agent in your prompt (e.g., "As *dev, ...").
-      # 4. The Gemini CLI will automatically have the context for that agent.
+      # 1. The installer creates a `SEAD` folder in `.gemini/commands`.
+      # 2. This adds custom commands for each agent and task.
+      # 3. Type /SEAD:agents:<agent-name> (e.g., "/SEAD:agents:sead-developer", "/SEAD:agents:sead-pm") or /SEAD:tasks:<task-name> (e.g., "/SEAD:tasks:sead-create-spec").
+      # 4. The agent will adopt that persona for the conversation or perform the task.
   github-copilot:
     name: Github Copilot
     rule-dir: .github/chatmodes/

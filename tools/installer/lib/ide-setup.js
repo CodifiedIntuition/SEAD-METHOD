@@ -47,6 +47,9 @@ class IdeSetup extends BaseIdeSetup {
       case 'claude-code': {
         return this.setupClaudeCode(installDir, selectedAgent);
       }
+      case 'iflow-cli': {
+        return this.setupIFlowCli(installDir, selectedAgent);
+      }
       case 'crush': {
         return this.setupCrush(installDir, selectedAgent);
       }
@@ -260,7 +263,7 @@ class IdeSetup extends BaseIdeSetup {
   }
 
   async setupCursor(installDir, selectedAgent) {
-    const cursorRulesDir = path.join(installDir, '.cursor', 'rules', 'bmad');
+    const cursorRulesDir = path.join(installDir, '.cursor', 'rules', 'sead');
     const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
 
     await fileManager.ensureDirectory(cursorRulesDir);
@@ -318,6 +321,134 @@ class IdeSetup extends BaseIdeSetup {
     return true;
   }
 
+  async setupIFlowCli(installDir, selectedAgent) {
+    // Setup sead-core commands
+    const coreSlashPrefix = await this.getCoreSlashPrefix(installDir);
+    const coreAgents = selectedAgent ? [selectedAgent] : await this.getCoreAgentIds(installDir);
+    const coreTasks = await this.getCoreTaskIds(installDir);
+    await this.setupIFlowCliForPackage(
+      installDir,
+      'core',
+      coreSlashPrefix,
+      coreAgents,
+      coreTasks,
+      '.sead-core',
+    );
+
+    // Setup expansion pack commands
+    const expansionPacks = await this.getInstalledExpansionPacks(installDir);
+    for (const packInfo of expansionPacks) {
+      const packSlashPrefix = await this.getExpansionPackSlashPrefix(packInfo.path);
+      const packAgents = await this.getExpansionPackAgents(packInfo.path);
+      const packTasks = await this.getExpansionPackTasks(packInfo.path);
+
+      if (packAgents.length > 0 || packTasks.length > 0) {
+        // Use the actual directory name where the expansion pack is installed
+        const rootPath = path.relative(installDir, packInfo.path);
+        await this.setupIFlowCliForPackage(
+          installDir,
+          packInfo.name,
+          packSlashPrefix,
+          packAgents,
+          packTasks,
+          rootPath,
+        );
+      }
+    }
+
+    return true;
+  }
+
+  async setupIFlowCliForPackage(installDir, packageName, slashPrefix, agentIds, taskIds, rootPath) {
+    const commandsBaseDir = path.join(installDir, '.iflow', 'commands', slashPrefix);
+    const agentsDir = path.join(commandsBaseDir, 'agents');
+    const tasksDir = path.join(commandsBaseDir, 'tasks');
+
+    // Ensure directories exist
+    await fileManager.ensureDirectory(agentsDir);
+    await fileManager.ensureDirectory(tasksDir);
+
+    // Setup agents
+    for (const agentId of agentIds) {
+      // Find the agent file - for expansion packs, prefer the expansion pack version
+      let agentPath;
+      if (packageName === 'core') {
+        // For core, use the normal search
+        agentPath = await this.findAgentPath(agentId, installDir);
+      } else {
+        // For expansion packs, first try to find the agent in the expansion pack directory
+        const expansionPackPath = path.join(installDir, rootPath, 'agents', `${agentId}.md`);
+        if (await fileManager.pathExists(expansionPackPath)) {
+          agentPath = expansionPackPath;
+        } else {
+          // Fall back to core if not found in expansion pack
+          agentPath = await this.findAgentPath(agentId, installDir);
+        }
+      }
+
+      const commandPath = path.join(agentsDir, `${agentId}.md`);
+
+      if (agentPath) {
+        // Create command file with agent content
+        let agentContent = await fileManager.readFile(agentPath);
+
+        // Replace {root} placeholder with the appropriate root path for this context
+        agentContent = agentContent.replaceAll('{root}', rootPath);
+
+        // Add command header
+        let commandContent = `# /${agentId} Command\n\n`;
+        commandContent += `When this command is used, adopt the following agent persona:\n\n`;
+        commandContent += agentContent;
+
+        await fileManager.writeFile(commandPath, commandContent);
+        console.log(chalk.green(`✓ Created agent command: /${agentId}`));
+      }
+    }
+
+    // Setup tasks
+    for (const taskId of taskIds) {
+      // Find the task file - for expansion packs, prefer the expansion pack version
+      let taskPath;
+      if (packageName === 'core') {
+        // For core, use the normal search
+        taskPath = await this.findTaskPath(taskId, installDir);
+      } else {
+        // For expansion packs, first try to find the task in the expansion pack directory
+        const expansionPackPath = path.join(installDir, rootPath, 'tasks', `${taskId}.md`);
+        if (await fileManager.pathExists(expansionPackPath)) {
+          taskPath = expansionPackPath;
+        } else {
+          // Fall back to core if not found in expansion pack
+          taskPath = await this.findTaskPath(taskId, installDir);
+        }
+      }
+
+      const commandPath = path.join(tasksDir, `${taskId}.md`);
+
+      if (taskPath) {
+        // Create command file with task content
+        let taskContent = await fileManager.readFile(taskPath);
+
+        // Replace {root} placeholder with the appropriate root path for this context
+        taskContent = taskContent.replaceAll('{root}', rootPath);
+
+        // Add command header
+        let commandContent = `# /${taskId} Task\n\n`;
+        commandContent += `When this command is used, execute the following task:\n\n`;
+        commandContent += taskContent;
+
+        await fileManager.writeFile(commandPath, commandContent);
+        console.log(chalk.green(`✓ Created task command: /${taskId}`));
+      }
+    }
+
+    console.log(
+      chalk.green(`\n✓ Created iFlow CLI commands for ${packageName} in ${commandsBaseDir}`),
+    );
+    console.log(chalk.dim(`  - Agents in: ${agentsDir}`));
+    console.log(chalk.dim(`  - Tasks in: ${tasksDir}`));
+  }
+
   async setupClaudeCode(installDir, selectedAgent) {
     // Setup sead-core commands
     const coreSlashPrefix = await this.getCoreSlashPrefix(installDir);
@@ -365,13 +496,42 @@ class IdeSetup extends BaseIdeSetup {
     rootPath,
   ) {
     const commandsBaseDir = path.join(installDir, '.claude', 'commands', slashPrefix);
+    const agentsDir = path.join(commandsBaseDir, 'agents');
     const tasksDir = path.join(commandsBaseDir, 'tasks');
 
-    // Ensure directories exist (only tasks directory for commands)
+    // Ensure directories exist
+    await fileManager.ensureDirectory(agentsDir);
     await fileManager.ensureDirectory(tasksDir);
 
-    // Note: Agents are handled separately in .claude/agents/ directory, not in commands
-    // This prevents incorrect duplication of agents in commands/agents/ subdirectory
+    // Setup agents under /<prefix>/agents/<agent>
+    for (const agentId of agentIds) {
+      // Find the agent file - for expansion packs, prefer the expansion pack version
+      let agentPath;
+      if (packageName === 'core') {
+        agentPath = await this.findAgentPath(agentId, installDir);
+      } else {
+        const expansionPackPath = path.join(installDir, rootPath, 'agents', `${agentId}.md`);
+        if (await fileManager.pathExists(expansionPackPath)) {
+          agentPath = expansionPackPath;
+        } else {
+          agentPath = await this.findAgentPath(agentId, installDir);
+        }
+      }
+
+      const commandPath = path.join(agentsDir, `${agentId}.md`);
+
+      if (agentPath) {
+        let agentContent = await fileManager.readFile(agentPath);
+        agentContent = agentContent.replaceAll('{root}', rootPath);
+
+        let commandContent = `# /${agentId} Command\n\n`;
+        commandContent += `When this command is used, adopt the following agent persona:\n\n`;
+        commandContent += agentContent;
+
+        await fileManager.writeFile(commandPath, commandContent);
+        console.log(chalk.green(`✓ Created agent command: /${agentId}`));
+      }
+    }
 
     // Setup tasks
     for (const taskId of taskIds) {
@@ -415,6 +575,7 @@ class IdeSetup extends BaseIdeSetup {
     console.log(
       chalk.green(`\n✓ Created Claude Code commands for ${packageName} in ${commandsBaseDir}`),
     );
+    console.log(chalk.dim(`  - Agents in: ${agentsDir}`));
     console.log(chalk.dim(`  - Tasks in: ${tasksDir}`));
   }
 
@@ -532,7 +693,30 @@ class IdeSetup extends BaseIdeSetup {
       }
     }
 
+    // Add task support
+    const tasks = await this.getAllTaskIds(installDir);
+    for (const taskId of tasks) {
+      const taskPath = await this.findTaskPath(taskId, installDir);
+      
+      if (taskPath) {
+        const taskContent = await fileManager.readFile(taskPath);
+        const mdPath = path.join(windsurfWorkflowDir, `task-${taskId}.md`);
+
+        // Write the task file contents prefixed with Windsurf frontmatter
+        let mdContent = `---\n`;
+        mdContent += `description: SEAD Task - ${taskId}\n`;
+        mdContent += `auto_execution_mode: 1\n`;
+        mdContent += `---\n\n`;
+        mdContent += taskContent;
+
+        await fileManager.writeFile(mdPath, mdContent);
+        console.log(chalk.green(`✓ Created task workflow: task-${taskId}.md`));
+      }
+    }
+
     console.log(chalk.green(`\n✓ Created Windsurf workflows in ${windsurfWorkflowDir}`));
+    console.log(chalk.dim(`  - Agent workflows: ${agents.length} files`));
+    console.log(chalk.dim(`  - Task workflows: ${tasks.length} files`));
 
     return true;
   }
@@ -583,6 +767,38 @@ class IdeSetup extends BaseIdeSetup {
         console.log(chalk.green(`✓ Created rule: ${agentId}.md`));
       }
     }
+
+    // Add task support
+    const tasks = await this.getAllTaskIds(installDir);
+    for (const taskId of tasks) {
+      const taskPath = await this.findTaskPath(taskId, installDir);
+
+      if (taskPath) {
+        const taskContent = await fileManager.readFile(taskPath);
+        const mdPath = path.join(traeRulesDir, `task-${taskId}.md`);
+
+        // Create MD content for tasks
+        let mdContent = `# ${taskId.toUpperCase()} Task Rule\n\n`;
+        mdContent += `This rule is triggered when the user types \`#${taskId}\` and executes the SEAD task.\n\n`;
+        mdContent += '## Task Execution\n\n';
+        mdContent += 'CRITICAL: Execute the task defined below exactly as specified:\n\n';
+        mdContent += taskContent;
+        mdContent += '\n\n## File Reference\n\n';
+        const relativePath = path.relative(installDir, taskPath).replaceAll('\\', '/');
+        mdContent += `The complete task definition is available in [${relativePath}](${relativePath}).\n\n`;
+        mdContent += '## Usage\n\n';
+        mdContent += `When the user types \`#${taskId}\`, execute this SEAD task following all instructions defined above.\n`;
+
+        await fileManager.writeFile(mdPath, mdContent);
+        console.log(chalk.green(`✓ Created task rule: task-${taskId}.md`));
+      }
+    }
+
+    console.log(chalk.green(`\n✓ Created Trae rules in ${traeRulesDir}`));
+    console.log(chalk.dim(`  - Agent rules: ${agents.length} files`));
+    console.log(chalk.dim(`  - Task rules: ${tasks.length} files`));
+
+    return true;
   }
 
   async findAgentPath(agentId, installDir) {
@@ -1173,97 +1389,77 @@ class IdeSetup extends BaseIdeSetup {
     return true;
   }
 
-  async setupGeminiCli(installDir) {
-    const geminiDir = path.join(installDir, '.gemini');
-    const bmadMethodDir = path.join(geminiDir, 'sead-method');
-    await fileManager.ensureDirectory(bmadMethodDir);
+  async setupGeminiCli(installDir, selectedAgent) {
+    const ideConfig = await configLoader.getIdeConfiguration('gemini');
+    const seadCommandsDir = path.join(installDir, ideConfig['rule-dir']);
 
-    // Update logic for existing settings.json
-    const settingsPath = path.join(geminiDir, 'settings.json');
-    if (await fileManager.pathExists(settingsPath)) {
-      try {
-        const settingsContent = await fileManager.readFile(settingsPath);
-        const settings = JSON.parse(settingsContent);
-        let updated = false;
+    const agentCommandsDir = path.join(seadCommandsDir, 'agents');
+    const taskCommandsDir = path.join(seadCommandsDir, 'tasks');
+    await fileManager.ensureDirectory(agentCommandsDir);
+    await fileManager.ensureDirectory(taskCommandsDir);
 
-        // Handle contextFileName property
-        if (settings.contextFileName && Array.isArray(settings.contextFileName)) {
-          const originalLength = settings.contextFileName.length;
-          settings.contextFileName = settings.contextFileName.filter(
-            (fileName) => !fileName.startsWith('agents/'),
-          );
-          if (settings.contextFileName.length !== originalLength) {
-            updated = true;
-          }
-        }
-
-        if (updated) {
-          await fileManager.writeFile(settingsPath, JSON.stringify(settings, null, 2));
-          console.log(
-            chalk.green('✓ Updated .gemini/settings.json - removed agent file references'),
-          );
-        }
-      } catch (error) {
-        console.warn(chalk.yellow('Could not update .gemini/settings.json'), error);
-      }
-    }
-
-    // Remove old agents directory
-    const agentsDir = path.join(geminiDir, 'agents');
-    if (await fileManager.pathExists(agentsDir)) {
-      await fileManager.removeDirectory(agentsDir);
-      console.log(chalk.green('✓ Removed old .gemini/agents directory'));
-    }
-
-    // Get all available agents
-    const agents = await this.getAllAgentIds(installDir);
-    let concatenatedContent = '';
-
+    // Process Agents
+    const agents = selectedAgent ? [selectedAgent] : await this.getAllAgentIds(installDir);
     for (const agentId of agents) {
-      // Find the source agent file
       const agentPath = await this.findAgentPath(agentId, installDir);
-
-      if (agentPath) {
-        const agentContent = await fileManager.readFile(agentPath);
-
-        // Create properly formatted agent rule content (similar to trae)
-        let agentRuleContent = `# ${agentId.toUpperCase()} Agent Rule\n\n`;
-        agentRuleContent += `This rule is triggered when the user types \`*${agentId}\` and activates the ${await this.getAgentTitle(
-          agentId,
-          installDir,
-        )} agent persona.\n\n`;
-        agentRuleContent += '## Agent Activation\n\n';
-        agentRuleContent +=
-          'CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:\n\n';
-        agentRuleContent += '```yaml\n';
-        // Extract just the YAML content from the agent file
-        const yamlContent = extractYamlFromAgent(agentContent);
-        if (yamlContent) {
-          agentRuleContent += yamlContent;
-        } else {
-          // If no YAML found, include the whole content minus the header
-          agentRuleContent += agentContent.replace(/^#.*$/m, '').trim();
-        }
-        agentRuleContent += '\n```\n\n';
-        agentRuleContent += '## File Reference\n\n';
-        const relativePath = path.relative(installDir, agentPath).replaceAll('\\', '/');
-        agentRuleContent += `The complete agent definition is available in [${relativePath}](${relativePath}).\n\n`;
-        agentRuleContent += '## Usage\n\n';
-        agentRuleContent += `When the user types \`*${agentId}\`, activate this ${await this.getAgentTitle(
-          agentId,
-          installDir,
-        )} persona and follow all instructions defined in the YAML configuration above.\n`;
-
-        // Add to concatenated content with separator
-        concatenatedContent += agentRuleContent + '\n\n---\n\n';
-        console.log(chalk.green(`✓ Added context for @${agentId}`));
+      if (!agentPath) {
+        console.log(chalk.yellow(`✗ Agent file not found for ${agentId}, skipping.`));
+        continue;
       }
+
+      const agentTitle = await this.getAgentTitle(agentId, installDir);
+      const commandPath = path.join(agentCommandsDir, `${agentId}.toml`);
+
+      // Get relative path from installDir to agent file for @{file} reference
+      const relativeAgentPath = path.relative(installDir, agentPath).replaceAll('\\', '/');
+
+      const tomlContent = `description = "Activates the ${agentTitle} agent from the SEAD Method."
+prompt = """
+CRITICAL: You are now the SEAD '${agentTitle}' agent. Adopt its persona, follow its instructions, and use its capabilities. The full agent definition is below.
+
+@{${relativeAgentPath}}
+"""`;
+
+      await fileManager.writeFile(commandPath, tomlContent);
+      console.log(chalk.green(`✓ Created agent command: /SEAD:agents:${agentId}`));
     }
 
-    // Write the concatenated content to GEMINI.md
-    const geminiMdPath = path.join(bmadMethodDir, 'GEMINI.md');
-    await fileManager.writeFile(geminiMdPath, concatenatedContent);
-    console.log(chalk.green(`\n✓ Created GEMINI.md in ${bmadMethodDir}`));
+    // Process Tasks
+    const tasks = await this.getAllTaskIds(installDir);
+    for (const taskId of tasks) {
+      const taskPath = await this.findTaskPath(taskId, installDir);
+      if (!taskPath) {
+        console.log(chalk.yellow(`✗ Task file not found for ${taskId}, skipping.`));
+        continue;
+      }
+
+      const taskTitle = taskId
+        .split('-')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+      const commandPath = path.join(taskCommandsDir, `${taskId}.toml`);
+
+      // Get relative path from installDir to task file for @{file} reference
+      const relativeTaskPath = path.relative(installDir, taskPath).replaceAll('\\', '/');
+
+      const tomlContent = `description = "Executes the SEAD Task: ${taskTitle}"
+prompt = """
+CRITICAL: You are to execute the SEAD Task defined below.
+
+@{${relativeTaskPath}}
+"""`;
+
+      await fileManager.writeFile(commandPath, tomlContent);
+      console.log(chalk.green(`✓ Created task command: /SEAD:tasks:${taskId}`));
+    }
+
+    console.log(
+      chalk.green(`
+✓ Created Gemini CLI extension in ${seadCommandsDir}`),
+    );
+    console.log(
+      chalk.dim('You can now use commands like /SEAD:agents:sead-developer or /SEAD:tasks:sead-create-spec.'),
+    );
 
     return true;
   }
