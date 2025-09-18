@@ -246,7 +246,7 @@ async function promptInstallation() {
   const coreShortTitle = coreConfig['short-title'] || 'SEAD Agile Core System';
 
   // Add SEAD core option
-  let bmadOptionText;
+  let seadOptionText;
   if (state.type === 'v4_existing') {
     const currentVersion = state.manifest?.version || 'unknown';
     const newVersion = version; // Always use package.json version
@@ -254,13 +254,13 @@ async function promptInstallation() {
       currentVersion === newVersion
         ? `(v${currentVersion} - reinstall)`
         : `(v${currentVersion} → v${newVersion})`;
-    bmadOptionText = `Update ${coreShortTitle} ${versionInfo} .sead-core`;
+    seadOptionText = `Update ${coreShortTitle} ${versionInfo} .sead-core`;
   } else {
-    bmadOptionText = `${coreShortTitle} (v${version}) .sead-core`;
+    seadOptionText = `${coreShortTitle} (v${version}) .sead-core`;
   }
 
   choices.push({
-    name: bmadOptionText,
+    name: seadOptionText,
     value: 'sead-core',
     checked: true,
   });

@@ -1466,8 +1466,8 @@ CRITICAL: You are to execute the SEAD Task defined below.
 
   async setupQwenCode(installDir, selectedAgent) {
     const qwenDir = path.join(installDir, '.qwen');
-    const bmadMethodDir = path.join(qwenDir, 'sead-method');
-    await fileManager.ensureDirectory(bmadMethodDir);
+    const seadMethodDir = path.join(qwenDir, 'sead-method');
+    await fileManager.ensureDirectory(seadMethodDir);
 
     // Update logic for existing settings.json
     const settingsPath = path.join(qwenDir, 'settings.json');
@@ -1550,9 +1550,9 @@ CRITICAL: You are to execute the SEAD Task defined below.
     }
 
     // Write the concatenated content to QWEN.md
-    const qwenMdPath = path.join(bmadMethodDir, 'QWEN.md');
+    const qwenMdPath = path.join(seadMethodDir, 'QWEN.md');
     await fileManager.writeFile(qwenMdPath, concatenatedContent);
-    console.log(chalk.green(`\n✓ Created QWEN.md in ${bmadMethodDir}`));
+    console.log(chalk.green(`\n✓ Created QWEN.md in ${seadMethodDir}`));
 
     return true;
   }

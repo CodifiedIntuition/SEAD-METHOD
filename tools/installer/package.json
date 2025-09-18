@@ -11,13 +11,13 @@
     "installer",
     "agents"
   ],
-  "homepage": "https://github.com/bmad-team/sead-method#readme",
+  "homepage": "https://github.com/CodifiedIntuition/SEAD-METHOD#readme",
   "bugs": {
-    "url": "https://github.com/bmad-team/sead-method/issues"
+    "url": "https://github.com/CodifiedIntuition/SEAD-METHOD/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bmad-team/sead-method.git"
+    "url": "https://github.com/CodifiedIntuition/SEAD-METHOD.git"
   },
   "license": "MIT",
   "author": "SEAD Team",

@@ -230,17 +230,17 @@ class Installer {
         // Full installation - copy entire .sead-core folder as a subdirectory
         spinner.text = 'Checking for existing installation...';
         const sourceDir = resourceLocator.getSeadCorePath();
-        const bmadCoreDestDir = path.join(installDir, '.sead-core');
+        const seadCoreDestDir = path.join(installDir, '.sead-core');
         
         // Check if .sead-core already exists
-        if (await fileManager.pathExists(bmadCoreDestDir)) {
+        if (await fileManager.pathExists(seadCoreDestDir)) {
           throw new Error('.sead-core already exists. Use reinstall mode or remove existing installation first.');
         }
         
         spinner.text = 'Copying complete .sead-core folder...';
         await fileManager.copyDirectoryWithRootReplacement(
           sourceDir,
-          bmadCoreDestDir,
+          seadCoreDestDir,
           '.sead-core',
         );
 
@@ -254,7 +254,7 @@ class Installer {
 
         // Get list of all files for manifest
         const foundFiles = await resourceLocator.findFiles('**/*', {
-          cwd: bmadCoreDestDir,
+          cwd: seadCoreDestDir,
           nodir: true,
           ignore: ['**/.git/**', '**/node_modules/**'],
         });
