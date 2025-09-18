@@ -7,9 +7,9 @@ const path = require('node:path');
 const program = new Command();
 
 program
-  .name('bmad-build')
-  .description('BMAD-METHOD™ build tool for creating web bundles')
-  .version('4.0.0');
+  .name('sead-build')
+  .description('SEAD-METHOD™ build tool for creating web bundles')
+  .version('1.3.5-beta.1');
 
 program
   .command('build')
@@ -136,7 +136,7 @@ program
 
 program
   .command('upgrade')
-  .description('Upgrade a BMAD-METHOD™ V3 project to V4')
+  .description('Upgrade a SEAD-METHOD™ V3 project to V4')
   .option('-p, --project <path>', 'Path to V3 project (defaults to current directory)')
   .option('--dry-run', 'Show what would be changed without making changes')
   .option('--no-backup', 'Skip creating backup (not recommended)')

@@ -1,9 +1,9 @@
 {
-  "name": "bmad-method",
-  "version": "4.42.1",
-  "description": "BMad Method installer - AI-powered Agile development framework",
+  "name": "sead-method-core",
+  "version": "1.3.5-beta.1",
+  "description": "SEAD Method installer - AI-powered Agile development framework",
   "keywords": [
-    "bmad",
+    "sead",
     "agile",
     "ai",
     "development",
@@ -11,20 +11,20 @@
     "installer",
     "agents"
   ],
-  "homepage": "https://github.com/bmad-team/bmad-method#readme",
+  "homepage": "https://github.com/bmad-team/sead-method#readme",
   "bugs": {
-    "url": "https://github.com/bmad-team/bmad-method/issues"
+    "url": "https://github.com/bmad-team/sead-method/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bmad-team/bmad-method.git"
+    "url": "https://github.com/bmad-team/sead-method.git"
   },
   "license": "MIT",
-  "author": "BMad Team",
+  "author": "SEAD Team",
   "main": "lib/installer.js",
   "bin": {
-    "bmad": "./bin/bmad.js",
-    "bmad-method": "./bin/bmad.js"
+    "sead": "./bin/sead.js",
+    "sead-method": "./bin/sead.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

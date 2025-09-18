@@ -6,53 +6,48 @@
 # If an agent is not listed here, it gets full edit access
 roo-permissions:
   # Core agents
-  analyst:
+  sead-analyst:
     fileRegex: "\\.(md|txt)$"
     description: "Documentation and text files"
-  pm:
+  sead-project-manager:
     fileRegex: "\\.(md|txt)$"
     description: "Product documentation"
-  architect:
+  sead-architect:
     fileRegex: "\\.(md|txt|yml|yaml|json)$"
     description: "Architecture docs and configs"
-  qa:
+  sead-qa:
     fileRegex: "\\.(test|spec)\\.(js|ts|jsx|tsx)$|\\.md$"
     description: "Test files and documentation"
-  ux-expert:
+  sead-ux-expert:
     fileRegex: "\\.(md|css|scss|html|jsx|tsx)$"
     description: "Design-related files"
-  po:
+  sead-product-owner:
     fileRegex: "\\.(md|txt)$"
     description: "Story and requirement docs"
-  sm:
+  sead-scrum-master:
     fileRegex: "\\.(md|txt)$"
     description: "Process and planning docs"
-  # Expansion pack agents
-  game-designer:
+  sead-catalog-architect:
     fileRegex: "\\.(md|txt|json|yaml|yml)$"
-    description: "Game design documents and configs"
-  game-sm:
-    fileRegex: "\\.(md|txt)$"
-    description: "Game project management docs"
+    description: "Catalog and pattern documents"
+  sead-pattern-extraction:
+    fileRegex: "\\.(md|txt|json|yaml|yml)$"
+    description: "Pattern extraction and analysis docs"
 
 # Cline agent ordering
 # Lower numbers appear first in the list
 # Agents not listed get order 99
 cline-order:
   # Core agents
-  bmad-master: 1
-  bmad-orchestrator: 2
-  pm: 3
-  analyst: 4
-  architect: 5
-  po: 6
-  sm: 7
-  dev: 8
-  qa: 9
-  ux-expert: 10
-  # Expansion pack agents
-  bmad-the-creator: 11
-  game-designer: 12
-  game-developer: 13
-  game-sm: 14
-  infra-devops-platform: 15
+  sead-master: 1
+  sead-orchestrator: 2
+  sead-project-manager: 3
+  sead-analyst: 4
+  sead-architect: 5
+  sead-product-owner: 6
+  sead-scrum-master: 7
+  sead-developer: 8
+  sead-qa: 9
+  sead-ux-expert: 10
+  sead-catalog-architect: 11
+  sead-pattern-extraction: 12
