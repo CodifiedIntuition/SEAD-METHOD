@@ -2,21 +2,23 @@
 
 **Get up and running with SEAD in 15 minutes**
 
-**Version**: 1.3.3  
-**Date**: 2025-01-15  
+**Version**: 1.3.5-beta.1  
+**Date**: 2025-09-17  
 **Status**: Production Ready
 
 ---
 
 ## What is SEAD?
 
-SEAD-METHOD™ (Specification Enforced Agentic Agile Development) is a revolutionary development methodology that uses 12 specialized AI agents with constitutional constraints to deliver consistent, high-quality software development.
+SEAD-METHOD™ (Specification Enforced Agentic Agile Development) is a revolutionary development methodology that uses 14 specialized AI agents with constitutional constraints to deliver consistent, high-quality software development.
 
 **Key Benefits**:
-- 🏛️ **Constitutional compliance** prevents AI agent drift
-- 📚 **Catalog patterns** ensure consistency across projects  
-- 🤖 **12 AI agents** handle everything from planning to implementation
+- 🏛️ **Constitutional AI agents** prevent drift and ensure quality
+- 📚 **Catalog-driven patterns** ensure consistency across projects  
+- 🤖 **14 specialized agents** handle everything from analysis to deployment
 - ⚡ **3 development modes** scale from prototype to production
+- 🔄 **External asset integration** adopts existing design systems and APIs
+- 📋 **Comprehensive validation** with 25+ checklists and quality gates
 
 ---
 
@@ -31,434 +33,305 @@ npm install -g sead-method-core
 sead --version
 ```
 
-### Step 2: Initialize Your First Project
-SEAD uses a simple two-stage installation process:
-
+### Step 2: Initialize Your Project
 ```bash
-# Create and initialize project
-sead init my-first-project
-cd my-first-project
+# Create new project (or navigate to existing project)
+sead init my-project
+cd my-project
 
-# Install SEAD agents and tools
+# Install SEAD methodology and IDE integration
 sead install
 
-# The installer will:
-# 1. Detect your IDE automatically
-# 2. Install all 12 agents to .sead-core/
-# 3. Set up 33 development tasks
-# 4. Configure IDE-specific commands
-```
-
-### Step 3: Verify Setup
-```bash
-# Check installation status  
+# Check installation status
 sead status
-
-# List available AI agents
-sead list-agents
-
-# Test agent availability
-sead agents
-
-# Expected output: 12 agents listed with descriptions
 ```
 
-**🎉 Installation Complete!** SEAD agents are now available in your IDE:
-- **Claude Code**: `/sead-architect`, `/sead-developer`
-- **Cursor**: `@sead-architect`, `@sead-developer`
-- **Other IDEs**: Commands generated based on your selection
+**What just happened?**
+- ✅ Created `.sead-core/` with 14 AI agents, 67+ tasks, 40+ templates
+- ✅ Set up IDE integration (Claude Code, Cursor, VS Code, etc.)
+- ✅ Initialized project catalog structure
+- ✅ Configured constitutional framework
 
 ---
 
-## Your First SEAD Project (10 minutes)
+## Your First SEAD Workflow (10 minutes)
 
-### Step 1: Initialize Project (1 minute)
-
+### Step 3: Specify Your Project (2 minutes)
 ```bash
-# Create new project with default settings
-sead init my-first-app
-cd my-first-app
-
-# Install SEAD agents and tools
-sead install
-
-# Check project structure
-ls -la
+# Create constitutional specification
+sead specify "task management application with user authentication" --mode development
 ```
 
-**What was created**:
-- `sead-workspace/` - Your specifications, plans, stories, implementations
-- `sead-catalog/` - 11 domains of reusable patterns (API, UI, data, etc.)
-- `sead.config.yaml` - Project configuration with constitutional constraints
+**Output**: Creates specification document with:
+- Constitutional requirements
+- Catalog integration points
+- Development mode constraints
+- Quality validation requirements
 
-### Step 2: Create Specification (2 minutes)
-
+### Step 4: Plan Implementation (2 minutes)
 ```bash
-# Specify what you want to build
-sead specify "Task management app with user authentication"
+# Generate implementation plan
+sead plan "Next.js frontend + FastAPI backend + PostgreSQL" --catalog-integration
 ```
 
-**What happens**:
-- SEAD Analyst researches requirements
-- Constitutional constraints ensure specification quality
-- Output: `sead-workspace/specifications/frontend-spec-[timestamp].md`
+**Output**: Creates implementation plan with:
+- Architecture breakdown
+- Technology stack validation
+- Catalog pattern recommendations
+- Constitutional compliance requirements
 
-**Check the output**:
+### Step 5: Create Project Catalog (3 minutes)
 ```bash
-ls sead-workspace/specifications/
-cat sead-workspace/specifications/frontend-spec-*.md
+# Interactive catalog creation (for new projects)
+sead interactive-catalog-creation --guided
+
+# OR for existing codebases
+sead brownfield-catalog-generation --source ./src
 ```
 
-### Step 3: Generate Plan (2 minutes)
+**Output**: Creates project catalog with:
+- Validated patterns and components
+- API contracts and interfaces
+- Design system integration points
+- Constitutional validation rules
 
+### Step 6: Generate Stories and Implement (3 minutes)
 ```bash
-# Create architectural plan with catalog integration
-sead plan fullstack --catalog-mode development
+# Create implementation stories
+sead stories --enforce-catalog --mode development
+
+# Implement first feature with quality gates
+sead implement auth-001 --qa-gate --validate-compliance
 ```
 
-**What happens**:
-- SEAD Architect designs system architecture
-- Catalog patterns ensure consistency
-- Constitutional constraints prevent over-engineering
-- Output: `sead-workspace/planning/fullstack-plan-[timestamp].md`
-
-### Step 4: Create Stories (2 minutes)
-
-```bash
-# Generate implementation stories with catalog compliance
-sead stories --enforce-catalog --context-preserve
-```
-
-**What happens**:
-- SEAD Product Owner creates user stories
-- SEAD Scrum Master validates story quality
-- Stories reference catalog patterns
-- Output: Multiple files in `sead-workspace/stories/`
-
-**View your stories**:
-```bash
-ls sead-workspace/stories/
-cat sead-workspace/stories/user-auth-001.md
-```
-
-### Step 5: Implement First Story (3 minutes)
-
-```bash
-# Implement authentication story with constitutional compliance
-sead implement user-auth-001 --mode development --validate-compliance
-```
-
-**What happens**:
-- SEAD Developer implements code using catalog patterns
-- Constitutional constraints ensure quality
-- Anti-drift protection maintains consistency
-- Output: `sead-workspace/implementations/impl-user-auth-001-[timestamp].md`
-
-**Check implementation**:
-```bash
-cat sead-workspace/implementations/impl-user-auth-001-*.md
-```
-
-### Step 6: Validate Project
-
-```bash
-# Check overall project health
-sead status --detailed --constitutional-summary
-
-# Validate constitutional compliance
-sead validate --constitutional --catalog
-```
-
----
-
-## Understanding Your SEAD Project
-
-### Project Structure
-```
-my-first-app/
-├── sead.config.yaml           # SEAD configuration
-├── sead-workspace/            # Your work artifacts
-│   ├── specifications/        # What to build
-│   ├── planning/             # How to build it  
-│   ├── stories/              # Implementation tasks
-│   └── implementations/      # Detailed implementation
-└── sead-catalog/             # Reusable patterns
-    ├── api-contracts/        # API patterns
-    ├── shared-types/         # Data types
-    ├── design-system/        # UI patterns
-    ├── state-management/     # State patterns
-    ├── error-handling/       # Error patterns
-    ├── validation-schemas/   # Validation patterns
-    ├── test-patterns/        # Testing patterns
-    ├── auth-patterns/        # Authentication patterns
-    ├── integration-patterns/ # Integration patterns
-    ├── data-strategy/        # Data patterns
-    └── deployment-strategy/  # Deployment patterns
-```
-
-### The SEAD Agents You Just Used
-
-1. **🔍 SEAD Analyst** - Researched your requirements
-2. **🏗️ SEAD Architect** - Designed your system architecture
-3. **🎯 SEAD Product Owner** - Created user stories
-4. **👥 SEAD Scrum Master** - Validated story quality
-5. **💻 SEAD Developer** - Implemented your code
-
-### Constitutional Framework
-
-SEAD prevents AI agent drift through:
-- **📚 Catalog Compliance**: All decisions reference proven patterns
-- **🏛️ Constitutional Constraints**: Built-in quality guardrails
-- **⚖️ Mode-Appropriate Governance**: Right amount of process for your project phase
+**Output**: Creates:
+- Constitutional user stories
+- Implementation with catalog compliance
+- Quality validation reports
+- Constitutional compliance verification
 
 ---
 
 ## Development Modes Explained
 
-### 🧪 Prototype Mode - Fast & Flexible
-```bash
-sead init prototype-app --mode prototype
-```
-- **When**: MVP, proof of concept, experimentation
-- **Constraints**: Minimal - focus on speed
-- **Quality Gates**: Basic functionality only
+SEAD operates in three modes with progressive constraint enforcement:
 
-### 🔧 Development Mode - Balanced Quality
-```bash
-sead init production-app --mode development  
-```
-- **When**: Feature development, team collaboration
-- **Constraints**: Progressive - balance speed with quality  
-- **Quality Gates**: Testing, documentation, code review
+| Mode | When to Use | Constraints | Validation |
+|------|-------------|-------------|------------|
+| **🧪 PROTOTYPE** | Rapid experimentation, proof of concepts | Minimal - creative freedom | Basic linting |
+| **⚙️ DEVELOPMENT** | Production features, team development | Must use catalog when available | Type checking, compliance validation |
+| **🏭 BUILD-TO-DEPLOY** | Deployment-ready code | STRICT - only catalog patterns | Full compliance checking |
 
-### 🚀 Build-to-Deploy Mode - Maximum Reliability
+### Switch Modes Anytime
 ```bash
-sead init enterprise-app --mode build-to-deploy
+# Start with prototype for experimentation
+sead specify "innovative UI concept" --mode prototype
+
+# Move to development for implementation
+sead implement ui-concept --mode development
+
+# Finalize for deployment
+sead verify-build --mode build-to-deploy
 ```
-- **When**: Production systems, enterprise applications
-- **Constraints**: Strict - maximum quality and reliability
-- **Quality Gates**: Full test suite, security review, performance validation
+
+---
+
+## IDE Integration (Already Set Up!)
+
+SEAD automatically detected and configured your IDE during installation:
+
+### Claude Code (Recommended)
+```bash
+# Use SEAD agents directly in Claude Code
+/sead-architect "Design microservices architecture for user management"
+/sead-developer "Implement login component using catalog patterns"
+/sead-qa "Review authentication flow for constitutional compliance"
+```
+
+### Cursor
+```bash
+# Use SEAD agents in Cursor chat
+@sead-architect Design scalable database schema
+@sead-developer Implement API endpoints with validation
+@sead-orchestrator Coordinate multi-agent feature development
+```
+
+### Other IDEs
+SEAD supports 15+ IDEs including VS Code, Windsurf, Cline, and more with automatic configuration.
+
+---
+
+## External Asset Integration
+
+### Integrate Existing Assets (5 minutes)
+```bash
+# 1. Analyze external assets
+sead external-asset-analysis --source ./external-assets/
+
+# 2. Generate adoption strategy  
+sead external-adoption-strategy --timeline "2-weeks"
+
+# 3. Transform and integrate
+sead catalog integrate-external --source ./external-assets/ --transform
+
+# 4. Validate integration
+sead external-asset-validation --compliance-level strict
+```
+
+**Supported Assets**:
+- 🎨 **Design Systems**: Figma exports, design tokens, style guides
+- 📦 **Component Libraries**: React/Vue/Angular components, Storybook exports
+- 🔗 **API Specifications**: OpenAPI/Swagger specs, GraphQL schemas
+- 🧩 **Pattern Collections**: Authentication flows, integration patterns
+
+---
+
+## Common Workflows
+
+### For New Projects
+```bash
+sead init my-app
+sead install
+sead specify "project description" --mode development
+sead interactive-catalog-creation --guided
+sead plan "technology stack" --catalog-integration
+sead stories --enforce-catalog
+sead implement feature-001 --qa-gate
+```
+
+### For Existing Projects (Brownfield)
+```bash
+sead install  # In existing project directory
+sead brownfield-catalog-generation --source ./src
+sead pattern-extraction-workflow --validate-patterns
+sead specify "new feature description" --mode development
+sead implement feature-002 --catalog-only
+```
+
+### For External Asset Adoption
+```bash
+sead external-asset-analysis --source ./design-system/
+sead external-adoption-strategy --risk-level low
+sead catalog integrate-external --validate-compliance
+sead stories --mode development  # Using integrated assets
+```
+
+---
+
+## Quality Assurance & Validation
+
+### Built-in Quality Gates
+```bash
+# Constitutional compliance check
+sead constitutional-validation-workflow
+
+# Catalog pattern validation
+sead catalog validate --strict
+
+# Comprehensive QA gate
+sead qa-gate --full-validation
+
+# Build readiness verification
+sead verify-build --mode build-to-deploy
+```
+
+### Project Health Check
+```bash
+# Overall project status
+sead project-status --verbose
+
+# Deployment readiness
+sead project-status --deployment-ready
+
+# Constitutional compliance summary
+sead project-status --compliance-summary
+```
 
 ---
 
 ## Next Steps
 
-### Continue with Your First Project
-```bash
-# Implement more stories
-sead implement story-002 --mode development
-sead implement story-003 --mode development
-
-# Check project progress
-sead status --detailed
-
-# Validate full project when ready
-sead validate --constitutional --catalog --end-to-end
-```
-
-### Try Different Project Types
-
-**Backend API Project**:
-```bash
-sead init api-service --mode development --template backend
-sead specify "REST API for user management with authentication"
-sead plan backend --catalog-mode development
-```
-
-**Frontend Only Project**:
-```bash
-sead init ui-dashboard --mode development --template frontend  
-sead specify "Analytics dashboard with real-time charts"
-sead plan frontend --catalog-mode development
-```
-
-**Existing Project Integration** (Brownfield):
-```bash
-# Generate catalog from existing project
-sead catalog generate --source ./existing-project --guided
-
-# Initialize SEAD with generated catalog
-sead init enhanced-project --catalog ./generated-catalog
-```
-
 ### Explore Advanced Features
+1. **Multi-Agent Coordination**: Use `sead-orchestrator` for complex workflows
+2. **Pattern Extraction**: Extract patterns from legacy code with `sead pattern-extraction-workflow`
+3. **External Integration**: Adopt existing design systems and APIs seamlessly
+4. **Constitutional Customization**: Customize agent constraints for your organization
 
-**Interactive Specification**:
+### Learn More
+- 📖 [Complete User Guide](./USER-GUIDE.md) - Comprehensive methodology guide
+- 💻 [CLI Reference](./CLI-REFERENCE.md) - All commands and options
+- 🏛️ [Constitutional Framework](./CONSTITUTIONAL-FRAMEWORK-GUIDE.md) - Constraint system details
+- 🤖 [Agent Coordination](./AGENT-COORDINATION-GUIDE.md) - Multi-agent patterns
+
+### Get Help
 ```bash
-sead specify "Complex e-commerce platform" --interactive
-```
-
-**Custom Agent Selection**:
-```bash
-sead implement ui-component-001 --agent sead-ux-expert
-```
-
-**Catalog Management**:
-```bash
-# Validate your catalog patterns
-sead catalog validate --constitutional-compliance
-
-# Initialize specific catalog domains
-sead catalog init --domains api-contracts,auth-patterns
-```
-
----
-
-## Common Commands Reference
-
-### Essential Commands
-```bash
-# Project lifecycle
-sead init <project-name>              # Initialize project
-sead specify <description>            # Create specification  
-sead plan <tech-stack>               # Generate architecture plan
-sead stories                         # Create implementation stories
-sead implement <story-id>            # Implement story
-
-# Project management
-sead status                          # Check project status
-sead validate                        # Validate project compliance
-sead config list                     # View configuration
-
-# Catalog management  
-sead catalog generate --source <path> # Generate from existing project
-sead catalog validate                # Validate catalog integrity
-```
-
-### Useful Options
-```bash
-# Development modes
---mode prototype          # Fast prototyping
---mode development       # Balanced development (default)
---mode build-to-deploy   # Production-ready
-
-# Quality options
---constitutional-compliance    # Enforce constitutional constraints
---validate-compliance         # Validate during implementation
---enforce-catalog            # Require catalog pattern usage
-
-# Output options
---interactive               # Interactive mode with prompts
---detailed                 # Detailed output and status
---verbose                  # Verbose logging
-```
-
----
-
-## Getting Help
-
-### Built-in Help
-```bash
-# General help
+# Command help
 sead --help
-
-# Command-specific help
-sead init --help
 sead specify --help
-sead implement --help
 
-# Check system health
-sead doctor
+# Agent information
+sead list-agents --detailed
 
-# View configuration
-sead config list
-```
-
-### Debugging Issues
-```bash
-# Enable debug mode
-sead --debug implement story-001
-
-# Check constitutional compliance
-sead validate --constitutional --verbose
-
-# Verify catalog integration
-sead catalog validate --detailed
-```
-
-### Documentation
-- **📖 Full User Guide**: `docs/USER-GUIDE.md`
-- **💻 CLI Reference**: `docs/CLI-REFERENCE.md`  
-- **🏛️ Constitutional Framework**: `docs/CONSTITUTIONAL-FRAMEWORK-GUIDE.md`
-- **🤖 Agent Coordination**: `docs/AGENT-COORDINATION-GUIDE.md`
-
-### Community & Support
-- **GitHub Issues**: [Report bugs and request features](https://github.com/CodifiedIntuition/SEAD-METHOD/issues)
-- **Discussions**: [Ask questions and share experiences](https://github.com/CodifiedIntuition/SEAD-METHOD/discussions)
-- **Documentation**: [Contribute improvements](https://github.com/CodifiedIntuition/SEAD-METHOD)
-
----
-
-## Troubleshooting Quick Fixes
-
-### "Constitutional constraint violation"
-```bash
-# Check what constraint was violated
-sead validate --constitutional --detailed
-
-# Review your agent's constraints
-cat sead-core/constitutional-rules/sead-developer-constraints.yaml
-
-# Fix: Align with catalog patterns or escalate properly
-```
-
-### "Catalog pattern not found"
-```bash
-# Verify catalog structure
-ls sead-catalog/
-
-# Validate catalog integrity
-sead catalog validate
-
-# Fix: Initialize missing catalog domains
-sead catalog init --domains <missing-domain>
-```
-
-### "Agent coordination failed"
-```bash
-# Check handoff status
-sead status --agent-status
-
-# Review previous agent's output
-cat sead-workspace/implementations/latest-*.md
-
-# Fix: Re-run with proper context preservation
-sead implement story-001 --context-preserve
+# Project troubleshooting
+sead status --verbose
 ```
 
 ---
 
-## What's Next?
+## Troubleshooting
 
-🎉 **Congratulations!** You've successfully:
-- ✅ Set up your first SEAD project
-- ✅ Used 5 different SEAD agents
-- ✅ Generated specifications, plans, stories, and implementations
-- ✅ Experienced constitutional compliance and catalog patterns
+### Installation Issues
+```bash
+# Check installation
+sead status
 
-### Ready for More?
+# Reinstall if needed
+sead uninstall
+sead install
 
-1. **📖 Read the Full User Guide** for comprehensive methodology understanding
-2. **🏛️ Study Constitutional Framework** to understand governance in depth  
-3. **🤖 Learn Agent Coordination** for advanced multi-agent workflows
-4. **🏢 Scale to Team Projects** with collaborative SEAD development
-5. **🌟 Contribute to SEAD** by sharing patterns and improvements
+# Manual IDE setup
+sead install --ide manual
+```
 
-### Join the SEAD Community
+### Validation Errors
+```bash
+# Check catalog compliance
+sead catalog validate --verbose
 
-SEAD-METHOD™ is revolutionizing AI-assisted development. Join us to:
-- Share your success stories and learnings
-- Contribute new catalog patterns
-- Suggest constitutional framework improvements  
-- Help other developers adopt SEAD methodology
+# Validate constitutional compliance
+sead constitutional-validation-workflow
 
-**Welcome to the future of AI-assisted software development!** 🚀
+# Fix common issues
+sead pattern-quality-assessment
+```
+
+### Agent Issues
+```bash
+# List available agents
+sead list-agents
+
+# Reset agent configurations
+sead update --reset-agents
+```
 
 ---
 
-**Document Version**: 1.3.3  
-**Last Updated**: 2025-01-15  
-**SEAD-METHOD™ Version**: 1.3.3  
-**Status**: Production Ready
+## Success! You're Ready for SEAD Development
 
-**Get started now**: `npm install -g sead-method-core && sead init my-project`
+You now have:
+- ✅ **SEAD installed** with IDE integration
+- ✅ **14 AI agents** ready for constitutional development
+- ✅ **Project catalog** for pattern consistency
+- ✅ **Quality gates** for validation and compliance
+- ✅ **External integration** capability for existing assets
+
+**Start developing with constitutional AI agents that never drift!**
+
+```bash
+# Begin your first constitutional development cycle
+sead specify "your next amazing feature" --mode development
+```
+
+---
+
+*For additional support, visit the [SEAD-METHOD repository](https://github.com/CodifiedIntuition/SEAD-METHOD) or check the comprehensive [User Guide](./USER-GUIDE.md)*

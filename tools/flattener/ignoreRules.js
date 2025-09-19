@@ -7,6 +7,7 @@ const ignore = require('ignore');
 const DEFAULT_PATTERNS = [
   // Project/VCS
   '**/.bmad-core/**',
+  '**/.sead-core/**',
   '**/.git/**',
   '**/.svn/**',
   '**/.hg/**',

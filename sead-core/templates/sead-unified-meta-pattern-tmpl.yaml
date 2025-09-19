@@ -1,0 +1,359 @@
+# SEAD Unified Meta-Pattern Template
+# Consolidates: pattern-documentation-tmpl, pattern-extraction-report-tmpl
+# Reduces 2 meta-pattern templates → 1 parameterized template (50% reduction)
+
+import: sead-core/templates/constitutional-base-template.yaml
+
+template:
+  id: sead-unified-meta-pattern-template-v1
+  name: SEAD Unified Meta-Pattern Template
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  
+  # Template parameters for meta-pattern type
+  parameters:
+    meta_pattern_type:
+      type: enum
+      values: [pattern_documentation, pattern_extraction_report, pattern_analysis, pattern_migration]
+      description: "Type of meta-pattern document being created"
+    
+    analysis_scope:
+      type: enum
+      values: [single_pattern, domain_patterns, cross_domain, full_catalog]
+      description: "Scope of pattern analysis or documentation"
+    
+    governance_level:
+      type: enum
+      values: [basic, standard, comprehensive, enterprise]
+      description: "Level of governance validation and documentation detail"
+
+  output:
+    format: markdown
+    filename: |
+      {% if meta_pattern_type == "pattern_documentation" %}
+      "{{pattern_name}}-pattern-documentation.md"
+      {% elif meta_pattern_type == "pattern_extraction_report" %}
+      "docs/pattern-extraction-report.md"
+      {% elif meta_pattern_type == "pattern_analysis" %}
+      "docs/{{analysis_scope}}-pattern-analysis.md"
+      {% elif meta_pattern_type == "pattern_migration" %}
+      "docs/pattern-migration-{{migration_scope}}.md"
+      {% endif %}
+    title: |
+      {% if meta_pattern_type == "pattern_documentation" %}
+      "{{pattern_name}} Pattern Documentation"
+      {% elif meta_pattern_type == "pattern_extraction_report" %}
+      "{{project_name}} Pattern Extraction Report"
+      {% elif meta_pattern_type == "pattern_analysis" %}
+      "{{project_name}} {{analysis_scope|title}} Pattern Analysis"
+      {% elif meta_pattern_type == "pattern_migration" %}
+      "{{project_name}} Pattern Migration: {{migration_scope|title}}"
+      {% endif %}
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  governance_validation: continuous
+
+workflow:
+  mode: constitutional_interactive
+  elicitation: |
+    {% if meta_pattern_type == "pattern_extraction_report" %}
+    pattern-extraction-workflow
+    {% else %}
+    guided_documentation
+    {% endif %}
+  catalog_validation: enabled
+  constraint_enforcement: progressive
+
+sections:
+  - id: constitutional-initialization
+    title: Constitutional Framework Initialization
+    instruction: |
+      Establish constitutional context for {{meta_pattern_type}} creation:
+      
+      {% if meta_pattern_type == "pattern_documentation" %}
+      1. Identify development mode and pattern documentation quality requirements
+      2. Load constitutional framework for pattern governance
+      3. Configure catalog integration validation requirements
+      4. Establish context preservation for pattern documentation handoffs
+      {% elif meta_pattern_type == "pattern_extraction_report" %}
+      1. Identify development mode and extraction quality requirements
+      2. Load constitutional framework for extraction governance
+      3. Configure catalog integration for pattern discovery
+      4. Establish context preservation for extraction reporting
+      {% endif %}
+    sections:
+      - id: meta-pattern-context
+        title: "{{meta_pattern_type|title|replace('_', ' ')}} Context and Constitutional Framework"
+        template: |
+          **Documentation Date:** {{documentation_date}}
+          **Development Mode:** {{development_mode}}
+          **Constitutional Framework:** {{constitutional_version}}
+          **Meta-Pattern Type:** {{meta_pattern_type}}
+          **Analysis Scope:** {{analysis_scope}}
+          **Governance Level:** {{governance_level}}
+          **Constitutional Compliance:** {{constitutional_compliance_level}}
+
+  # Pattern Documentation sections
+  - id: pattern-documentation-overview
+    title: Pattern Documentation Overview
+    condition: "{{meta_pattern_type}} == 'pattern_documentation'"
+    instruction: |
+      Document comprehensive pattern overview with constitutional compliance for universal pattern documentation
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: universal-pattern-description
+        title: Universal Pattern Description
+        template: |
+          **Pattern Name:** {{pattern_name}}
+          **Pattern Category:** {{pattern_category}}
+          **Universal Applicability:** {{universal_applicability}}
+          **Cross-Domain Benefits:** {{cross_domain_benefits}}
+          **Constitutional Intent:** {{constitutional_intent}}
+          **Catalog Integration Strategy:** {{catalog_integration_strategy}}
+
+  # Pattern Extraction Report sections
+  - id: extraction-executive-summary
+    title: Pattern Extraction Executive Summary
+    condition: "{{meta_pattern_type}} == 'pattern_extraction_report'"
+    instruction: |
+      Provide executive summary of pattern extraction activities with constitutional compliance
+    sections:
+      - id: extraction-overview
+        title: Extraction Overview
+        template: |
+          **Project Analyzed:** {{project_name}}
+          **Extraction Period:** {{extraction_start_date}} to {{extraction_end_date}}
+          **Total Patterns Identified:** {{total_patterns_identified}}
+          **High-Quality Patterns:** {{high_quality_patterns_count}}
+          **Constitutional Compliance Rate:** {{constitutional_compliance_rate}}
+          **Catalog Integration Opportunities:** {{catalog_integration_opportunities}}
+          **Governance Validation Status:** {{governance_validation_status}}
+
+  - id: extraction-methodology
+    title: Pattern Extraction Methodology
+    condition: "{{meta_pattern_type}} == 'pattern_extraction_report'"
+    instruction: |
+      Document the constitutional methodology used for pattern extraction
+    sections:
+      - id: extraction-approach
+        title: Extraction Approach
+        template: |
+          **Constitutional Analysis Framework:** {{constitutional_analysis_framework}}
+          **Pattern Identification Strategy:** {{pattern_identification_strategy}}
+          **Quality Assessment Criteria:** {{quality_assessment_criteria}}
+          **Catalog Integration Validation:** {{catalog_integration_validation}}
+          **Governance Compliance Verification:** {{governance_compliance_verification}}
+      
+      - id: tools-and-techniques
+        title: Tools and Techniques
+        template: |
+          **Constitutional Analysis Tools:** {{constitutional_analysis_tools}}
+          **Pattern Mining Techniques:** {{pattern_mining_techniques}}
+          **Quality Validation Methods:** {{quality_validation_methods}}
+          **Catalog Integration Tools:** {{catalog_integration_tools}}
+
+  - id: pattern-inventory
+    title: Pattern Inventory
+    condition: "{{meta_pattern_type}} == 'pattern_extraction_report'"
+    instruction: |
+      Comprehensive inventory of extracted patterns with constitutional classification
+    sections:
+      - id: pattern-summary-table
+        title: Pattern Summary Table
+        type: table
+        columns: [Pattern Name, Domain, Quality Tier, Constitutional Compliance, Catalog Integration, Extraction Confidence]
+        instruction: List all extracted patterns with constitutional and catalog assessments
+      
+      - id: high-value-patterns
+        title: High-Value Patterns
+        repeatable: true
+        sections:
+          - id: pattern-detail
+            title: "{{pattern_name}} - {{pattern_domain}}"
+            template: |
+              **Quality Tier:** {{quality_tier}}
+              **Constitutional Compliance:** {{constitutional_compliance_score}}
+              **Catalog Integration Potential:** {{catalog_integration_potential}}
+              **Reusability Score:** {{reusability_score}}
+              **Implementation Complexity:** {{implementation_complexity}}
+              **Governance Benefits:** {{governance_benefits}}
+              **Recommended Actions:** {{recommended_actions}}
+
+  # Pattern Analysis sections (for pattern_analysis type)
+  - id: pattern-analysis-overview
+    title: Pattern Analysis Overview
+    condition: "{{meta_pattern_type}} == 'pattern_analysis'"
+    instruction: |
+      Provide comprehensive analysis overview based on analysis scope
+    sections:
+      - id: analysis-objectives
+        title: Analysis Objectives
+        template: |
+          **Analysis Scope:** {{analysis_scope}}
+          **Constitutional Goals:** {{constitutional_goals}}
+          **Catalog Evolution Objectives:** {{catalog_evolution_objectives}}
+          **Quality Improvement Targets:** {{quality_improvement_targets}}
+          **Governance Enhancement Goals:** {{governance_enhancement_goals}}
+
+  # Common sections for all meta-pattern types
+  - id: constitutional-findings
+    title: Constitutional Findings
+    instruction: |
+      Document key constitutional findings based on meta-pattern type:
+      
+      {% if meta_pattern_type == "pattern_extraction_report" %}
+      Focus on constitutional compliance assessment and governance gaps identified during extraction.
+      {% elif meta_pattern_type == "pattern_documentation" %}
+      Focus on constitutional compliance of the documented pattern and governance implications.
+      {% elif meta_pattern_type == "pattern_analysis" %}
+      Focus on constitutional compliance across analyzed patterns and systemic governance issues.
+      {% endif %}
+    sections:
+      - id: compliance-assessment
+        title: Constitutional Compliance Assessment
+        template: |
+          **Overall Compliance Score:** {{overall_compliance_score}}
+          **Mode-Specific Compliance:** {{mode_specific_compliance}}
+          **Governance Gaps Identified:** {{governance_gaps_identified}}
+          **Constitutional Strengths:** {{constitutional_strengths}}
+          **Areas for Improvement:** {{areas_for_improvement}}
+      
+      - id: catalog-integration-findings
+        title: Catalog Integration Findings
+        template: |
+          **Current Integration Level:** {{current_integration_level}}
+          **Integration Opportunities:** {{integration_opportunities}}
+          **Cross-Domain Dependencies:** {{cross_domain_dependencies}}
+          **Catalog Evolution Potential:** {{catalog_evolution_potential}}
+
+  - id: quality-assessment
+    title: Quality Assessment
+    instruction: |
+      Assess quality aspects based on governance level and meta-pattern type
+    sections:
+      - id: quality-metrics
+        title: Quality Metrics
+        template: |
+          **Documentation Quality:** {{documentation_quality_score}}
+          **Implementation Quality:** {{implementation_quality_score}}
+          **Reusability Factor:** {{reusability_factor}}
+          **Maintainability Score:** {{maintainability_score}}
+          **Constitutional Adherence:** {{constitutional_adherence_score}}
+      
+      - id: quality-recommendations
+        title: Quality Recommendations
+        repeatable: true
+        template: "- **{{recommendation_category}}:** {{recommendation_description}} (Priority: {{priority_level}}, Impact: {{expected_impact}})"
+
+  - id: governance-recommendations
+    title: Governance Recommendations
+    instruction: |
+      Provide governance recommendations based on findings and constitutional framework
+    sections:
+      - id: immediate-actions
+        title: Immediate Actions
+        type: bullet-list
+        template: "- {{action_description}} (Timeline: {{timeline}}, Owner: {{responsible_party}})"
+      
+      - id: strategic-initiatives
+        title: Strategic Initiatives
+        type: bullet-list
+        template: "- {{initiative_description}} (Horizon: {{time_horizon}}, Constitutional Impact: {{constitutional_impact}})"
+      
+      - id: governance-process-improvements
+        title: Governance Process Improvements
+        template: |
+          **Process Enhancement Opportunities:** {{process_enhancement_opportunities}}
+          **Constitutional Framework Updates:** {{constitutional_framework_updates}}
+          **Catalog Governance Improvements:** {{catalog_governance_improvements}}
+          **Quality Assurance Enhancements:** {{quality_assurance_enhancements}}
+
+  - id: implementation-roadmap
+    title: Implementation Roadmap
+    instruction: |
+      Define implementation roadmap for recommendations and improvements
+    sections:
+      - id: phased-approach
+        title: Phased Implementation Approach
+        sections:
+          - id: phase-1
+            title: "Phase 1: Constitutional Foundation ({{phase_1_timeline}})"
+            template: |
+              **Objectives:** {{phase_1_objectives}}
+              **Key Deliverables:** {{phase_1_deliverables}}
+              **Constitutional Milestones:** {{phase_1_constitutional_milestones}}
+              **Success Criteria:** {{phase_1_success_criteria}}
+          
+          - id: phase-2
+            title: "Phase 2: Catalog Integration ({{phase_2_timeline}})"
+            template: |
+              **Objectives:** {{phase_2_objectives}}
+              **Key Deliverables:** {{phase_2_deliverables}}
+              **Catalog Evolution Milestones:** {{phase_2_catalog_milestones}}
+              **Success Criteria:** {{phase_2_success_criteria}}
+      
+      - id: resource-requirements
+        title: Resource Requirements
+        template: |
+          **Team Resources:** {{team_resources_required}}
+          **Constitutional Expertise Needed:** {{constitutional_expertise_needed}}
+          **Tool and Infrastructure Requirements:** {{tool_infrastructure_requirements}}
+          **Training and Development Needs:** {{training_development_needs}}
+
+  - id: monitoring-and-measurement
+    title: Monitoring and Measurement
+    instruction: |
+      Define monitoring approach for tracking progress and measuring success
+    sections:
+      - id: success-metrics
+        title: Success Metrics
+        template: |
+          **Constitutional Compliance Metrics:** {{constitutional_compliance_metrics}}
+          **Catalog Integration Metrics:** {{catalog_integration_metrics}}
+          **Quality Improvement Metrics:** {{quality_improvement_metrics}}
+          **Governance Effectiveness Metrics:** {{governance_effectiveness_metrics}}
+      
+      - id: monitoring-framework
+        title: Monitoring Framework
+        template: |
+          **Review Frequency:** {{review_frequency}}
+          **Reporting Structure:** {{reporting_structure}}
+          **Escalation Procedures:** {{escalation_procedures}}
+          **Continuous Improvement Process:** {{continuous_improvement_process}}
+
+  - id: constitutional-checklist-results
+    title: "Constitutional {{meta_pattern_type|title|replace('_', ' ')}} Checklist"
+    instruction: |
+      Execute constitutional checklist for {{meta_pattern_type}}:
+      - Meta-pattern specific constitutional compliance validation
+      - Documentation completeness and quality verification
+      - Governance framework adherence assessment
+      - Context preservation implementation validation
+    constitutional_validation: mandatory
+
+  - id: conclusion-and-next-steps
+    title: Conclusion and Next Steps
+    instruction: |
+      Summarize key findings and define next steps with constitutional governance
+    sections:
+      - id: key-takeaways
+        title: Key Takeaways
+        template: |
+          **Primary Findings:** {{primary_findings}}
+          **Constitutional Insights:** {{constitutional_insights}}
+          **Catalog Evolution Opportunities:** {{catalog_evolution_opportunities}}
+          **Governance Improvements Identified:** {{governance_improvements_identified}}
+      
+      - id: next-steps
+        title: Next Steps
+        template: |
+          **Immediate Actions:** {{immediate_actions}}
+          **Strategic Initiatives:** {{strategic_initiatives}}
+          **Constitutional Validation Requirements:** {{constitutional_validation_requirements}}
+          **Agent Handoff Considerations:** {{agent_handoff_considerations}}
+          **Context Preservation:** {{context_preservation_requirements}}

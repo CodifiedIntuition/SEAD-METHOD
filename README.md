@@ -4,7 +4,7 @@
 
 A revolutionary development methodology that combines AI agents with constitutional constraints and catalog-based patterns to deliver consistent, high-quality software development at scale. Now with comprehensive external asset integration for seamless design system, API specification, and component library adoption.
 
-[![Version](https://img.shields.io/badge/version-1.3.3-blue.svg)](https://github.com/CodifiedIntuition/SEAD-METHOD)
+[![Version](https://img.shields.io/badge/version-1.3.5--beta.1-blue.svg)](https://github.com/CodifiedIntuition/SEAD-METHOD)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen.svg)](https://nodejs.org/)
 
@@ -374,10 +374,10 @@ my-project/
 └── docs/                       # Project documentation
 ```
 
-### SEAD-METHOD Repository
+### SEAD-METHOD Repository (Source)
 ```
 SEAD-METHOD/
-├── sead-core/                   # Core SEAD methodology
+├── sead-core/                   # Core SEAD methodology (source files)
 │   ├── agents/                  # 12 specialized AI agents
 │   ├── constitutional-rules/    # Constitutional framework and constraints  
 │   ├── tasks/                   # SEAD development tasks
@@ -389,6 +389,8 @@ SEAD-METHOD/
 ├── docs/                       # Comprehensive documentation
 └── cli.js                      # Unified SEAD CLI interface
 ```
+
+> **Note**: When SEAD is installed in your project, these source files from `sead-core/` are copied to `.sead-core/` (hidden directory) in your project.
 
 ## 🎯 Key Benefits
 

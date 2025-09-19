@@ -1,9 +1,14 @@
 # <!-- Powered by SEAD-METHOD™ Core -->
+
+import: sead-core/templates/constitutional-base-template.yaml
+
 template:
   id: sead-story-template-v1
   name: SEAD Story Document
   version: 1.0
   methodology: SEAD-METHOD
+  constitutional_framework: true
+  catalog_integration: true
   output:
     format: markdown
     filename: docs/stories/{{epic_num}}.{{story_num}}.{{story_title_short}}.md

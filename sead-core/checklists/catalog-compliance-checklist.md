@@ -2,12 +2,36 @@
 
 # SEAD Catalog Compliance Checklist
 
-This checklist ensures any UX deliverable aligns with SEAD catalog governance before it is recorded or handed off. Run it prior to final approval, after executing domain-specific tasks.
+**Purpose:** Ensure any UX deliverable aligns with SEAD catalog governance before it is recorded or handed off. Run it prior to final approval, after executing domain-specific tasks.
 
-[[LLM: PRE-CHECK ACTIONS]]
-- Load `/sead-core/core-config.yaml` to identify active mode and catalog enforcement level.
-- Review `/sead-core/data/design-system-guidelines.md`, `/sead-core/data/ui-pattern-library.md`, and `/sead-core/data/mode-constraint-matrix.md`.
-- Collect outputs from relevant workflows (wireframe, prototype, design-system analysis, accessibility audit).
+## Module Imports
+```yaml
+imports:
+  - module: catalog-pattern-validation-module
+    parameters:
+      artifact_type: ux_deliverable
+      catalog_domains: [components, layouts, themes, patterns]
+      deviation_tolerance: mode_specific
+  - module: constitutional-compliance-module
+    parameters:
+      role: catalog-steward
+      context: catalog_compliance
+      validation_level: enforcement
+  - module: documentation-standards-module
+    parameters:
+      artifact_types: [deliverable_docs, compliance_records]
+      handoff_targets: [catalog_maintainer, engineering_team]
+      template_requirements: [catalog-compliance-record]
+```
+
+## Catalog Pattern Validation Framework
+*[Imported from catalog-pattern-validation-module]*
+
+## Constitutional Compliance Standards
+*[Imported from constitutional-compliance-module]*
+
+## Documentation Standards
+*[Imported from documentation-standards-module]*
 
 ## 1. Catalog Reference Integrity
 - [ ] Each deliverable cites catalog components/layouts/themes using canonical names.

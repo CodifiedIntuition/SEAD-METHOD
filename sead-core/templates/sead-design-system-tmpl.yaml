@@ -1,4 +1,7 @@
 # SEAD Design System Pattern Template
+
+import: sead-core/templates/constitutional-base-template.yaml
+
 template:
   id: sead-design-system-pattern-template-v1
   name: SEAD Catalog Pattern Specification

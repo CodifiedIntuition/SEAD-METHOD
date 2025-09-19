@@ -1,4 +1,7 @@
 # SEAD Product Requirements Document Template
+
+import: sead-core/templates/constitutional-base-template.yaml
+
 template:
   id: sead-prd-template-v1
   name: SEAD Product Requirements Document
@@ -10,11 +13,7 @@ template:
     filename: docs/sead-prd.md
     title: "{{project_name}} SEAD Product Requirements Document (PRD)"
 
-constitutional_requirements:
-  mode_detection: required
-  catalog_read: mandatory
-  context_preservation: enforced
-  governance_validation: continuous
+# Constitutional requirements inherited from base template
 
 workflow:
   mode: constitutional_interactive
