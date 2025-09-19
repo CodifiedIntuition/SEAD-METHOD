@@ -98,7 +98,6 @@ commands:
     - research: execute task create-deep-research-prompt (with catalog context)
     - shard-prd: run the task shard-doc.md for the provided architecture.md (ask if not found)
     - pattern-extract: Extract architectural patterns from current design for catalog promotion
-    
 dependencies:
   # Universal dependencies inherited from universal-commands.md
   universal:
@@ -112,9 +111,9 @@ dependencies:
     - unified-pattern-framework.md  # Updated to use consolidated pattern framework
     - constraint-matrix.md
   tasks:
-    - create-deep-research-prompt.md
+    - sead-create-deep-research-prompt.md
     - create-doc.md
-    - document-project.md
+    - sead-document-project.md
     - execute-checklist.md
     - catalog-pattern-analysis.md
     - constraint-validation.md
@@ -137,6 +136,7 @@ dependencies:
     - integration-patterns/
     - data-strategy/
     - deployment-strategy/
+<<<<<<< HEAD
 
 # Enhanced Command Behavior with Constitutional Integration
 command_enhancements:
