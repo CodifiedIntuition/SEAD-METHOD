@@ -68,6 +68,7 @@ commands:
   - help: Show numbered list of the following commands to allow selection
   - catalog-scan: Analyze current catalog for relevant patterns before backlog planning
   - mode-assess: Assess current SEAD mode impact on story creation and acceptance criteria
+  # PRIMARY STORY CREATION AUTHORITY - Other agents delegate story/epic creation here
   - create-epic: Create catalog-aware epic for projects (task sead-create-epic with pattern integration)
   - create-story: Create user story from requirements with catalog pattern suggestions (task sead-create-story)
   - create-brownfield-epic: Create epic for brownfield projects with catalog analysis (task sead-brownfield-create-epic)
@@ -76,12 +77,13 @@ commands:
   - backlog-prioritization: Prioritize backlog items based on catalog efficiency and business value
   - acceptance-criteria: Define mode-appropriate acceptance criteria with catalog constraints
   - story-refinement: Refine stories for catalog compliance and constraint adherence
-  - catalog-dependency-analysis: Analyze story dependencies on catalog patterns
+  # CATALOG OPERATIONS - Delegate complex operations to sead-catalog-architect
+  # - catalog-dependency-analysis → Use sead-catalog-architect for complex analysis
   - sprint-planning: Plan sprints considering catalog pattern availability and mode progression
   - feature-specification: Create detailed feature specs aligned with catalog patterns
   - correct-course: execute the sead-correct-course task (catalog-aware course correction)
   - constitutional-validation: Validate product decisions against governance rules
-  - pattern-impact-analysis: Analyze impact of catalog pattern changes on backlog
+  # - pattern-impact-analysis → Use sead-catalog-architect for pattern impact analysis
   - mode-transition-backlog: Prepare backlog for SEAD mode transitions
   - doc-out: Output full document to current destination file with catalog references
   - execute-checklist-po: Run task execute-checklist (checklist sead-po-master-checklist)

@@ -1,0 +1,386 @@
+# Development Coordination Module
+# Reusable workflow module for development setup, story management, and implementation cycles
+
+module:
+  id: development_module
+  name: SEAD Development Coordination Module
+  description: "Story creation, development coordination, and implementation cycle management"
+  version: "2.0.0"
+  
+  # Import constitutional framework
+  constitutional:
+    import: "constitutional-base-template.yaml"
+    customizations:
+      development_specific_validation:
+        - Story quality and completeness validation
+        - Implementation readiness verification
+        - Catalog compliance during development
+        - Context preservation across development cycles
+
+agents:
+  primary: [sead-scrum-master, sead-developer]
+  secondary: [sead-qa, sead-product-owner]
+
+applicable_scenarios:
+  - story_creation: "Epic breakdown into implementable stories"
+  - development_setup: "Project structure and development environment setup"
+  - implementation_cycles: "Story implementation with catalog compliance"
+  - quality_assurance: "Code review and validation workflows"
+
+dependencies:
+  required_inputs:
+    - validated_artifacts (from validation module)
+    - catalog/ (complete catalog structure)
+    - sharded_docs/ (from document sharding)
+  
+  required_catalog_domains:
+    - catalog/shared-types/ (for implementation guidance)
+    - catalog/design-system/ (for UI development)
+    - catalog/test-patterns/ (for testing requirements)
+    - catalog/auth-patterns/ (for authentication implementation)
+
+steps:
+  # Step 1: Document Sharding
+  document_sharding:
+    agent: sead-product-owner
+    task: sead-shard-doc
+    constitutional_validation: required
+    creates: sharded_docs/
+    requires: validated_artifacts
+    
+    constitutional_enhancements:
+      catalog_reference_preservation:
+        description: "Maintain catalog references in sharded documents"
+        validation: "Ensure catalog links preserved across shards"
+        output: "Sharded documents with intact catalog references"
+      
+      constraint_context_preservation:
+        description: "Preserve SEAD constraint context in shards"
+        validation: "Verify constitutional context maintained"
+        output: "Context-aware document shards"
+    
+    sharding_strategy:
+      by_workstream:
+        condition: "project_type in ['fullstack', 'complex']"
+        workstreams: [authentication, core_features, integration, analytics]
+        output_structure: "docs/{workstream}-shards/"
+      
+      by_epic:
+        condition: "project_type in ['service', 'ui']"
+        organization: epic_based
+        output_structure: "docs/epic-{num}-shards/"
+      
+      by_domain:
+        condition: "catalog_domains > 5"
+        organization: catalog_domain_based
+        output_structure: "docs/{domain}-shards/"
+
+  # Step 2: Story Creation Cycle
+  story_creation:
+    agent: sead-scrum-master
+    task: sead-create-story
+    constitutional_validation: required
+    creates: story.md
+    requires: [sharded_docs/, catalog/]
+    repeats: for_each_epic
+    
+    constitutional_enhancements:
+      catalog_component_linking:
+        description: "Link story tasks to specific catalog components"
+        validation: "Ensure all tasks reference appropriate catalog patterns"
+        output: "Stories with catalog component traceability"
+      
+      mode_constraint_integration:
+        description: "Include appropriate mode constraints in acceptance criteria"
+        validation: "Verify mode-specific constraints documented"
+        output: "Mode-aware acceptance criteria"
+      
+      context_preservation:
+        description: "Include catalog references for developer context"
+        validation: "Ensure developer handoff context complete"
+        output: "Context-rich story documentation"
+    
+    story_structure:
+      story_metadata:
+        - epic_reference: "Link to parent epic and position"
+        - catalog_dependencies: "Required catalog components"
+        - mode_constraints: "Applicable SEAD mode constraints"
+        - complexity_estimate: "Story complexity and effort estimate"
+      
+      acceptance_criteria:
+        - business_scenarios: "Given-When-Then scenarios"
+        - catalog_compliance: "Required catalog pattern usage"
+        - constitutional_validation: "Mode-specific validation requirements"
+        - quality_gates: "Testing and validation criteria"
+      
+      implementation_guidance:
+        - catalog_patterns: "Specific patterns to implement"
+        - constraint_enforcement: "Mode constraint enforcement points"
+        - testing_requirements: "Required test coverage and patterns"
+        - handoff_documentation: "Context preservation requirements"
+
+  # Step 3: Development Implementation Cycle
+  development_implementation:
+    repeatable_cycle: true
+    constitutional_validation: continuous
+    
+    substeps:
+      # 3a: Story Implementation
+      story_implementation:
+        agent: sead-developer
+        creates: implementation_files
+        requires: [story.md, catalog/]
+        
+        constitutional_enhancements:
+          catalog_pattern_implementation:
+            description: "Implement using catalog patterns where available"
+            validation: "Verify catalog pattern usage compliance"
+            output: "Implementation using approved catalog patterns"
+          
+          mode_constraint_enforcement:
+            description: "Enforce current mode constraints during implementation"
+            validation: "Validate constraint adherence during development"
+            output: "Mode-compliant implementation"
+          
+          pattern_capture:
+            description: "Capture new patterns for catalog promotion (development mode)"
+            validation: "Ensure new patterns documented for review"
+            output: "New pattern documentation for catalog evolution"
+          
+          constraint_validation:
+            description: "Validate implementation against mode constraints"
+            validation: "Comprehensive constraint compliance checking"
+            output: "Validated implementation with compliance documentation"
+        
+        implementation_workflow:
+          preparation:
+            - load_story_context: "Review story with catalog dependencies"
+            - validate_catalog_patterns: "Ensure required patterns available"
+            - setup_development_environment: "Configure mode-appropriate tooling"
+          
+          implementation:
+            - implement_tasks: "Execute story tasks using catalog patterns"
+            - validate_constraints: "Continuous constraint validation"
+            - document_deviations: "Record any catalog pattern deviations"
+            - capture_new_patterns: "Document emerging reusable patterns"
+          
+          completion:
+            - run_tests: "Execute comprehensive test suite"
+            - validate_acceptance_criteria: "Verify all criteria met"
+            - update_story_documentation: "Complete story record"
+            - prepare_handoff: "Document context for QA review"
+      
+      # 3b: Quality Assurance Review
+      qa_review:
+        agent: sead-qa
+        condition: "mode in ['development', 'build-to-deploy'] || user_requests_review"
+        task: sead-review-story
+        constitutional_validation: required
+        
+        constitutional_enhancements:
+          catalog_compliance_validation:
+            description: "Validate implementation uses catalog patterns correctly"
+            validation: "Comprehensive catalog pattern usage review"
+            output: "Catalog compliance verification"
+          
+          constraint_enforcement_check:
+            description: "Verify mode constraints were properly enforced"
+            validation: "Mode constraint enforcement verification"
+            output: "Constraint compliance report"
+          
+          pattern_quality_review:
+            description: "Review any new patterns for catalog promotion quality"
+            validation: "New pattern quality and reusability assessment"
+            output: "Pattern promotion recommendations"
+        
+        review_workflow:
+          code_review:
+            - architectural_compliance: "Verify architectural pattern adherence"
+            - catalog_pattern_usage: "Validate catalog pattern implementation"
+            - code_quality: "Standard code quality review"
+            - test_coverage: "Verify test coverage and quality"
+          
+          constitutional_review:
+            - mode_constraint_compliance: "Verify mode constraint adherence"
+            - documentation_completeness: "Ensure complete documentation"
+            - context_preservation: "Validate handoff documentation"
+            - audit_trail: "Verify complete audit trail"
+          
+          decision_making:
+            - approve_implementation: "Story meets all requirements"
+            - request_changes: "Issues require developer attention"
+            - escalate_issues: "Complex issues require architect review"
+      
+      # 3c: Issue Resolution
+      issue_resolution:
+        agent: sead-developer
+        condition: "qa_left_unchecked_items"
+        task: sead-apply-qa-fixes
+        constitutional_validation: required
+        
+        constitutional_enhancements:
+          catalog_compliance_fixes:
+            description: "Fix catalog compliance issues"
+            validation: "Verify catalog compliance issues resolved"
+            output: "Compliant implementation"
+          
+          constraint_violation_fixes:
+            description: "Address constraint validation failures"
+            validation: "Ensure constraint violations corrected"
+            output: "Constraint-compliant implementation"
+        
+        resolution_workflow:
+          issue_analysis:
+            - categorize_issues: "Separate catalog, constraint, and quality issues"
+            - prioritize_fixes: "Address blocking issues first"
+            - plan_resolution: "Develop fix strategy"
+          
+          implementation:
+            - fix_catalog_issues: "Correct catalog pattern usage"
+            - address_constraints: "Resolve constraint violations"
+            - improve_quality: "Address code quality issues"
+            - update_tests: "Ensure test coverage maintained"
+          
+          validation:
+            - validate_fixes: "Verify all issues resolved"
+            - run_regression_tests: "Ensure no new issues introduced"
+            - update_documentation: "Document resolution approach"
+            - return_to_qa: "Submit for final review"
+
+  # Step 4: Cycle Management
+  cycle_management:
+    constitutional_validation: continuous
+    
+    cycle_completion:
+      story_completion:
+        condition: "all_tasks_complete && qa_approved"
+        actions:
+          - update_story_status: "Mark story as Done"
+          - document_catalog_evolution: "Record new patterns discovered"
+          - preserve_context: "Document learnings for future stories"
+          - update_epic_progress: "Track epic completion status"
+      
+      epic_completion:
+        condition: "all_epic_stories_complete"
+        actions:
+          - validate_epic_completion: "Verify all acceptance criteria met"
+          - document_catalog_changes: "Record catalog evolution during epic"
+          - assess_mode_progression: "Evaluate readiness for mode progression"
+          - prepare_retrospective: "Gather data for epic retrospective"
+    
+    cycle_optimization:
+      velocity_tracking:
+        - story_completion_rate: "Track development velocity"
+        - catalog_pattern_reuse_rate: "Measure pattern efficiency"
+        - constraint_compliance_rate: "Monitor constraint effectiveness"
+        - quality_gate_pass_rate: "Track quality trends"
+      
+      process_improvement:
+        - identify_bottlenecks: "Find process inefficiencies"
+        - catalog_gap_analysis: "Identify missing patterns"
+        - constraint_effectiveness: "Evaluate constraint value"
+        - handoff_optimization: "Improve agent coordination"
+
+# Quality Gates by Development Phase
+quality_gates:
+  story_ready_for_development:
+    requirements:
+      - Story has clear acceptance criteria with catalog references
+      - Required catalog patterns identified and available
+      - Mode constraints documented and understood
+      - Development environment configured appropriately
+    validation:
+      - All story dependencies resolved
+      - Catalog component availability verified
+      - Implementation approach approved
+
+  implementation_complete:
+    requirements:
+      - All story tasks completed using appropriate catalog patterns
+      - Mode constraints enforced throughout implementation
+      - Comprehensive test coverage achieved
+      - Documentation updated with implementation details
+    validation:
+      - Catalog pattern usage validated
+      - Constraint compliance verified
+      - Quality gates passed
+      - Handoff documentation complete
+
+  cycle_complete:
+    requirements:
+      - All stories in epic completed and validated
+      - Catalog evolution documented and reviewed
+      - Mode progression readiness assessed
+      - Context preserved for future development
+    validation:
+      - Epic acceptance criteria met
+      - Constitutional compliance maintained
+      - Catalog integrity preserved
+      - Lessons learned documented
+
+# Constitutional Integration
+constitutional_compliance:
+  development_constraints:
+    prototype_mode:
+      - Rapid iteration with pattern discovery
+      - Basic catalog pattern awareness
+      - Minimal constraint enforcement
+      - Pattern experimentation encouraged
+    
+    development_mode:
+      - Preferred catalog pattern usage
+      - Comprehensive constraint validation
+      - New pattern capture and documentation
+      - Quality gate enforcement
+    
+    build_to_deploy_mode:
+      - Mandatory catalog pattern compliance
+      - Strict constraint enforcement
+      - No custom implementations without approval
+      - Complete audit trail required
+
+  context_preservation:
+    story_level:
+      - Catalog pattern usage documented
+      - Implementation decisions recorded
+      - Constraint compliance verified
+      - Handoff context maintained
+    
+    epic_level:
+      - Catalog evolution tracked
+      - Pattern effectiveness measured
+      - Mode progression readiness assessed
+      - Strategic context preserved
+
+# Performance Metrics
+success_metrics:
+  development_efficiency:
+    - Story completion velocity
+    - Catalog pattern reuse rate
+    - Constraint compliance rate
+    - Quality gate pass rate
+    - Rework reduction percentage
+  
+  quality_indicators:
+    - Defect density
+    - Test coverage percentage
+    - Catalog pattern adoption rate
+    - Constitutional compliance score
+    - Context preservation effectiveness
+
+# Module Integration Notes
+integration_guidance:
+  prerequisite_modules:
+    - Must complete validation module before beginning development
+    - Requires sharded documentation from validation phase
+    - Catalog must be prepared and validated
+  
+  parallel_modules:
+    - Can run validation checks in parallel with development
+    - Catalog operations may continue during development (pattern evolution)
+  
+  handoff_requirements:
+    - Complete story documentation with catalog references
+    - Implementation with validated catalog pattern usage
+    - Context preservation for maintenance and evolution
+    - Audit trail for constitutional compliance

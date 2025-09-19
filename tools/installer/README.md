@@ -1,8 +1,8 @@
-# BMad Method Installer
+# SEAD Method Installer
 
 ## Usage
 
 ```bash
 # Interactive installation
-npx bmad-method install
+npx sead-method-core install
 ```

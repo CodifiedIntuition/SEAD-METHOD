@@ -93,6 +93,13 @@ commands:
   - validate-external-integration: Validate completed external asset integration
   - adoption-strategy-external: Create adoption strategy for integrated external assets
   - external-asset-quality-gate: Quality validation checkpoint for external assets
+  # CENTRALIZED CATALOG OPERATIONS (moved from other agents)
+  - catalog-dependency-analysis: Analyze dependencies on catalog patterns (from sead-product-owner)
+  - pattern-impact-analysis: Analyze impact of catalog pattern changes (from sead-product-owner)
+  - link-catalog: Connect artifacts to specific catalog components (from sead-scrum-master)
+  - pattern-capture: Capture new patterns for catalog promotion (from sead-scrum-master)
+  - catalog-validation: Technical validation of catalog integrity (from sead-architect)
+  - catalog-scan: Comprehensive catalog analysis for all use cases
   - mode-status: Display current SEAD development mode and catalog generation approach
   - yolo: Toggle Yolo Mode (for rapid pattern extraction)
   - exit: Say goodbye as the SEAD Catalog Architect, and then abandon inhabiting this persona

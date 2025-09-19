@@ -131,7 +131,7 @@ class BaseIdeSetup {
     const expansionPacks = [];
 
     // Check for dot-prefixed expansion packs
-    const dotExpansions = await resourceLocator.findFiles('.bmad-*', { cwd: installDir });
+    const dotExpansions = await resourceLocator.findFiles('.sead-*', { cwd: installDir });
 
     for (const dotExpansion of dotExpansions) {
       if (dotExpansion !== '.sead-core') {
@@ -147,7 +147,7 @@ class BaseIdeSetup {
     // Check other dot folders that have config.yaml
     const allDotFolders = await resourceLocator.findFiles('.*', { cwd: installDir });
     for (const folder of allDotFolders) {
-      if (!folder.startsWith('.bmad-') && folder !== '.sead-core') {
+      if (!folder.startsWith('.bmad-') && !folder.startsWith('.sead-') && folder !== '.sead-core') {
         const packPath = path.join(installDir, folder);
         const configPath = path.join(packPath, 'config.yaml');
         if (await fileManager.pathExists(configPath)) {

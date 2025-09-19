@@ -1,0 +1,293 @@
+# <!-- Powered by SEAD-METHOD™ Core -->
+# Updated Story Template with Constitutional Base Import
+# This demonstrates how templates import the constitutional framework base
+
+template:
+  id: sead-story-template-v2-constitutional
+  name: SEAD Story Document (Constitutional Base)
+  version: 2.0
+  methodology: SEAD-METHOD
+  output:
+    format: markdown
+    filename: docs/stories/{{epic_num}}.{{story_num}}.{{story_title_short}}.md
+    title: "SEAD Story {{epic_num}}.{{story_num}}: {{story_title_short}}"
+
+# Import constitutional framework base (eliminates 40% of template content)
+constitutional:
+  import: "constitutional-base-template.yaml"
+  customizations:
+    # Story-specific constitutional requirements
+    story_specific_validation:
+      - Business language validation for stakeholder readiness
+      - Acceptance criteria testability requirements
+      - Catalog component dependency validation
+      - Story-to-epic traceability requirements
+    
+    mode_specific_requirements:
+      prototype:
+        - Basic story structure validation
+        - Simple acceptance criteria format
+        - Optional catalog component references
+      development:
+        - Comprehensive acceptance criteria with Given-When-Then
+        - Required catalog component analysis
+        - Business language validation required
+      build_to_deploy:
+        - Complete testable scenarios with edge cases
+        - Mandatory catalog compliance validation
+        - Full stakeholder sign-off documentation
+
+workflow:
+  mode: interactive
+  elicitation: sead-advanced-elicitation
+  catalog_integration: true
+  constraint_validation: true
+
+agent_config:
+  editable_sections:
+    - Status
+    - Story
+    - Acceptance Criteria
+    - Tasks / Subtasks
+    - Dev Notes
+    - Testing
+    - Change Log
+    - SEAD Mode Configuration
+    - Catalog Component References
+    - Constraint Validation Criteria
+
+sead_configuration:
+  mode_enforcement: true
+  catalog_validation: true
+  context_preservation: true
+  constraint_tracking: true
+
+sections:
+  # Constitutional sections automatically imported from base template
+  # Custom story-specific sections defined below
+  
+  - id: story-metadata
+    title: Story Metadata
+    type: header
+    instruction: Core story identification and tracking information
+    owner: sead-scrum-master
+    
+  - id: epic-reference
+    title: Epic Reference
+    type: reference
+    instruction: Reference to parent epic and story position within epic
+    template: |
+      **Epic**: {{epic_num}}.{{epic_title}}
+      **Story Position**: {{story_num}} of {{total_stories}}
+      **Epic File**: {{epic_file_path}}
+    required: true
+    owner: sead-scrum-master
+
+  - id: status
+    title: Status
+    type: choice
+    choices: [Draft, Approved, InProgress, Review, Done]
+    instruction: Select the current status of the story
+    owner: sead-scrum-master
+    editors: [sead-scrum-master, sead-dev-agent]
+    sead_enhancement: includes catalog compliance validation
+
+  - id: story
+    title: Story
+    type: template-text
+    template: |
+      **As a** {{role}},
+      **I want** {{action}},
+      **so that** {{benefit}}
+      
+      **SEAD Context**: This story will be implemented using {{catalog_patterns}} with {{sead_mode}} constraints.
+    instruction: Define the user story using the standard format enhanced with SEAD catalog context
+    elicit: true
+    owner: sead-scrum-master
+    editors: [sead-scrum-master]
+
+  - id: acceptance-criteria
+    title: Acceptance Criteria
+    type: numbered-list
+    instruction: Copy the acceptance criteria numbered list from the epic file, enhanced with catalog compliance requirements
+    elicit: true
+    owner: sead-scrum-master
+    editors: [sead-scrum-master, sead-pm]
+    sead_enhancement: includes mode-specific validation criteria
+
+  - id: spec-kit-acceptance-scenarios
+    title: Given-When-Then Acceptance Scenarios (Spec-Kit Enhancement)
+    type: structured-list
+    structure: |
+      **Scenario {{scenario_number}}**: {{scenario_title}}
+      - **Given** {{precondition_or_initial_state}}
+      - **When** {{user_action_or_trigger}}
+      - **Then** {{expected_measurable_outcome}}
+      
+      **Edge Case {{edge_case_number}}**: {{edge_case_title}}
+      - **Given** {{boundary_condition}}
+      - **When** {{action_or_condition}}
+      - **Then** {{specific_expected_behavior}}
+    instruction: Transform acceptance criteria into testable Given-When-Then scenarios. Each scenario must be measurable - no vague outcomes like "works well" or "is user-friendly"
+    required: true
+    owner: sead-scrum-master
+    editors: [sead-scrum-master, sead-pm]
+    validation: business-language-appropriate
+
+  - id: business-language-validation
+    title: Business Language Validation (Spec-Kit Enhancement)
+    type: structured-text
+    template: |
+      **Stakeholder Readiness**: {{non_technical_stakeholder_friendly}}
+      
+      **Technical Details Removed**: 
+      {{#each removed_technical_details}}
+      - {{this}} → Moved to implementation plan
+      {{/each}}
+      
+      **Business Value Clarity**:
+      - **User Value**: {{clear_user_value}}
+      - **Business Outcomes**: {{measurable_business_outcomes}}
+      - **WHAT vs HOW Separation**: {{what_vs_how_properly_separated}}
+      
+      **Language Validation Status**: {{validation_status}}
+    instruction: Ensure story content is appropriate for non-technical stakeholders, with user needs (WHAT) clearly separated from implementation details (HOW)
+    required: true
+    owner: sead-scrum-master
+
+  - id: catalog-component-analysis
+    title: Catalog Component Analysis
+    type: structured-list
+    structure: |
+      **Required Components**:
+      {{#each required_components}}
+      - **Component**: {{component_name}}
+        - **Domain**: {{domain}}
+        - **Status**: {{available|partial|missing|needs_extension}}
+        - **Usage Pattern**: {{how_component_will_be_used}}
+        - **Compliance Level**: {{mode_specific_compliance_level}}
+      {{/each}}
+      
+      **New Patterns to Create**:
+      {{#each new_patterns}}
+      - **Pattern**: {{pattern_name}}
+        - **Domain**: {{target_domain}}
+        - **Rationale**: {{why_new_pattern_needed}}
+        - **Promotion Plan**: {{how_pattern_will_be_generalized}}
+      {{/each}}
+    instruction: Analyze catalog component dependencies and identify new patterns this story will create
+    required: true
+    owner: sead-scrum-master
+    editors: [sead-architect, sead-catalog-architect]
+
+  - id: tasks-subtasks
+    title: Tasks / Subtasks
+    type: interactive-checklist
+    instruction: List specific tasks needed to complete this story. Tasks are created by scrum master, executed by developer
+    template: |
+      ### Implementation Tasks
+      {{#each implementation_tasks}}
+      - [ ] {{task_description}}
+        - **Catalog Pattern**: {{applicable_catalog_pattern}}
+        - **Validation Required**: {{validation_requirements}}
+        - **Definition of Done**: {{task_completion_criteria}}
+      {{/each}}
+      
+      ### Testing Tasks
+      {{#each testing_tasks}}
+      - [ ] {{test_description}}
+        - **Test Type**: {{unit|integration|e2e}}
+        - **Coverage Requirement**: {{coverage_percentage}}
+        - **Acceptance Validation**: {{acceptance_criteria_covered}}
+      {{/each}}
+    owner: sead-scrum-master
+    editors: [sead-scrum-master, sead-developer]
+
+  - id: dev-agent-record
+    title: Dev Agent Record
+    type: structured-text
+    template: |
+      ### Agent Model Used
+      {{agent_model_version}}
+      
+      ### Debug Log References
+      {{#each debug_logs}}
+      - {{log_reference}}: {{log_description}}
+      {{/each}}
+      
+      ### Completion Notes
+      {{#each completion_notes}}
+      - {{note_timestamp}}: {{completion_note}}
+      {{/each}}
+      
+      ### File List
+      {{#each modified_files}}
+      - {{file_path}} ({{created|modified|deleted}})
+      {{/each}}
+      
+      ### Catalog Compliance Report
+      **Patterns Used**: {{patterns_used}}
+      **New Patterns Created**: {{new_patterns_created}}
+      **Compliance Level**: {{compliance_percentage}}
+      **Validation Results**: {{validation_status}}
+    instruction: Developer-managed section for tracking implementation progress and catalog compliance
+    owner: sead-developer
+    editors: [sead-developer]
+
+  - id: testing
+    title: Testing
+    type: structured-text
+    template: |
+      ### Test Strategy
+      {{test_strategy_description}}
+      
+      ### Test Coverage
+      **Unit Tests**: {{unit_test_coverage}}%
+      **Integration Tests**: {{integration_test_coverage}}%
+      **E2E Tests**: {{e2e_test_coverage}}%
+      
+      ### Acceptance Test Results
+      {{#each acceptance_tests}}
+      - **Scenario**: {{scenario_name}}
+        - **Status**: {{passed|failed|pending}}
+        - **Evidence**: {{test_evidence_location}}
+      {{/each}}
+      
+      ### Constitutional Compliance Testing
+      **Catalog Pattern Testing**: {{catalog_pattern_test_results}}
+      **Mode Constraint Validation**: {{constraint_validation_results}}
+      **Quality Gate Results**: {{quality_gate_status}}
+    instruction: Comprehensive testing documentation with constitutional compliance validation
+    owner: sead-qa
+    editors: [sead-qa, sead-developer]
+
+  - id: change-log
+    title: Change Log
+    type: timestamped-list
+    instruction: Track all changes to this story with timestamps and rationale
+    template: |
+      {{#each changes}}
+      - **{{timestamp}}** ({{author}}): {{change_description}}
+        - **Rationale**: {{change_rationale}}
+        - **Constitutional Impact**: {{constitutional_impact}}
+        - **Catalog Impact**: {{catalog_impact}}
+      {{/each}}
+    owner: sead-scrum-master
+    editors: [sead-scrum-master, sead-developer, sead-qa]
+
+# Constitutional Integration
+# The constitutional base template automatically provides:
+# - Mode detection and enforcement
+# - Catalog integration requirements
+# - Quality gate definitions
+# - Constraint validation rules
+# - Handoff documentation requirements
+# - Audit trail maintenance
+
+# Template Benefits with Constitutional Base:
+# - 40% reduction in template size
+# - Consistent constitutional compliance
+# - Automatic mode-specific validation
+# - Standardized quality gates
+# - Unified handoff procedures
+# - Single source of truth for constitutional requirements

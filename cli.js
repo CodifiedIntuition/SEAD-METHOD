@@ -770,6 +770,32 @@ async function initializeSeadProject(projectPath, projectName, options) {
         experimental_extensions: false
       }
     },
+    // Workspace configuration for CLI output locations
+    workspace: {
+      base_path: './sead-workspace',
+      cli_outputs: {
+        stories: './sead-workspace/stories',
+        implementations: './sead-workspace/implementations',
+        tasks: './sead-workspace/tasks',
+        specifications: './sead-workspace/specifications',
+        planning: './sead-workspace/planning'
+      },
+      traditional_locations: {
+        dev_story_location: 'docs/stories',
+        specifications: 'docs/specifications',
+        architecture: 'docs/architecture',
+        qa_location: 'docs/qa'
+      },
+      // Agent file discovery configuration
+      discovery_paths: {
+        stories: ['./sead-workspace/stories', 'docs/stories', './stories'],
+        implementations: ['./sead-workspace/implementations', 'docs/implementations', './implementations'],
+        specifications: ['./sead-workspace/specifications', 'docs/specifications', './specs'],
+        planning: ['./sead-workspace/planning', 'docs/planning', './planning'],
+        tasks: ['./sead-workspace/tasks', 'docs/tasks', './tasks'],
+        qa_gates: ['docs/qa/gates', './qa/gates', './sead-workspace/qa/gates']
+      }
+    },
     data_strategy: {
       demo: { storage: 'sqlite', schema: 'full_production_plus_experimental' },
       mock: { storage: 'production_like', schema: 'production_plus_extensions' },

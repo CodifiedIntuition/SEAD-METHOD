@@ -1,0 +1,497 @@
+# <!-- Powered by SEAD-METHOD™ Core -->
+# SEAD Unified Workflow Framework
+# Consolidates all 6 workflows into a single parameterized system
+# Eliminates 83% workflow redundancy while maintaining all functionality
+
+workflow:
+  id: sead-unified-workflow
+  name: SEAD Unified Development Workflow
+  description: >-
+    Unified parameterized workflow that handles all SEAD development scenarios
+    through conditional logic and modular architecture. Supports greenfield/brownfield
+    projects across fullstack/service/ui scopes with complete catalog integration
+    and constitutional compliance.
+  version: "2.0.0"
+  methodology: SEAD-METHOD
+  
+  # Import constitutional framework base
+  constitutional:
+    import: "constitutional-base-template.yaml"
+    customizations:
+      workflow_specific_validation:
+        - Parameter validation for project_phase and scope
+        - Conditional quality gates based on complexity
+        - Agent coordination validation for multi-agent workflows
+        - Catalog integration requirements per workflow path
+
+# Workflow Parameters - Replaces 6 separate workflow files
+parameters:
+  project_phase:
+    type: enum
+    values: [greenfield, brownfield]
+    required: true
+    description: "Whether starting new project or enhancing existing system"
+    
+  scope:
+    type: enum  
+    values: [fullstack, service, ui]
+    required: true
+    description: "Application scope and architecture complexity"
+    
+  complexity:
+    type: enum
+    values: [simple, standard, complex]
+    default: standard
+    description: "Project complexity affecting workflow depth and validation"
+    
+  mode:
+    type: enum
+    values: [prototype, development, build-to-deploy]
+    default: development
+    description: "SEAD development mode determining constraint enforcement level"
+
+# Project Type Classification
+project_types:
+  greenfield_fullstack:
+    condition: "project_phase == 'greenfield' && scope == 'fullstack'"
+    types: [web-app, saas, enterprise-app, prototype, mvp]
+    
+  greenfield_service:
+    condition: "project_phase == 'greenfield' && scope == 'service'"
+    types: [api-service, microservice, backend-service, data-service]
+    
+  greenfield_ui:
+    condition: "project_phase == 'greenfield' && scope == 'ui'"
+    types: [frontend-app, component-library, design-system, ui-framework]
+    
+  brownfield_fullstack:
+    condition: "project_phase == 'brownfield' && scope == 'fullstack'"
+    types: [feature-addition, refactoring, modernization, integration-enhancement]
+    
+  brownfield_service:
+    condition: "project_phase == 'brownfield' && scope == 'service'"
+    types: [service-enhancement, api-evolution, performance-optimization, integration-update]
+    
+  brownfield_ui:
+    condition: "project_phase == 'brownfield' && scope == 'ui'"
+    types: [ui-enhancement, component-update, design-refresh, accessibility-improvement]
+
+# SEAD Configuration
+sead_configuration:
+  default_mode: development
+  catalog_enforcement: true
+  constraint_validation: progressive
+  context_preservation: true
+  
+  mode_progression:
+    prototype: "Rapid experimentation with minimal catalog constraints"
+    development: "Catalog-preferred with extension tracking" 
+    build_to_deploy: "Strict catalog-only enforcement"
+
+# Modular Workflow Architecture
+modules:
+  # Module 1: Analysis and Discovery
+  analysis:
+    id: analysis_module
+    description: "Project context analysis and requirement discovery"
+    agents: [sead-analyst, sead-product-owner]
+    applicable_to: all
+    
+    steps:
+      - step: project_classification
+        agent: sead-analyst
+        condition: true
+        constitutional_validation: required
+        creates: 
+          - project-classification.md (brownfield only)
+          - project-brief.md (greenfield only)
+        actions:
+          greenfield:
+            - action: create_project_brief
+              task: sead-facilitate-brainstorming-session
+              sead_enhancements:
+                - catalog_research: "Check existing catalog patterns for similar projects"
+                - mode_awareness: "Adapt analysis depth to current SEAD mode"
+                - constraint_documentation: "Document catalog gaps for future extension"
+              optional_steps:
+                - catalog_pattern_analysis
+                - brainstorming_session
+                - market_research_prompt
+          brownfield:
+            - action: classify_enhancement_scope
+              task: sead-advanced-elicitation
+              sead_enhancements:
+                - constitutional_enhancement_classification: "Classify with governance validation"
+                - catalog_integration_impact: "Assess catalog integration requirements"
+                - context_preservation_analysis: "Analyze context preservation needs"
+              routing_conditions:
+                single_story: "< 4 hours, use sead-brownfield-create-story"
+                small_feature: "1-3 stories, use sead-brownfield-create-epic"
+                major_enhancement: "Multiple epics, continue full workflow"
+
+  # Module 2: Requirements and Specifications
+  requirements:
+    id: requirements_module
+    description: "Requirements gathering and specification creation"
+    agents: [sead-product-owner, sead-project-manager]
+    condition: "complexity != 'simple'"
+    
+    steps:
+      - step: requirements_development
+        agent: sead-product-owner
+        constitutional_validation: required
+        creates:
+          - prd.md (greenfield)
+          - enhancement-specification.md (brownfield)
+        requires:
+          greenfield: [project-brief.md, catalog-patterns-analysis.md]
+          brownfield: [project-classification.md, existing-system-analysis.md]
+        sead_enhancements:
+          - catalog_integration: "Reference catalog components in user stories"
+          - mode_constraints: "Include mode-appropriate acceptance criteria"
+          - validation_requirements: "Add SEAD constraint validation to stories"
+          - constitutional_compliance: "Ensure governance validation in specifications"
+
+  # Module 3: Design and Architecture
+  design:
+    id: design_module
+    description: "System design and architecture definition"
+    agents: [sead-architect, sead-ux-expert, sead-catalog-architect]
+    condition: "scope in ['fullstack', 'service'] || (scope == 'ui' && complexity == 'complex')"
+    
+    steps:
+      - step: ux_design
+        agent: sead-ux-expert
+        condition: "scope in ['fullstack', 'ui']"
+        creates: front-end-spec.md
+        requires: 
+          - prd.md (greenfield) / enhancement-specification.md (brownfield)
+          - catalog/design-system/
+        sead_enhancements:
+          - design_system_integration: "Use existing catalog design system patterns"
+          - component_reuse: "Prioritize catalog UI components over custom designs"
+          - constraint_compliance: "Validate designs against current mode constraints"
+        optional_steps:
+          - user_research_prompt
+          - design_system_audit
+          - ai_generation_prompt (greenfield only)
+          
+      - step: architecture_design
+        agent: sead-architect
+        creates:
+          fullstack: fullstack-architecture.md
+          service: service-architecture.md
+          ui: ui-architecture.md
+        requires:
+          - specification file
+          - front-end-spec.md (if ui scope)
+          - catalog/api-contracts/
+          - catalog/shared-types/
+          - catalog/data-strategy/
+          - catalog/deployment-strategy/
+        sead_enhancements:
+          - catalog_pattern_selection: "Select appropriate patterns from catalog"
+          - three_tier_design: "Design data/deployment strategies for all tiers"
+          - constraint_architecture: "Ensure architecture supports all SEAD modes"
+          - pattern_gap_analysis: "Identify missing catalog patterns"
+        conditional_actions:
+          greenfield:
+            - comprehensive_architecture_design
+            - catalog_bootstrap_planning
+          brownfield:
+            - existing_system_integration
+            - migration_strategy_design
+
+  # Module 4: Catalog Operations
+  catalog_operations:
+    id: catalog_module
+    description: "Catalog validation, bootstrap, and integration"
+    agents: [sead-catalog-architect]
+    condition: "project_phase == 'greenfield' || catalog_impact == 'significant'"
+    
+    steps:
+      - step: catalog_preparation
+        agent: sead-catalog-architect
+        actions:
+          - validate_catalog_completeness
+          - configure_constraint_validation
+          - setup_progressive_validation
+        sead_enhancements:
+          - pattern_availability_check: "Verify required patterns exist"
+          - constraint_configuration: "Ensure SEAD mode configuration correct"
+          - validation_setup: "Configure progressive validation pipeline"
+          
+      - step: catalog_bootstrap
+        agent: sead-catalog-architect
+        condition: "project_phase == 'greenfield'"
+        task: greenfield-catalog-bootstrap
+        creates: initial_catalog_structure
+        sead_enhancements:
+          - domain_initialization: "Initialize all 11 catalog domains"
+          - pattern_seeding: "Seed initial patterns from architecture"
+          - validation_framework: "Setup catalog validation framework"
+
+  # Module 5: Validation and Quality Gates
+  validation:
+    id: validation_module
+    description: "Document validation and quality assurance"
+    agents: [sead-qa, sead-product-owner]
+    applicable_to: all
+    
+    steps:
+      - step: artifact_validation
+        agent: sead-product-owner
+        task: execute-checklist
+        checklist: sead-po-master-checklist
+        validates: all_artifacts
+        sead_enhancements:
+          - catalog_compliance_check: "Validate appropriate catalog pattern references"
+          - constraint_consistency: "Ensure consistent SEAD mode constraints"
+          - three_tier_validation: "Validate data/deployment strategies complete"
+          - constitutional_validation: "Verify governance compliance"
+          
+      - step: quality_gate_enforcement
+        agent: sead-qa
+        condition: "mode in ['development', 'build-to-deploy']"
+        task: sead-qa-gate
+        sead_enhancements:
+          - mode_specific_gates: "Apply mode-appropriate quality gates"
+          - catalog_compliance_testing: "Test catalog pattern usage"
+          - constraint_validation_testing: "Validate constraint enforcement"
+
+  # Module 6: Development Coordination
+  development:
+    id: development_module
+    description: "Development setup and story management"
+    agents: [sead-scrum-master, sead-developer]
+    applicable_to: all
+    
+    steps:
+      - step: document_sharding
+        agent: sead-product-owner
+        task: sead-shard-doc
+        creates: sharded_docs
+        requires: validated_artifacts
+        sead_enhancements:
+          - catalog_reference_preservation: "Maintain catalog references in shards"
+          - constraint_context_preservation: "Preserve SEAD constraint context"
+          
+      - step: story_creation
+        agent: sead-scrum-master
+        task: sead-create-story
+        creates: story.md
+        requires: [sharded_docs, catalog/]
+        repeats: for_each_epic
+        sead_enhancements:
+          - catalog_component_linking: "Link tasks to specific catalog components"
+          - mode_constraint_integration: "Include mode constraints in acceptance criteria"
+          - context_preservation: "Include catalog references for developer context"
+          
+      - step: development_implementation
+        agent: sead-developer
+        creates: implementation_files
+        requires: [story.md, catalog/]
+        sead_enhancements:
+          - catalog_pattern_implementation: "Implement using catalog patterns"
+          - mode_constraint_enforcement: "Enforce current mode constraints"
+          - pattern_capture: "Capture new patterns for catalog promotion"
+          - constraint_validation: "Validate against mode constraints"
+
+# Conditional Logic Engine
+conditionals:
+  # Workflow routing based on parameters
+  workflow_selection:
+    simple_brownfield_story:
+      condition: "project_phase == 'brownfield' && complexity == 'simple'"
+      modules: [analysis]
+      exit_after: analysis
+      
+    simple_brownfield_epic:
+      condition: "project_phase == 'brownfield' && complexity == 'standard' && estimated_stories <= 3"
+      modules: [analysis, requirements]
+      exit_after: requirements
+      
+    full_greenfield:
+      condition: "project_phase == 'greenfield'"
+      modules: [analysis, requirements, design, catalog_operations, validation, development]
+      
+    full_brownfield:
+      condition: "project_phase == 'brownfield' && complexity == 'complex'"
+      modules: [analysis, requirements, design, validation, development]
+      catalog_operations: conditional_on_impact
+      
+  # Module inclusion based on scope
+  scope_conditions:
+    ux_design_required:
+      condition: "scope in ['fullstack', 'ui']"
+      includes: [design.ux_design]
+      
+    architecture_required:
+      condition: "scope in ['fullstack', 'service'] || (scope == 'ui' && complexity == 'complex')"
+      includes: [design.architecture_design]
+      
+    catalog_bootstrap_required:
+      condition: "project_phase == 'greenfield'"
+      includes: [catalog_operations.catalog_bootstrap]
+
+# Agent Handoff Patterns
+handoff_patterns:
+  standard_handoff:
+    pattern: |
+      {source_agent} completes {output_artifact} with catalog integration.
+      Save as {file_path} in project docs/.
+      {target_agent} begins {next_task} using saved artifact and catalog references.
+    
+  validation_handoff:
+    pattern: |
+      {source_agent} requests validation of {artifact} for catalog compliance.
+      {validator_agent} validates using {checklist} with constitutional requirements.
+      If issues found: return to {source_agent} for catalog/constraint fixes.
+      If validated: proceed to {next_step} with approval documentation.
+    
+  conditional_handoff:
+    pattern: |
+      {source_agent} completes {artifact} and evaluates {condition}.
+      If {condition} true: handoff to {conditional_agent} for {conditional_task}.
+      If {condition} false: proceed directly to {next_agent} for {next_task}.
+
+# Quality Gates by Mode
+quality_gates:
+  prototype:
+    validation_level: basic
+    required_gates:
+      - basic_syntax_validation
+      - constitutional_compliance_check
+      - catalog_usage_tracking
+    catalog_enforcement: optional
+    
+  development:
+    validation_level: comprehensive
+    required_gates:
+      - comprehensive_validation
+      - catalog_compliance_validation
+      - constraint_enforcement_check
+      - quality_documentation_review
+    catalog_enforcement: preferred
+    
+  build_to_deploy:
+    validation_level: strict
+    required_gates:
+      - strict_validation
+      - mandatory_catalog_compliance
+      - full_constraint_enforcement
+      - security_validation
+      - performance_validation
+      - constitutional_audit_trail
+    catalog_enforcement: mandatory
+
+# Flow Diagram Generation
+flow_diagram: |
+  ```mermaid
+  graph TD
+      A[Start: Unified SEAD Workflow] --> A1{Parameter Validation}
+      A1 --> B[Analysis Module]
+      B --> B1{Project Phase?}
+      
+      B1 -->|Greenfield| B2[Create Project Brief]
+      B1 -->|Brownfield| B3[Classify Enhancement]
+      
+      B3 --> B4{Enhancement Scope?}
+      B4 -->|Simple Story| EXIT1[Create Story & Exit]
+      B4 -->|Small Epic| C1[Requirements Module → Exit]
+      B4 -->|Major Enhancement| C[Requirements Module]
+      
+      B2 --> C[Requirements Module]
+      C --> C2{Complexity?}
+      C2 -->|Simple| V[Validation Module]
+      C2 -->|Standard/Complex| D[Design Module]
+      
+      D --> D1{Scope?}
+      D1 -->|UI/Fullstack| D2[UX Design]
+      D1 -->|Service| D3[Architecture Only]
+      D2 --> D3[Architecture Design]
+      
+      D3 --> CAT{Catalog Operations Needed?}
+      CAT -->|Yes| CAT1[Catalog Module]
+      CAT -->|No| V[Validation Module]
+      CAT1 --> V
+      
+      V --> V1[Artifact Validation]
+      V1 --> V2{Mode Gates?}
+      V2 -->|Development+| V3[Quality Gates]
+      V2 -->|Prototype| DEV[Development Module]
+      V3 --> DEV
+      
+      DEV --> DEV1[Document Sharding]
+      DEV1 --> DEV2[Story Creation]
+      DEV2 --> DEV3[Implementation Cycle]
+      DEV3 --> END[Workflow Complete]
+      
+      style A fill:#FFB6C1
+      style A1 fill:#FFB6C1
+      style CAT fill:#FFB6C1
+      style V2 fill:#FFB6C1
+      style EXIT1 fill:#90EE90
+      style C1 fill:#90EE90
+      style END fill:#90EE90
+      style B fill:#FFE4B5
+      style C fill:#FFE4B5
+      style D fill:#FFE4B5
+      style V fill:#F0E68C
+      style DEV fill:#ADD8E6
+  ```
+
+# Benefits Achieved
+consolidation_benefits:
+  file_reduction: "6 workflows → 1 parameterized workflow (83% reduction)"
+  maintenance_improvement: "Single source of truth for all workflow logic"
+  consistency_enhancement: "Unified handoff patterns and quality gates"
+  flexibility_increase: "Parameter-driven customization for all scenarios"
+  constitutional_integration: "Consistent constitutional compliance across all paths"
+  catalog_optimization: "Unified catalog integration and validation"
+  
+# Usage Examples
+usage_examples:
+  greenfield_fullstack_prototype:
+    parameters:
+      project_phase: greenfield
+      scope: fullstack
+      complexity: standard
+      mode: prototype
+    expected_modules: [analysis, requirements, design, catalog_operations, validation, development]
+    
+  brownfield_service_development:
+    parameters:
+      project_phase: brownfield
+      scope: service
+      complexity: complex
+      mode: development
+    expected_modules: [analysis, requirements, design, validation, development]
+    
+  simple_brownfield_story:
+    parameters:
+      project_phase: brownfield
+      scope: ui
+      complexity: simple
+      mode: development
+    expected_modules: [analysis]
+    exits_after: analysis
+
+# Migration Strategy
+migration_from_legacy:
+  greenfield_fullstack: "Maps directly to greenfield+fullstack+standard parameters"
+  greenfield_service: "Maps directly to greenfield+service+standard parameters"
+  greenfield_ui: "Maps directly to greenfield+ui+standard parameters"
+  brownfield_fullstack: "Maps directly to brownfield+fullstack+complex parameters"
+  brownfield_service: "Maps directly to brownfield+service+complex parameters"
+  brownfield_ui: "Maps directly to brownfield+ui+complex parameters"
+  
+  validation_required: "All legacy workflows must be tested against unified framework"
+  rollback_plan: "Maintain legacy workflows during transition period"
+  
+# Implementation Notes
+implementation:
+  cli_integration: "Update CLI to accept workflow parameters instead of workflow selection"
+  agent_updates: "No agent changes required - uses existing agent capabilities"
+  template_integration: "Leverages constitutional base template for consistent compliance"
+  testing_framework: "Comprehensive testing across all parameter combinations required"

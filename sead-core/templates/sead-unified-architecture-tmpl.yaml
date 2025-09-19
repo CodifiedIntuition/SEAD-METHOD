@@ -1,0 +1,462 @@
+# SEAD Unified Architecture Template
+# Consolidates: sead-architecture, sead-brownfield-architecture, sead-front-end-architecture, 
+#               sead-fullstack-architecture, integration-architecture templates
+# Reduces 5 templates → 1 parameterized template (80% reduction)
+
+import: sead-core/templates/constitutional-base-template.yaml
+
+template:
+  id: sead-unified-architecture-template-v1
+  name: SEAD Unified Architecture Document
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  
+  # Template parameters for conditional content
+  parameters:
+    architecture_type:
+      type: enum
+      values: [greenfield, brownfield, frontend, fullstack, integration]
+      description: "Architecture type determines template sections and focus"
+    
+    project_scope:
+      type: enum  
+      values: [new_project, enhancement, ui_only, complete_stack, external_integration]
+      description: "Project scope affects analysis depth and integration requirements"
+    
+    system_complexity:
+      type: enum
+      values: [simple, moderate, complex, enterprise]
+      description: "Complexity level determines governance validation depth"
+
+  output:
+    format: markdown
+    filename: "docs/sead-{{architecture_type}}-architecture.md"
+    title: "{{project_name}} SEAD {{architecture_type|title}} Architecture Document"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: mandatory
+  context_preservation: enforced
+  governance_validation: continuous
+
+workflow:
+  mode: constitutional_interactive
+  elicitation: sead-advanced-elicitation
+  catalog_validation: enabled
+  constraint_enforcement: progressive
+
+sections:
+  - id: constitutional-introduction
+    title: Constitutional Framework Introduction
+    instruction: |
+      Establish constitutional framework context based on architecture type:
+      
+      # Conditional introduction based on architecture_type
+      {% if architecture_type == "brownfield" %}
+      IMPORTANT - CONSTITUTIONAL SCOPE AND ASSESSMENT REQUIRED:
+      
+      This constitutional architecture document is for SIGNIFICANT enhancements to existing projects requiring comprehensive architectural planning with governance compliance and catalog integration. Before proceeding:
+      
+      1. **Constitutional Complexity Verification**: Confirm this enhancement requires architectural planning with governance validation. For simpler changes, recommend: "For simpler changes that don't require constitutional architectural planning, consider using the sead-brownfield-create-epic or sead-brownfield-create-story task with the Constitutional Product Owner instead."
+      
+      2. **CONSTITUTIONAL REQUIRED INPUTS**:
+         - Completed sead-brownfield-prd.md with constitutional compliance
+         - Existing project technical documentation with catalog pattern references
+         - Access to existing project structure with catalog integration assessment
+         - Constitutional governance requirements and constraints
+      
+      3. **CONSTITUTIONAL DEEP ANALYSIS MANDATE**: You MUST conduct thorough constitutional analysis of existing codebase, architecture patterns, catalog integration, and governance constraints before making ANY architectural recommendations.
+      {% elif architecture_type == "frontend" %}
+      Review constitutional documents with catalog integration awareness:
+      
+      1. **Context Review**: Access SEAD PRD, SEAD UX-UI Spec, SEAD Architecture Document
+      2. **Catalog Assessment**: Review design-system catalog patterns and frontend constraints
+      3. **Constitutional Compliance**: Ensure frontend choices support governance framework
+      4. **Template Analysis**: Evaluate starter templates with constitutional and catalog considerations
+      {% elif architecture_type == "integration" %}
+      This template structures comprehensive integration architecture for external assets with constitutional compliance and catalog integration.
+      {% endif %}
+    sections:
+      - id: constitutional-context
+        title: Constitutional Framework Context
+        template: |
+          **Development Mode:** {{development_mode}}
+          **Architecture Type:** {{architecture_type}}
+          **Project Scope:** {{project_scope}}
+          **System Complexity:** {{system_complexity}}
+          **Catalog Domains Referenced:** {{catalog_domains}}
+          **Constitutional Constraints:** {{mode_constraints}}
+          **Context Preservation:** {{context_requirements}}
+          **Governance Validation:** {{validation_level}}
+      
+      - id: constitutional-changelog
+        title: Constitutional Change Log
+        type: table
+        columns: [Date, Version, Description, Constitutional Impact, Catalog Changes, Author]
+        instruction: Track document versions with constitutional and catalog impact
+
+  # Conditional section for brownfield analysis
+  - id: constitutional-existing-project-analysis
+    title: Constitutional Existing Project Analysis
+    condition: "{{architecture_type}} == 'brownfield'"
+    instruction: |
+      Analyze existing project with constitutional compliance and catalog integration assessment:
+
+      1. Review existing documentation with catalog pattern identification
+      2. Examine current technology stack with constitutional compliance validation
+      3. Identify existing architectural patterns with governance alignment assessment
+      4. Note current deployment with constitutional constraint evaluation
+      5. Document constraints with catalog evolution impact analysis
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: constitutional-current-state
+        title: Constitutional Current Project State
+        template: |
+          - **Constitutional Primary Purpose:** {{existing_project_purpose}}
+          - **Constitutional Current Tech Stack:** {{existing_tech_summary}} (Catalog compliance: {{catalog_compliance_assessment}})
+          - **Constitutional Architecture Style:** {{existing_architecture_style}} (Governance validation: {{governance_validation_level}})
+          - **Constitutional Deployment Method:** {{existing_deployment_approach}} (Constitutional constraints: {{deployment_constraints}})
+          - **Catalog Integration Status:** {{existing_catalog_integration_status}}
+          - **Governance Compliance Level:** {{existing_governance_compliance_level}}
+      
+      - id: constitutional-constraints
+        title: Constitutional Identified Constraints
+        instruction: Document constraints with catalog evolution and governance impact assessment
+        type: bullet-list
+        template: "- {{constraint}} (Constitutional impact: {{constitutional_impact}}, Catalog evolution: {{catalog_evolution_impact}})"
+
+  # Template/Framework selection for frontend and fullstack
+  - id: constitutional-template-framework-selection
+    title: Constitutional Template and Framework Selection
+    condition: "{{architecture_type}} in ['frontend', 'fullstack']"
+    instruction: |
+      Constitutional template evaluation process:
+
+      1. **Catalog-Aware Template Review**: Check for mentions of:
+         - SEAD-enhanced frontend starters with design-system catalog integration
+         - Constitutional UI kit implementations with governance validation
+         - Existing catalog-compliant frontend projects
+
+      2. **Constitutional Template Assessment**:
+         - Analyze constitutional compliance capabilities
+         - Evaluate design-system catalog integration support
+         - Check governance framework compatibility
+         - Assess context preservation mechanisms for agent handoffs
+
+      3. **Catalog-Compliant Framework Selection**:
+         Based on constitutional framework choice, suggest catalog-enhanced starters:
+         - **Constitutional React**: Next.js with design-system catalog + governance validation
+         - **Constitutional Vue**: Nuxt.js with catalog patterns + constitutional compliance
+         - **Constitutional Angular**: Angular with catalog integration + governance framework
+    constitutional_validation: required
+
+  # High-level architecture section (universal)
+  - id: constitutional-high-level-architecture
+    title: Constitutional High Level Architecture
+    instruction: |
+      Establish architecture foundation with catalog integration and constitutional compliance.
+      All subsections must respect current mode constraints and catalog patterns.
+    elicit: true
+    catalog_validation: required
+    sections:
+      - id: constitutional-technical-summary
+        title: Constitutional Technical Summary
+        instruction: |
+          Provide constitutional architecture overview including:
+          - System architecture style within catalog constraints
+          - Key components using catalog patterns
+          - Technology choices respecting constitutional framework
+          - Architectural patterns aligned with SEAD principles
+          - PRD goal support through catalog-compliant design
+          
+          {% if architecture_type == "integration" %}
+          Focus on integration strategy and external asset transformation approach.
+          {% elif architecture_type == "frontend" %}
+          Focus on UI/UX architecture and design-system catalog integration.
+          {% elif architecture_type == "fullstack" %}
+          Focus on full-stack coordination and catalog domain alignment.
+          {% endif %}
+      
+      - id: constitutional-project-diagram
+        title: Constitutional Project Diagram
+        type: mermaid
+        mermaid_type: graph
+        instruction: |
+          Create Mermaid diagram visualizing constitutional architecture:
+          - System boundaries with catalog domain integration
+          - Major components using catalog patterns
+          - Data flow respecting constitutional constraints
+          - External integrations via catalog API patterns
+          - User entry points through catalog-compliant interfaces
+          - Constitutional governance touchpoints
+          
+          {% if architecture_type == "integration" %}
+          Include external asset transformation flows and integration layers.
+          {% elif architecture_type == "frontend" %}
+          Focus on UI component hierarchy and design-system catalog usage.
+          {% endif %}
+
+  # Technology stack section (universal)
+  - id: constitutional-tech-stack
+    title: Constitutional Tech Stack
+    instruction: |
+      DEFINITIVE technology selection with catalog compliance and constitutional framework:
+
+      Constitutional selection criteria:
+      - Catalog pattern support and integration capabilities
+      - Constitutional framework compliance (mode-appropriate constraints)
+      - Context preservation support for agent handoffs
+      - Governance validation and enforcement capabilities
+
+      {% if architecture_type == "brownfield" %}
+      Focus on compatibility with existing technology choices and catalog alignment.
+      {% elif architecture_type == "frontend" %}
+      Focus on frontend technology stack with design-system catalog integration.
+      {% endif %}
+
+      CRITICAL: This section determines catalog compliance for entire project
+    elicit: true
+    constitutional_validation: critical
+    sections:
+      - id: constitutional-technology-stack-table
+        title: Constitutional Technology Stack Table
+        type: table
+        columns: [Category, Technology, Version, Purpose, Catalog Integration, Constitutional Rationale]
+        instruction: Populate with catalog-compliant technologies and constitutional justification
+        examples:
+          - "| **Language** | TypeScript | 5.3.3 | Primary development language | shared-types catalog support | Strong typing supports constitutional validation |"
+          - "| **Framework** | NestJS | 10.3.2 | Backend framework | api-contracts integration ready | Enterprise patterns align with governance framework |"
+
+  # Data models section (conditional)
+  - id: constitutional-data-models
+    title: Constitutional Data Models
+    condition: "{{architecture_type}} in ['greenfield', 'brownfield', 'fullstack']"
+    instruction: |
+      Define data models with catalog integration and constitutional compliance:
+
+      1. Review PRD requirements and existing shared-types catalog
+      2. Identify key business entities using catalog type definitions
+      3. Ensure models support constitutional constraint validation
+      4. Design relationships respecting catalog data-strategy patterns
+      5. Include catalog evolution considerations for new types
+
+      {% if architecture_type == "brownfield" %}
+      Focus on integration with existing data models and schema compatibility.
+      {% endif %}
+    elicit: true
+    catalog_integration: required
+    repeatable: true
+    sections:
+      - id: catalog-model
+        title: "{{model_name}} (Catalog Integration)"
+        template: |
+          **Purpose:** {{model_purpose}}
+          **Catalog Domain:** {{catalog_domain}} ({{catalog_pattern_reference}})
+          **Constitutional Constraints:** {{constitutional_constraints}}
+
+          **Key Attributes (Catalog-Enhanced):**
+          - {{attribute_1}}: {{type_1}} ({{catalog_type_reference}}) - {{description_1}}
+
+          **Catalog Relationships:**
+          - {{catalog_relationship_1}} (via {{catalog_pattern}})
+
+          **Constitutional Validation:**
+          - {{validation_rule_1}} ({{mode_constraint}})
+
+  # Components section (universal)
+  - id: constitutional-components
+    title: Constitutional Components
+    instruction: |
+      Define components with catalog pattern integration and constitutional compliance:
+
+      1. Identify components using catalog patterns and governance principles
+      2. Respect repository structure and constitutional constraints
+      3. Define boundaries supporting catalog domain separation
+      4. Specify catalog pattern usage and constitutional validation
+      5. Ensure components support context preservation for agent handoffs
+
+      {% if architecture_type == "frontend" %}
+      Focus on UI components and design-system catalog integration.
+      {% elif architecture_type == "integration" %}
+      Focus on integration components and external asset transformation.
+      {% endif %}
+    elicit: true
+    constitutional_validation: required
+    sections:
+      - id: catalog-component-list
+        repeatable: true
+        title: "{{component_name}} (Catalog-Compliant)"
+        template: |
+          **Responsibility:** {{component_description}}
+          **Catalog Patterns Used:** {{catalog_patterns}}
+          **Constitutional Constraints:** {{constitutional_constraints}}
+
+          **Key Interfaces (Catalog-Compliant):**
+          - {{interface_1}} ({{catalog_api_pattern}})
+
+          **Catalog Dependencies:** {{catalog_dependencies}}
+          **Constitutional Validation:** {{validation_requirements}}
+
+          **Technology Stack (Catalog-Integrated):** {{component_tech_details}}
+
+  # Project structure section (conditional)
+  - id: constitutional-source-tree
+    title: Constitutional Source Tree
+    condition: "{{architecture_type}} in ['greenfield', 'frontend', 'fullstack']"
+    type: code
+    language: plaintext
+    instruction: |
+      Create project structure supporting constitutional framework:
+
+      1. Reflect catalog domain organization and separation
+      2. Support constitutional constraint validation
+      3. Enable context preservation across agent handoffs
+      4. Follow catalog best practices and conventions
+      5. Organize components for governance compliance
+
+      {% if architecture_type == "frontend" %}
+      Focus on frontend project structure with design-system catalog organization.
+      {% elif architecture_type == "fullstack" %}
+      Create monorepo structure with catalog domain alignment.
+      {% endif %}
+
+      Structure must support SEAD methodology and catalog evolution.
+    elicit: true
+    constitutional_validation: required
+
+  # Integration-specific sections
+  - id: constitutional-integration-strategy
+    title: Constitutional Integration Strategy
+    condition: "{{architecture_type}} == 'integration'"
+    instruction: |
+      Define strategic approach for external asset integration with constitutional compliance
+    sections:
+      - id: asset-transformation-strategy
+        title: Asset Transformation Strategy
+        template: |
+          **Integration Methodology:** {{methodology_type}}
+          **Catalog Expansion Approach:** {{catalog_expansion}}
+          **Transformation Pipeline:** {{transformation_pipeline}}
+          **Quality Gates:** {{quality_gates}}
+
+  # API specification section (conditional)
+  - id: constitutional-rest-api-spec
+    title: Constitutional REST API Specification
+    condition: "{{architecture_type}} in ['greenfield', 'brownfield', 'fullstack'] and project_includes_api"
+    type: code
+    language: yaml
+    instruction: |
+      Create OpenAPI specification with catalog compliance:
+
+      1. Use catalog api-contracts patterns and existing specifications
+      2. Include endpoints respecting constitutional constraints
+      3. Define schemas using shared-types catalog definitions
+      4. Document authentication using catalog auth-patterns
+    elicit: true
+    catalog_integration: mandatory
+
+  # Coding standards section (universal)
+  - id: constitutional-coding-standards
+    title: Constitutional Coding Standards
+    instruction: |
+      Define MANDATORY standards for constitutional compliance and catalog integration:
+
+      1. Standards directly control SEAD agent behavior
+      2. Focus on catalog compliance and constitutional requirements
+      3. Include context preservation and governance validation rules
+
+      {% if architecture_type == "brownfield" %}
+      Ensure consistency with existing codebase patterns and catalog compliance.
+      {% endif %}
+
+      These standards are CRITICAL for SEAD methodology compliance.
+    elicit: true
+    constitutional_validation: mandatory
+    sections:
+      - id: catalog-critical-rules
+        title: Catalog and Constitutional Rules
+        instruction: |
+          List MANDATORY rules for catalog compliance and constitutional adherence
+        repeatable: true
+        template: "- **{{rule_name}}:** {{rule_description}} ({{catalog_domain}} / {{constitutional_principle}})"
+
+  # Testing strategy section (universal)
+  - id: constitutional-test-strategy
+    title: Constitutional Test Strategy and Standards
+    instruction: |
+      Define testing with catalog compliance and constitutional validation:
+
+      1. Use test-patterns catalog and constitutional testing framework
+      2. Include catalog pattern validation tests
+      3. Test constitutional compliance and governance adherence
+      4. Validate context preservation across agent handoffs
+
+      {% if architecture_type == "brownfield" %}
+      Integrate with existing test suite while ensuring constitutional compliance.
+      {% endif %}
+    elicit: true
+    constitutional_validation: required
+
+  # Security section (universal)
+  - id: constitutional-security
+    title: Constitutional Security
+    instruction: |
+      Define security with catalog patterns and constitutional compliance:
+
+      1. Use security-patterns catalog and constitutional security framework
+      2. Implement auth-patterns catalog for authentication/authorization
+      3. Include constitutional compliance monitoring and validation
+      4. Support context preservation security throughout agent handoffs
+
+      {% if architecture_type == "frontend" %}
+      Focus on client-side security and auth-patterns catalog integration.
+      {% endif %}
+    elicit: true
+    constitutional_validation: critical
+
+  # Checklist results section (universal)
+  - id: constitutional-checklist-results
+    title: Constitutional Checklist Results Report
+    instruction: |
+      Execute SEAD constitutional architecture checklist validating:
+      - Catalog integration completeness and compliance
+      - Constitutional framework adherence
+      - Context preservation implementation
+      - Governance validation and constraint enforcement
+      
+      {% if architecture_type == "brownfield" %}
+      Focus on brownfield-specific constitutional validation with catalog evolution assessment.
+      {% elif architecture_type == "frontend" %}
+      Focus on frontend-specific constitutional validation with design-system catalog compliance.
+      {% endif %}
+    constitutional_validation: mandatory
+
+  # Next steps section (universal)
+  - id: constitutional-next-steps
+    title: Constitutional Next Steps
+    instruction: |
+      Define next steps with constitutional compliance and catalog integration:
+
+      1. Frontend Architecture (if applicable) must use design-system catalog
+      2. All subsequent agents must maintain constitutional compliance
+      3. Context preservation must be validated across all handoffs
+      4. Catalog evolution opportunities should be documented
+
+      {% if architecture_type == "frontend" %}
+      Define frontend implementation steps with catalog integration and governance validation.
+      {% elif architecture_type == "brownfield" %}
+      Define brownfield implementation steps with existing system integration.
+      {% elif architecture_type == "integration" %}
+      Define integration implementation phases with external asset transformation.
+      {% endif %}
+    sections:
+      - id: constitutional-handoff-prompts
+        title: Constitutional Handoff Prompts
+        instruction: |
+          Create handoff prompts ensuring constitutional continuity:
+          - Reference to this constitutional architecture document
+          - Constitutional framework continuation requirements
+          - Context preservation across architectural layers
+          - Mode-appropriate constraint enforcement
