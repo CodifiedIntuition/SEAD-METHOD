@@ -1,0 +1,14 @@
+generated_by: sead-project-manager
+intended_use: Milestones aligned with validation gates
+version: 1.0.0
+
+milestones:
+  - id: M-001
+    name: ""
+    date: ""
+    deliverables: []
+    gates:
+      - qa_gate
+      - constraint_validation
+      - catalog_compliance
+

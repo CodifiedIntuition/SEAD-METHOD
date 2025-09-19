@@ -1,0 +1,17 @@
+generated_by: sead-project-manager
+intended_use: Time-phased roadmap tied to catalog evolution and gates
+version: 1.0.0
+
+timeline:
+  phases:
+    - name: "Phase 1"
+      window: ""
+      objectives: []
+      catalog_changes: []
+      gates: []
+    - name: "Phase 2"
+      window: ""
+      objectives: []
+      catalog_changes: []
+      gates: []
+
