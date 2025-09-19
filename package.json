@@ -65,7 +65,11 @@
   "preferGlobal": true,
   "files": [
     "cli.js",
-    "tools/installer/**/*",
+    "tools/installer/bin/**/*",
+    "tools/installer/config/**/*",
+    "tools/installer/lib/**/*",
+    "tools/installer/package.json",
+    "tools/installer/README.md",
     "sead-core/**/*",
     "sead-catalog-template/**/*",
     "docs/**/*",
