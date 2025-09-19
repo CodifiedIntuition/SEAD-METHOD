@@ -13,6 +13,8 @@ const chalk = require('chalk');
 const fs = require('fs-extra');
 const path = require('path');
 
+const { version: PACKAGE_VERSION } = require('./package.json');
+
 const program = new Command();
 
 // SEAD-METHOD ASCII Art
@@ -43,7 +45,7 @@ program
   .name('sead-method')
   .alias('sead')
   .description('SEAD-METHOD CLI - Specification Enforced Agentic Agile Development')
-  .version('1.0.0')
+  .version(PACKAGE_VERSION)
   .option('-v, --verbose', 'enable verbose logging')
   .option('--no-banner', 'disable SEAD banner display');
 
@@ -744,12 +746,12 @@ async function initializeSeadProject(projectPath, projectName, options) {
   const config = {
     project: {
       name: projectName,
-      version: '1.0.0',
+      version: PACKAGE_VERSION,
       mode: options.mode,
       template: options.template
     },
     catalog: {
-      version: '1.0.0',
+      version: PACKAGE_VERSION,
       enforce_constraints: true,
       auto_validate: true
     },
