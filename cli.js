@@ -880,19 +880,45 @@ sead status
     }]);
     
     if (!overwrite) {
+      await ensureHiddenSeadCore(projectPath);
       console.log(chalk.blue('ℹ️  Skipping .sead-core installation (keeping existing)'));
     } else {
       console.log(chalk.blue('🔄 Removing existing .sead-core...'));
       await fs.remove(seadCoreDest);
       await fs.copy(seadCoreSrc, seadCoreDest);
+      await ensureHiddenSeadCore(projectPath);
       console.log(chalk.green('✅ SEAD resources copied successfully'));
     }
   } else {
     await fs.copy(seadCoreSrc, seadCoreDest);
+    await ensureHiddenSeadCore(projectPath);
     console.log(chalk.green('✅ SEAD resources copied successfully'));
   }
-  
+
   // Resources are now available directly in .sead-core directory
+}
+
+async function ensureHiddenSeadCore(projectPath) {
+  const hiddenDir = path.join(projectPath, '.sead-core');
+  const visibleDir = path.join(projectPath, 'sead-core');
+
+  const [hiddenExists, visibleExists] = await Promise.all([
+    fs.pathExists(hiddenDir),
+    fs.pathExists(visibleDir),
+  ]);
+
+  if (!hiddenExists && visibleExists) {
+    // Legacy installers created a visible sead-core directory; move it to the hidden location.
+    await fs.move(visibleDir, hiddenDir, { overwrite: true });
+    console.log(chalk.yellow('ℹ️  Moved legacy `sead-core` folder to `.sead-core`'));
+    return;
+  }
+
+  if (hiddenExists && visibleExists) {
+    // Clean up duplicates so future commands always target the hidden directory.
+    await fs.remove(visibleDir);
+    console.log(chalk.yellow('ℹ️  Removed duplicate `sead-core` folder (using `.sead-core`)'));
+  }
 }
 
 async function runAgentBasedCatalogGeneration(options) {
