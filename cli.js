@@ -50,7 +50,7 @@ program
   .option('--no-banner', 'disable SEAD banner display');
 
 // Show banner unless disabled
-program.hook('preAction', (thisCommand, actionCommand) => {
+program.hook('preAction', (thisCommand) => {
   if (thisCommand.opts().banner !== false) {
     console.log(SEAD_BANNER);
   }
@@ -374,7 +374,7 @@ catalogCmd
   .description('Initialize catalog for greenfield project')
   .option('-m, --mode <mode>', 'catalog mode', 'greenfield')
   .option('--track-patterns', 'enable pattern tracking', false)
-  .action(async (options) => {
+  .action(async () => {
     console.log(chalk.green('🌱 Initializing greenfield catalog...'));
     
     // TODO: Implement catalog initialization
@@ -923,7 +923,7 @@ async function ensureHiddenSeadCore(projectPath) {
   }
 }
 
-async function runAgentBasedCatalogGeneration(options) {
+async function runAgentBasedCatalogGeneration() {
   console.log(chalk.blue('🤖 AI-Driven Catalog Generation'));
   console.log(chalk.white('This feature orchestrates SEAD agents for automated pattern extraction.'));
   
@@ -1073,6 +1073,7 @@ async function checkCatalogStatus() {
   return status;
 }
 
+// eslint-disable-next-line no-unused-vars
 function generateSpecificationInstructions(description, options, mode, catalogStatus) {
   const timestamp = new Date().toISOString();
   
