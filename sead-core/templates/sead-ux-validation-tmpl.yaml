@@ -1,0 +1,70 @@
+# SEAD UX Validation Report Template
+template:
+  id: sead-ux-validation-template-v1
+  name: SEAD UX Validation Report
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: advisory
+  output:
+    format: markdown
+    filename: docs/{{feature_slug}}-ux-validation.md
+    title: "{{project_name}} UX Validation"
+
+constitutional_requirements:
+  mode_detection: required
+  catalog_read: required
+  accessibility_alignment: requires_evidence
+  governance_validation: continuous
+
+workflow:
+  mode: guided
+  elicitation: sead-advanced-elicitation
+  catalog_validation: enabled
+  constraint_enforcement: mode-aware
+
+sections:
+  - id: overview
+    title: Validation Overview
+    content: |
+      - **Feature / Flow:** {{feature_name}}
+      - **Mode:** {{sead_mode}}
+      - **Objectives:** {{objectives}}
+      - **Artifacts Validated:** {{artifacts}}
+
+  - id: methods
+    title: Methods & Participants
+    instruction: |
+      List validation methods, participant profiles, and session counts.
+    type: table
+    columns: [Method, Description, Participants, Sessions, Notes]
+
+  - id: metrics
+    title: Metrics & Success Criteria
+    type: table
+    columns: [Metric, Target, Result, Status, Notes]
+
+  - id: findings
+    title: Key Findings
+    type: numbered-list
+    template: "{{findings}}"
+
+  - id: accessibility
+    title: Accessibility Evidence
+    content: |
+      - **Checklists Completed:** {{checklists_completed}}
+      - **Assistive Tech Coverage:** {{assistive_tech}}
+      - **Outstanding Issues:** {{accessibility_gaps}}
+
+  - id: catalog-impact
+    title: Catalog Impact & Recommendations
+    instruction: |
+      Summarize how validation outcomes affect catalog patterns.
+    type: numbered-list
+    template: "{{catalog_recommendations}}"
+
+  - id: decisions
+    title: Decisions & Next Steps
+    content: |
+      - **Go / No-Go:** {{decision}}
+      - **Follow-up Actions:** {{follow_up_actions}}
+      - **Owners & Due Dates:** {{owners}}

@@ -1,0 +1,76 @@
+# SEAD Accessibility Audit Report Template
+template:
+  id: sead-accessibility-audit-template-v1
+  name: SEAD Accessibility Audit Report
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: advisory
+  output:
+    format: markdown
+    filename: docs/{{feature_slug}}-accessibility-audit.md
+    title: "{{project_name}} Accessibility Audit"
+
+constitutional_requirements:
+  mode_detection: required
+  accessibility_alignment: mandatory
+  governance_validation: strict
+
+workflow:
+  mode: guided
+  elicitation: sead-advanced-elicitation
+  catalog_validation: enabled
+  constraint_enforcement: mode-aware
+
+sections:
+  - id: audit-summary
+    title: Audit Summary
+    content: |
+      - **Artifact Reviewed:** {{artifact_name}}
+      - **Mode:** {{sead_mode}}
+      - **Date:** {{audit_date}}
+      - **Auditor:** {{auditor}}
+      - **Compliance Target:** {{compliance_target}}
+
+  - id: scope
+    title: Scope & Assumptions
+    type: numbered-list
+    template: "{{scope_items}}"
+
+  - id: findings
+    title: Findings Overview
+    instruction: Present categorized results with severity rankings.
+    content: |
+      | # | Category | Issue | Severity | Recommendation | Owner | Status |
+      |---|----------|-------|----------|----------------|-------|--------|
+      | 1 | {{category_1}} | {{issue_1}} | {{severity_1}} | {{recommendation_1}} | {{owner_1}} | {{status_1}} |
+      | 2 | {{category_2}} | {{issue_2}} | {{severity_2}} | {{recommendation_2}} | {{owner_2}} | {{status_2}} |
+      | 3 | {{category_3}} | {{issue_3}} | {{severity_3}} | {{recommendation_3}} | {{owner_3}} | {{status_3}} |
+      | ... | ... | ... | ... | ... | ... | ... |
+
+  - id: checklist-results
+    title: Checklist Results
+    instruction: Summarize outcomes of `/sead-core/checklists/accessibility-checklist.md` execution.
+    type: numbered-list
+    template: "{{checklist_outcomes}}"
+
+  - id: testing
+    title: Testing Evidence
+    content: |
+      - **Tools Used:** {{tools_used}}
+      - **Assistive Technologies Tested:** {{assistive_tech}}
+      - **Manual Testing Notes:** {{manual_testing}}
+      - **Automated Scan Results:** {{automated_results}}
+
+  - id: remediation
+    title: Remediation Plan
+    instruction: |
+      Define prioritized remediation steps with owners and due dates.
+    type: table
+    columns: [Priority, Action, Owner, Due Date, Status]
+
+  - id: signoff
+    title: Sign-off & Next Steps
+    content: |
+      - **Go / No-Go Recommendation:** {{recommendation}}
+      - **Follow-up Validation:** {{follow_up_validation}}
+      - **Stakeholder Approvals:** {{approvals}}

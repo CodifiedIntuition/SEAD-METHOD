@@ -174,8 +174,8 @@ class Installer {
     }
 
     // Check for V4 installation (has .sead-core with manifest)
-    const bmadCorePath = path.join(installDir, '.sead-core');
-    const manifestPath = path.join(bmadCorePath, 'install-manifest.yaml');
+    const seadCorePath = path.join(installDir, '.sead-core');
+    const manifestPath = path.join(seadCorePath, 'install-manifest.yaml');
 
     if (await fileManager.pathExists(manifestPath)) {
       state.type = 'v4_existing';
@@ -194,7 +194,7 @@ class Installer {
     }
 
     // Check for .sead-core without manifest (broken V4 or manual copy)
-    if (await fileManager.pathExists(bmadCorePath)) {
+    if (await fileManager.pathExists(seadCorePath)) {
       state.type = 'unknown_existing';
       state.hasBmadCore = true;
       return state;
@@ -858,10 +858,10 @@ class Installer {
     spinner.start('Preparing to reinstall SEAD Method...');
 
     // Remove existing .sead-core
-    const bmadCorePath = path.join(installDir, '.sead-core');
-    if (await fileManager.pathExists(bmadCorePath)) {
+    const seadCorePath = path.join(installDir, '.sead-core');
+    if (await fileManager.pathExists(seadCorePath)) {
       spinner.text = 'Removing existing installation...';
-      await fileManager.removeDirectory(bmadCorePath);
+      await fileManager.removeDirectory(seadCorePath);
     }
 
     spinner.text = 'Installing fresh copy...';
@@ -1467,9 +1467,9 @@ class Installer {
         const teamConfig = yaml.load(teamContent);
         const agents = teamConfig.agents || [];
 
-        // Add bmad-orchestrator if not present (required for all teams)
-        if (!agents.includes('bmad-orchestrator')) {
-          agents.unshift('bmad-orchestrator');
+        // Add sead-orchestrator if not present (required for all teams)
+        if (!agents.includes('sead-orchestrator')) {
+          agents.unshift('sead-orchestrator');
         }
 
         // Check each agent in the team

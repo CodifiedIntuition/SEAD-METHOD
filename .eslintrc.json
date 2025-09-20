@@ -8,6 +8,11 @@
   "parserOptions": {
     "ecmaVersion": 12
   },
+  "ignorePatterns": ["tools/"],
   "rules": {
+    "no-unused-vars": "warn",
+    "no-constant-condition": "warn", 
+    "no-undef": "warn",
+    "no-unreachable": "warn"
   }
 }

@@ -370,6 +370,55 @@ deployment_strategy:
     validation_level: "strict"
     sharing: ["blue_green", "canary_releases"]
 
+# Workspace Configuration
+# Defines standard locations for SEAD artifacts and CLI outputs
+workspace:
+  # Standard workspace directory for all SEAD activities
+  base_path: "./sead-workspace"
+  
+  # CLI command output locations
+  cli_outputs:
+    stories: "./sead-workspace/stories"
+    implementations: "./sead-workspace/implementations"
+    tasks: "./sead-workspace/tasks"
+    specifications: "./sead-workspace/specifications"
+    planning: "./sead-workspace/planning"
+    
+  # Traditional SEAD locations (maintained for compatibility)
+  traditional_locations:
+    dev_story_location: "docs/stories"
+    specifications: "docs/specifications"
+    architecture: "docs/architecture"
+    qa_location: "docs/qa"
+    
+  # Agent discovery paths (checked in order)
+  # Agents will search these locations when looking for files
+  discovery_paths:
+    stories:
+      - "./sead-workspace/stories"
+      - "docs/stories"
+      - "./stories"
+    implementations:
+      - "./sead-workspace/implementations"
+      - "docs/implementations"
+      - "./implementations"
+    specifications:
+      - "./sead-workspace/specifications"
+      - "docs/specifications"
+      - "./specs"
+    planning:
+      - "./sead-workspace/planning"
+      - "docs/planning"
+      - "./planning"
+    tasks:
+      - "./sead-workspace/tasks"
+      - "docs/tasks"
+      - "./tasks"
+    qa_gates:
+      - "docs/qa/gates"
+      - "./qa/gates"
+      - "./sead-workspace/qa/gates"
+
 # Agent Configuration
 agents:
   devLoadAlwaysFiles:

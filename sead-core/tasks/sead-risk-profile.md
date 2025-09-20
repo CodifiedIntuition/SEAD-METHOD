@@ -34,7 +34,9 @@ Generate a comprehensive, catalog-aware risk assessment matrix for story impleme
 ```yaml
 required:
   - story_id: '{epic}.{story}' # e.g., "1.3"
-  - story_path: 'docs/stories/{epic}.{story}.*.md'
+  - story_path: # Discovered using workspace.discovery_paths.stories configuration
+      discovery_paths: '{workspace.discovery_paths.stories}'
+      pattern: '{epic}.{story}.*.md'
   - story_title: '{title}' # If missing, derive from story file H1
   - story_slug: '{slug}' # If missing, derive from title (lowercase, hyphenated)
   - catalog_context: 'relevant catalog domains and patterns'

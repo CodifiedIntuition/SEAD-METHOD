@@ -1,0 +1,61 @@
+# SEAD Sprint Plan Template
+template:
+  id: sead-sprint-plan-template-v1
+  name: SEAD Catalog-Aware Sprint Plan
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/{{sprint_name}}-sprint-plan.md
+    title: "Sprint Plan – {{sprint_name}}"
+
+sections:
+  - id: summary
+    title: Sprint Summary
+    content: |
+      - **Sprint Name:** {{sprint_name}}
+      - **Dates:** {{dates}}
+      - **Mode:** {{sead_mode}}
+      - **Sprint Goal:** {{sprint_goal}}
+      - **Catalog Focus:** {{catalog_focus}}
+      - **Metrics Baseline:** {{metrics_baseline}}
+
+  - id: commitments
+    title: Sprint Commitments
+    type: table
+    columns: [Story, Catalog Patterns, Acceptance Criteria, Owner, Status]
+
+  - id: capacity
+    title: Capacity & Allocation
+    type: table
+    columns: [Team Member/Role, Capacity, Allocated Work, Notes]
+
+  - id: dependencies
+    title: Dependencies & Coordination
+    type: table
+    columns: [Dependency, Owner, Due Date, Status, Notes]
+
+  - id: validation
+    title: Validation & Compliance Plan
+    content: |
+      - **Catalog Compliance Checks:** {{catalog_checks}}
+      - **Accessibility Activities:** {{accessibility_activities}}
+      - **QA / Testing:** {{testing_plan}}
+      - **Research / Stakeholder Reviews:** {{research_reviews}}
+
+  - id: metrics
+    title: Target Metrics
+    type: table
+    columns: [Metric, Target, Measurement Timing, Owner]
+
+  - id: risks
+    title: Risks & Mitigations
+    type: table
+    columns: [Risk, Impact, Mitigation, Owner, Status]
+
+  - id: review
+    title: Review & Retrospective Inputs
+    instruction: Capture items to revisit in retrospective.
+    type: numbered-list
+    template: "{{retro_inputs}}"

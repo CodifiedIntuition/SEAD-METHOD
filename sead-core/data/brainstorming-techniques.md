@@ -1,4 +1,4 @@
-<!-- Powered by BMAD™ Core -->
+<!-- Powered by SEAD-METHOD Core -->
 
 # Brainstorming Techniques Data
 

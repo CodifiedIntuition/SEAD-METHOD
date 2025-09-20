@@ -115,10 +115,10 @@ dependencies:
   tasks:
     - sead-apply-qa-fixes.md
     - execute-checklist.md
-    - validate-next-story.md
-    - catalog-compliance-check.md
-    - constraint-validation.md
-    - pattern-extraction.md
+    - sead-validate-next-story.md
+    - sead-catalog-compliance-check.md
+    - sead-constraint-validation.md
+    - sead-pattern-extraction.md
   catalog:
     - api-contracts/
     - shared-types/

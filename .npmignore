@@ -7,8 +7,16 @@ BMAD-METHOD/
 spec-kit/
 .git/
 
+# Exclude nested node_modules that cause installation issues
+tools/installer/node_modules/
+tools/*/node_modules/
+
 # Keep these for the npm package
-!tools/installer/
+!tools/installer/bin/
+!tools/installer/lib/
+!tools/installer/config/
+!tools/installer/package.json
+!tools/installer/README.md
 !sead-core/
 !sead-catalog-template/
 !docs/

@@ -382,8 +382,9 @@ class FileManager {
       return false;
     }
   }
-  manifestDir = '.sead-core';
-  manifestFile = 'install-manifest.yaml';
+  
+  let manifestDir = '.sead-core';
+  let manifestFile = 'install-manifest.yaml';
 }
 
 module.exports = new FileManager();

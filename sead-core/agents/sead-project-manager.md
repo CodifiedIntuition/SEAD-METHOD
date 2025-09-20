@@ -69,10 +69,12 @@ commands:
   - mode-assess: Assess current SEAD mode impact on project planning and resource allocation
   - create-prd: run task create-doc.md with template sead-prd-tmpl.yaml (catalog-enhanced)
   - create-brownfield-prd: run task create-doc.md with template sead-brownfield-prd-tmpl.yaml (with catalog analysis)
-  - create-epic: Create catalog-aware epic for projects (task sead-create-epic with catalog integration)
-  - create-brownfield-epic: run task sead-brownfield-create-epic.md (catalog-enhanced brownfield epic creation)
-  - create-story: Create user story from requirements with catalog pattern suggestions (task sead-create-story)
-  - create-brownfield-story: run task sead-brownfield-create-story.md (catalog-aware brownfield stories)
+  # STORY CREATION - Delegate to sead-product-owner for all story/epic creation
+  # Use: "Please use sead-product-owner for story and epic creation - they have primary authority"
+  # - create-epic → Delegate to sead-product-owner
+  # - create-brownfield-epic → Delegate to sead-product-owner  
+  # - create-story → Delegate to sead-product-owner
+  # - create-brownfield-story → Delegate to sead-product-owner
   - project-planning: Create comprehensive project plan with catalog constraint analysis
   - resource-planning: Plan resources considering catalog efficiency and mode requirements
   - roadmap-planning: Create product roadmap aligned with catalog evolution and mode progression
@@ -84,15 +86,17 @@ commands:
   - milestone-planning: Plan project milestones aligned with mode progression and validation gates
   - doc-out: Output full document to current destination file with catalog references
   - shard-prd: run the task sead-shard-doc.md for the provided prd.md (catalog-aware document sharding)
-  - execute-checklist: Run task execute-checklist (default->sead-pm-checklist)
+  - execute-checklist: Run task execute-checklist (default->sead-pm-requirements-checklist.md)
   - catalog-efficiency-report: Generate report on catalog usage and efficiency metrics
   - mode-transition-plan: Plan transition between SEAD modes (prototype→development→build-to-deploy)
   - constitutional-check: Validate project plans against constitutional governance rules
   - yolo: Toggle Yolo Mode (respects SEAD mode constraints)
   - exit: Say goodbye as the SEAD Project Manager, and then abandon inhabiting this persona
 dependencies:
+  # NOTE: Pre-project assets live under sead-core/*.
+  # Post-project assets (sead-catalog/*, QA gates, workspace outputs) are created in consumer projects.
   checklists:
-    - sead-pm-checklist.md
+    - sead-pm-requirements-checklist.md
     - sead-change-checklist.md
     - catalog-compliance-checklist.md
     - mode-transition-checklist.md
@@ -107,11 +111,11 @@ dependencies:
     - sead-create-story.md
     - sead-brownfield-create-story.md
     - sead-correct-course.md
-    - create-deep-research-prompt.md
+    - sead-create-deep-research-prompt.md
     - create-doc.md
     - execute-checklist.md
     - sead-shard-doc.md
-    - catalog-constraint-analysis.md
+    - catalog-dependency-analysis.md
     - project-planning-workflow.md
     - resource-optimization-workflow.md
     - mode-transition-planning.md

@@ -1,0 +1,93 @@
+# SEAD Epic Template
+
+import: sead-core/templates/constitutional-base-template.yaml
+
+template:
+  id: sead-epic-template-v1
+  name: SEAD Catalog-Aligned Epic Specification
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: true
+  output:
+    format: markdown
+    filename: docs/{{epic_slug}}-epic.md
+    title: "{{project_name}} Epic – {{epic_name}}"
+
+# Constitutional requirements inherited from base template
+
+workflow:
+  mode: guided
+  elicitation: sead-advanced-elicitation
+  catalog_validation: enabled
+  constraint_enforcement: mode-aware
+
+sections:
+  - id: summary
+    title: Epic Summary
+    content: |
+      - **Epic Name:** {{epic_name}}
+      - **Mode:** {{sead_mode}}
+      - **Strategic Pillar:** {{strategic_pillar}}
+      - **Primary Personas:** {{personas}}
+      - **Desired Outcomes:** {{outcomes}}
+      - **Catalog References:** {{catalog_refs}}
+
+  - id: problem-opportunity
+    title: Problem / Opportunity Statement
+    type: numbered-list
+    template: "{{problem_points}}"
+
+  - id: hypothesis
+    title: Hypothesis & Success Metrics
+    content: |
+      - **Hypothesis:** {{hypothesis}}
+      - **Success Metrics:** {{metrics}}
+      - **Validation Plan:** {{validation_plan}}
+
+  - id: scope
+    title: Scope Definition
+    sections:
+      - id: in-scope
+        title: In Scope
+        type: numbered-list
+        template: "{{in_scope}}"
+      - id: out-of-scope
+        title: Out of Scope
+        type: numbered-list
+        template: "{{out_scope}}"
+
+  - id: catalog-alignment
+    title: Catalog Alignment
+    instruction: Document patterns reused or extended.
+    content: |
+      - **Existing Patterns:** {{existing_patterns}}
+      - **New Pattern Needs:** {{new_patterns}}
+      - **Pattern Extraction Tasks:** {{pattern_tasks}}
+
+  - id: dependency-map
+    title: Dependency Map
+    type: table
+    columns: [Dependency, Type, Owner, Status, Notes]
+
+  - id: stories
+    title: Story Breakdown
+    instruction: Present stories as numbered list referencing catalog components.
+    type: numbered-list
+    template: "{{story_list}}"
+
+  - id: risks
+    title: Risks & Mitigations
+    type: table
+    columns: [Risk, Impact, Mitigation, Owner, Status]
+
+  - id: compliance
+    title: Constitutional & Catalog Compliance Plan
+    content: |
+      - **Constitutional Constraints:** {{constraints}}
+      - **Compliance Activities:** {{activities}}
+      - **Escalation Path:** {{escalation}}
+
+  - id: timeline
+    title: Timeline & Milestones
+    type: table
+    columns: [Milestone, Target Date, Description, Dependencies]

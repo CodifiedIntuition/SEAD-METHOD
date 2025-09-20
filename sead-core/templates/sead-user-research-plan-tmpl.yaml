@@ -1,0 +1,91 @@
+# SEAD User Research Plan Template
+template:
+  id: sead-user-research-plan-template-v1
+  name: SEAD Catalog-Aware Research Plan
+  version: 1.0
+  constitutional_framework: true
+  catalog_integration: advisory
+  output:
+    format: markdown
+    filename: docs/{{feature_slug}}-research-plan.md
+    title: "{{project_name}} UX Research Plan"
+
+constitutional_requirements:
+  mode_detection: required
+  participant_governance: documented
+  context_preservation: enforced
+
+workflow:
+  mode: guided
+  elicitation: sead-advanced-elicitation
+  catalog_validation: reference-only
+  constraint_enforcement: mode-aware
+
+sections:
+  - id: summary
+    title: Study Summary
+    instruction: Provide high-level overview and alignment with SEAD mode.
+    content: |
+      - **Study Name:** {{study_name}}
+      - **Mode:** {{sead_mode}}
+      - **Objectives:** {{objectives}}
+      - **Artifacts Under Test:** {{artifacts}}
+      - **Target Catalog Patterns:** {{catalog_targets}}
+
+  - id: research-questions
+    title: Research Questions & Hypotheses
+    type: numbered-list
+    template: "{{research_questions}}"
+
+  - id: participants
+    title: Participants & Recruitment
+    instruction: |
+      Describe participant profiles, recruitment channels, incentives, and accessibility considerations.
+    sections:
+      - id: personas
+        title: Persona Coverage
+        type: table
+        columns: [Persona, Key Attributes, Accessibility Considerations, Notes]
+      - id: logistics
+        title: Recruitment Logistics
+        content: |
+          - **Channels:** {{recruitment_channels}}
+          - **Screening Criteria:** {{screening}}
+          - **Incentives:** {{incentives}}
+          - **Consent/Privacy Notes:** {{consent_notes}}
+
+  - id: session-structure
+    title: Session Structure
+    instruction: |
+      Outline session flow, tasks, and metrics referencing catalog components when applicable.
+    sections:
+      - id: agenda
+        title: Agenda & Timing
+        type: table
+        columns: [Phase, Duration, Description, Catalog Focus]
+      - id: tasks
+        title: Task Scripts & Metrics
+        type: table
+        columns: [Task, Success Criteria, Metrics, Notes]
+
+  - id: logistics
+    title: Logistics & Tooling
+    content: |
+      - **Schedule:** {{schedule}}
+      - **Tools / Platforms:** {{tools}}
+      - **Recording & Storage:** {{recording}}
+      - **Support Roles:** {{support_roles}}
+
+  - id: risk
+    title: Risks & Mitigation
+    type: numbered-list
+    template: "{{risks}}"
+
+  - id: synthesis-plan
+    title: Synthesis & Reporting Plan
+    instruction: |
+      Describe how findings will be synthesized, shared, and integrated with catalog updates.
+    content: |
+      - **Analysis Approach:** {{analysis}}
+      - **Reporting Artifacts:** {{reporting}}
+      - **Follow-up Tasks:** {{follow_up}}

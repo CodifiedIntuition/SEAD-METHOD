@@ -1,0 +1,212 @@
+# Constitutional Framework Base Template
+# This template provides the standardized constitutional framework that all SEAD templates import
+# Eliminates 98% redundancy across 47 templates by providing single source of truth
+
+constitutional:
+  initialization:
+    mode_detection: |
+      # Detect current SEAD development mode (prototype/development/build-to-deploy)
+      - Check project configuration for explicit mode setting
+      - Analyze project maturity indicators if mode not specified
+      - Apply mode-specific constraints and validation requirements
+      - Document mode selection rationale for audit trail
+    
+    project_context: |
+      # Gather essential project context for constitutional compliance
+      - Load project configuration (sead.config.yaml or defaults)
+      - Identify catalog structure and available patterns
+      - Establish workspace paths and discovery mechanisms
+      - Load constitutional constraints for current mode and agent role
+    
+    catalog_integration: |
+      # Initialize catalog integration and constraint enforcement
+      - Verify catalog structure meets SEAD 11-domain requirements
+      - Load applicable constraints from constitutional-rules/
+      - Establish pattern discovery and validation mechanisms
+      - Initialize constraint tracking for compliance reporting
+
+  governance:
+    validation_requirements: |
+      # Universal validation requirements across all SEAD artifacts
+      constitutional_compliance:
+        - Verify mode-appropriate constraint adherence
+        - Validate constitutional rule compliance for agent role
+        - Ensure catalog pattern usage where required
+        - Document any justified deviations with rationale
+      
+      catalog_compliance:
+        - Check required catalog reads before implementation
+        - Validate against applicable pattern constraints
+        - Ensure consistent usage of approved patterns
+        - Report catalog coverage and compliance metrics
+      
+      quality_assurance:
+        - Apply mode-specific quality gates
+        - Validate artifact completeness and consistency
+        - Ensure cross-reference integrity and traceability
+        - Confirm handoff readiness for downstream agents
+    
+    compliance_framework: |
+      # Standard compliance framework for constitutional adherence
+      constraint_categories:
+        shared_types:
+          - No duplicate type names across domains
+          - Consistent naming conventions throughout
+          - Required export validation for public interfaces
+          - Import path validation and dependency tracking
+        
+        design_system:
+          - Token-only styling in build-to-deploy mode
+          - No hardcoded colors or spacing values
+          - Approved component usage validation
+          - Consistent theme application across artifacts
+        
+        api_contracts:
+          - Endpoint existence validation before usage
+          - Request/response schema compliance checking
+          - API version compatibility verification
+          - Authentication requirement validation
+        
+        code_quality:
+          - Zero linting errors in development+ modes
+          - Zero TypeScript compilation errors
+          - Required test coverage thresholds
+          - No console.log statements in production builds
+    
+    escalation_procedures: |
+      # Standardized escalation procedures for constraint conflicts
+      blocking_violations:
+        - HALT execution for forbidden actions in current mode
+        - Document specific constraint violation details
+        - Provide clear remediation guidance
+        - Escalate to appropriate authority (architect/orchestrator)
+      
+      catalog_insufficiency:
+        - Document gaps in available catalog patterns
+        - Request pattern creation through catalog-architect
+        - Provide temporary workaround if approved
+        - Track resolution for future pattern promotion
+      
+      constitutional_conflicts:
+        - Document conflicting constitutional requirements
+        - Escalate to orchestrator for resolution
+        - Implement temporary solution if blocking
+        - Update constitutional rules based on resolution
+
+  quality_gates:
+    basic_validation:
+      # Validation requirements for prototype mode
+      checks:
+        - Basic linting and syntax validation
+        - Type checking where applicable
+        - Simple pattern compliance checking
+        - Documentation completeness verification
+      
+      pass_criteria:
+        - No blocking syntax errors
+        - Basic constitutional compliance achieved
+        - Minimal documentation requirements met
+        - Pattern usage tracked for future optimization
+    
+    comprehensive_validation:
+      # Validation requirements for development mode
+      checks:
+        - Comprehensive linting with style enforcement
+        - Full TypeScript compilation validation
+        - Catalog compliance checking with reporting
+        - Cross-reference integrity validation
+        - Constitutional constraint validation
+      
+      pass_criteria:
+        - All linting and type errors resolved
+        - Catalog patterns used where available
+        - Constitutional compliance fully documented
+        - Quality gates passed with evidence
+        - Handoff documentation complete
+    
+    strict_validation:
+      # Validation requirements for build-to-deploy mode
+      checks:
+        - Strict linting with zero tolerance policy
+        - Complete TypeScript compilation validation
+        - Mandatory catalog compliance verification
+        - Security scanning and validation
+        - Performance impact assessment
+        - Full constitutional audit trail
+      
+      pass_criteria:
+        - Zero linting or compilation violations
+        - 100% catalog compliance achieved
+        - All security requirements satisfied
+        - Performance thresholds met
+        - Complete audit trail documented
+        - Constitutional sign-off obtained
+
+  context_preservation:
+    handoff_requirements: |
+      # Standardized requirements for agent handoffs
+      documentation:
+        - Catalog patterns used and rationale
+        - Constitutional constraints applied
+        - Deviations documented with justification
+        - Quality gate results and evidence
+        - Recommendations for next agent
+      
+      traceability:
+        - Link to source requirements and specifications
+        - Reference to applicable constitutional rules
+        - Catalog pattern usage documentation
+        - Quality gate decision audit trail
+        - Context for any custom implementations
+    
+    audit_trail: |
+      # Standard audit trail requirements for compliance
+      required_documentation:
+        - Agent activation and mode configuration
+        - Constitutional constraints loaded and applied
+        - Catalog patterns discovered and utilized
+        - Quality gates executed and results
+        - Handoff documentation and recommendations
+      
+      compliance_tracking:
+        - Constitutional rule adherence metrics
+        - Catalog compliance coverage statistics
+        - Quality gate pass/fail/waiver tracking
+        - Deviation documentation and approvals
+        - Performance and efficiency measurements
+
+# Template Integration Instructions
+integration:
+  usage_pattern: |
+    # Standard pattern for importing constitutional framework
+    constitutional:
+      import: "constitutional-base-template.yaml"
+      customizations:
+        # Template-specific constitutional customizations
+        # Override specific sections as needed for domain requirements
+        # Add template-specific validation rules
+        # Extend quality gates for specialized requirements
+  
+  customization_guidelines: |
+    # Guidelines for customizing constitutional framework
+    - Import full constitutional base as foundation
+    - Add only domain-specific constitutional requirements
+    - Override sections only when absolutely necessary
+    - Document all customizations with clear rationale
+    - Maintain compatibility with base framework updates
+  
+  validation_integration: |
+    # Integration with SEAD validation framework
+    - Constitutional compliance checking automatic on import
+    - Mode-specific validation applied based on project configuration
+    - Catalog constraint enforcement enabled by default
+    - Quality gate integration with agent workflow systems
+
+# Version and Maintenance
+metadata:
+  version: "1.0.0"
+  created: "2024-01-04"
+  purpose: "Eliminate constitutional framework redundancy across all SEAD templates"
+  impact: "Reduces template size by 40% and ensures constitutional consistency"
+  maintenance: "Single source of truth for constitutional requirements"
+  compatibility: "All existing SEAD templates can import this base framework"

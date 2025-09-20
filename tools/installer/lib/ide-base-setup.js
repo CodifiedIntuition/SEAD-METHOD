@@ -131,7 +131,7 @@ class BaseIdeSetup {
     const expansionPacks = [];
 
     // Check for dot-prefixed expansion packs
-    const dotExpansions = await resourceLocator.findFiles('.bmad-*', { cwd: installDir });
+    const dotExpansions = await resourceLocator.findFiles('.sead-*', { cwd: installDir });
 
     for (const dotExpansion of dotExpansions) {
       if (dotExpansion !== '.sead-core') {

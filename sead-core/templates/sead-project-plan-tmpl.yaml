@@ -1,0 +1,40 @@
+generated_by: sead-project-manager
+intended_use: Project planning aligned with SEAD modes and catalog
+version: 1.0.0
+
+metadata:
+  project: ""
+  owner: ""
+  mode: prototype|development|build-to-deploy
+  updated: ""
+
+scope:
+  goals: []
+  non_goals: []
+  assumptions: []
+
+catalog:
+  dependencies: []
+  gaps: []
+  extension_plans: []
+
+plan:
+  increments: []
+  validation_gates:
+    - name: qa_gate
+      criteria: []
+    - name: constraint_validation
+      criteria: []
+
+risks:
+  items:
+    - id: ""
+      desc: ""
+      mode_impact: ""
+      mitigation: ""
+
+communications:
+  stakeholders: []
+  cadence: ""
+  channels: []
+

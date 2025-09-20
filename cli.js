@@ -13,6 +13,8 @@ const chalk = require('chalk');
 const fs = require('fs-extra');
 const path = require('path');
 
+const { version: PACKAGE_VERSION } = require('./package.json');
+
 const program = new Command();
 
 // SEAD-METHOD ASCII Art
@@ -43,12 +45,12 @@ program
   .name('sead-method')
   .alias('sead')
   .description('SEAD-METHOD CLI - Specification Enforced Agentic Agile Development')
-  .version('1.0.0')
+  .version(PACKAGE_VERSION)
   .option('-v, --verbose', 'enable verbose logging')
   .option('--no-banner', 'disable SEAD banner display');
 
 // Show banner unless disabled
-program.hook('preAction', (thisCommand, actionCommand) => {
+program.hook('preAction', (thisCommand) => {
   if (thisCommand.opts().banner !== false) {
     console.log(SEAD_BANNER);
   }
@@ -372,7 +374,7 @@ catalogCmd
   .description('Initialize catalog for greenfield project')
   .option('-m, --mode <mode>', 'catalog mode', 'greenfield')
   .option('--track-patterns', 'enable pattern tracking', false)
-  .action(async (options) => {
+  .action(async () => {
     console.log(chalk.green('🌱 Initializing greenfield catalog...'));
     
     // TODO: Implement catalog initialization
@@ -744,12 +746,12 @@ async function initializeSeadProject(projectPath, projectName, options) {
   const config = {
     project: {
       name: projectName,
-      version: '1.0.0',
+      version: PACKAGE_VERSION,
       mode: options.mode,
       template: options.template
     },
     catalog: {
-      version: '1.0.0',
+      version: PACKAGE_VERSION,
       enforce_constraints: true,
       auto_validate: true
     },
@@ -768,6 +770,32 @@ async function initializeSeadProject(projectPath, projectName, options) {
         validation_level: 'strict',
         catalog_enforcement: 'mandatory',
         experimental_extensions: false
+      }
+    },
+    // Workspace configuration for CLI output locations
+    workspace: {
+      base_path: './sead-workspace',
+      cli_outputs: {
+        stories: './sead-workspace/stories',
+        implementations: './sead-workspace/implementations',
+        tasks: './sead-workspace/tasks',
+        specifications: './sead-workspace/specifications',
+        planning: './sead-workspace/planning'
+      },
+      traditional_locations: {
+        dev_story_location: 'docs/stories',
+        specifications: 'docs/specifications',
+        architecture: 'docs/architecture',
+        qa_location: 'docs/qa'
+      },
+      // Agent file discovery configuration
+      discovery_paths: {
+        stories: ['./sead-workspace/stories', 'docs/stories', './stories'],
+        implementations: ['./sead-workspace/implementations', 'docs/implementations', './implementations'],
+        specifications: ['./sead-workspace/specifications', 'docs/specifications', './specs'],
+        planning: ['./sead-workspace/planning', 'docs/planning', './planning'],
+        tasks: ['./sead-workspace/tasks', 'docs/tasks', './tasks'],
+        qa_gates: ['docs/qa/gates', './qa/gates', './sead-workspace/qa/gates']
       }
     },
     data_strategy: {
@@ -895,7 +923,7 @@ async function ensureHiddenSeadCore(projectPath) {
   }
 }
 
-async function runAgentBasedCatalogGeneration(options) {
+async function runAgentBasedCatalogGeneration() {
   console.log(chalk.blue('🤖 AI-Driven Catalog Generation'));
   console.log(chalk.white('This feature orchestrates SEAD agents for automated pattern extraction.'));
   
@@ -1045,6 +1073,7 @@ async function checkCatalogStatus() {
   return status;
 }
 
+// eslint-disable-next-line no-unused-vars
 function generateSpecificationInstructions(description, options, mode, catalogStatus) {
   const timestamp = new Date().toISOString();
   
